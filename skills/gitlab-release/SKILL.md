@@ -64,16 +64,16 @@ git log <last-tag>..HEAD --no-merges --format="%s%n%b%x1e"
 
 The `\x1e` byte separates commits. If no tag exists, use all reachable commits. Parse Conventional Commit types and map to keepachangelog sections:
 
-| Commit type | Section |
-| --- | --- |
-| `feat` | Added |
-| `fix` | Fixed |
-| `refactor`, `perf` | Changed |
-| `BREAKING CHANGE` / `type!` | Changed (mark breaking) |
-| deprecation notes | Deprecated |
-| removals | Removed |
-| security fixes | Security |
-| `chore`, `ci`, `test`, `build`, `docs` | omit by default |
+| Commit type                            | Section                 |
+| -------------------------------------- | ----------------------- |
+| `feat`                                 | Added                   |
+| `fix`                                  | Fixed                   |
+| `refactor`, `perf`                     | Changed                 |
+| `BREAKING CHANGE` / `type!`            | Changed (mark breaking) |
+| deprecation notes                      | Deprecated              |
+| removals                               | Removed                 |
+| security fixes                         | Security                |
+| `chore`, `ci`, `test`, `build`, `docs` | omit by default         |
 
 Read `assets/changelog.md` for the section structure. Note: the git tag and branch use `vX.Y.Z` (with the leading `v`), but the CHANGELOG section heading uses `[X.Y.Z]` without the `v`, per keepachangelog. Emit only non-empty subsections, in keepachangelog order (Added, Changed, Deprecated, Removed, Fixed, Security). Section headings and prose follow the **user's active language** — do not hardcode any language. Use today's date for `YYYY-MM-DD`.
 
