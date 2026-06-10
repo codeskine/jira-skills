@@ -216,6 +216,34 @@ No GitLab Premium required. Hierarchy state is persisted entirely in the parent 
 
 ---
 
+### `gitlab-release` — Release author _(v1.0.0)_
+
+**Trigger phrases:** "Cut a release", "Prepare release v1.5.0", "Finalize the release",
+"Start the release process"
+
+**What it produces:**
+
+- A `release/vX.Y.Z` branch cut from the integration branch (`develop` by default)
+- A `CHANGELOG.md` entry ([keepachangelog 1.1.0](https://keepachangelog.com/en/1.1.0/))
+  built from Conventional Commits since the last tag, with a recommended version bump
+- A **draft** merge request from `release/vX.Y.Z` toward the default branch
+
+The version is detected from the latest semver tag (or a version file), bumped per commit
+history — `BREAKING CHANGE` / `type!` → major, any `feat` → minor, otherwise patch — and
+confirmed by you. The git tag and branch use `vX.Y.Z`; the CHANGELOG heading uses `[X.Y.Z]`
+per keepachangelog.
+
+**Delegates** MR creation to `gitlab-review` — it never calls `glab mr create` itself, so the
+draft gate runs twice (once on the CHANGELOG, once in `gitlab-review`).
+
+**Context extracted silently:** `git status --porcelain`, `git tag --sort=-v:refname`,
+`git log <last-tag>..HEAD`, default-branch detection via `git symbolic-ref`.
+
+**Boundary:** not for plain commits (→ `gitlab-commit`). Scope ends at the draft MR — tagging
+and back-merging into the integration branch happen after a human merges it.
+
+---
+
 ## Commands
 
 ### `/gitlab-doctor` — Environment health check
@@ -307,6 +335,7 @@ mkdir -p .codex/skills && cp -r /tmp/gitlab-workflow/skills/. .codex/skills/
 6. "Create MR for this branch and close #11"           → gitlab-review
 7. "Link MR !5 to story #10"                           → gitlab-story (Link-MR)
 8. "Sync story #10 children status"                    → gitlab-story (Sync)
+9. "Cut release v1.5.0"                                 → gitlab-release
 ```
 
 ## Artifact style
