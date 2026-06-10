@@ -45,7 +45,7 @@ If the current branch is `develop`, use it. Else if a local or remote `develop` 
 git tag --sort=-v:refname | head -1
 ```
 
-Use the latest semver tag as the base. If no tag exists, fall back to a `version` field in `package.json` (or another version file). Propose the next version with `AskUserQuestion`, offering patch / minor / major bumps; let the user confirm or override. The result MUST be formatted `vX.Y.Z` (with the leading `v`).
+Use the latest semver tag as the base. If no tag exists, fall back to a `version` field in `package.json` (or another version file). Inspect the commits since that base (`git log <last-tag>..HEAD --format="%s%n%b"`) to recommend a bump: a `BREAKING CHANGE` footer or `type!` → major; any `feat` → minor; otherwise patch. Propose the recommended version with `AskUserQuestion`, offering patch / minor / major; let the user confirm or override. The result MUST be formatted `vX.Y.Z` (with the leading `v`).
 
 ### 4. Create the release branch
 
@@ -62,7 +62,7 @@ The branch name MUST be `release/vX.Y.Z` (with the leading `v`).
 git log <last-tag>..HEAD --no-merges --format="%s%n%b%x1e"
 ```
 
-If no tag exists, use all reachable commits. Parse Conventional Commit types and map to keepachangelog sections:
+The `\x1e` byte separates commits. If no tag exists, use all reachable commits. Parse Conventional Commit types and map to keepachangelog sections:
 
 | Commit type | Section |
 | --- | --- |
@@ -75,7 +75,7 @@ If no tag exists, use all reachable commits. Parse Conventional Commit types and
 | security fixes | Security |
 | `chore`, `ci`, `test`, `build`, `docs` | omit by default |
 
-Read `assets/changelog.md` for the section structure. Emit only non-empty subsections, in keepachangelog order (Added, Changed, Deprecated, Removed, Fixed, Security). Section headings and prose follow the **user's active language** — do not hardcode any language. Use today's date for `YYYY-MM-DD`.
+Read `assets/changelog.md` for the section structure. Note: the git tag and branch use `vX.Y.Z` (with the leading `v`), but the CHANGELOG section heading uses `[X.Y.Z]` without the `v`, per keepachangelog. Emit only non-empty subsections, in keepachangelog order (Added, Changed, Deprecated, Removed, Fixed, Security). Section headings and prose follow the **user's active language** — do not hardcode any language. Use today's date for `YYYY-MM-DD`.
 
 - If `CHANGELOG.md` is missing: create it with the keepachangelog 1.1.0 header (intro + "Unreleased" guidance), then the new section.
 - If present: insert the new `## [X.Y.Z] - YYYY-MM-DD` section directly below the header / above the most recent prior release. Never rewrite existing entries.
@@ -105,11 +105,11 @@ git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's|refs/remotes/orig
 
 Fallback: `git remote show origin | grep 'HEAD branch' | awk '{print $NF}'`.
 
-Hand off to the **gitlab-review** skill to open a **draft** MR from `release/vX.Y.Z` to the detected default branch, passing the new CHANGELOG section as the MR body context. Do NOT call `glab mr create` here — gitlab-review owns MR creation and enforces its own draft gate.
+Invoke the **gitlab-review** skill to open a **draft** MR from `release/vX.Y.Z` to the detected default branch, seeding the MR description with the new CHANGELOG section. Do NOT call `glab mr create` here — gitlab-review owns MR creation and runs its own draft gate (so the user confirms twice: once at step 6, once in gitlab-review).
 
 ## Out of scope
 
-Tagging the release and back-merging into the integration branch happen after a human merges the MR.
+Tagging the release and back-merging into `develop` (the integration branch) happen after a human merges the MR.
 
 ## References
 
