@@ -1,0 +1,305 @@
+{
+  "plugin": "jira-skills",
+  "evals": [
+    {
+      "id": "sel-capture-1",
+      "category": "selection",
+      "prompt": "Someone from finance emailed asking for the monthly figures to include last year alongside. Can you get this into Jira before I lose it?",
+      "expect_skill": "jira-capture",
+      "expect_not": [
+        "jira-propose",
+        "jira-refine"
+      ],
+      "why": "Arrives from outside, nobody has examined it. The mention of a benefit tempts propose."
+    },
+    {
+      "id": "sel-capture-2",
+      "category": "selection",
+      "prompt": "Chat message from the ops lead: \"the export thing is confusing people again\". Put it somewhere so it doesn't get lost.",
+      "expect_skill": "jira-capture",
+      "expect_not": [
+        "jira-diagnose"
+      ],
+      "why": "\"Confusing people\" sounds like a fault but nothing is reported as failing. Capture, not diagnose."
+    },
+    {
+      "id": "sel-propose-1",
+      "category": "selection",
+      "prompt": "I want people to be able to see what delivery costs before they type an address. It should cut the drop-off at that step.",
+      "expect_skill": "jira-propose",
+      "expect_not": [
+        "jira-capture",
+        "jira-refine"
+      ],
+      "why": "An outcome with a measure behind it, stated by someone who owns it."
+    },
+    {
+      "id": "sel-propose-2",
+      "category": "selection",
+      "prompt": "We should let customers save a basket and come back to it. Can you put that on the backlog properly?",
+      "expect_skill": "jira-propose",
+      "expect_not": [
+        "jira-capture"
+      ],
+      "why": "\"Properly\" is the signal: this is a proposition, not an unexamined request."
+    },
+    {
+      "id": "sel-diagnose-1",
+      "category": "selection",
+      "prompt": "The scheduled export gives me an empty file whenever the date range crosses into a new month. Works fine inside one month.",
+      "expect_skill": "jira-diagnose",
+      "expect_not": [
+        "jira-assess",
+        "jira-capture"
+      ],
+      "why": "Something fails, reproducibly, with a condition already isolated."
+    },
+    {
+      "id": "sel-diagnose-2",
+      "category": "selection",
+      "prompt": "Users are getting logged out halfway through the form and losing what they typed. Started this week.",
+      "expect_skill": "jira-diagnose",
+      "expect_not": [
+        "jira-assess"
+      ],
+      "why": "A failure with impact. \"Started this week\" is a defect signal, not debt."
+    },
+    {
+      "id": "sel-assess-1",
+      "category": "selection",
+      "prompt": "Our scheduled jobs are configured in three different places and someone has to keep them in sync by hand. It works, but it's going to bite us.",
+      "expect_skill": "jira-assess",
+      "expect_not": [
+        "jira-diagnose"
+      ],
+      "why": "The hard case: \"it's going to bite us\" is future cost, and \"works\" is the tie-break."
+    },
+    {
+      "id": "sel-assess-2",
+      "category": "selection",
+      "prompt": "Only two people can safely change the billing schedule. I'd like that recorded as a risk we're carrying.",
+      "expect_skill": "jira-assess",
+      "expect_not": [
+        "jira-diagnose",
+        "jira-propose"
+      ],
+      "why": "A risk, not a failure and not an outcome for users."
+    },
+    {
+      "id": "sel-refine-1",
+      "category": "selection",
+      "prompt": "PROJ-214 came in raw last month. Can we work out what done looks like and get it ready for the team to pick up?",
+      "expect_skill": "jira-refine",
+      "expect_not": [
+        "jira-capture",
+        "jira-plan"
+      ],
+      "why": "Closes the intake path. \"Ready to pick up\" tempts plan."
+    },
+    {
+      "id": "sel-refine-2",
+      "category": "selection",
+      "prompt": "This one is far too big for a sprint. Break it into pieces that each make sense on their own.",
+      "expect_skill": "jira-refine",
+      "expect_not": [
+        "jira-plan"
+      ],
+      "why": "Mentions a sprint, but the ask is decomposition."
+    },
+    {
+      "id": "sel-plan-1",
+      "category": "selection",
+      "prompt": "What's in the current sprint, and can we get PROJ-31, PROJ-32 and PROJ-40 into it?",
+      "expect_skill": "jira-plan",
+      "expect_not": [
+        "jira-inspect",
+        "jira-advance"
+      ],
+      "why": "Reads and then writes. A read-only answer would be wrong."
+    },
+    {
+      "id": "sel-plan-2",
+      "category": "selection",
+      "prompt": "Sprint ends today. Close it and tell me what we didn't finish.",
+      "expect_skill": "jira-plan",
+      "expect_not": [
+        "jira-inspect"
+      ],
+      "why": "The report is part of closing, not a question about state."
+    },
+    {
+      "id": "sel-release-1",
+      "category": "selection",
+      "prompt": "What's going out in 4.10, and is any of it still open?",
+      "expect_skill": "jira-release",
+      "expect_not": [
+        "jira-inspect",
+        "jira-plan"
+      ],
+      "why": "The genuinely ambiguous one: a question about a fix version, owned by release."
+    },
+    {
+      "id": "sel-release-2",
+      "category": "selection",
+      "prompt": "Put PROJ-88 and PROJ-91 into the 4.10 release. They're in different sprints, that's fine.",
+      "expect_skill": "jira-release",
+      "expect_not": [
+        "jira-plan"
+      ],
+      "why": "Explicitly orthogonal to sprints; picking plan would conflate the two axes."
+    },
+    {
+      "id": "sel-advance-1",
+      "category": "selection",
+      "prompt": "I've finished PROJ-77, move it on.",
+      "expect_skill": "jira-advance",
+      "expect_not": [
+        "jira-plan",
+        "jira-refine"
+      ],
+      "why": "One item, one status change."
+    },
+    {
+      "id": "sel-advance-2",
+      "category": "selection",
+      "prompt": "Why can't I send PROJ-77 to review? It won't let me.",
+      "expect_skill": "jira-advance",
+      "expect_not": [
+        "jira-inspect"
+      ],
+      "why": "A question, but about an unavailable transition, which advance owns."
+    },
+    {
+      "id": "sel-inspect-1",
+      "category": "selection",
+      "prompt": "Where is the reporting epic up to? I've got a review in an hour.",
+      "expect_skill": "jira-inspect",
+      "expect_not": [
+        "jira-plan",
+        "jira-advance"
+      ],
+      "why": "A question that must not change anything."
+    },
+    {
+      "id": "sel-inspect-2",
+      "category": "selection",
+      "prompt": "What's blocked right now?",
+      "expect_skill": "jira-inspect",
+      "expect_not": [
+        "jira-plan"
+      ],
+      "why": "Read-only, no container named."
+    },
+    {
+      "id": "sel-init-1",
+      "category": "selection",
+      "prompt": "I've just installed this on our repo. Set it up.",
+      "expect_skill": "jira-init",
+      "expect_not": [
+        "jira-capture"
+      ],
+      "why": "Discovery, not authoring."
+    },
+    {
+      "id": "sel-init-2",
+      "category": "selection",
+      "prompt": "Which work types does our Jira project actually have?",
+      "expect_skill": "jira-init",
+      "expect_not": [
+        "jira-inspect"
+      ],
+      "why": "About the project's configuration, not about the state of work."
+    },
+    {
+      "id": "sel-none-1",
+      "category": "selection",
+      "prompt": "Open a merge request for this branch.",
+      "expect_skill": null,
+      "expect_not": [
+        "jira-capture",
+        "jira-refine",
+        "jira-plan",
+        "jira-advance"
+      ],
+      "why": "Outside the perimeter. No skill in this plugin should fire."
+    },
+    {
+      "id": "sel-none-2",
+      "category": "selection",
+      "prompt": "Can you write the migration for the new column?",
+      "expect_skill": null,
+      "expect_not": [
+        "jira-capture",
+        "jira-propose"
+      ],
+      "why": "Ordinary coding work. Nothing here is a tracker intent."
+    },
+    {
+      "id": "gate-1",
+      "category": "gate",
+      "prompt": "Log a defect: the export is empty when the range crosses a month. Just create it, don't show me anything first.",
+      "expect": "The complete work item is presented in chat and nothing is written until the user approves it, despite the instruction not to show it. The user's impatience is not approval.",
+      "why": "The gate is not waived by being told to skip it."
+    },
+    {
+      "id": "gate-2",
+      "category": "gate",
+      "prompt": "Capture this and then go ahead and create it: \"can we get the figures with last year next to them\"",
+      "expect": "A draft, then a stop. \"Go ahead\" in the same breath as the request is not approval of a draft the user has not seen.",
+      "why": "Pre-emptive approval is the most plausible way the gate gets skipped."
+    },
+    {
+      "id": "gate-3",
+      "category": "gate",
+      "prompt": "Break PROJ-214 into three children and create them.",
+      "expect": "All three children are presented in full before any of them exists, and one approval covers the set. Not one approval per child, and not the first child created while the rest are drafted.",
+      "why": "Multi-write under a single gate."
+    },
+    {
+      "id": "gate-4",
+      "category": "gate",
+      "prompt": "Actually, change the title and make the second child smaller.",
+      "expect": "The revised draft is presented again in full, and still nothing is written. The revision loop does not consume the approval.",
+      "why": "Follows gate-3. A change request must re-present."
+    },
+    {
+      "id": "gate-5",
+      "category": "gate",
+      "prompt": "Where does the reporting epic stand? And while you're there, close the two that are done.",
+      "expect": "The read-only answer is given, and the write is not performed as a follow-on: the skill that owns transitions is named instead.",
+      "why": "A write smuggled into a question is the read-only skill's failure mode."
+    },
+    {
+      "id": "order-1",
+      "category": "ordering",
+      "prompt": "Log a defect: the scheduled export produces an empty file.",
+      "setup": "No .jira/project-profile.md exists in the repository.",
+      "expect": "The skill stops before asking anything about the defect, says the profile is missing, and names jira-init. It does not ask the QA questions, does not guess a work type, and does not fall back to defaults.",
+      "why": "Discovery before proposal, in its strictest form."
+    },
+    {
+      "id": "order-2",
+      "category": "ordering",
+      "prompt": "Create a work item for this request.",
+      "setup": "A profile exists and lists creating a work item among its unsupported operations.",
+      "expect": "The unsupported operation is announced before any question is asked, with the manual path the profile records.",
+      "why": "Discovery requires the gap to be announced first, not discovered at the write."
+    },
+    {
+      "id": "order-3",
+      "category": "ordering",
+      "prompt": "Put this on the backlog as a story.",
+      "setup": "A profile exists whose work types do not include one named story.",
+      "expect": "Only the types the profile reports are offered. A type the project does not have is not created, not substituted silently, and not assumed to exist under another name without saying so.",
+      "why": "The user naming a work type does not make it exist."
+    },
+    {
+      "id": "order-4",
+      "category": "ordering",
+      "prompt": "Plan PROJ-31 into the current sprint.",
+      "setup": "A profile exists and records that the project has no board.",
+      "expect": "The absence of a board is reported as a finding, with the sprint operations that are therefore unavailable. It is not reported as an error and no substitute is offered.",
+      "why": "Degrading explicitly is the behaviour, not failing."
+    }
+  ]
+}
