@@ -1,10 +1,12 @@
 #!/usr/bin/env node
 // Pre-publish integrity check.
 // Fails the pack if the plugin manifest, the VERSION file and the skills directory have
-// drifted apart. Replaces the hard-coded path list that had to be edited by hand every
-// time a skill was added.
+// drifted apart, or if a skill's frontmatter would misbehave once installed. One gate:
+// everything that must hold before publishing is asserted here.
 
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
+
+import { validateSkill } from './skill-frontmatter.mjs';
 
 const read = (p) => JSON.parse(readFileSync(p, 'utf8'));
 const errors = [];
@@ -26,8 +28,16 @@ for (const name of declared) {
   if (!existsSync(`skills/${name}/SKILL.md`)) errors.push(`declared skill "${name}" has no skills/${name}/SKILL.md`);
 }
 
+// `shared` holds the contracts every skill links. It is not a skill: it is neither declared
+// in the manifest nor carries frontmatter, and it is the only directory here that is exempt.
 for (const name of present) {
-  if (name !== 'shared' && !declared.includes(name)) errors.push(`skills/${name}/ exists but is not declared in .claude-plugin/plugin.json`);
+  if (name === 'shared') continue;
+
+  if (!declared.includes(name)) errors.push(`skills/${name}/ exists but is not declared in .claude-plugin/plugin.json`);
+
+  const path = `skills/${name}/SKILL.md`;
+  if (!existsSync(path)) continue;
+  for (const error of validateSkill(name, readFileSync(path, 'utf8'))) errors.push(`${path}: ${error}`);
 }
 
 const grouped = existsSync('skills.sh.json')

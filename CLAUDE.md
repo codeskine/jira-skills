@@ -62,7 +62,7 @@ This project does **not** use `openclaw` metadata.
 | Field            | Required         | Constraints                                                                                                                                   |
 | ---------------- | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | `name`           | Spec-required    | 1–64 chars. Lowercase `a-z`, digits, hyphens. No leading/trailing/consecutive hyphens. Must match parent directory name.                      |
-| `description`    | Spec-required    | 1–1024 chars. Must include a "Use when" or "Apply when" trigger clause. Must contain the word `Jira`.                                         |
+| `description`    | Spec-required    | 1–1,000 chars. Must include a "Use when" or "Apply when" trigger clause. Must contain the word `Jira`.                                         |
 | `license`        | Project-required | `MIT`                                                                                                                                         |
 | `compatibility`  | Project-required | Base: `Designed for Claude Code. Requires the Atlassian MCP server configured as "atlassian".` Extend when the skill also needs the Jira CLI. |
 | `metadata`       | Project-required | Must include `author` (string) and `version` (semver `a.b.c`, e.g. `"1.0.0"`). No `openclaw` block.                                           |
@@ -97,9 +97,11 @@ context (too broad) or never fires (too vague).
 Every description **MUST** contain the word `Jira` — skills must not activate on
 non-Jira requests.
 
-Descriptions **MUST NOT** name a work type as a hard requirement (`bug`, `story`, `epic`).
-Work types belong to the project scheme and are discovered, not assumed: describe the
-**intent** the user expresses, not the Jira object that will result.
+Descriptions **MUST NOT** name a work type at all — `bug`, `story`, `epic`, `task`,
+`sub-task`, singular or plural, in a trigger clause or in a boundary disclaimer. Work types
+belong to the project scheme and are discovered, not assumed: describe the **intent** the user
+expresses, not the Jira object that will result. Most of these words are refused vocabulary in
+any case; see the _Avoid_ lists in [CONTEXT.md](CONTEXT.md).
 
 **Too vague** — no trigger context, ignored:
 
@@ -294,7 +296,7 @@ reusing it.
 4. Add `"<name>"` to the `skills` array in `.claude-plugin/plugin.json`.
 5. Add it to a grouping in `skills.sh.json`.
 6. Run `node scripts/check-package.mjs` — it fails if the manifests, the VERSION file and the
-   skills directory have drifted apart.
+   skills directory have drifted apart, or if the frontmatter would misbehave once installed.
 7. Run the description quality check: contains `Jira`, has a "Use when" trigger clause, names
    an intent rather than a work type, no over-triggering, no `openclaw` block.
 

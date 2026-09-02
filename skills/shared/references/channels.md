@@ -14,8 +14,8 @@ expose the Agile surface, and the CLI is not the native integration.
 ## Resolving MCP tool names
 
 MCP tool names have the form `mcp__atlassian__<tool>` and the `<tool>` part changes between
-server versions. **Never hard-code one in a skill.** The available tools are enumerated once by
-`/jira-doctor`, and the project profile records which tool serves which operation. A skill
+server versions. **Never hard-code one in a skill.** The available tools are enumerated once
+during discovery, and the project profile records which tool serves which operation. A skill
 reads the profile and calls what it finds there.
 
 The server id, by contrast, _is_ fixed by convention: `atlassian`. It appears in `allowed-tools`,
