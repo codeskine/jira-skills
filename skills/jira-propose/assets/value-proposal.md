@@ -1,11 +1,8 @@
 # Template — value proposal
 
-Section order and shape for a work item created by `jira-propose`. The words below name the
-structure; the artifact itself is written in the language the user is working in, and its
-headings are translated with it. Nothing here presumes a technology.
-
-Everything in angle brackets is replaced. A section with nothing to put in it says so
-explicitly — an empty heading reads as an oversight, a stated absence reads as a fact.
+Section order and shape for a work item created by `jira-propose`. The conventions that govern every
+template — structure only, no fixed language, no technology, optional sections omitted rather
+than left blank — are in [reading a template](../../shared/references/templates.md).
 
 ---
 

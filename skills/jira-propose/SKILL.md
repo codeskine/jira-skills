@@ -18,14 +18,13 @@ down, and does not record work that is already understood — those are other in
 
 It obeys [the discovery contract](../shared/references/discovery.md),
 [the draft gate](../shared/references/draft-gate.md) and
-[the quality standard](../shared/references/quality-standard.md), from which three criteria apply
-to this intent: the outcome sought, who benefits, and how success is measured.
+[the quality standard](../shared/references/quality-standard.md), whose criteria for proposing
+value apply here in full.
 
 ## 1. Read the project profile
 
-First, before anything is asked or proposed. [Discovery](../shared/references/discovery.md) says
-where the profile lives, what to do when it is missing, and how to report an operation the
-project does not support. Setting a parent is the one this intent depends on: if the profile
+First, before anything is asked or proposed, as
+[discovery](../shared/references/discovery.md) requires. Setting a parent is the one this intent depends on: if the profile
 lists it unsupported, say so now, not after a draft the user cannot have.
 
 ## 2. Ask what a Product Owner asks
@@ -72,13 +71,12 @@ Fill [the template](assets/value-proposal.md).
 ## 7. Present and confirm
 
 Follow [the draft gate](../shared/references/draft-gate.md). What this intent adds: when the item
-will have no parent, the confirmation says why not.
+will have no parent, the gate says why not.
 
 ## 8. Write
 
 Through the tool the profile resolves for creating a work item, and the one it resolves for
-setting a parent; see [the channel map](../shared/references/channels.md). Never hard-code a tool
-name.
+setting a parent; see [the channel map](../shared/references/channels.md).
 
 If the item is created but the parent cannot be set, say so: a proposal sitting at the wrong level
 is a finding the user must see, not a step to retry silently.

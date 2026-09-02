@@ -19,15 +19,13 @@ them here produces an artifact someone else has to unpick.
 
 It obeys [the discovery contract](../shared/references/discovery.md),
 [the draft gate](../shared/references/draft-gate.md) and
-[the quality standard](../shared/references/quality-standard.md), from which three criteria
-apply to this intent: the original wording preserved, the source of the request, and an explicit
-statement that the item is raw and awaiting refinement.
+[the quality standard](../shared/references/quality-standard.md), whose criteria for capturing
+a request apply here in full.
 
 ## 1. Read the project profile
 
-First, before anything is asked or proposed. [Discovery](../shared/references/discovery.md) says
-where the profile lives, what to do when it is missing, and how to report an operation the
-project does not support. Nothing here overrides it.
+First, before anything is asked or proposed, as
+[discovery](../shared/references/discovery.md) requires. Nothing here overrides it.
 
 ## 2. Take the request whole
 
@@ -68,13 +66,13 @@ Fill [the template](assets/captured-request.md).
 
 Follow [the draft gate](../shared/references/draft-gate.md). One thing this intent adds to it:
 the statement that the item is raw must be **visible in the draft**, not merely intended, and the
-confirmation says plainly that what will be created is a raw record rather than planned work.
+gate says plainly that what will be created is a raw record rather than planned work.
 
 ## 7. Write
 
 Through the tool the profile resolves for creating a work item; see
 [the channel map](../shared/references/channels.md) for why the profile is asked and not the
-skill. Never hard-code a tool name.
+skill.
 
 ## The handover
 
