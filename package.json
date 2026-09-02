@@ -1,15 +1,13 @@
 {
   "name": "@codeskine/jira-skills",
   "version": "1.0.0",
-  "description": "AI Agent Skills for authoring Atlassian Jira Cloud work items — capture requests, propose value, report defects, refine and decompose, plan sprints and fix versions.",
+  "description": "Claude Code Agent Skills for authoring Atlassian Jira Cloud work items — capture requests, propose value, report defects, refine and decompose, plan sprints and fix versions.",
   "license": "MIT",
   "author": {
     "name": "Stefano Veloccia"
   },
   "keywords": [
     "claude-code",
-    "cursor",
-    "codex",
     "agent-skill",
     "jira",
     "jira-cloud",
@@ -31,9 +29,7 @@
     "LICENSE",
     "skills",
     "commands",
-    ".claude-plugin",
-    ".cursor-plugin",
-    ".codex-plugin"
+    ".claude-plugin"
   ],
   "scripts": {
     "prepack": "node scripts/check-package.mjs"

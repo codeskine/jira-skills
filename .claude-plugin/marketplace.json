@@ -7,7 +7,7 @@
   "plugins": [
     {
       "name": "jira-skills",
-      "description": "AI Agent Skills for authoring Atlassian Jira Cloud work items — capture requests, propose value, report defects, refine and decompose, plan sprints and fix versions.",
+      "description": "Claude Code Agent Skills for authoring Atlassian Jira Cloud work items — capture requests, propose value, report defects, refine and decompose, plan sprints and fix versions.",
       "source": {
         "source": "github",
         "repo": "codeskine/jira-skills"

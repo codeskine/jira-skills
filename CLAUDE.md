@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-`jira-skills` is a Claude Code / Cursor / Codex Agent Skills plugin for authoring the work
+`jira-skills` is a Claude Code Agent Skills plugin for authoring the work
 items of a project on **Atlassian Jira Cloud** — capturing requests, proposing value,
 reporting defects, recording technical debt, refining and decomposing, planning sprints and
 fix versions. The repository is open source and serves two audiences: teams who install the
@@ -29,9 +29,11 @@ skills/               # Agent Skill definitions
 docs/adr/             # Architecture decision records (versioned; the rest of docs/ is not)
 scripts/              # Repository tooling
 .claude-plugin/       # Plugin metadata, marketplace entry
-.cursor-plugin/       # Plugin metadata (version and skills array must match .claude-plugin)
-.codex-plugin/        # Plugin metadata (version and skills array must match .claude-plugin)
 ```
+
+This plugin targets **Claude Code only**. Cursor and Codex manifests were dropped: keeping
+three manifests in sync bought nothing while the skills depend on an MCP server id and on
+tools declared in Claude Code's own `allowed-tools` syntax.
 
 ## Agent Skills Specification
 
@@ -57,15 +59,15 @@ statically and `/jira-doctor` verifies it. The full operation → channel map li
 New skills go in `skills/<skill-name>/SKILL.md`. Each file requires YAML frontmatter.
 This project does **not** use `openclaw` metadata.
 
-| Field            | Required         | Constraints                                                                                                                                                               |
-| ---------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `name`           | Spec-required    | 1–64 chars. Lowercase `a-z`, digits, hyphens. No leading/trailing/consecutive hyphens. Must match parent directory name.                                                  |
-| `description`    | Spec-required    | 1–1024 chars. Must include a "Use when" or "Apply when" trigger clause. Must contain the word `Jira`.                                                                     |
-| `license`        | Project-required | `MIT`                                                                                                                                                                     |
-| `compatibility`  | Project-required | Base: `Designed for Claude Code or similar AI coding agents. Requires the Atlassian MCP server configured as "atlassian".` Extend when the skill also needs the Jira CLI. |
-| `metadata`       | Project-required | Must include `author` (string) and `version` (semver `a.b.c`, e.g. `"1.0.0"`). No `openclaw` block.                                                                       |
-| `user-invocable` | Project-required | Boolean. `true` for every skill in this plugin: each one maps to an activity a user names out loud.                                                                       |
-| `allowed-tools`  | Project-required | Space-delimited list. See [Allowed Tools](#allowed-tools).                                                                                                                |
+| Field            | Required         | Constraints                                                                                                                                   |
+| ---------------- | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `name`           | Spec-required    | 1–64 chars. Lowercase `a-z`, digits, hyphens. No leading/trailing/consecutive hyphens. Must match parent directory name.                      |
+| `description`    | Spec-required    | 1–1024 chars. Must include a "Use when" or "Apply when" trigger clause. Must contain the word `Jira`.                                         |
+| `license`        | Project-required | `MIT`                                                                                                                                         |
+| `compatibility`  | Project-required | Base: `Designed for Claude Code. Requires the Atlassian MCP server configured as "atlassian".` Extend when the skill also needs the Jira CLI. |
+| `metadata`       | Project-required | Must include `author` (string) and `version` (semver `a.b.c`, e.g. `"1.0.0"`). No `openclaw` block.                                           |
+| `user-invocable` | Project-required | Boolean. `true` for every skill in this plugin: each one maps to an activity a user names out loud.                                           |
+| `allowed-tools`  | Project-required | Space-delimited list. See [Allowed Tools](#allowed-tools).                                                                                    |
 
 Example frontmatter:
 
@@ -75,7 +77,7 @@ name: jira-example
 description: "Jira X author. Use when the user asks to create or update Y on Jira."
 user-invocable: true
 license: MIT
-compatibility: Designed for Claude Code or similar AI coding agents. Requires the Atlassian MCP server configured as "atlassian".
+compatibility: Designed for Claude Code. Requires the Atlassian MCP server configured as "atlassian".
 metadata:
   author: your-username
   version: "1.0.0"
@@ -281,8 +283,7 @@ reusing it.
 1. Create `skills/<name>/SKILL.md` with all project-required frontmatter fields.
 2. Create `skills/<name>/assets/<type>.md` for each artifact template the skill needs.
 3. Optionally create `skills/<name>/references/` for deep documentation.
-4. Add `"<name>"` to the `skills` array in `.claude-plugin/plugin.json`,
-   `.cursor-plugin/plugin.json` and `.codex-plugin/plugin.json`.
+4. Add `"<name>"` to the `skills` array in `.claude-plugin/plugin.json`.
 5. Add it to a grouping in `skills.sh.json`.
 6. Run `node scripts/check-package.mjs` — it fails if the manifests, the VERSION file and the
    skills directory have drifted apart.
