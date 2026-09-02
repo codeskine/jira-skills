@@ -49,8 +49,9 @@ A skill reaches Jira through one of two channels, never through a third:
 | **Atlassian MCP server** | work items, fields, comments, transitions, search, project metadata | `mcp__atlassian` |
 | **Jira CLI** (`jira`)    | the Agile domain only — boards, sprints, backlog                    | `Bash(jira:*)`   |
 
-The MCP server MUST be configured with the server id `atlassian`; skills declare that id
-statically and `/jira-doctor` verifies it. The full operation → channel map lives in
+The MCP server MUST be reachable under the server id `atlassian`; skills declare that id
+statically and `/jira-doctor` verifies it. A server connected under any other name — including
+an Atlassian connector added through claude.ai settings — serves no skill in this plugin. The full operation → channel map lives in
 `skills/shared/references/channels.md` and nowhere else. Rationale in
 [ADR-0001](docs/adr/0001-hybrid-mcp-and-cli-channel.md).
 

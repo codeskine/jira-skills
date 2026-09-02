@@ -40,8 +40,11 @@ Two things follow from that shape, and they are the whole design:
 | -------------------------------- | ------------------------------------------------------------------------------------- |
 | Claude Code                      | The only harness this plugin targets                                                  |
 | The Atlassian MCP server         | Work items, fields, comments, transitions, search and project metadata                |
-| — configured under the id `atlassian` | Skills declare that id statically; a server under any other name is invisible to them |
+| — reachable under the id `atlassian` | Skills declare that id statically, so a server under any other name is invisible to them. An Atlassian connector added through claude.ai settings may show as connected and still not serve them — `/jira-doctor` tells you which situation you are in |
 | The `jira` CLI, authenticated    | Only for the Agile surface — boards, sprints, backlog. Without it, `jira-plan` and the fix-version listing are unavailable and everything else still works |
+
+Add it under that id with `claude mcp add --transport http atlassian https://mcp.atlassian.com/v1/mcp`,
+then authenticate it.
 
 Run `/jira-doctor` to check all three at once. It reports each failure with the exact remediation,
 and tells you which half of the plugin is degraded rather than failing as a whole.

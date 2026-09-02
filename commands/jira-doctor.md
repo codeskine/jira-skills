@@ -30,10 +30,10 @@ Read the output and classify:
 - A row named exactly **`atlassian`**, connected → ✅.
 - A row named `atlassian` that needs authentication → ❌ **not authenticated**. The user
   re-authenticates it through Claude Code; do not attempt it for them.
-- A row that is clearly the Atlassian server under **another id** (`Atlassian`,
-  `mcp-atlassian`, `jira`, …) → ❌ **wrong id**. This is the failure that looks like nothing
-  happening, because skills declare `mcp__atlassian` statically in `allowed-tools` and a
-  differently-named server is simply invisible to them.
+- A row that is the Atlassian server under **another id** (`Atlassian`, `mcp-atlassian`,
+  `jira`, …) → ❌ **wrong id**. This is the failure that looks like nothing happening, because
+  skills declare `mcp__atlassian` statically in `allowed-tools` and a differently-named server
+  is invisible to them.
 
   Report the id found, and the remediation — re-adding the same server under the required id:
 
@@ -46,7 +46,24 @@ Read the output and classify:
   the row does not show one, ask the user for it or point them at Atlassian's own setup
   documentation.
 
-- No Atlassian row at all → ❌ **not configured**. The user adds it; the plugin cannot.
+- A row whose name begins with **`claude.ai `** — `claude.ai Atlassian`, say → ⚠️ **connected
+  is not the same as usable here.** Before trusting it, check whether any Atlassian tool is
+  actually available in the session. If none is, the skills cannot reach Jira through that row
+  whatever its status column says.
+
+  Renaming or removing such a row has not been established to work, so do not send the user
+  down that path. The remediation that does not depend on it is to add a server under the
+  required id:
+
+  ```bash
+  claude mcp add --transport http atlassian https://mcp.atlassian.com/v1/mcp
+  ```
+
+  A newly added remote server starts unauthenticated, so expect the second case above next,
+  and have the user authenticate it before running anything.
+
+- No Atlassian row at all → ❌ **not configured**. The user adds it, with the command above;
+  the plugin cannot.
 
 ## Step 2 — The Jira CLI
 
@@ -107,7 +124,7 @@ missing **and** the CLI is unconfigured saves the user a second round trip.
 
 | Symptom                                       | Cause                                        | Fix                                              |
 | --------------------------------------------- | -------------------------------------------- | ------------------------------------------------ |
-| a skill's Jira calls silently do nothing      | MCP server configured under another id       | re-add it as `atlassian` (Step 1)                |
+| a skill's Jira calls silently do nothing      | the server is not reachable as `atlassian`    | add one under that id (Step 1)                   |
 | `jira: command not found`                     | CLI not installed or not on `PATH`           | install it; confirm with `command -v jira`       |
 | `The tool needs a Jira API token`             | CLI installed, never configured              | `jira init`                                      |
 | a skill stops asking for the profile          | no discovery has been run in this repository | run `jira-init`                                  |

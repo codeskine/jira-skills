@@ -19,7 +19,9 @@ during discovery, and the project profile records which tool serves which operat
 reads the profile and calls what it finds there.
 
 The server id, by contrast, _is_ fixed by convention: `atlassian`. It appears in `allowed-tools`,
-which is static frontmatter and cannot read a file. `/jira-doctor` verifies it.
+which is static frontmatter and cannot read a file, so a server reachable under any other name
+serves no skill here however healthy it looks. `/jira-doctor` verifies it and prints the
+remediation.
 
 ## Operation map
 
