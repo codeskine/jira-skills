@@ -62,6 +62,12 @@ Read the output and classify:
   A newly added remote server starts unauthenticated, so expect the second case above next,
   and have the user authenticate it before running anything.
 
+- **A server added, approved or authenticated during this session may not be usable in it.**
+  When `claude mcp list` reports it connected and no Atlassian tool is available here, the
+  environment is fine and the session is not: tell the user to start a new one in this
+  repository and run this check again. Do not report it as a configuration failure — you would
+  be sending them to fix something that is already correct.
+
 - No Atlassian row at all → ❌ **not configured**. The user adds it, with the command above;
   the plugin cannot.
 
