@@ -1,7 +1,7 @@
 {
-  "name": "@codeskine/gitlab-workflow",
-  "version": "1.5.0",
-  "description": "AI Agent Skills for managing the GitLab workflow — plan milestones, track issues, commit with traceability, and open merge requests via the glab CLI.",
+  "name": "@codeskine/jira-skills",
+  "version": "1.0.0",
+  "description": "AI Agent Skills for authoring Atlassian Jira Cloud work items — capture requests, propose value, report defects, refine and decompose, plan sprints and fix versions.",
   "license": "MIT",
   "author": {
     "name": "Stefano Veloccia"
@@ -11,14 +11,15 @@
     "cursor",
     "codex",
     "agent-skill",
-    "gitlab",
-    "glab",
-    "gitlab-workflow",
-    "conventional-commits",
-    "merge-request",
-    "milestone",
-    "issue-tracking",
-    "traceability",
+    "jira",
+    "jira-cloud",
+    "atlassian",
+    "atlassian-mcp",
+    "work-item",
+    "backlog",
+    "sprint",
+    "agile",
+    "product-management",
     "ai-agent",
     "agentic"
   ],
@@ -27,22 +28,22 @@
   },
   "files": [
     "VERSION",
-    "SECURITY.md",
     "LICENSE",
     "skills",
+    "commands",
     ".claude-plugin",
     ".cursor-plugin",
     ".codex-plugin"
   ],
   "scripts": {
-    "prepack": "node -e \"const fs=require('fs');for(const p of ['skills/gitlab-plan/SKILL.md','skills/gitlab-track/SKILL.md','skills/gitlab-commit/SKILL.md','skills/gitlab-review/SKILL.md','skills/gitlab-story/SKILL.md','skills/gitlab-init/SKILL.md','skills/gitlab-release/SKILL.md','skills/shared/references/label-registry.md','VERSION']){if(!fs.existsSync(p)){console.error('Missing '+p);process.exit(1)}}\""
+    "prepack": "node scripts/check-package.mjs"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/codeskine/gitlab-workflow.git"
+    "url": "git+https://github.com/codeskine/jira-skills.git"
   },
-  "homepage": "https://github.com/codeskine/gitlab-workflow#readme",
+  "homepage": "https://github.com/codeskine/jira-skills#readme",
   "bugs": {
-    "url": "https://github.com/codeskine/gitlab-workflow/issues"
+    "url": "https://github.com/codeskine/jira-skills/issues"
   }
 }

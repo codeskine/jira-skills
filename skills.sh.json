@@ -4,23 +4,28 @@
   "groupings": [
     {
       "title": "Setup",
-      "description": "Skills for initializing a GitLab project with the required labels and configuration.",
-      "skills": ["gitlab-init"]
+      "description": "Discover how the Jira project is really configured and record the project profile every other skill reads.",
+      "skills": ["jira-init"]
+    },
+    {
+      "title": "Authoring",
+      "description": "Turn a request, a defect or a technical risk into a well-formed Jira work item.",
+      "skills": ["jira-capture", "jira-propose", "jira-diagnose", "jira-assess"]
+    },
+    {
+      "title": "Refinement",
+      "description": "Enrich a work item and break it down into well-formed children.",
+      "skills": ["jira-refine"]
     },
     {
       "title": "Planning",
-      "description": "Skills for scoping and structuring GitLab work before writing code.",
-      "skills": ["gitlab-plan", "gitlab-story"]
+      "description": "Decide when work is tackled and what ships together.",
+      "skills": ["jira-plan", "jira-release"]
     },
     {
-      "title": "Execution",
-      "description": "Skills for tracking progress and committing changes with traceability.",
-      "skills": ["gitlab-track", "gitlab-commit"]
-    },
-    {
-      "title": "Review",
-      "description": "Skills for authoring and publishing GitLab merge requests.",
-      "skills": ["gitlab-review"]
+      "title": "Progress",
+      "description": "Move work along its workflow and read where it stands.",
+      "skills": ["jira-advance", "jira-inspect"]
     }
   ]
 }

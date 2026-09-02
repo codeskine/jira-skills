@@ -9,11 +9,14 @@ node_modules/
 .history/
 .cursor/plans/
 .cursor/skills/
+.idea
 
-# local docs
-docs/
+# agent worktrees
+.claude/worktrees/
+
+# local docs — architecture decision records are versioned, the rest is scratch
+docs/*
+!docs/adr/
 
 # logs
 npm-debug.log*
-
-.idea

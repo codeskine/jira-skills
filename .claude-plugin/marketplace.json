@@ -6,35 +6,35 @@
   },
   "plugins": [
     {
-      "name": "gitlab-workflow",
-      "description": "AI Agent Skills for managing the GitLab workflow — plan milestones, track issues, commit with traceability, and open merge requests via the glab CLI.",
+      "name": "jira-skills",
+      "description": "AI Agent Skills for authoring Atlassian Jira Cloud work items — capture requests, propose value, report defects, refine and decompose, plan sprints and fix versions.",
       "source": {
         "source": "github",
-        "repo": "codeskine/gitlab-workflow"
+        "repo": "codeskine/jira-skills"
       },
       "author": {
         "name": "Stefano Veloccia",
         "email": "stefano.veloccia@sourcesense.com"
       },
-      "homepage": "https://github.com/codeskine/gitlab-workflow",
-      "repository": "https://github.com/codeskine/gitlab-workflow",
+      "homepage": "https://github.com/codeskine/jira-skills",
+      "repository": "https://github.com/codeskine/jira-skills",
       "license": "MIT",
       "keywords": [
         "claude-code",
         "claude-code-plugin",
-        "gitlab",
-        "glab",
-        "gitlab-workflow",
+        "jira",
+        "jira-cloud",
+        "atlassian",
+        "atlassian-mcp",
         "skills",
         "ai-agent",
         "agentic",
-        "conventional-commits",
-        "merge-request",
-        "milestone",
-        "issue-tracking",
-        "traceability"
+        "work-item",
+        "backlog",
+        "sprint",
+        "agile"
       ],
-      "category": "DevOps"
+      "category": "Project Management"
     }
   ]
 }
