@@ -134,6 +134,12 @@ you ask.
 and the boundaries between skills. `CONTEXT.md` is the glossary, and it lists the words this
 project refuses to use as well as the ones it uses.
 
+This repository carries its own MCP configuration in `.mcp.json`, declaring the Atlassian
+server under the id the skills require. Claude Code asks you to approve it the first time you
+open the repository, and you authenticate it yourself; it is scoped to this project and changes
+nothing on your machine, so testing the plugin never means reconfiguring the environment you
+work in. It holds a URL and no credential.
+
 Before opening a change:
 
 ```bash
