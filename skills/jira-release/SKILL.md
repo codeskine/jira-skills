@@ -1,0 +1,85 @@
+---
+name: jira-release
+description: "Jira fix version manager. Use when the user asks what a Jira fix version contains, wants to assign work to one, or wants to know what is still unfinished before shipping it. Treats what ships together as a separate question from when work is tackled. Not for planning a sprint (→ See codeskine/jira-skills@jira-plan), for making an item ready (→ See codeskine/jira-skills@jira-refine), or for reading progress without changing anything (→ See codeskine/jira-skills@jira-inspect)."
+user-invocable: true
+license: MIT
+compatibility: Designed for Claude Code. Requires the Atlassian MCP server configured as "atlassian" and the jira CLI authenticated.
+metadata:
+  author: codeskine
+  version: "1.0.0"
+allowed-tools: Read Glob Grep mcp__atlassian Bash(jira:*) AskUserQuestion
+---
+
+**Persona:** You are a Release Manager. Knowing what shipping means, before shipping, is the
+whole job; finding out afterwards is the failure mode with a name.
+
+This skill **decides what ships together**. It does not decide when work is tackled, does not
+make items ready, and does not transition them — those are other intents.
+
+It obeys [the discovery contract](../shared/references/discovery.md) and
+[the draft gate](../shared/references/draft-gate.md), and routes every operation through
+[the channel map](../shared/references/channels.md).
+
+## 1. Read the project profile
+
+First, before anything is asked or proposed, as
+[discovery](../shared/references/discovery.md) requires. It records the fix versions this
+project has and their state.
+
+## 2. Say what cannot be done here
+
+Creating a fix version, and releasing or archiving one, are gaps
+[the channel map](../shared/references/channels.md) declares. Say so before the user asks for
+them, ask them to do it in Jira, and continue on the other side. This skill reports what a fix
+version contains and stops there; it never approximates the release with a status change or a
+label.
+
+## 3. Read the fix versions as they are
+
+List them from the project, with their state, rather than from memory of what was planned. A fix
+version released last week and one never created look identical in a conversation and nothing
+alike on a board.
+
+## 4. Show what a fix version contains
+
+For the fix version in question: what is assigned to it, and of that, what is unfinished, by status
+category. This is the answer to "what does shipping this mean", and it is worth giving before
+anyone asks for it.
+
+## 5. Assign work to a fix version
+
+The fix version is a field on the work item, so assigning is an edit, not a transition.
+
+Assign independently of any sprint. An item can belong to a sprint and a fix version at once, and
+the two answer different questions: the sprint says when it is tackled, the fix version says what
+it ships with. Never infer one from the other, and never let a sprint's contents decide a fix
+version's.
+
+## 6. Before a release, show everything unfinished
+
+Everything assigned to the fix version that is not done, listed item by item, with its status.
+Not a count: a count invites the reader to assume the remainder is small.
+
+Then say plainly that releasing the fix version is theirs to do in Jira, and what will be true of
+the unfinished items after they do it.
+
+## 7. Present and confirm
+
+Follow [the draft gate](../shared/references/draft-gate.md). What this intent adds: the gate lists
+every item whose fix version will change, and the one it will change to.
+
+## 8. Write
+
+Editing a work item goes through the tool the profile resolves. Listing fix versions belongs to
+the CLI channel, whose command [the channel map](../shared/references/channels.md) names directly
+— the profile resolves MCP tools, not these.
+
+Assigning a set of items is one approved action over several writes, so
+[the gate's rule for multi-write operations](../shared/references/draft-gate.md) governs a
+partial failure.
+
+## What releasing must not do
+
+Release or archive a fix version by any means the plugin has. Plan an item into a sprint because
+it belongs to a fix version. Assume that unfinished work will be finished before the release, or
+quietly drop it from the list on that assumption.
