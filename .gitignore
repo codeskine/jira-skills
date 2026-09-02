@@ -14,9 +14,10 @@ node_modules/
 # agent worktrees
 .claude/worktrees/
 
-# local docs — architecture decision records are versioned, the rest is scratch
+# local docs — decision records and agent config are versioned, the rest is scratch
 docs/*
 !docs/adr/
+!docs/agents/
 
 # logs
 npm-debug.log*

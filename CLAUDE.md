@@ -301,3 +301,24 @@ After making changes, suggest the following as next steps. Do NOT execute automa
 3. Increment `metadata.version` in the changed SKILL.md.
 4. Bump the plugin version with `scripts/bump-version.sh`.
 5. Regenerate the README skill table.
+
+## Agent skills
+
+Configuration consumed by the engineering skills — where work on this repository is tracked and
+how it is labelled. Unrelated to [Agent Skills Specification](#agent-skills-specification)
+above, which governs the skills this repository _builds_.
+
+### Issue tracker
+
+Issues live as GitHub issues on `codeskine/jira-skills`, via the `gh` CLI. External pull
+requests are not a triage surface. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+The five canonical roles, unchanged: `needs-triage`, `needs-info`, `ready-for-agent`,
+`ready-for-human`, `wontfix`. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context: `CONTEXT.md` and `docs/adr/` at the repo root. The glossary lists refused terms
+as well as canonical ones. See `docs/agents/domain.md`.
