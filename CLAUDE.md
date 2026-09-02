@@ -81,7 +81,7 @@ compatibility: Designed for Claude Code. Requires the Atlassian MCP server confi
 metadata:
   author: your-username
   version: "1.0.0"
-allowed-tools: Read Glob Grep mcp__atlassian Agent AskUserQuestion
+allowed-tools: Read Glob Grep mcp__atlassian AskUserQuestion
 ---
 ```
 
@@ -145,7 +145,7 @@ skill-specific extras as needed.
 **Default set** (include in every skill):
 
 ```
-Read Glob Grep mcp__atlassian Agent AskUserQuestion
+Read Glob Grep mcp__atlassian AskUserQuestion
 ```
 
 **Skill-specific extras:**
@@ -155,6 +155,7 @@ Read Glob Grep mcp__atlassian Agent AskUserQuestion
 | `Bash(jira:*)` | Skills touching the Agile domain — boards, sprints, backlog     |
 | `Write` `Edit` | Skills that write the project profile — in practice `jira-init` |
 | `WebFetch`     | Skills that fetch external documentation or resources           |
+| `Agent`        | Skills that dispatch a sub-agent — none so far, so justify it   |
 
 `Bash(git:*)` is **not** in the default set. This plugin does not touch git.
 

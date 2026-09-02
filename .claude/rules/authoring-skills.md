@@ -42,9 +42,10 @@ Use the canonical terms; the alternatives listed here are defects, not synonyms.
 - `user-invocable: true`, `license: MIT`, `metadata.author`, `metadata.version` present.
 - `compatibility` starts from `Designed for Claude Code. Requires the Atlassian MCP server
 configured as "atlassian".`
-- `allowed-tools` starts from `Read Glob Grep mcp__atlassian Agent AskUserQuestion`. Add
+- `allowed-tools` starts from `Read Glob Grep mcp__atlassian AskUserQuestion`. Add
   `Bash(jira:*)` only for the Agile domain; add `Write`/`Edit` only where the skill writes the
-  project profile. Never add `Bash(git:*)` — this plugin does not touch git.
+  project profile; add `Agent` only where the skill dispatches a sub-agent. Never add
+  `Bash(git:*)` — this plugin does not touch git. Declare nothing the skill does not use.
 
 ## Body
 
