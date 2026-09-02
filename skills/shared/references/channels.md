@@ -8,7 +8,8 @@ it looks the operation up here.
 | Atlassian MCP server | work items, fields, comments, transitions, search, project metadata                | `mcp__atlassian` |
 | Jira CLI (`jira`)    | the Agile domain only — boards, sprints, epics as a listing, versions as a listing | `Bash(jira:*)`   |
 
-Rationale in [ADR-0001](../../../docs/adr/0001-hybrid-mcp-and-cli-channel.md).
+Two channels rather than one because neither covers the whole domain: the MCP server does not
+expose the Agile surface, and the CLI is not the native integration.
 
 ## Resolving MCP tool names
 

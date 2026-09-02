@@ -214,7 +214,7 @@ instructions if the model perceives an identity conflict. Keep leaf personas min
 
 ### Mandatory invariants
 
-Six invariants apply to every skill in this project. Violating any of them is a defect.
+Seven invariants apply to every skill in this project. Violating any of them is a defect.
 
 **1. Discovery before proposal**
 
@@ -255,6 +255,14 @@ language at runtime. Examples must not presuppose a programming language.
 A SKILL.md states in three or four lines _what must hold_ and links the shared procedure. The
 steps themselves live once, in `skills/shared/references/`. Never copy a procedure into a
 skill; never restate a quality criterion that the shared reference already owns.
+
+**7. Shipped artifacts are self-contained**
+
+Everything under `skills/` and `commands/` is installed on a user's machine, where this
+repository does not exist. A shipped artifact must not link to `docs/adr/`, name `CONTEXT.md`,
+`CLAUDE.md` or the README, or assume any convention of the repository that builds it. Where a
+rationale is worth knowing at runtime, state it inline in one sentence; the ADR stays the record
+for contributors. Cross-references **within** `skills/` are fine and expected.
 
 ### Boundaries between skills
 

@@ -1,8 +1,8 @@
 # Discovery and the project profile
 
 No skill assumes how a Jira project is configured. Work types, statuses, transitions, hierarchy
-depth, boards and versions belong to the project, and the plugin reads them. See
-[ADR-0003](../../../docs/adr/0003-no-surrogates-discovery-over-creation.md).
+depth, boards and versions belong to the project admin, not to this plugin. The plugin reads
+them and never re-creates them.
 
 Discovery runs **once**, in `jira-init`, and its result is written to the project profile. Every
 other skill reads the profile as its first step and does not repeat discovery.
@@ -15,8 +15,6 @@ other skill reads the profile as its first step and does not repeat discovery.
 
 Versioned in the repository, so the whole team shares one answer and changes to it are
 reviewable. It is the only local cache this plugin keeps, and it is kept because it is read.
-
-It is deliberately **not** under `docs/`, which this repository treats as scratch.
 
 ## What discovery reads
 

@@ -12,8 +12,9 @@ Every artifact, whatever the intent:
 2. **The reason is stated.** Why this matters, or what happens if it is not done. An artifact
    that only says _what_ leaves prioritisation to guesswork.
 3. **Every verifiable claim carries its evidence.** See below.
-4. **No term from an `_Avoid_` list in `CONTEXT.md`.** The glossary refuses words that encode a
-   wrong model; using one is a defect, not a stylistic choice.
+4. **Canonical vocabulary.** Say work item, work type, parent, status, transition, sprint, fix
+   version — the words Jira itself uses. Tracker-generic synonyms (ticket, issue, milestone,
+   epic link, workflow state) encode a different model and are defects, not stylistic choices.
 5. **The language is the user's.** Structure comes from the template, language from the
    conversation. Neither is hard-coded.
 6. **No technology stack is assumed.** An example may show code; it must not presume which
