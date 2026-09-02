@@ -48,6 +48,21 @@ Every skill, as its first step:
 3. If the operation it needs is listed as unsupported, it says so before asking the user
    anything, and offers the manual path.
 
+## Choosing a work type
+
+Every authoring skill reaches this point and does the same thing with it.
+
+1. **Offer the types the profile reports**, and let the user choose. A type absent from the
+   profile does not exist in this project and is never offered, however natural it sounds.
+2. **Recommend one where the intent has an obvious home** — a type meant for unrefined intake,
+   for instance — and say why you recommend it. A recommendation is not a choice made for the
+   user.
+3. **Read the fields the profile marks required on creation** for the chosen type. Fill what the
+   answers already cover; name what remains so the draft gate can raise it. A required field
+   discovered after approval wastes the approval.
+
+A skill states which of these carry extra weight for its intent. It does not restate the steps.
+
 ## Staleness
 
 Invalidation is **explicit, never time-based**. A project's configuration changes rarely and a

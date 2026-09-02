@@ -51,23 +51,18 @@ Three questions, not an interview. An answer the user does not have is recorded 
 never inferred, never filled in with a plausible guess. Refinement is a later intent with its own
 skill, and reaching for it here is how capture becomes a bottleneck.
 
-## 4. Offer the work types the profile reports
+## 4. Choose the work type
 
-Offer the types the project actually has and let the user choose. Recommend the one meant for
-unrefined intake if the project has one, and say why you recommend it. A type absent from the
-profile does not exist here and is never offered.
-
-Then read the fields the profile marks required on creation for the chosen type. Fill what the
-request answers; leave the rest for the gate to raise. A required field discovered after
-approval wastes the approval.
+Follow [choosing a work type](../shared/references/discovery.md). For this intent, recommend the
+type meant for unrefined intake where the project has one: filed as ordinary work, a raw record
+is read as ready by everyone who sees it later.
 
 Set no parent, no sprint and no fix version. A raw request has not earned a place in a hierarchy
 or a plan, and putting it in one is the mistake this skill exists to avoid.
 
 ## 5. Assemble the artifact
 
-Fill [the template](assets/captured-request.md). Structure comes from the template; the language
-comes from the conversation.
+Fill [the template](assets/captured-request.md).
 
 ## 6. Present and confirm
 
