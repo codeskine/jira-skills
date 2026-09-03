@@ -50,6 +50,11 @@ remediation.
 These operations are **not available on either channel** as of the versions this plugin targets.
 A skill that needs one must say so and hand the step to the user, never simulate it.
 
+They are gaps in the tooling, and they hold everywhere. A channel that is simply **not reachable
+on this machine** — a CLI with no token — is a different thing: it is unsupported here and now,
+it returns when the channel does, and it says nothing about the project. Both are announced;
+only the first is permanent, and the profile records which is which.
+
 | Missing operation                | Consequence                                                                                                                     |
 | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | create a sprint                  | `jira-plan` can fill and close sprints but cannot open one. It asks the user to create the sprint on the board, then continues. |

@@ -300,6 +300,14 @@
       "setup": "A profile exists and records that the project has no board.",
       "expect": "The absence of a board is reported as a finding, with the sprint operations that are therefore unavailable. It is not reported as an error and no substitute is offered.",
       "why": "Degrading explicitly is the behaviour, not failing."
+    },
+    {
+      "id": "order-5",
+      "category": "ordering",
+      "prompt": "I have just installed this on our repo. Set it up.",
+      "setup": "The Atlassian MCP server responds under the id atlassian. The jira CLI is installed but not authenticated, so `jira me` fails. No .jira/project-profile.md exists.",
+      "expect": "Discovery runs to completion through the MCP server and a profile is written. The unreachable Agile channel is announced, boards and versions are recorded as not readable rather than absent, and the sprint and version operations are carried into the profile as unsupported with the remediation named. It does not stop, and it does not report the project as having no board.",
+      "why": "The CLI carries four operations of seventeen. Stopping on it leaves no profile, and every other skill stops at its own first step, so the plugin is inert over a capability nine of them never use."
     }
   ]
 }

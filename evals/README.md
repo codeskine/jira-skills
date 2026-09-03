@@ -11,11 +11,11 @@ Ten skills were separated by the **intent a user expresses**, and their descript
 thing enforcing that separation. Nothing else in the repository can catch a description that has
 drifted into its neighbour's territory.
 
-| Category    | The question it asks                                             |
-| ----------- | ---------------------------------------------------------------- |
-| `selection` | Given a phrase someone would really say, does the right skill fire — and do the wrong ones stay quiet? |
-| `gate`      | Is the complete artifact presented and approval awaited, rather than written? |
-| `ordering`  | Is the project profile read before anything is proposed?         |
+| Category    | The question it asks                                                                                                                                          |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `selection` | Given a phrase someone would really say, does the right skill fire — and do the wrong ones stay quiet?                                                        |
+| `gate`      | Is the complete artifact presented and approval awaited, rather than written?                                                                                 |
+| `ordering`  | Is the project profile read before anything is proposed — and, where it or a channel cannot supply something, is the gap announced rather than worked around? |
 
 **What is deliberately not tested:** the wording of any template, the phrasing of any question,
 the content of any persona. Those are editorial, they will change, and asserting on them produces
