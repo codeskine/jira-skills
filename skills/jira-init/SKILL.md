@@ -37,7 +37,9 @@ project from the repository name.
 Gather, in this order, stopping to report anything that fails rather than working around it:
 
 1. **Work types** available in the project, with the hierarchy between them. Record the names
-   exactly as the project reports them, including custom and renamed types.
+   exactly as the project reports them, including custom and renamed types — and record which of
+   the intents this plugin authors no type serves, as a stated fact. A reader acts on what the
+   profile says, not on what it can infer is missing from a table.
 2. **Statuses** and the shape of the workflow connecting them.
 3. **Fields required on creation**, per work type. These are what make a write fail after an
    approved draft, so they matter more than they look.

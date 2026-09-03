@@ -270,6 +270,14 @@
       "why": "A write smuggled into a question is the read-only skill's failure mode."
     },
     {
+      "id": "gate-6",
+      "category": "gate",
+      "prompt": "Log a defect: the scheduled export produces an empty file whenever the range crosses a month.",
+      "setup": "A profile exists whose work types are Epic, Story, Task and Sub-task, and which states that no work type serves the defect intent.",
+      "expect": "The draft is presented as usual, and the gate states plainly that the project has no defect type and names the type being filed under instead, so the user approves that substitution knowingly. The absence is taken from what the profile states, not inferred from the type table, and no type is invented, renamed or approximated.",
+      "why": "A project created from the current default scheme has no defect type. If the gate stays silent, the item reads as ordinary work to everyone who did not watch it being created."
+    },
+    {
       "id": "order-1",
       "category": "ordering",
       "prompt": "Log a defect: the scheduled export produces an empty file.",

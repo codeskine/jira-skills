@@ -32,8 +32,11 @@ reviewable. It is the only local cache this plugin keeps, and it is kept because
 ## Profile contract
 
 A profile is valid when it states, at minimum: the project key, the work types with their
-hierarchy, the statuses, the resolved operation → tool mapping, and the list of unsupported
-operations. Anything else is convenience.
+hierarchy, the intents no work type serves, the statuses, the resolved operation → tool mapping,
+and the list of unsupported operations. Anything else is convenience.
+
+Absences are stated, not inferred. A skill acts on what the profile says; it does not audit a
+table for what is missing from it.
 
 Every entry answers one question: _what can this project actually do?_ Nothing in the profile
 describes what the plugin would prefer.
@@ -60,6 +63,10 @@ Every authoring skill reaches this point and does the same thing with it.
 3. **Read the fields the profile marks required on creation** for the chosen type. Fill what the
    answers already cover; name what remains so the draft gate can raise it. A required field
    discovered after approval wastes the approval.
+4. **Where the profile records no type for this intent at all**, say so at the gate and name the
+   type being filed under instead, so the user approves the substitution knowingly. The artifact
+   is then the only thing carrying the distinction and must carry it well. Never rename,
+   approximate or invent a type to supply it: the scheme is the project admin's.
 
 A skill states which of these carry extra weight for its intent. It does not restate the steps.
 

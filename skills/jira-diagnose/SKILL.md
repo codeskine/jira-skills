@@ -70,6 +70,9 @@ Follow [choosing a work type](../shared/references/discovery.md). Defect types a
 projects most often burden with required fields — severity, component, affected release. Read
 them here rather than discovering them at the gate.
 
+Expect there to be no defect type. A project created from the current default scheme has none,
+so step 4 of the shared procedure is the common path here, not the exception.
+
 ## 7. Assemble the artifact
 
 Fill [the template](assets/defect-report.md).
