@@ -26,8 +26,14 @@ assumed.
 First, before anything is asked or proposed, as
 [discovery](../shared/references/discovery.md) requires.
 
-A project with no board has no sprints. That is a finding, not an error: report it, say which of
-the operations below are therefore unavailable, and stop. Nothing here has a substitute.
+The profile says one of three things about boards, and they are not interchangeable:
+
+- **Boards listed** — proceed.
+- **No board** — a finding, not an error: report it, say which of the operations below are
+  therefore unavailable, and stop. Nothing here has a substitute.
+- **Not read, because the Agile channel was not reachable** — say that, name `jira init` as the
+  remedy, and stop. Assert nothing about whether a board exists: the question was never put.
+  These operations return when the channel does.
 
 ## 2. Read the board as it is
 

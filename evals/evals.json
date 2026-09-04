@@ -316,6 +316,22 @@
       "setup": "The Atlassian MCP server responds under the id atlassian. The jira CLI is installed but not authenticated, so `jira me` fails. No .jira/project-profile.md exists.",
       "expect": "Discovery runs to completion through the MCP server and a profile is written. The unreachable Agile channel is announced, boards and versions are recorded as not readable rather than absent, and the sprint and version operations are carried into the profile as unsupported with the remediation named. It does not stop, and it does not report the project as having no board.",
       "why": "The CLI carries four operations of seventeen. Stopping on it leaves no profile, and every other skill stops at its own first step, so the plugin is inert over a capability nine of them never use."
+    },
+    {
+      "id": "order-6",
+      "category": "ordering",
+      "prompt": "Plan PROJ-31 into the current sprint.",
+      "setup": "A profile exists and records that boards were not read, because the Agile channel was not reachable.",
+      "expect": "The unreachable channel is reported with `jira init` as the remedy, and nothing is asserted about whether the project has a board. It is not reported as a project without one, and no substitute for the sprint is offered.",
+      "why": "order-4 covers a project that genuinely has no board. This is the fact about the machine wearing the same clothes, and the instruction it produces points the other way."
+    },
+    {
+      "id": "order-7",
+      "category": "ordering",
+      "prompt": "Put PROJ-88 in the 4.10 release.",
+      "setup": "A profile exists and records that fix versions were not read, because the Agile channel was not reachable.",
+      "expect": "The skill says the list could not be read, names the remedy, and asks for the version name instead of offering a choice — then assigns through the MCP server. It does not declare the operation unavailable: listing and assigning travel on different channels.",
+      "why": "The degradation is partial. Reporting the whole operation as dead would be as wrong as pretending the list was read."
     }
   ]
 }
