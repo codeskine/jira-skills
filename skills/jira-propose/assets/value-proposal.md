@@ -36,3 +36,9 @@ holds it. Omit this section only when there are none.>
 
 <Fields this project marks required on creation that the answers do not cover, named so the
 draft gate can raise them. Omit this section when there are none.>
+
+## Work type
+
+<That this is a value proposal, filed under a work type that does not name it because this
+project's scheme has none. Omit this section when the project has a work type for this
+intent.>

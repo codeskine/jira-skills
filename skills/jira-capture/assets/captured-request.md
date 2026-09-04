@@ -42,3 +42,9 @@ draft gate can raise them. Omit this section when there are none.>
 <The statement that this item is raw: captured as it arrived, with no acceptance criteria, no
 agreed scope and no estimate, and therefore not ready to be planned. Names `jira-refine` as the
 intent that owns it next.>
+
+## Work type
+
+<That this is an unexamined request, filed under a work type that does not name it because this
+project's scheme has none. Omit this section when the project has a work type for this
+intent.>
