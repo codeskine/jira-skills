@@ -67,7 +67,8 @@ These two decide urgency, and asking now means triage is not a second conversati
 ## 6. Choose the work type
 
 Follow [choosing a work type](../shared/references/discovery.md). Defect types are the ones
-projects most often burden with required fields — severity, component, affected release. Read
+projects most often burden with required fields — severity, component, affected fix version.
+Read
 them here rather than discovering them at the gate.
 
 Expect there to be no defect type. A project created from the current default scheme has none,

@@ -1,7 +1,7 @@
 # Discovery and the project profile
 
 No skill assumes how a Jira project is configured. Work types, statuses, transitions, hierarchy
-depth, boards and versions belong to the project admin, not to this plugin. The plugin reads
+depth, boards and fix versions belong to the project admin, not to this plugin. The plugin reads
 them and never re-creates them.
 
 Discovery runs **once**, in `jira-init`, and its result is written to the project profile. Every
@@ -22,10 +22,10 @@ reviewable. It is the only local cache this plugin keeps, and it is kept because
 | ------------------------------------------------------ | -------------------------------------------------------- |
 | project key and name                                   | every operation is scoped to it                          |
 | available work types, and how they nest                | so a skill offers types that exist, at levels that exist |
-| statuses, and which transitions connect them           | so `jira-advance` offers only legal moves                |
+| statuses, and which transitions connect them           | so `jira-advance` offers only permitted transitions      |
 | fields that are required on creation, per work type    | so a draft is not rejected on write                      |
 | boards, and the active sprint of each                  | so `jira-plan` plans against reality                     |
-| versions                                               | so `jira-release` knows what already exists              |
+| fix versions                                           | so `jira-release` knows what already exists              |
 | the MCP tool serving each operation in the channel map | so no tool name is hard-coded                            |
 | operations with no available tool                      | so degradation is explicit, not a surprise               |
 
@@ -76,8 +76,8 @@ Invalidation is **explicit, never time-based**. A project's configuration change
 timestamp check would add a call to every invocation to catch a rare event.
 
 Re-run `jira-init` when: the project scheme changes, a status or transition is added, a board or
-version appears that the profile does not list, or a skill reports that something it expected in
-the profile is not in Jira.
+fix version appears that the profile does not list, or a skill reports that something it expected
+in the profile is not in Jira.
 
 A skill that hits an inconsistency between the profile and Jira reports it and names `jira-init`
 as the remedy. It does not silently repair the profile: a profile edited by a skill nobody

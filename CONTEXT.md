@@ -32,8 +32,9 @@ _Avoid_: introspection, probe, detection
 **Project profile**:
 The file, versioned in the repository, that records the outcome of Discovery and that every
 skill reads as its first step. It is the only local cache allowed, and it is allowed because
-it is **read**.
-_Avoid_: config, cache, mirror, local state
+it is **read**. Describing it that way is fine; **naming** it that way is not — a thing called
+the cache invites being treated as disposable and silently refreshed, and this file is neither.
+_Avoid_: config, mirror, local state, "the cache"
 
 ### Work
 
@@ -111,3 +112,39 @@ Templates define structure and sections, never a natural language nor a technolo
 language of generated content follows the user's active language; code examples, where they
 apply, assume no programming language.
 _Avoid_: i18n, localization, agnosticism
+
+## Applying the _Avoid_ lists
+
+An _Avoid_ list bans a word **as a name for the concept above it**, not as a string. The same
+letters are fine, and often required, in three other roles:
+
+- **A literal name owned by something else.** `jira issue move` and `jira release list` are what
+  those CLI commands are called; `Category` is what Jira calls the status category field;
+  `metadata.version` is a frontmatter key. Renaming them in prose would make the prose wrong.
+  Quote them as code and leave them alone. The same goes for a verb Jira owns: **releasing** a
+  fix version is the action Jira performs on it, and only the noun standing in for _fix version_
+  is refused.
+- **A mention made in order to forbid.** "never simulate it", "the write-only mirror the
+  predecessor accumulated", and the shared quality standard's own list of tracker-generic
+  synonyms all name a refused thing so that a reader recognises it. The glossary does the same:
+  Surrogate stays in the vocabulary only to name what was removed.
+- **Ordinary English carrying no domain sense.** "exactly the kind of fact", "server versions",
+  "the status column of that output", "ask for approval". Approval is the act the Draft gate
+  performs; it is a substitute only when it is used as the _name_ of the gate.
+
+The test is one question: **does this word stand where the canonical term belongs?** "at the
+moment of the move" stands where _transition_ belongs, and is a defect. "`jira issue move` is the
+fallback" does not.
+
+### Is this checkable mechanically?
+
+**No, not as a word list, and the sweep of 2026-09-04 is the evidence.** Every refused word that
+appeared in the shipped artifacts was searched for. Most occurrences were legitimate under one of
+the three roles above, and separating them from the dozen real defects took reading the sentence
+each one sat in. A list that fires on `move`, `version`, `category`, `approval`, `kind`, `column`
+and `issue` reports mostly noise, and a check whose output is mostly noise stops being read.
+
+What is checkable is the narrow case where the rule admits no exceptions and the surrounding text
+is fixed. `scripts/skill-frontmatter.mjs` already carries one: a description that names a work
+type is rejected, because a description has no room for a literal command name or a mention made
+in order to forbid. Add a mechanical rule when a case reaches that standard, and not before.

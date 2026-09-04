@@ -162,8 +162,8 @@ Read Glob Grep mcp__atlassian AskUserQuestion
 
 ## Skill Body
 
-The body contains step-by-step workflow instructions. Use `references/` files for depth
-(referenced via relative links from SKILL.md). Keep references one level deep — avoid
+The body contains step-by-step instructions for the skill's procedure. Use `references/` files
+for depth (referenced via relative links from SKILL.md). Keep references one level deep — avoid
 deeply nested chains.
 
 ### Token budgets
@@ -224,7 +224,7 @@ Seven invariants apply to every skill in this project. Violating any of them is 
 
 No skill assumes how the Jira project is configured. Every skill reads the project profile
 as its first step, and re-runs discovery when the profile is missing. Work types, statuses,
-transitions, hierarchy depth, boards and versions belong to the project.
+transitions, hierarchy depth, boards and fix versions belong to the project.
 
 **2. No surrogates**
 
@@ -279,7 +279,7 @@ The one handover rule: **no skill creates an artifact another skill will have to
 `jira-capture` is the single exception, and it declares it: what it writes is explicitly raw
 and awaiting refinement.
 
-## Workflows
+## Contributor procedures
 
 ### Working in worktrees
 
@@ -333,4 +333,6 @@ The five canonical roles, unchanged: `needs-triage`, `needs-info`, `ready-for-ag
 ### Domain docs
 
 Single-context: `CONTEXT.md` and `docs/adr/` at the repo root. The glossary lists refused terms
-as well as canonical ones. See `docs/agents/domain.md`.
+as well as canonical ones, and its closing section says how to tell a refused word from a literal
+command name, a mention made in order to forbid, and ordinary English — read it before removing a
+word from a shipped artifact. See `docs/agents/domain.md`.
