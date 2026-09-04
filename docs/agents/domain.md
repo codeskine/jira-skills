@@ -24,7 +24,8 @@ actually get resolved.
 │   ├── 0001-hybrid-mcp-and-cli-channel.md
 │   ├── 0002-tracker-only-perimeter.md
 │   ├── 0003-no-surrogates-discovery-over-creation.md
-│   └── 0004-intent-boundaries-shared-mechanics.md
+│   ├── 0004-intent-boundaries-shared-mechanics.md
+│   └── 0005-a-third-seam-for-the-frontmatter-rules.md
 └── skills/
 ```
 
@@ -58,6 +59,8 @@ overriding:
 
 > _Contradicts ADR-0002 (the perimeter is the tracker) — but worth reopening because…_
 
-The four ADRs in this repo are unusually load-bearing: they define the perimeter, the access
-channel, the rule against surrogates, and the boundary between skills. A proposal that crosses
-one of them is a proposal to change the shape of the plugin, and should say so.
+The first four ADRs in this repo are unusually load-bearing: they define the perimeter, the
+access channel, the rule against surrogates, and the boundary between skills. A proposal that
+crosses one of them is a proposal to change the shape of the plugin, and should say so. ADR-0005
+is narrower — it admits the third testing seam and fixes the test a fourth would have to pass —
+but it is the one to read before adding or removing a command a contributor must keep green.

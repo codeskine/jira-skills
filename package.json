@@ -32,6 +32,7 @@
     ".claude-plugin"
   ],
   "scripts": {
+    "test": "node --test scripts/*.test.mjs",
     "prepack": "node scripts/check-package.mjs"
   },
   "repository": {

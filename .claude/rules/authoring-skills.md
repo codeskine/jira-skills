@@ -47,6 +47,11 @@ configured as "atlassian".`
   project profile; add `Agent` only where the skill dispatches a sub-agent. Never add
   `Bash(git:*)` — this plugin does not touch git. Declare nothing the skill does not use.
 
+These rules are enforced by `scripts/skill-frontmatter.mjs` and covered, one case each, by
+`scripts/skill-frontmatter.test.mjs` — the project's third testing seam. Changing what a rule
+accepts means changing all three: none of the ten skills breaks a rule, so nothing else would
+notice if one stopped running.
+
 ## Body
 
 - State the contract in three or four lines and link the shared procedure. Never inline a

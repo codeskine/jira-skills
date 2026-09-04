@@ -302,6 +302,21 @@ reusing it.
 7. Run the description quality check: contains `Jira`, has a "Use when" trigger clause, names
    an intent rather than a work type, no over-triggering, no `openclaw` block.
 
+### Changing the frontmatter rules
+
+The rules live in `scripts/skill-frontmatter.mjs` and are covered by
+`scripts/skill-frontmatter.test.mjs`. Add a case with the rule — the ten real skills all pass, so
+they cannot tell a rule that works from a rule that no longer runs.
+
+```bash
+npm test
+```
+
+Node's own test runner, no dependency, out of the publish path. It is the project's **third
+testing seam**, admitted because the other two are blind to it — a rule that stopped running would
+still see a green integrity check, since none of the ten skills breaks any rule. What it costs is
+in [ADR-0005](docs/adr/0005-a-third-seam-for-the-frontmatter-rules.md).
+
 ### After updating a skill
 
 After making changes, suggest the following as next steps. Do NOT execute automatically.
