@@ -36,15 +36,32 @@ Two things follow from that shape, and they are the whole design:
 
 ## Requirements
 
-| What                             | Why                                                                                   |
-| -------------------------------- | ------------------------------------------------------------------------------------- |
-| Claude Code                      | The only harness this plugin targets                                                  |
-| The Atlassian MCP server         | Work items, fields, comments, transitions, search and project metadata                |
-| — reachable under the id `atlassian` | Skills declare that id statically, so a server under any other name is invisible to them. An Atlassian connector added through claude.ai settings may show as connected and still not serve them — `/jira-doctor` tells you which situation you are in |
-| The `jira` CLI, authenticated    | Only for the Agile surface — boards, sprints, backlog. Without it, `jira-plan` and the fix-version listing are unavailable and everything else still works |
+| What                                 | Why                                                                                                                                                                                                                                                                                                           |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Claude Code                          | The only harness this plugin targets                                                                                                                                                                                                                                                                          |
+| The Atlassian MCP server             | Work items, fields, comments, transitions, search and project metadata                                                                                                                                                                                                                                        |
+| — reachable under the id `atlassian` | Skills declare that id statically, so a server under any other name is invisible to them. An Atlassian connector added through claude.ai settings is one such name: it shows as connected, exposes its tools under an identifier of its own, and serves no skill here. Adding `atlassian` does not disturb it |
+| The `jira` CLI, authenticated        | Only for the Agile surface — boards, sprints, backlog. Without it, `jira-plan` and the fix-version listing are unavailable and everything else still works                                                                                                                                                    |
 
-Add it under that id with `claude mcp add --transport http atlassian https://mcp.atlassian.com/v1/mcp`,
-then authenticate it.
+The simplest way to get that id is a `.mcp.json` at the root of the repository where your work
+is tracked:
+
+```json
+{
+  "mcpServers": {
+    "atlassian": {
+      "type": "http",
+      "url": "https://mcp.atlassian.com/v1/mcp"
+    }
+  }
+}
+```
+
+Claude Code asks you to approve it the next time you open the repository, and you authenticate it
+yourself. It holds a URL and no credential, so commit it and your team configures the server once
+instead of each on their own machine. If you would rather have it on your machine than in the
+repository, `claude mcp add --transport http atlassian https://mcp.atlassian.com/v1/mcp` does the
+same job — the id is what matters, not the scope.
 
 Run `/jira-doctor` to check all three at once. It reports each failure with the exact remediation,
 and tells you which half of the plugin is degraded rather than failing as a whole.
@@ -134,11 +151,9 @@ you ask.
 and the boundaries between skills. `CONTEXT.md` is the glossary, and it lists the words this
 project refuses to use as well as the ones it uses.
 
-This repository carries its own MCP configuration in `.mcp.json`, declaring the Atlassian
-server under the id the skills require. Claude Code asks you to approve it the first time you
-open the repository, and you authenticate it yourself; it is scoped to this project and changes
-nothing on your machine, so testing the plugin never means reconfiguring the environment you
-work in. It holds a URL and no credential.
+This repository carries its own `.mcp.json`, declaring the Atlassian server under the id the
+skills require — the same file described under [Requirements](#requirements), here so that
+testing the plugin never means reconfiguring the environment you work in.
 
 Before opening a change:
 
