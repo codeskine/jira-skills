@@ -3,7 +3,7 @@ name: jira-release
 description: "Jira fix version manager. Use when the user asks what a Jira fix version contains, wants to assign work to one, or wants to know what is still unfinished before shipping it. Treats what ships together as a separate question from when work is tackled. Not for planning a sprint (→ See codeskine/jira-skills@jira-plan), for making an item ready (→ See codeskine/jira-skills@jira-refine), or for reading progress without changing anything (→ See codeskine/jira-skills@jira-inspect)."
 user-invocable: true
 license: MIT
-compatibility: Designed for Claude Code. Requires the Atlassian MCP server configured as "atlassian" and the jira CLI authenticated.
+compatibility: Designed for Claude Code. Requires the Atlassian MCP server configured as "atlassian". Listing fix versions needs the jira CLI authenticated; assigning work to one does not.
 metadata:
   author: codeskine
   version: "1.0.0"
@@ -39,6 +39,12 @@ label.
 List them from the project, with their state, rather than from memory of what was planned. A fix
 version released last week and one never created look identical in a conversation and nothing
 alike on a board.
+
+Where the profile records the versions as **not read** rather than absent, the listing is gone
+but the work is not: assigning a work item to a version is a field on the item, carried by the
+MCP server. Say the list could not be read, name `jira init`, and ask the user for the version
+name rather than offering a choice you cannot compile. Assignment fails closed on a name that
+does not exist, so nothing is created by guessing.
 
 ## 4. Show what a fix version contains
 
