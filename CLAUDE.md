@@ -302,6 +302,19 @@ reusing it.
 7. Run the description quality check: contains `Jira`, has a "Use when" trigger clause, names
    an intent rather than a work type, no over-triggering, no `openclaw` block.
 
+### Changing the frontmatter rules
+
+The rules live in `scripts/skill-frontmatter.mjs` and are covered by
+`scripts/skill-frontmatter.test.mjs`. Add a case with the rule — the ten real skills all pass, so
+they cannot tell a rule that works from a rule that no longer runs.
+
+```bash
+npm test
+```
+
+Node's own test runner, no dependency, out of the publish path. Testing this repository's tooling
+is not a third seam; the reasoning is in [ADR-0005](docs/adr/0005-tooling-tests-are-not-a-seam.md).
+
 ### After updating a skill
 
 After making changes, suggest the following as next steps. Do NOT execute automatically.

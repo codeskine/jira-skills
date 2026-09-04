@@ -166,6 +166,9 @@ The first fails if the manifest, the version file and the skills directory disag
 frontmatter would misbehave once installed. The second regenerates the table above from the
 skills themselves — it is generated precisely so that it cannot drift, so never edit it by hand.
 
+If you change what the frontmatter rules accept, run `npm test` as well: it covers the reader and
+one case per rule, on Node alone, and it is what says the check still means what it claims.
+
 ## License
 
 MIT. See [LICENSE](LICENSE).
