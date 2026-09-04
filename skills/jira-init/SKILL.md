@@ -3,7 +3,7 @@ name: jira-init
 description: "Jira project discovery. Use when the user sets up this plugin on a repository, asks how their Jira project is configured, or when another skill reports that the project profile is missing or stale. Reads the project's work types, hierarchy, statuses, boards and versions and records them in a versioned project profile that every other skill reads. Creates nothing in Jira. Not for verifying that the environment can reach Jira at all (→ See the /jira-doctor command)."
 user-invocable: true
 license: MIT
-compatibility: Designed for Claude Code. Requires the Atlassian MCP server configured as "atlassian" and the jira CLI authenticated.
+compatibility: Designed for Claude Code. Requires the Atlassian MCP server configured as "atlassian". Uses the jira CLI for the Agile surface where it is authenticated, and degrades explicitly without it.
 metadata:
   author: codeskine
   version: "1.0.0"
@@ -20,9 +20,17 @@ team shares it.
 
 ## 1. Check the channels
 
-Confirm the MCP server responds under the id `atlassian` and that `jira` is installed and
-authenticated. If either fails, stop and point the user at `/jira-doctor`, which reports the
-exact remediation. Do not attempt discovery through the half that works.
+The two channels fail independently, and only one of them is a precondition.
+
+- **MCP server unreachable under the id `atlassian`** — stop. Nothing else answers for work
+  types, statuses or fields. Point the user at `/jira-doctor`.
+- **`jira` CLI missing or unauthenticated** — degrade, as
+  [the channel map](../shared/references/channels.md) requires of any missing capability.
+  Discover what the MCP server reaches, and record the Agile surface as unsupported with
+  `jira init` as the manual path.
+
+Record which channels answered. Read and not reachable are different facts, and the profile
+must keep them apart.
 
 ## 2. Identify the project
 
@@ -34,16 +42,19 @@ project from the repository name.
 
 ## 3. Discover
 
-Gather, in this order, stopping to report anything that fails rather than working around it:
+Gather, in this order. Report anything that fails rather than working around it — but a subject
+the unreachable channel of step 1 owns is **not** a failure to stop on: record it as not read and
+carry on to the next.
 
 1. **Work types** available in the project, with the hierarchy between them. Record the names
    exactly as the project reports them, including custom and renamed types.
 2. **Statuses** and the shape of the workflow connecting them.
 3. **Fields required on creation**, per work type. These are what make a write fail after an
    approved draft, so they matter more than they look.
-4. **Boards** and, for each, the active sprint. A project with no board has no sprint
-   operations, and that is a finding, not an error.
-5. **Versions**, with their state.
+4. **Boards** and, for each, the active sprint — the Agile channel. A project with no board has
+   no sprint operations, and that is a finding, not an error. A channel that did not answer is a
+   different finding: record that it was not read, never that no board exists.
+5. **Versions**, with their state — the Agile channel, and the same two findings apply.
 6. **Project style** — team-managed or company-managed — because it changes which fields exist.
 
 ## 4. Resolve the operations
