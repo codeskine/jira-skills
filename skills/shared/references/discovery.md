@@ -65,8 +65,7 @@ Every authoring skill reaches this point and does the same thing with it.
    discovered after approval wastes the approval.
 4. **Where the profile records no type for this intent at all**, say so at the gate and name the
    type being filed under instead, so the user approves the substitution knowingly. The artifact
-   is then the only thing carrying the distinction and must carry it well: every template that
-   creates a work item has a **Work type** section for it. Never rename,
+   is then the only thing carrying the distinction and must carry it well. Never rename,
    approximate or invent a type to supply it: the scheme is the project admin's.
 
 A skill states which of these carry extra weight for its intent. It does not restate the steps.

@@ -15,6 +15,7 @@ form, every skill, no exceptions other than the read-only skill, which never wri
    - the parent, if any
    - the sprint and the fix version, if any
    - anything the project marks as required and the draft has left empty
+   - a work type standing in for an intent the project has none for, and whether the draft says so
 4. **Ask for explicit approval.** A question the user answers, not an announcement of what is
    about to happen.
 5. **On a change request**, apply it and return to step 2 with the revised artifact. Loop as
