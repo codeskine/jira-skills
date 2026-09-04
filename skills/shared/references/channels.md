@@ -3,13 +3,13 @@
 A skill reaches Jira through one of two channels, never through a third. It does not choose:
 it looks the operation up here.
 
-| Channel              | Owns                                                                               | Declared as      |
-| -------------------- | ---------------------------------------------------------------------------------- | ---------------- |
-| Atlassian MCP server | work items, fields, comments, transitions, search, project metadata                | `mcp__atlassian` |
-| Jira CLI (`jira`)    | the Agile domain only — boards, sprints, epics as a listing, versions as a listing | `Bash(jira:*)`   |
+| Channel              | Owns                                                                            | Declared as      |
+| -------------------- | ------------------------------------------------------------------------------- | ---------------- |
+| Atlassian MCP server | work items, fields, comments, transitions, search, project metadata             | `mcp__atlassian` |
+| Jira CLI (`jira`)    | the Agile domain only — boards, sprints, and listings of epics and fix versions | `Bash(jira:*)`   |
 
 Two channels rather than one because neither covers the whole domain: the MCP server does not
-expose the Agile surface, and the CLI is not the native integration.
+expose the Agile surface, and the CLI is not the channel the agent speaks natively.
 
 ## Resolving MCP tool names
 
@@ -42,13 +42,14 @@ remediation.
 | list sprints of a board                                    | CLI     | `jira sprint list`                     |
 | add work items to a sprint                                 | CLI     | `jira sprint add`                      |
 | close a sprint                                             | CLI     | `jira sprint close`                    |
-| list the versions of a project                             | CLI     | `jira release list`                    |
-| assign a work item to a version                            | MCP     | it is a field on the work item         |
+| list the fix versions of a project                         | CLI     | `jira release list`                    |
+| assign a work item to a fix version                        | MCP     | it is a field on the work item         |
 
 ## Declared gaps
 
-These operations are **not available on either channel** as of the versions this plugin targets.
-A skill that needs one must say so and hand the step to the user, never simulate it.
+These operations are **not available on either channel** as of the server and CLI versions this
+plugin targets. A skill that needs one must say so and hand the step to the user, never simulate
+it.
 
 They are gaps in the tooling, and they hold everywhere. A channel that is simply **not reachable
 on this machine** — a CLI with no token — is a different thing: it is unsupported here and now,
@@ -58,8 +59,8 @@ only the first is permanent, and the profile records which is which.
 | Missing operation                | Consequence                                                                                                                     |
 | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | create a sprint                  | `jira-plan` can fill and close sprints but cannot open one. It asks the user to create the sprint on the board, then continues. |
-| create a fix version             | `jira-release` can list versions and assign work to them, but the version itself is created by the user in Jira.                |
-| release or archive a fix version | Same. The skill reports what the version contains and stops at the release action.                                              |
+| create a fix version             | `jira-release` can list fix versions and assign work to them, but the fix version itself is created by the user in Jira.        |
+| release or archive a fix version | Same. The skill reports what the fix version contains and stops at the release action.                                          |
 
 If a future MCP server exposes any of these, the profile will record it during discovery and the
 gap closes without touching a skill. That is the whole point of resolving operations through the

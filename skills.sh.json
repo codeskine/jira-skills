@@ -24,7 +24,7 @@
     },
     {
       "title": "Progress",
-      "description": "Move work along its workflow and read where it stands.",
+      "description": "Advance a work item through its Jira Workflow and read where it stands.",
       "skills": ["jira-advance", "jira-inspect"]
     }
   ]

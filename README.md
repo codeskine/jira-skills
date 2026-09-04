@@ -119,7 +119,7 @@ your whole team, and every future session, learns the same facts without asking 
 | `jira-plan` | Jira sprint planner. Use when the user asks what is in the current sprint, wants to fill or empty one, or wants to close one and see what was delivered. |
 | `jira-release` | Jira fix version manager. Use when the user asks what a Jira fix version contains, wants to assign work to one, or wants to know what is still unfinished before shipping it. |
 
-**Progress** — Move work along its workflow and read where it stands.
+**Progress** — Advance a work item through its Jira Workflow and read where it stands.
 
 | Skill | What it does |
 | ----- | ------------ |
@@ -134,7 +134,7 @@ Out by decision, and recorded as such:
 
 - **Merge requests, pull requests, commits, branches and technical release.** They belong to a
   different plugin, not to a later version of this one.
-- **Jira administration.** Work types, statuses, workflows, schemes, boards and permissions are
+- **Jira administration.** Work types, statuses, Jira Workflows, schemes, boards and permissions are
   discovered and never changed.
 - **Any tracker other than Jira Cloud.** The abstraction that would have allowed it was
   deliberately removed.

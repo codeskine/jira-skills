@@ -40,8 +40,12 @@ So the rule has two halves:
 
 - When your output names a domain concept — an issue title, a skill description, a template
   heading, a test name — use the canonical term.
-- When your output uses a term from an `_Avoid_` list, that is a defect, not a nuance. It is
-  checkable, and it should be corrected rather than defended.
+- When your output uses a term from an `_Avoid_` list **where the canonical term belongs**, that
+  is a defect, not a nuance, and it should be corrected rather than defended. The same letters
+  are legitimate in three other roles — a literal name owned by something else, a mention made in
+  order to forbid, and ordinary English carrying no domain sense. `CONTEXT.md`'s closing section,
+  "Applying the _Avoid_ lists", gives the test and the reason a word list cannot make the call
+  for you.
 
 If the concept you need isn't in the glossary yet, that's a signal — either you're inventing
 language the project doesn't use (reconsider) or there's a real gap (note it for

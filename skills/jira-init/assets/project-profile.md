@@ -42,7 +42,7 @@ sentences. If the project supports levels above the top container, say so and na
 | <name> | <to do / in progress / done, as reported> | <statuses, or "initial"> | <conditions, if any> |
 
 Transitions in Jira are evaluated per work item, not per type: this table is the shape of the
-workflow, and the transitions actually available are asked of Jira at the moment of the move.
+Jira Workflow, and the transitions actually available are asked of Jira when one is attempted.
 
 ## Boards and sprints
 
@@ -55,14 +55,14 @@ board; the boards it has are listed above; or the Agile channel was not reachabl
 board exists was never established. Never write the first when you mean the third — it sends the
 reader to create a board instead of restoring the channel.>
 
-## Versions
+## Fix versions
 
-| Version | Status                             | Notes |
-| ------- | ---------------------------------- | ----- |
-| <name>  | <unreleased / released / archived> |       |
+| Fix version | Status                             | Notes |
+| ----------- | ---------------------------------- | ----- |
+| <name>      | <unreleased / released / archived> |       |
 
-<The same three cases as above: no versions, the versions listed, or not readable because the
-Agile channel was not reachable.>
+<The same three cases as above: no fix versions, the fix versions listed, or not readable because
+the Agile channel was not reachable.>
 
 ## Operation resolution
 

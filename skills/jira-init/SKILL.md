@@ -1,6 +1,6 @@
 ---
 name: jira-init
-description: "Jira project discovery. Use when the user sets up this plugin on a repository, asks how their Jira project is configured, or when another skill reports that the project profile is missing or stale. Reads the project's work types, hierarchy, statuses, boards and versions and records them in a versioned project profile that every other skill reads. Creates nothing in Jira. Not for verifying that the environment can reach Jira at all (→ See the /jira-doctor command)."
+description: "Jira project discovery. Use when the user sets up this plugin on a repository, asks how their Jira project is configured, or when another skill reports that the project profile is missing or stale. Reads the project's work types, hierarchy, statuses, boards and fix versions and records them in a versioned project profile that every other skill reads. Creates nothing in Jira. Not for verifying that the environment can reach Jira at all (→ See the /jira-doctor command)."
 user-invocable: true
 license: MIT
 compatibility: Designed for Claude Code. Requires the Atlassian MCP server configured as "atlassian". Uses the jira CLI for the Agile surface where it is authenticated, and degrades explicitly without it.
@@ -11,7 +11,7 @@ allowed-tools: Read Write Edit Glob Grep mcp__atlassian Bash(jira:*) AskUserQues
 ---
 
 This skill **discovers**. It never creates, renames or configures anything in Jira: work types,
-statuses, workflows, boards and versions belong to the project admin. Read
+statuses, Jira Workflows, boards and fix versions belong to the project admin. Read
 [the discovery contract](../shared/references/discovery.md) before running, and
 [the channel map](../shared/references/channels.md) to know which channel answers what.
 
@@ -50,13 +50,13 @@ carry on to the next.
    exactly as the project reports them, including custom and renamed types — and record which of
    the intents this plugin authors no type serves, as a stated fact. A reader acts on what the
    profile says, not on what it can infer is missing from a table.
-2. **Statuses** and the shape of the workflow connecting them.
+2. **Statuses** and the shape of the Jira Workflow connecting them.
 3. **Fields required on creation**, per work type. These are what make a write fail after an
    approved draft, so they matter more than they look.
 4. **Boards** and, for each, the active sprint — the Agile channel. A project with no board has
    no sprint operations, and that is a finding, not an error. A channel that did not answer is a
    different finding: record that it was not read, never that no board exists.
-5. **Versions**, with their state — the Agile channel, and the same two findings apply.
+5. **Fix versions**, with their state — the Agile channel, and the same two findings apply.
 6. **Project style** — team-managed or company-managed — because it changes which fields exist.
 
 ## 4. Resolve the operations
@@ -76,7 +76,7 @@ Fill [the profile template](assets/project-profile.md) and present it in full, i
 the user is working in. State plainly:
 
 - the project it describes;
-- how many work types, statuses, boards and versions were found;
+- how many work types, statuses, boards and fix versions were found;
 - **every unsupported operation**, because that is what will surprise the user later.
 
 Ask for approval. Apply changes and re-present until approved. Writing this file is not a write
