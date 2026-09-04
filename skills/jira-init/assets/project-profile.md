@@ -22,6 +22,14 @@ Do not edit by hand: re-run `jira-init` instead, so the file and Jira stay in ag
 Levels and names are whatever this project declares. A type absent from this table does not
 exist here, and no skill may offer it.
 
+### Intents no work type serves
+
+<Name the intents this project's scheme has no type for — a defect, unrefined intake, technical
+debt — as a stated fact rather than one left to be inferred from the table above. A reading skill
+acts on what the profile says; it does not audit a table for what is missing. Where every intent
+has a type, say that instead of omitting the section: "none" is a fact, and a missing section is
+not.>
+
 ## Hierarchy
 
 <How deep the hierarchy goes in this project and which type sits at each level, in one or two

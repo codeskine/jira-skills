@@ -55,9 +55,8 @@ missing number is itself useful; it is often a smaller piece of work than the de
 
 ## 5. Choose the work type
 
-Follow [choosing a work type](../shared/references/discovery.md). Where the project has no type
-that distinguishes debt from other work, say so at the gate: the artifact is then the only thing
-carrying the distinction, and it must carry it well.
+Follow [choosing a work type](../shared/references/discovery.md). A project that separates debt
+from other work by work type is the exception, so step 4 of that procedure is the usual path here.
 
 ## 6. Assemble the artifact
 
