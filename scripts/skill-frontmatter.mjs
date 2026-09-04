@@ -4,6 +4,10 @@
 // wrong request, or never triggers at all. These rules turn that into a command an author can
 // run. They are consumed by the package integrity check and are not a gate of their own.
 //
+// `scripts/skill-frontmatter.test.mjs` covers them, and `npm test` runs it. Add a case with a
+// rule: the real skills all pass, so they cannot tell a working rule from one that stopped
+// running.
+//
 // No dependencies: the check runs on `prepack`, before anything is installed.
 
 // The sentence every skill starts from. Stored without its final period, because a skill that

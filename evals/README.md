@@ -1,9 +1,9 @@
 # Evaluation fixtures
 
-Prompt-level fixtures that exercise the plugin the way a user does. They are the second of the
-two seams this project keeps; the first is `scripts/check-package.mjs`, which asserts that the
-package is structurally sound. This one asserts that the model does the right thing when someone
-speaks.
+Prompt-level fixtures that exercise the plugin the way a user does. They are one of the three
+seams this project keeps: `scripts/check-package.mjs` asserts that the package is structurally
+sound, `npm test` asserts that the rules that check runs still run, and this one asserts that the
+model does the right thing when someone speaks.
 
 ## What is tested, and why only this
 
