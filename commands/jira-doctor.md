@@ -95,43 +95,59 @@ Read the output and classify:
 Needed only for the Agile domain — boards, sprints, backlog. Everything else goes through the
 MCP server, so a missing CLI is a **partial** degradation, not a dead environment.
 
-```bash
-{
-  if ! command -v jira >/dev/null 2>&1; then
-    echo "jira CLI is NOT installed."
-    echo "   macOS: brew install ankitpokhrel/jira-cli/jira-cli"
-    echo "   Other: https://github.com/ankitpokhrel/jira-cli#installation"
-    exit 1
-  fi
-  echo "jira installed"
-  jira version 2>/dev/null | head -1
-
-  if jira me >/dev/null 2>&1; then
-    echo "jira authenticated"
-    jira me 2>/dev/null | head -1
-  else
-    echo "jira installed but NOT configured (no API token)."
-    exit 2
-  fi
-}
-```
-
-On exit 2, the fix is interactive — ask the user to run it themselves:
+**Nothing in this step ends the check.** Run the commands, classify what comes back, and carry the
+outcome to Step 4 — an absent or unauthenticated CLI is a state to report, not a reason to stop
+before Step 3.
 
 ```bash
-jira init
+command -v jira
 ```
 
-It needs an API token from <https://id.atlassian.com/manage-profile/security/api-tokens>.
+- A path → the CLI is installed. Read its version:
+
+  ```bash
+  jira version
+  ```
+
+- No output → ❌ **not installed**. Report the install route and go straight to Step 3; there is
+  nothing left here to interrogate.
+
+  ```text
+  macOS: brew install ankitpokhrel/jira-cli/jira-cli
+  Other: https://github.com/ankitpokhrel/jira-cli#installation
+  ```
+
+If it is installed, find out whether it is authenticated:
+
+```bash
+jira me
+```
+
+- It prints the account → ✅ **authenticated**.
+- It errors, or asks for an API token → ❌ **installed but NOT configured**. The fix is
+  interactive, so ask the user to run it themselves:
+
+  ```bash
+  jira init
+  ```
+
+  It needs an API token from <https://id.atlassian.com/manage-profile/security/api-tokens>.
+
+`jira me` exits non-zero on an unconfigured CLI. That status is the answer to the question, not a
+broken command: read it and move on.
 
 ## Step 3 — The project profile
 
-```bash
-test -f .jira/project-profile.md && echo "project profile present" || echo "no project profile"
-```
+Read `.jira/project-profile.md`.
 
-If absent, the skills have nothing to read and will stop on their first step. The fix is the
-`jira-init` skill, which discovers the project and writes the profile.
+- The file is there → ✅ **project profile present**.
+- It does not exist → ❌ **no project profile**. The skills have nothing to read and will stop on
+  their first step. The fix is the `jira-init` skill, which discovers the project and writes the
+  profile.
+
+Reading the file rather than testing for it in a shell keeps this step inside what the command
+declares, and an absent file comes back as an ordinary "not found" instead of a non-zero exit that
+reads like a failure.
 
 ## Step 4 — Report
 
