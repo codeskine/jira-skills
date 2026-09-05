@@ -31,9 +31,11 @@ The profile says one of three things about boards, and they are not interchangea
 - **Boards listed** — proceed.
 - **No board** — a finding, not an error: report it, say which of the operations below are
   therefore unavailable, and stop. Nothing here has a substitute.
-- **Not read, because the Agile channel was not reachable** — say that, name `jira init` as the
-  remedy, and stop. Assert nothing about whether a board exists: the question was never put.
-  These operations return when the channel does.
+- **Not read, because the Agile channel was not reachable** — say that, give the remedy
+  [the channel map](../shared/references/channels.md) § When the CLI channel is not reachable
+  assigns to the cause at hand, and stop. `jira init` is the remedy for one of the two causes
+  only, and prescribing it for the other returns `401`. Assert nothing about whether a board
+  exists: the question was never put. These operations return when the channel does.
 
 ## 2. Read the board as it is
 
