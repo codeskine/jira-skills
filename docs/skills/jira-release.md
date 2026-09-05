@@ -44,8 +44,8 @@ same thing as the opening of a conversation that ends in an assignment you appro
 contents and the change in one breath and you are here, not there. The line runs the same way on
 the sprint axis, so there is one rule to learn and not two.
 
-One question only `jira-release` can take: **which** fix versions the project has and what state
-each is in. That listing belongs to the Jira CLI, and `jira-inspect` does not declare it.
+One question only `jira-release` can take: the **list** of fix versions the project has and the
+state of each. That listing belongs to the Jira CLI, and `jira-inspect` does not declare it.
 
 **With [`jira-plan`](jira-plan.md).** "Ships in 2.4" and "is in Sprint 25" are two independent
 facts about the same work item. The fix version says what it ships with, the sprint says when it

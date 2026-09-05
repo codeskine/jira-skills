@@ -72,6 +72,14 @@ and could not be read off the channel map.
 - **The three signals now agree**, and the one that was right was the live run. That is worth
   saying plainly: the fixture encoded an intention the descriptions did not carry, and a fixture
   that resolves an ambiguity by fiat will pass in review and fail in use.
+- **The trigger and the exclusion had to be told apart in words, not left to inference.** A first
+  wording kept "which fix versions the project has" next to "not for reading what a fix version
+  holds without changing it", and a replay routed the catalogue question at low confidence, having
+  invented the distinction it needed — _holds_ as the contents of one version, _has_ as the
+  catalogue, which it called "a two-word hinge holding up three routings". The hinge is real and it
+  is the channel, so the description states it: **the list of** fix versions and the state of each,
+  against what **one** fix version holds. A distinction a reader has to supply is a distinction the
+  description does not have.
 - **Nothing changes in either skill's channel or contract.** `jira-inspect` still never writes and
   still declares no Agile channel; `jira-release` still needs the CLI for the listing and not for
   assignment. This is a boundary between intents, which is where ADR-0004 said boundaries go.

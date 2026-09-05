@@ -36,10 +36,12 @@ enumerates, the enumeration is illustration of the threshold and not a definitio
 
 Applied to the two:
 
-- **`jira-diagnose`.** What governs is _nothing to reproduce it from_. The enumeration stays,
-  because ADR-0006 was right that a test has to be decidable from the text of the request, and it
-  now closes on the general condition — "no steps, no environment, nothing that would let someone
-  else see it happen" — so a reader cannot stop at the second item and treat two boxes as the test.
+- **`jira-diagnose`.** What governs is whether the material carries anything anyone could act on
+  to see the fault happen. The enumeration stays, because ADR-0006 was right that a test has to be
+  decidable from the text of a request — but it is **inverted**. It no longer lists absences; it
+  describes the failing state as a whole: _a symptom, and at most a product or a version, with no
+  steps_. Why it had to be inverted is recorded below, and it is the one part of this decision a
+  replay caught rather than confirmed.
 - **`jira-propose`.** Any figure that says the problem is real clears the floor; a target is not
   required. The exclusion says so rather than leaving one word to carry both meanings.
 
@@ -61,6 +63,29 @@ skill fires. It is left open there deliberately, and it blocks nothing.
 This is the same shape as ADR-0006's own finding about answerability: a rule that is good at
 runtime, inside a skill that can ask, quietly asks the reader to guess when it is made to choose
 the skill.
+
+## The first wording failed, and how
+
+The rule above was first written as a list of absences closing on the general condition — "no steps,
+no environment, nothing that would let someone else see it happen" — on the assumption that a
+trailing general clause governs the two items in front of it. An isolated routing replay, given only
+the ten descriptions and no tools, reported the opposite:
+
+> Diagnose names three absences with no connective. I ruled that any one of them being present
+> clears the floor.
+
+That is Reading B, reconstructed out of the wording written to exclude it, and the fixture built for
+this decision — the fault relayed with an environment and no steps — failed against it. Which is
+what the fixture exists for.
+
+**A negative enumeration reads disjunctively.** A reader looking for a reason not to apply an
+exclusion needs only one listed item to be present, and a general condition placed last reads as the
+third item rather than as the test. Putting the governing clause at the end does not make it govern.
+
+The wording that holds inverts the list: it names what a failing case **carries** rather than what it
+lacks, so there is nothing to satisfy item by item, and _at most_ says outright that naming where it
+ran does not lift the exclusion. The lesson is not local to this floor — a negative enumeration
+cannot carry a conjunctive test anywhere the reader is looking for an exit.
 
 ## Consequences
 

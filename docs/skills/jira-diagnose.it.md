@@ -45,7 +45,7 @@ riportato di seconda mano che porta i passi e l'ambiente è la segnalazione di u
 qui, chiunque l'abbia inoltrato. Uno che non porta niente su cui qualcuno possa agire per vederlo
 accadere è intake: nessuno dei presenti può rispondere a quello che questa skill sta per chiedere,
 e capture lo registra con le parole con cui è arrivato. Quella soglia non è una checklist — una
-email che nomina il programma in cui si è rotto, e nient'altro, resta intake — e non è nemmeno una
+email che nomina il programma in cui si è rotto e la versione che usano, e nessun passo, resta intake — e non è nemmeno una
 prova di completezza: il materiale parziale sta qui, e i suoi buchi sono quello per cui esistono
 le domande più sotto.
 

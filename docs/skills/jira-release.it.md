@@ -45,8 +45,8 @@ un'assegnazione che hai approvato: se chiedi il contenuto e il cambiamento nello
 sei qui, non là. Sull'asse dello sprint il confine corre allo stesso modo, così la regola da
 imparare è una e non due.
 
-Una domanda la prende solo `jira-release`: **quali** fix
-version ha il progetto, e in che stato è ciascuna. Quell'elenco appartiene alla Jira CLI, e
+Una domanda la prende solo `jira-release`: l'**elenco** delle fix
+version che il progetto ha, e lo stato di ciascuna. Quell'elenco appartiene alla Jira CLI, e
 `jira-inspect` non la dichiara.
 
 **Con [`jira-plan`](jira-plan.it.md).** «Esce con la 2.4» e «è nello Sprint 25» sono due fatti

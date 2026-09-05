@@ -51,7 +51,8 @@ meriti il nome — è la segnalazione di un difetto e appartiene a `jira-diagnos
 evidentemente sia arrivata da fuori. Se non porta niente su cui qualcuno possa agire per vedere il
 guasto accadere, qui nessuno può fornirlo, e registrare la richiesta con le parole di chi l'ha
 mandata è la versione onesta. Quella soglia si legge su tutto il messaggio e mai come due caselle
-da spuntare: nominare il programma in cui si è rotto non rende da solo riproducibile una lamentela.
+da spuntare: nominare il programma in cui si è rotto, o la versione che usano, non rende da solo
+riproducibile una lamentela.
 
 Lo stesso test vale verso [`jira-propose`](jira-propose.it.md), dove la soglia è più bassa di
 quanto sembri. Un desiderio riportato senza nessuna cifra dietro è intake; uno che porta un
