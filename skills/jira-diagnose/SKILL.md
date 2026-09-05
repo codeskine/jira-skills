@@ -1,6 +1,6 @@
 ---
 name: jira-diagnose
-description: "Jira defect author. Use when the user reports that something is broken, behaves unexpectedly, or fails — and it has to reach Jira in a form someone who was not there can reproduce. Asks for the steps, the expected and the actual result, the environment, and carries the error or log verbatim. Not for something that works but will cost the team later (→ See codeskine/jira-skills@jira-assess), for something that works but serves its users poorly today (→ See codeskine/jira-skills@jira-propose), or for a fault relayed second-hand with nothing to reproduce it from — no steps, no environment (→ See codeskine/jira-skills@jira-capture)."
+description: "Jira defect author. Use when the user reports that something is broken, behaves unexpectedly, or fails — and it has to reach Jira in a form someone who was not there can reproduce. Asks for the steps, the expected and the actual result, the environment, and carries the error or log verbatim. Not for something that works but will cost the team later (→ See codeskine/jira-skills@jira-assess), for something that works but serves its users poorly today (→ See codeskine/jira-skills@jira-propose), or for a fault relayed second-hand with nothing to reproduce it from — no steps, no environment, nothing that would let someone else see it happen (→ See codeskine/jira-skills@jira-capture)."
 user-invocable: true
 license: MIT
 compatibility: Designed for Claude Code. Requires the Atlassian MCP server configured as "atlassian".

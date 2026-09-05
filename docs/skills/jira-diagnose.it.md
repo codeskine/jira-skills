@@ -42,9 +42,12 @@ archiviare come difetto quello che è un rischio.
 
 Anche il confine con [`jira-capture`](jira-capture.it.md) lo decide il materiale. Un guasto
 riportato di seconda mano che porta i passi e l'ambiente è la segnalazione di un difetto e sta
-qui, chiunque l'abbia inoltrato. Uno che non porta né gli uni né l'altro è intake: nessuno dei
-presenti può rispondere a quello che questa skill sta per chiedere, e capture lo registra con le
-parole con cui è arrivato.
+qui, chiunque l'abbia inoltrato. Uno che non porta niente su cui qualcuno possa agire per vederlo
+accadere è intake: nessuno dei presenti può rispondere a quello che questa skill sta per chiedere,
+e capture lo registra con le parole con cui è arrivato. Quella soglia non è una checklist — una
+email che nomina il programma in cui si è rotto, e nient'altro, resta intake — e non è nemmeno una
+prova di completezza: il materiale parziale sta qui, e i suoi buchi sono quello per cui esistono
+le domande più sotto.
 
 ## Come si usa
 

@@ -41,8 +41,11 @@ risk.
 
 The boundary with [`jira-capture`](jira-capture.md) is decided by the material too. A fault
 relayed second-hand that carries the steps and the environment is a defect report and belongs
-here, whoever forwarded it. One that carries neither is intake: nobody present can answer what
-this skill is about to ask, and capture records it in the words it arrived in.
+here, whoever forwarded it. One that carries nothing anyone could act on to see it happen is
+intake: nobody present can answer what this skill is about to ask, and capture records it in the
+words it arrived in. That bar is not a checklist — an email naming the program it broke in, and no
+more, is still intake — and it is not a completeness test either: partial material belongs here,
+and its gaps are what the questions below are for.
 
 ## How to use it
 
