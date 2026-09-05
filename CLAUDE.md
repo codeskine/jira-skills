@@ -360,3 +360,12 @@ both environment modes — with the Jira CLI reachable and without it. The proce
 paste into a dedicated session; it stops at every finding, files a ticket, and restarts from zero
 once a fix lands. Run reports are scratch and stay out of the repository. See
 `docs/agents/e2e-testing.md`.
+
+### Documentation
+
+The bilingual documentation of the plugin: one document pair per skill and per command, a
+development process document owning the mechanics they share, and a README that collects them.
+English and Italian are peers — neither is a translation of the other, and nothing checks one
+against the other. The section contract every document follows, and the procedure that produces
+them, is a prompt to paste into a dedicated session; screenshots are listed by that run and
+captured outside it. See `docs/agents/documentation.md`.
