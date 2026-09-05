@@ -15,17 +15,23 @@ Do not edit by hand: re-run `jira-init` instead, so the file and Jira stay in ag
 
 ## Work types
 
-| Work type                      | Level         | Can be a child of       | Notes                           |
-| ------------------------------ | ------------- | ----------------------- | ------------------------------- |
-| <name as the project calls it> | <as reported> | <parent types, or none> | <required fields, restrictions> |
+| Work type                      | Level                       | Can be a child of       | Notes                           |
+| ------------------------------ | --------------------------- | ----------------------- | ------------------------------- |
+| <name as the project calls it> | <integer, as Jira gives it> | <parent types, or none> | <required fields, restrictions> |
+
+`Level` is the hierarchy level Jira reports, written exactly as it comes: an integer, counted from
+the base level at `0`, going up for containers and **negative** below it. Do not renumber it into
+a depth of your own — the numbers mean something to Jira and nothing to this plugin.
 
 Levels and names are whatever this project declares. A type absent from this table does not
 exist here, and no skill may offer it.
 
 ### Intents no work type serves
 
-<Name the intents this project's scheme has no type for — a defect, unrefined intake, technical
-debt — as a stated fact rather than one left to be inferred from the table above. A reading skill
+<Of the five intents this plugin authors — capture a request, propose value, report a defect,
+record debt or risk, refine — name the ones this project's scheme has no type for, as a stated
+fact rather than one left to be inferred from the table above. Check all five, every time: a run
+that checks a different set produces a profile the next run will disagree with. A reading skill
 acts on what the profile says; it does not audit a table for what is missing. Where every intent
 has a type, say that instead of omitting the section: "none" is a fact, and a missing section is
 not.>
@@ -61,7 +67,7 @@ reader to create a board instead of restoring the channel.>
 
 ## Fix versions
 
-| Fix version | Status                             | Notes |
+| Fix version | Release state                      | Notes |
 | ----------- | ---------------------------------- | ----- |
 | <name>      | <unreleased / released / archived> |       |
 
@@ -73,9 +79,14 @@ the Agile channel was not reachable.>
 Which tool serves each operation, resolved from the tools the configured MCP server actually
 exposes. Skills read this table instead of hard-coding a tool name.
 
-| Operation                        | Channel     | Tool or command                  |
-| -------------------------------- | ----------- | -------------------------------- |
-| <operation from the channel map> | <MCP / CLI> | <resolved tool name, or command> |
+| Operation                        | Channel     | Tool or command                      |
+| -------------------------------- | ----------- | ------------------------------------ |
+| <operation from the channel map> | <MCP / CLI> | <bare tool name, or the CLI command> |
+
+MCP tools go in under their **bare** name — `getJiraIssue`, not `mcp__atlassian__getJiraIssue`.
+The prefix is the server id, which is fixed by convention and checked before any of this runs;
+writing it into every row would copy one constant into a file nobody re-reads, and would record
+the wrong one on a server reached under a different name.
 
 ## Unsupported operations
 

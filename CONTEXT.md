@@ -86,8 +86,10 @@ _Avoid_: icebox, inbox, wishlist, the pile
 
 **Fix Version**:
 The native versioned release target: it defines _what_ ships together. It has no duration, it
-has a version, and it is released or archived.
-_Avoid_: release, version, milestone, tag
+has a version, and it is released or archived. Its **release state** — unreleased, released,
+archived — is not a Status: Status is the position of a Work item in the Jira Workflow, and a Fix
+Version is not a Work item. The profile's column carries the release state and is named for it.
+_Avoid_: release, version, milestone, tag; and _status_ as the name of the release state
 
 A Work item may belong to a Sprint and to a Fix Version at the same time: they are orthogonal
 axes. The term **milestone** does not belong to this domain.

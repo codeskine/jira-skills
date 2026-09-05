@@ -53,7 +53,10 @@ on to the next.
 1. **Work types** available in the project, with the hierarchy between them. Record the names
    exactly as the project reports them, including custom and renamed types — and record which of
    the intents this plugin authors no type serves, as a stated fact. A reader acts on what the
-   profile says, not on what it can infer is missing from a table.
+   profile says, not on what it can infer is missing from a table. The intents are the five
+   [the quality standard](../shared/references/quality-standard.md) names per intent, and that
+   list is the authority: check all five every time, or two runs on the same project produce
+   profiles that disagree.
 2. **Statuses** and the shape of the Jira Workflow connecting them. A project with no work item
    exposes none — statuses are read from the items that occupy them. Record that they were not
    observable yet and that the first work item will make them readable, then carry on.
@@ -70,6 +73,11 @@ on to the next.
 Enumerate the tools the MCP server actually exposes and map each operation in the channel map to
 the tool that serves it. Record the mapping in the profile, so no skill ever hard-codes a tool
 name.
+
+Record each tool under its **bare** name — `getJiraIssue`, not `mcp__atlassian__getJiraIssue`.
+The prefix is the server id, which is fixed by convention and verified before any skill runs;
+writing it into every row copies one constant into a file nobody re-reads, and records the wrong
+one on a server reached under a different name.
 
 Anything the map lists that no available tool covers goes to **Unsupported operations**, with
 the manual path the user will take instead. The channel map already declares the gaps known at
