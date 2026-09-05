@@ -84,6 +84,20 @@ item's type and the children's, say so and stop: refuse the split, explain why, 
 whole. Creating children that cannot be attached produces orphans, and an orphan is worse than an
 item that is too large, because it is also invisible.
 
+Refusing is not the whole answer, and the profile holds most of the rest. Say what this project can
+support, cheapest first:
+
+1. **Other work types the hierarchy does allow.** The profile's table answers this rather than a
+   guess: where some pair of types would hold the split, name it and ask whether it fits the work.
+2. **Enriching the item in place** — this skill's other branch. An item too large to finish is
+   still an item that can be made ready, and that is a smaller change than either of the others.
+3. **A change to the project's scheme**, last, because it needs a project admin and is not the
+   user's to make. Name it as a real option and say whose it is, rather than leaving it as the
+   only one.
+
+Where the profile records the work types as not read, say that too: the refusal is then about what
+could not be established, and not about what the project cannot do.
+
 ## 6. Assemble
 
 Fill [the template](assets/refined-item.md) for the item being refined. Children are built from

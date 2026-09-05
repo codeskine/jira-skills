@@ -244,6 +244,44 @@ from the template of the intent it serves and each complete enough to be picked 
 of those children appears in the parent's text, in either branch: Jira already answers that
 question.
 
+### The other branch, worked
+
+PROJ-421 was enriched in place because it was already small enough. PROJ-388 — _self-service
+reporting for the finance team_ — is not, and the split is the branch nothing has shown until now.
+
+Three children, because three is what the work divided into and not a number anyone was aiming for:
+
+```text
+PROJ-388  Self-service reporting for the finance team        ← the parent, narrowed
+├── PROJ-401  A finance user picks a period and sees the figures for it
+├── PROJ-402  A finance user compares a period against the same period a year earlier
+└── PROJ-403  A finance user exports what they are looking at
+```
+
+Each carries its own acceptance criteria, agreed before any of them existed: the whole split goes
+to the gate once, never child by child. PROJ-402 is the one that shows why. On its own it is a
+comparison of nothing, so its criteria name the period selection PROJ-401 provides — and that
+becomes a link between the two, not a sentence in a description.
+
+**What the parent says afterwards** is the part no source showed:
+
+> **Before** — Self-service reporting for the finance team. They ask us for every figure they need
+> and each request costs someone half a day. They should be able to select a period, compare it
+> against the year before, and take the result away.
+>
+> **After** — Self-service reporting for the finance team. They ask us for every figure they need
+> and each request costs someone half a day. What that needs is PROJ-401, PROJ-402 and PROJ-403.
+
+The parent keeps the argument and gives up the specification. What it must **not** keep is a list
+of its children: the hierarchy is queryable on Jira, and a list maintained by hand is a second
+answer that disagrees with the first the day somebody adds a fourth child.
+
+**When the hierarchy will not hold it**, the split is refused — and the refusal is not the end of
+the exchange. The profile knows which work types may contain which, so what comes back is what
+this project can support, cheapest first: another pair of types the hierarchy does allow, then
+enriching PROJ-388 in place, then a change to the scheme — which is a project admin's to make and
+not yours.
+
 ## What it will not do
 
 - **Invent acceptance criteria you did not agree to.** Criteria nobody agreed to are still

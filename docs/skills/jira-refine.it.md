@@ -258,6 +258,45 @@ costruito dal template dell'intento che serve e ciascuno abbastanza completo da 
 carico da solo. L'elenco di quei figli non compare nel testo del parent in nessuno dei due rami:
 quella domanda Jira la sa già.
 
+### L'altro ramo, lavorato
+
+PROJ-421 è stato arricchito in place perché era già abbastanza piccolo. PROJ-388 — _reportistica
+self-service per il team finance_ — non lo è, e lo split è il ramo che finora non era mostrato da
+nessuna parte.
+
+Tre figli, perché è in tre che il lavoro si è diviso e non perché qualcuno puntasse a quel numero:
+
+```text
+PROJ-388  Reportistica self-service per il team finance      ← il parent, ristretto
+├── PROJ-401  Chi lavora in finance sceglie un periodo e ne vede i numeri
+├── PROJ-402  Chi lavora in finance confronta un periodo con lo stesso di un anno prima
+└── PROJ-403  Chi lavora in finance esporta quello che sta guardando
+```
+
+Ognuno porta i propri criteri di accettazione, concordati prima che esistesse anche solo uno di
+loro: lo split intero passa dal cancello una volta sola, mai figlio per figlio. PROJ-402 è quello
+che fa vedere perché. Da solo è un confronto di niente, quindi i suoi criteri nominano la selezione
+del periodo che dà PROJ-401 — e quello diventa un link fra i due, non una frase in una descrizione.
+
+**Cosa dice il parent dopo** è la parte che nessuna fonte mostrava:
+
+> **Prima** — Reportistica self-service per il team finance. Ci chiedono ogni numero di cui hanno
+> bisogno e ogni richiesta costa mezza giornata a qualcuno. Dovrebbero poter scegliere un periodo,
+> confrontarlo con l'anno prima, e portarsi via il risultato.
+>
+> **Dopo** — Reportistica self-service per il team finance. Ci chiedono ogni numero di cui hanno
+> bisogno e ogni richiesta costa mezza giornata a qualcuno. Quello che serve è PROJ-401, PROJ-402 e
+> PROJ-403.
+
+Il parent tiene l'argomento e cede la specifica. Quello che **non** deve tenere è un elenco dei
+suoi figli: la gerarchia su Jira si interroga, e un elenco tenuto a mano è una seconda risposta che
+smentisce la prima il giorno in cui qualcuno aggiunge un quarto figlio.
+
+**Quando la gerarchia non lo regge**, lo split viene rifiutato — e il rifiuto non chiude lo
+scambio. Il profilo sa quali work type possono contenere quali, quindi quello che torna è cosa
+questo progetto può sostenere, dal più economico: un'altra coppia di type che la gerarchia ammette,
+poi arricchire PROJ-388 in place, poi un cambio di schema — che è di un project admin e non tuo.
+
 ## Cosa non fa
 
 - **Inventare criteri di accettazione che non hai concordato.** Criteri che nessuno ha concordato
