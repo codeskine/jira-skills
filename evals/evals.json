@@ -43,6 +43,16 @@
       "why": "A desired outcome, relayed, with no datum behind it: nothing says who benefits or what faster would have to mean. Precedence sends it to intake rather than to a proposal that would have to invent its own measure. Paired with sel-propose-3, the same wish owned by the person stating it."
     },
     {
+      "id": "sel-capture-5",
+      "category": "selection",
+      "prompt": "The architect mentioned in standup that the retry logic round the payment gateway is a mess. Log it before I forget.",
+      "expect_skill": "jira-capture",
+      "expect_not": [
+        "jira-assess"
+      ],
+      "why": "Debt relayed second-hand, arriving as an adjective and nothing else: nothing says whose time it costs or how often, which is the floor jira-assess names in its own exclusion. The precedence test turns on what the material carries, whatever intent it is about, so it belongs to intake first. The architect is on the team, so this also holds intake to material arriving second-hand rather than to where it came from: a routing test cannot ask a reader to judge an organisation the request text does not describe. Paired with sel-assess-3, the same remark carrying its toll."
+    },
+    {
       "id": "sel-propose-1",
       "category": "selection",
       "prompt": "I want people to be able to see what delivery costs before they type an address. It should cut the drop-off at that step.",
@@ -82,6 +92,17 @@
         "jira-capture"
       ],
       "why": "Relayed second-hand like sel-capture-4, but arriving with its datum and its target, so it carries what a value proposal asks for and precedence does not claim it. The mirror of sel-diagnose-4 on the value axis. It exists because sel-capture-4 and sel-propose-3 move provenance and datum at the same time, and a pair that flips two variables cannot show which one routed."
+    },
+    {
+      "id": "sel-propose-5",
+      "category": "selection",
+      "prompt": "Half the people who reach the delivery-options step ring us before they finish it — about forty calls last month. It works, it just doesn't make sense to anyone. Get it on the backlog.",
+      "expect_skill": "jira-propose",
+      "expect_not": [
+        "jira-assess",
+        "jira-diagnose"
+      ],
+      "why": "Something that works and costs, like sel-assess-1, with one variable moved: the cost falls on the people it serves now rather than on the team later. This is the case jira-diagnose used to hand to jira-assess, which has no technical impact to ask about here and would have to record the toll as one."
     },
     {
       "id": "sel-diagnose-1",
@@ -144,6 +165,17 @@
         "jira-propose"
       ],
       "why": "A risk, not a failure and not an outcome for users."
+    },
+    {
+      "id": "sel-assess-3",
+      "category": "selection",
+      "prompt": "The architect mentioned in standup that the retry logic round the payment gateway is hand-rolled in four services and every new endpoint copies it again — it costs two of us a day each time. Log it before I forget.",
+      "expect_skill": "jira-assess",
+      "expect_not": [
+        "jira-capture",
+        "jira-diagnose"
+      ],
+      "why": "Relayed second-hand like sel-capture-5, but arriving with the toll — whose time, how often — which is what a debt record asks for and the one thing a relayer either carries or does not. Precedence does not claim it. The mirror of sel-diagnose-4 and sel-propose-4 on the debt axis. Nothing fails, which is what keeps diagnose out."
     },
     {
       "id": "sel-refine-1",

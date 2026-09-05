@@ -1,6 +1,6 @@
 ---
 name: jira-assess
-description: "Jira technical debt and risk author. Use when the user wants to record something that works today but will cost the team later — a shortcut taken deliberately, a dependency going stale, a design that no longer fits, an arrangement only two people understand. Asks what deferring it costs, what the options are, and what the technical impact is, so it can be ranked against feature work. Not for something that is actually broken now (→ See codeskine/jira-skills@jira-diagnose), and not for proposing an outcome for users (→ See codeskine/jira-skills@jira-propose)."
+description: "Jira technical debt and risk author. Use when the user wants to record something that works today but will cost the team later — a shortcut taken deliberately, a dependency going stale, a design that no longer fits, an arrangement only two people understand. Asks what deferring it costs, what the options are, and what the technical impact is, so it can be ranked against feature work. Not for something that is actually broken now (→ See codeskine/jira-skills@jira-diagnose), for an outcome sought on behalf of users (→ See codeskine/jira-skills@jira-propose), or for debt relayed second-hand with nothing to say what deferring it costs (→ See codeskine/jira-skills@jira-capture)."
 user-invocable: true
 license: MIT
 compatibility: Designed for Claude Code. Requires the Atlassian MCP server configured as "atlassian".
