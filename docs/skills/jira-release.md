@@ -16,9 +16,9 @@
 
 Owns the fix version — what ships together. It lists the fix versions the project actually has
 with their state, assigns work items to one and takes them off again, and shows what one contains
-and which part
-of that is unfinished as the ground for a change you approve. Two things it cannot do at all — create a fix version, and release or
-archive one — it names before you ask and hands back to you in Jira.
+and which part of that is unfinished as the ground for a change you approve. Two things it cannot
+do at all — create a fix version, and release or archive one — it names before you ask and hands
+back to you in Jira.
 
 It is a Release Manager's question asked at the only useful moment. Knowing what shipping means
 before you ship is the job; finding out afterwards has a name, and it is not a good one.
@@ -42,9 +42,10 @@ Two boundaries are worth stating outright.
 
 **With [`jira-inspect`](jira-inspect.md).** The line is what the question is _about_. Ask about the
 work **inside** a fix version — _what is in 2.4, and what of it is unfinished_ — and it is
-`jira-inspect`, which reads and stops. Ask about the **version itself** — which ones the project
-has, whether 2.4 has been released or archived — and it is `jira-release`, because those live on the
-Jira CLI, which `jira-inspect` does not declare.
+`jira-inspect`, which reads and stops. Ask about the **fix version itself** — putting work on one,
+taking work off one, which ones the project has, whether 2.4 has been released or archived — and
+it is `jira-release`. The last two live on the Jira CLI, which `jira-inspect` does not declare;
+the first two change something, which `jira-inspect` never does.
 
 `jira-release` also reads the contents, as the opening of a conversation that ends in an assignment
 you approved: ask for the contents and the change in one breath and you are here, not there. The
@@ -94,10 +95,17 @@ small.
 a fix version, nothing is planned into a sprint because it was, and an item already in a sprint
 stays in it.
 
-**6 · Then the draft gate.** What this intent adds: the gate lists every work item whose fix
-version will change, and the one it will change to. A set assigned together is one approved
-action over several writes — if part of it fails you are told which part succeeded and which did
-not, and nothing is rolled back on the skill's initiative.
+The way off is the way on, cleared. Moving an item from 2.4 to 2.5 sets the same field; taking it
+off 2.4 empties it. Neither is a release and neither needs the Jira CLI. The skill says which of
+the two is happening, because an item that leaves 2.4 for 2.5 and an item that leaves 2.4 for
+nothing are different decisions, and only one of them has somewhere to be.
+
+**6 · Then the draft gate, in its operation form.** Nothing here is authored, so what the gate
+shows you is the change itself rather than a document: every work item whose fix version will
+change, and the one it will change to — or, where it is being taken off one, that it will end up
+assigned to none. A set assigned together is one approved action over several writes — if part of
+it fails you are told which part succeeded and which did not, and nothing is rolled back on the
+skill's initiative.
 
 ## Worked exchange
 

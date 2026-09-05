@@ -36,10 +36,12 @@ how to reach it.
 | "this works but it will bite us in six months"     | [`jira-assess`](jira-assess.md)     |
 
 The line against [`jira-capture`](jira-capture.md) is **the datum**. Relaying someone else's wish
-with nothing checkable behind it is intake — capture records it in the words it arrived in and
-says so — and it stays intake however clearly the outcome is described. The bar is a figure, not a target: _about forty calls last
-month_ clears it, and the skill then asks what success would have to look like. What it will not
-do is manufacture the outcome, the audience or the measure by asking harder.
+with nothing checkable behind it at all is intake — capture records it in the words it arrived in
+and says so — and it stays intake however clearly the outcome is described. That bar is read against
+the whole of what was relayed, never as a list of answers to tick, and it is lower than it sounds:
+any figure saying the problem is real clears it, and a target is not required. _About forty calls
+last month_ is enough, and the skill then asks what success would have to look like. What it will
+not do is manufacture the outcome, the audience or the measure by asking harder.
 
 The line downstream is [`jira-refine`](jira-refine.md). Proposing states the value and stops.
 Acceptance criteria, a scope small enough to finish, and the children the proposal implies are
@@ -51,11 +53,13 @@ You do not need to name the skill. Say what you want to be true, and answer the 
 
 **1 · It reads the project profile first.** Before anything is asked, `.jira/project-profile.md`
 tells it which work types this project has, how they nest, and which fields are required on
-creation. If the profile is missing it stops and tells you to run `jira-init` — it does not
-guess. It also checks one operation in particular: setting a parent. This is the intent that
-depends on it, so if the profile records that operation as unsupported you hear it now, with the
-manual path, rather than after a draft you cannot have. See
-[the development process](../development-process.md).
+creation. If the profile is missing it stops and tells you to run `jira-init` — it does not guess.
+It also checks one operation in particular: setting a parent. This is the intent that depends on it,
+so if the profile records that operation as unsupported you hear it now, with the manual path,
+rather than after a draft you cannot have. That is not a theoretical branch: what lands in that list
+is what discovery could not resolve **on this installation** — no tool for it, a channel that did
+not answer, an account not permitted — which is a different thing from an operation the tooling has
+no route to anywhere. See [the development process](../development-process.md).
 
 **2 · It asks what a Product Owner asks.** Three questions, and each one is refused a certain
 kind of answer:
@@ -87,10 +91,17 @@ that was wrong on the board in between. Where the project's hierarchy allows no 
 type, or none of the candidates fits, it says so and creates the item without one. It never
 invents a container to hold it.
 
-**6 · Then the draft gate.** The complete proposal appears in chat with the decisions it carries
-— title, work type, parent, and anything this project marks required that the draft left empty.
-You approve, or you ask for changes and see it again. This intent adds one thing to the gate:
-when the item will have no parent, the gate says why not.
+**6 · Then the draft gate, which here is an artifact gate.** What you approve is the complete
+content of the work item, section by section. Its other form, an operation gate, shows a change
+reaching things that already exist — a sprint filled, work assigned to a fix version, an item moved
+to its next status — and authoring never produces one. The proposal appears in chat with the
+decisions it carries — title, work type, parent, anything this project marks required that the draft
+left empty, and, where your request carried a second intent this proposal does not satisfy, that
+intent and the skill that owns it — which takes over once this write is done, with a gate of its
+own. You approve, or you ask for changes and see it again. Or you say no, and that is an answer:
+nothing is written, you are told what holds instead, no thinner proposal is offered in the hope that
+one passes, and a later message about something else is not read as a change of mind. This intent
+adds one thing to the gate: when the item will have no parent, the gate says why not.
 
 **7 · After the write, it reports what did not happen.** If the item is created but the parent
 cannot be set, you are told. A proposal sitting at the wrong level is something you have to see,
@@ -252,8 +263,9 @@ A heading with nothing under it reads as an oversight, so it is removed rather t
 
 - [The development process](../development-process.md) — the project profile, the draft gate, the
   two channels, and where proposing value sits in the whole path.
-- [`jira-capture`](jira-capture.md) — for a request from outside that nobody has examined yet.
+- [`jira-capture`](jira-capture.md) — for a wish relayed second-hand with no figure behind it at
+  all.
 - [`jira-diagnose`](jira-diagnose.md) — for something that is broken today.
-- [`jira-assess`](jira-assess.md) — for something that works today and will cost later.
+- [`jira-assess`](jira-assess.md) — for something that works today and will cost the team later.
 - [`jira-refine`](jira-refine.md) — for turning an approved proposal into something a team can
   pick up.

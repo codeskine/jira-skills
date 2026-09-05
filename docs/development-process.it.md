@@ -108,13 +108,16 @@ project profile non elenca.
 ```mermaid
 stateDiagram-v2
     direction LR
-    [*] --> Domande
-    Domande --> Bozza : assembla l'artefatto per intero
-    Bozza --> Gate : lo mostra in chat, mai in un file
-    Gate --> Bozza : chiedi una modifica
+    [*] --> Artefatto : quando si redige
+    [*] --> Operazione : quando si cambia ciò che esiste
+    Artefatto --> Gate : il contenuto completo, in chat
+    Operazione --> Gate : ogni work item toccato, nominato
+    Gate --> Gate : chiedi una modifica e lo rivedi
+    Gate --> Rifiutato : no
     Gate --> Scrittura : approvi, esplicitamente
+    Rifiutato --> [*] : niente scritto, e ti si dice cosa vale adesso
     Scrittura --> Jira : una scrittura, sul channel mappato
-    Jira --> [*] : riporta la chiave e la URL
+    Jira --> [*] : la chiave e la URL
 ```
 
 Questo è il **draft gate**, il cancello che precede ogni scrittura su Jira, ed è un cancello solo
@@ -122,7 +125,7 @@ in tutte le skill che scrivono. Quello che ci arriva ha una di due forme, decisa
 scrittura e non da quale skill sta girando.
 
 **Quando qualcosa viene scritto ex novo** — una richiesta registrata, una proposta, la segnalazione
-di un difetto, un debito, i figli di uno split — ricevi il contenuto esatto che verrà scritto, non
+di un difetto, un debito, i figli di una scomposizione — ricevi il contenuto esatto che verrà scritto, non
 un riassunto e non una scaletta, nella lingua in cui stai lavorando. Con esso le decisioni che
 porta con sé: il titolo, il work type, il parent se c'è, lo sprint e la fix version se ci sono,
 tutto ciò che il tuo progetto marca obbligatorio e che la bozza ha lasciato vuoto, e — se il tuo
@@ -135,6 +138,11 @@ con cosa cambia di ciascuno, cosa sarà vero dopo, e cosa l'operazione **non** f
 potresti ragionevolmente aspettartelo. È quest'ultimo il punto della forma. Chiudere uno sprint non
 può collocare il lavoro rimasto aperto dentro, e sentirselo dire al cancello è la differenza fra
 approvare un esito e scoprirlo.
+
+Qualunque delle due forme nomina una cosa in più, quando ricorre: **l'intento che la tua
+richiesta portava e che questa scrittura non soddisfa, e la skill che se ne occupa.** Una frase
+può chiedere due cose, e un'approvazione data senza quella è l'approvazione di metà richiesta. La
+sezione dopo la prossima dice che fine fa l'altra metà.
 
 Poi approvi, oppure chiedi modifiche e lo rivedi — quante volte vuoi — oppure dici di no. Dire di
 no è una risposta e viene trattata come tale: non viene scritto niente, ti viene detto cosa vale
@@ -163,16 +171,40 @@ primo passo.
 
 ---
 
+## Quando una richiesta porta due intenti
+
+_«È troppo grande, e deve entrare nello sprint corrente.»_ _«A che punto è, e se è pronto
+pianificalo.»_ Le due metà sono entrambe reali, devono accadere entrambe, e la skill che si è
+attivata ne possiede una sola. Da qui discende:
+
+- **L'altra metà viene nominata al gate**, nel blocco delle decisioni. Un'approvazione data senza
+  quella è l'approvazione di metà di una richiesta che credevi di aver fatto intera.
+- **L'ordine non è una preferenza.** Va prima l'intento sul cui risultato l'altro opera — una
+  scomposizione prima dello sprint che ne conterrà i figli, una lettura prima della scrittura che
+  ne dipende. Dove nessuno dei due consuma l'altro, vale l'ordine in cui l'hai detto.
+- **Due gate, mai uno.** La seconda cosa non si può assemblare prima che la prima sia scritta,
+  perché il suo soggetto non esiste ancora. Approvare la prima non approva niente della seconda.
+- **La scrittura non è la fine della richiesta.** Riportare la chiave chiude la scrittura; poi la
+  skill passa la mano a chi possiede quello che resta, e dice che è ciò che sta facendo.
+- **Ti viene chiesto quando la prima metà ha cambiato il soggetto della seconda.** Dopo una
+  scomposizione, _«mettilo nello sprint»_ non nomina più un solo work item, e quale livello un
+  team pianifichi appartiene al tuo progetto. La domanda arriva a te invece di essere risolta per
+  default.
+- **Una condizione che hai posto è una condizione.** _«Se è pronto pianificalo»_ non è soddisfatto
+  pianificandolo.
+
+---
+
 ## Due channel, e cosa succede quando uno è spento
 
 ```mermaid
 flowchart TB
     S["Una skill"] --> M["<b>Atlassian MCP server</b><br/>work item · campi · commenti<br/>transition · ricerca · metadati di progetto"]
-    S --> C["<b>Jira CLI</b><br/>board · sprint · backlog"]
+    S --> C["<b>Jira CLI</b><br/>board · sprint · l'elenco delle fix version"]
     M --> J[("Jira Cloud")]
     C --> J
 
-    G["<b>Disponibili su nessuno dei due</b><br/>creare uno sprint · avviare uno sprint<br/>creare una fix version · rilasciarla o archiviarla"]
+    G["<b>Disponibili su nessuno dei due</b><br/>creare uno sprint · avviare uno sprint<br/>creare una fix version · rilasciarla o archiviarla<br/>riportare un work item fuori da uno sprint"]
     G -. "restituite a te, mai simulate" .-> S
 ```
 
@@ -186,9 +218,11 @@ skill di questo plugin, per quanto sano appaia. Un connettore Atlassian aggiunto
 impostazioni di claude.ai è esattamente uno di quei nomi.
 [`/jira-doctor`](commands/jira-doctor.it.md) lo verifica e stampa il rimedio.
 
-**Quattro operazioni non esistono su nessuno dei due channel** e ti vengono restituite invece che
-simulate: creare uno sprint, avviarlo, creare una fix version, e rilasciarla o archiviarla. Le
-skill lo dicono prima che tu lo chieda. Sono gap degli strumenti, e valgono ovunque.
+**Cinque operazioni non esistono su nessuno dei due channel** e ti vengono restituite invece che
+simulate: creare uno sprint, avviarlo, creare una fix version, rilasciarla o archiviarla, e
+riportare un work item fuori da uno sprint. Le skill lo dicono prima che tu lo chieda, e nominano
+la destinazione che non riescono a raggiungere — lo sprint successivo, o il backlog — così puoi
+fare tu lo spostamento sulla board. Sono gap degli strumenti, e valgono ovunque.
 
 **Un channel semplicemente irraggiungibile sulla tua macchina è un'altra cosa**: è una
 degradazione, torna quando torna il channel, e non dice niente sul tuo progetto. Senza una `jira`

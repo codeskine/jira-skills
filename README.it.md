@@ -41,7 +41,7 @@ Da questa forma discendono due cose, e sono tutto il progetto:
   ci accompagnano.
 
 **[Leggi il processo di sviluppo](docs/development-process.it.md)** per il percorso completo — la
-discovery, il draft gate, i due channel e i buchi che dichiarano — con i diagrammi. È la pagina da
+discovery, il draft gate, i due channel e i gap che dichiarano — con i diagrammi. È la pagina da
 leggere prima di installare.
 
 ## Cosa c'è in questo repository
@@ -128,12 +128,12 @@ l'artefatto o il report che produce.
 
 **Redazione** — Trasforma una richiesta, un difetto o un rischio tecnico in un work item Jira fatto bene.
 
-| Skill           | Cosa fa                                                                                                                                                                                                        | Pagina                                   |
-| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
-| `jira-capture`  | Registra una richiesta arrivata da fuori il team — una email, un messaggio in chat, un appunto preso durante una riunione — con le parole con cui è arrivata, prima che qualcuno abbia capito cosa significhi. | [leggi](docs/skills/jira-capture.it.md)  |
-| `jira-propose`  | Mette agli atti un risultato che qualcuno vuole ottenere, in una forma che sopravvive a una discussione sulle priorità.                                                                                        | [leggi](docs/skills/jira-propose.it.md)  |
-| `jira-diagnose` | Trasforma qualcosa che hai visto rompersi in una segnalazione che chi non era presente riesce a riprodurre.                                                                                                    | [leggi](docs/skills/jira-diagnose.it.md) |
-| `jira-assess`   | Registra qualcosa che oggi funziona e che costerà al team più avanti — una scorciatoia presa consapevolmente, una dipendenza che invecchia, un design che non calza più, un assetto che conoscono solo in due. | [leggi](docs/skills/jira-assess.it.md)   |
+| Skill           | Cosa fa                                                                                                                                                                                                                | Pagina                                   |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| `jira-capture`  | Registra una richiesta che ti è arrivata di seconda mano — una email, un messaggio in chat, un appunto preso durante una riunione — con le parole con cui è arrivata, prima che qualcuno abbia capito cosa significhi. | [leggi](docs/skills/jira-capture.it.md)  |
+| `jira-propose`  | Mette agli atti un risultato che qualcuno vuole ottenere, in una forma che sopravvive a una discussione sulle priorità.                                                                                                | [leggi](docs/skills/jira-propose.it.md)  |
+| `jira-diagnose` | Trasforma qualcosa che hai visto rompersi in una segnalazione che chi non era presente riesce a riprodurre.                                                                                                            | [leggi](docs/skills/jira-diagnose.it.md) |
+| `jira-assess`   | Registra qualcosa che oggi funziona e che costerà al team più avanti — una scorciatoia presa consapevolmente, una dipendenza che invecchia, un design che non calza più, un assetto che conoscono solo in due.         | [leggi](docs/skills/jira-assess.it.md)   |
 
 **Refinement** — Arricchisci un work item e scomponilo in figli completi.
 

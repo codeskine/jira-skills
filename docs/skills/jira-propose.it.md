@@ -36,12 +36,14 @@ che qualcuno decida come raggiungerlo.
 | «l'export esce vuoto, va segnalato»                         | [`jira-diagnose`](jira-diagnose.it.md) |
 | «adesso funziona, ma fra sei mesi ci si ritorce contro»     | [`jira-assess`](jira-assess.it.md)     |
 
-Il confine con [`jira-capture`](jira-capture.it.md) è **il dato**. Riportare il desiderio di
-qualcun altro senza niente di verificabile dietro è intake — capture lo registra con le parole con
+Il confine con [`jira-capture`](jira-capture.it.md) è **il dato**. Riportare il desiderio di qualcun
+altro senza proprio niente di verificabile dietro è intake — capture lo registra con le parole con
 cui è arrivato e dichiara che è così — e resta intake per quanto chiaramente il risultato sia
-descritto. La soglia è una cifra, non un obiettivo: _una quarantina di chiamate il mese scorso_ la
-supera, e la skill chiede poi da cosa si capirà che ha funzionato. Quello che non fa è fabbricare
-il risultato, il pubblico o la misura insistendo con le domande.
+descritto. Quella soglia si legge su tutto quello che è stato riportato, mai come un elenco di
+risposte da spuntare, ed è più bassa di quanto sembri: la supera qualsiasi cifra che dica che il
+problema è reale, e un obiettivo non serve. _Una quarantina di chiamate il mese scorso_ basta, e la
+skill chiede poi da cosa si capirà che ha funzionato. Quello che non fa è fabbricare il risultato,
+il pubblico o la misura insistendo con le domande.
 
 Il confine a valle è [`jira-refine`](jira-refine.it.md). Proporre dichiara il valore e si ferma.
 I criteri di accettazione, un perimetro abbastanza piccolo da poter essere finito e i figli che
@@ -52,15 +54,17 @@ concordato.
 
 Non serve nominare la skill. Di' cosa vuoi che sia vero, e rispondi alle domande.
 
-**1 · Legge prima il project profile.** Prima di chiedere qualsiasi cosa,
-`.jira/project-profile.md` — il file che registra l'esito della discovery, cioè la lettura della
-configurazione reale del progetto — le dice quali work type ha questo progetto, come si
-annidano, e quali campi sono
-obbligatori alla creazione. Se il project profile manca si ferma e ti dice di eseguire
-`jira-init`: non tira a indovinare. Controlla anche un'operazione in particolare, quella che
-imposta il parent. È l'operazione da cui questo intento dipende, quindi se il project profile la
-registra come non supportata te lo senti dire adesso, insieme alla via manuale, e non dopo una
-bozza che non puoi avere. Vedi [il processo di sviluppo](../development-process.it.md).
+**1 · Legge prima il project profile.** Prima di chiedere qualsiasi cosa, `.jira/project-profile.md`
+— il file che registra l'esito della discovery, cioè la lettura della configurazione reale del
+progetto — le dice quali work type ha questo progetto, come si annidano, e quali campi sono
+obbligatori alla creazione. Se il project profile manca si ferma e ti dice di eseguire `jira-init`:
+non tira a indovinare. Controlla anche un'operazione in particolare, quella che imposta il parent. È
+l'operazione da cui questo intento dipende, quindi se il project profile la registra come non
+supportata te lo senti dire adesso, insieme alla via manuale, e non dopo una bozza che non puoi
+avere. Non è un ramo teorico: in quell'elenco finisce quello che la discovery non è riuscita a
+risolvere **su questa installazione** — nessun tool che la serva, un channel che non ha risposto, un
+account senza il permesso — che è cosa diversa da un'operazione a cui gli strumenti non arrivano da
+nessuna parte. Vedi [il processo di sviluppo](../development-process.it.md).
 
 **2 · Fa le domande che fa un Product Owner.** Tre, e ognuna rifiuta un certo tipo di risposta:
 
@@ -92,11 +96,19 @@ dopo è una gerarchia che nel frattempo era sbagliata sulla board. Se la gerarch
 non ammette nessun parent per quel work type, o se nessun candidato va bene, lo dice e crea il
 work item senza parent. Non inventa mai un contenitore in cui metterlo.
 
-**6 · Poi il draft gate**, il cancello che precede ogni scrittura su Jira. La proposta completa
-compare in chat con le decisioni che porta con sé — titolo, work type, parent, e ogni campo che
-questo progetto marca obbligatorio e che la bozza ha lasciato vuoto. Approvi, oppure chiedi
-modifiche e la rivedi. Questo intento aggiunge una cosa al gate: quando il work item resterà
-senza parent, il gate dice perché.
+**6 · Poi il draft gate** — il cancello che precede ogni scrittura su Jira — **e qui è un artifact
+gate**, la forma del gate che mostra il contenuto di un work item. Quello che approvi è quel
+contenuto per intero, sezione per sezione. L'altra forma, l'operation gate, mostra un cambiamento a
+ciò che esiste già — uno sprint riempito, del lavoro assegnato a una fix version, un work item
+portato allo status successivo — e quando si scrive ex novo non si presenta mai. La proposta
+completa compare in chat con le decisioni che porta con sé — titolo, work type, parent, ogni campo
+che questo progetto marca obbligatorio e che la bozza ha lasciato vuoto, e, se la tua richiesta
+portava un secondo intento che questa proposta non soddisfa, quell'intento e la skill che se ne
+occupa, che subentra a scrittura fatta e ha un gate suo. Approvi, oppure chiedi modifiche e la
+rivedi. Oppure dici di no, ed è una risposta: non viene scritto niente, ti viene detto cosa vale
+adesso, non ti viene proposta una versione più magra sperando che passi quella, e un messaggio
+successivo su altro non viene preso per un ripensamento. Questo intento aggiunge una cosa al gate:
+quando il work item resterà senza parent, il gate dice perché.
 
 **7 · Dopo la scrittura, riporta quello che non è riuscito.** Se il work item viene creato ma il
 parent non si riesce a impostare, te lo dice. Una proposta che sta al livello sbagliato è una
@@ -263,9 +275,9 @@ dimenticanza, quindi si rimuove invece di lasciarla vuota.
 
 - [Il processo di sviluppo](../development-process.it.md) — il project profile, il draft gate, i
   due channel, e dove proporre valore si colloca nel percorso completo.
-- [`jira-capture`](jira-capture.it.md) — per una richiesta che arriva da fuori e che nessuno ha
-  ancora esaminato.
+- [`jira-capture`](jira-capture.it.md) — per un desiderio riportato di seconda mano senza nessuna
+  cifra dietro.
 - [`jira-diagnose`](jira-diagnose.it.md) — per qualcosa che oggi è rotto.
-- [`jira-assess`](jira-assess.it.md) — per qualcosa che oggi funziona e costerà dopo.
+- [`jira-assess`](jira-assess.it.md) — per qualcosa che oggi funziona e costerà al team più avanti.
 - [`jira-refine`](jira-refine.it.md) — per trasformare una proposta approvata in qualcosa che un
   team può prendere in carico.

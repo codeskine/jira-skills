@@ -29,19 +29,21 @@ without saying which sends you to the wrong person.
 It fires when one work item has to reach a different status — start it, hand it over, put it
 back, close it.
 
-| Say something like                    | And this is the skill you get     |
-| ------------------------------------- | --------------------------------- |
-| "PROJ-118 is out of review, close it" | `jira-advance`                    |
-| "where has PROJ-118 got to?"          | [`jira-inspect`](jira-inspect.md) |
-| "put these four in the sprint"        | [`jira-plan`](jira-plan.md)       |
-| "close the sprint, we are done"       | [`jira-plan`](jira-plan.md)       |
-| "is anything still blocked?"          | [`jira-inspect`](jira-inspect.md) |
+| Say something like                     | And this is the skill you get     |
+| -------------------------------------- | --------------------------------- |
+| "PROJ-118 is out of review, close it"  | `jira-advance`                    |
+| "where has PROJ-118 got to?"           | [`jira-inspect`](jira-inspect.md) |
+| "put these four in the sprint"         | [`jira-plan`](jira-plan.md)       |
+| "take PROJ-118 back out of the sprint" | [`jira-plan`](jira-plan.md)       |
+| "close the sprint, we are done"        | [`jira-plan`](jira-plan.md)       |
+| "is anything still blocked?"           | [`jira-inspect`](jira-inspect.md) |
 
 Two boundaries, and one word sits on both. **Close** means a transition when it is a work item
 being closed, and this skill runs it; it means something else entirely when it is a sprint being
 closed, which is [`jira-plan`](jira-plan.md) reporting what was delivered and where the unfinished
-work goes. The other boundary is the count: one item and one decision here, a set of items in one
-approved operation there. A question about where things stand changes nothing and belongs to
+work goes. The other boundary is not the count but what changes: a status here, membership of a
+sprint there. Moving a work item into a sprint or back out of one is [`jira-plan`](jira-plan.md)
+whether it is one item or twenty. A question about where things stand changes nothing and belongs to
 [`jira-inspect`](jira-inspect.md).
 
 ## How to use it
@@ -51,14 +53,16 @@ exist — that is the question the skill puts to Jira.
 
 **1 · It reads the project profile first.** `.jira/project-profile.md` gives it the project key
 and the tool that performs a transition, resolved from the profile rather than hard-coded. If the
-profile is missing it stops and tells you to run `jira-init`. See
+profile is missing it stops and tells you to run `jira-init`; if the profile records transitioning
+as something this installation cannot do, it says so before asking you anything and gives you the
+manual path, instead of reaching for the other channel. See
 [the development process](../development-process.md).
 
-The profile also records the shape of the Jira Workflow, **and this skill does not read that
-part**. The table of statuses is not the source for what an item can do today: it may be
-incomplete, because statuses are observable only where work already exists and a project holding
-nothing exposes none — and even complete, it does not know the condition that will refuse a
-transition.
+The profile also records the shape of the Jira Workflow, and **no transition is ever offered from
+it**. That table is not the source for what an item can do today: it may be incomplete, because
+statuses are observable only where work already exists and a project holding nothing exposes
+none — and even complete, it does not know the condition that will refuse a transition. It has one
+use here, in step 4, and that use is explaining an absence rather than proposing a presence.
 
 **2 · It asks Jira what this item can do, at this moment.** Transitions are evaluated per work
 item, not per work type: two items of the same type, sitting in the same status, can offer
@@ -79,18 +83,28 @@ It tells them apart by comparing two things it already has. The project profile 
 status is reachable from which — the **shape** of your Jira Workflow, which is what that table is
 for — and Jira's answer for this work item records what is available **right now**. Named in the
 shape and missing from Jira's answer means the path exists and something about this item is
-closing it. Missing from both means there is no path.
+closing it. Missing from both means there is no path. What you were offered does not change
+either way: the table explains why something is absent, it never adds to what Jira returned.
 
 Where the profile cannot answer — statuses not observable yet because the project holds no work
 item, or a table it records as not read — it says the cause cannot be established here, gives you
 the manual path, and names `jira-init` if a run would fill the table in. A cause named by guess
 would send you to repair something that is not broken, and that is worse than a cause not named.
 
-**5 · Then the draft gate.** There is no artifact to show here, so what the gate carries is the
-item, the status it is in, and the status it will reach; you approve, or you ask for something
-else and see the choice again. Where the item is held by someone else, the gate says so rather
-than transitioning it quietly. The write goes through the Atlassian MCP server — this skill does
-not declare the Jira CLI at all.
+**5 · Then the draft gate**, in the shape it takes when the write changes something that exists
+already. Nothing is authored here — the work item is there before you start — so there is no
+artifact to show you, and the gate shows the change itself: the work item, the status it is in,
+the status the transition declares it will reach, and what running it will **not** do where you
+could reasonably expect otherwise. Where the item is held by someone else, the gate says so rather
+than transitioning it quietly. You approve, or you ask for something else and see the choice
+again. Both shapes of the gate are in [the development process](../development-process.md).
+
+Say no and nothing is written. You are told what now holds — the item is in the status it was
+already in — and you are not offered a smaller transition in the hope that one passes.
+
+The write goes through the Atlassian MCP server. A skill reaches a channel only by carrying that
+channel's exact string among its declared tools, and this one carries `mcp__atlassian` and not
+`Bash(jira:*)`: the Jira CLI is not available to it at all.
 
 **6 · It reads the status back afterwards.** The status it reports is the one Jira returns after
 the write, not the one the transition declared. Most of the time the two agree. When they do not,
@@ -148,7 +162,8 @@ says where the item actually is.
 > **PROJ-118 · Saved filters can be shared with a group**
 >
 > In Review → **Request changes**, which declares In Progress. The item is assigned to someone
-> other than you. Run it?
+> other than you. What this does not do is close PROJ-118, or bring it any nearer to Done: Done
+> stays refused while PROJ-90 is open, and I will not clear that condition to get past it. Run it?
 
 **You**
 
@@ -190,7 +205,8 @@ people would have spent the afternoon in the wrong two places.
 ## What it will not do
 
 - **Propose a transition from the project profile.** The profile records the shape of the Jira
-  Workflow; it never answers what this item can do now.
+  Workflow, and the one thing this skill reads it for is telling the two causes of an absence
+  apart. It never answers what this item can do now.
 - **Offer a transition Jira did not return**, however reasonable it sounds — including the one you
   just asked for by name.
 - **Fill a required field so that a refused transition passes.** It names what is unmet and stops
@@ -201,8 +217,11 @@ people would have spent the afternoon in the wrong two places.
 - **Chain several transitions to reach a distant status.** Each one is a decision, and a Jira
   Workflow that needs three of them to get where you are going is telling you something you should
   hear.
-- **Plan, refine or report.** Deciding when work is tackled is [`jira-plan`](jira-plan.md), making
-  an item ready is [`jira-refine`](jira-refine.md), and answering where things stand is
+- **Reach for the Jira CLI when the MCP tool is missing.** An operation has one channel. Where the
+  profile resolved no tool for a transition, it says so and hands you the manual path.
+- **Plan, refine or report.** Deciding when work is tackled is [`jira-plan`](jira-plan.md) —
+  including moving a single work item into a sprint or back out of one — making an item ready is
+  [`jira-refine`](jira-refine.md), and answering where things stand is
   [`jira-inspect`](jira-inspect.md).
 
 ## See also
@@ -211,6 +230,7 @@ people would have spent the afternoon in the wrong two places.
   two channels, and where a transition sits in the whole path.
 - [`jira-inspect`](jira-inspect.md) — to read where an item stands, and what is blocking it,
   without changing anything.
-- [`jira-plan`](jira-plan.md) — to decide when a set of items is tackled, and to close a sprint.
+- [`jira-plan`](jira-plan.md) — to decide when work is tackled, to move a work item into a sprint
+  or back out of one, and to close a sprint.
 - [`jira-refine`](jira-refine.md) — to make an item ready, rather than to take it to its next
   status.

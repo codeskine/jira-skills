@@ -103,7 +103,15 @@ children's, the skill says so, explains why, and leaves the item whole. It does 
 children anyway: children that cannot be attached are orphans, and an orphan is worse than an item
 that is too large, because it is also invisible.
 
-**8 · Then the draft gate.** The complete result appears in chat with the decisions it carries,
+Refusing is not where it stops. The profile knows which work types may contain which, so the
+refusal arrives with what this project can support instead, cheapest first: another pair of types
+the hierarchy does allow, then enriching the item where it is — this skill's other branch — then a
+change to the project's scheme, which needs a project admin and is not yours to make. Where the
+profile records the work types as _not read_ rather than listed, the refusal says that instead:
+what could not be established is not the same thing as what the project cannot do.
+
+**8 · Then the draft gate, in its artifact form.** A split creates work items, so what the gate
+shows you is their content. The complete result appears in chat with the decisions it carries,
 and nothing reaches Jira until you approve it. This intent adds one thing: **the whole split is
 presented before any of it exists, and approved once** — never child by child, because a split
 approved child by child is a split nobody rebalanced. Several items are then written under that
@@ -112,13 +120,26 @@ nothing is undone without you. The block of decisions names the acceptance crite
 involved, the parent included: they are what is being agreed, and a draft that lost them is
 otherwise approvable without anyone noticing.
 
+Ask for the split and for the children to go somewhere in the same breath — into the current sprint,
+say — and you meet the gate twice, once in each of its two forms: the artifact gate here, and the
+operation gate that [the development process](../development-process.md) describes. The children
+have to exist before anything can place them, so the split is approved here and the placement is
+approved by the skill that owns it. Neither approval carries the other.
+
 **9 · On the write, the raw declaration is retired.** Where intake wrote a statement saying the
 item is raw and awaiting refinement, this write removes it — on both branches. That statement is
 what allowed an incomplete item to exist; left standing beside acceptance criteria it makes the
-item contradict itself and keeps it out of the planning it is now ready for. Where the item was
-split, the skill also narrows the item's own text so that it no longer claims what its children
-now carry, and it never adds a list of them: the hierarchy is queryable on Jira, and a list
-maintained by hand is a second answer that will disagree with the first.
+item contradict itself and keeps it out of the planning it is now ready for.
+
+Retired means removed, not softened into a milder version of itself: an item that says it was once
+raw is keeping a second copy of something Jira's own history already holds. Where the heading
+exists for that claim alone it goes with the claim, because a section with nothing under it is a
+shape no template permits; where the claim sits under a heading that carries other content, the
+claim goes and the rest stays.
+
+Where the item was split, the skill also narrows the item's own text so that it no longer claims
+what its children now carry, and it never adds a list of them: the hierarchy is queryable on Jira,
+and a list maintained by hand is a second answer that will disagree with the first.
 
 ## Worked exchange
 

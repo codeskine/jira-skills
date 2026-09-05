@@ -110,25 +110,49 @@ type del work item e quello dei figli, la skill lo dice, spiega perché, e lasci
 intero. Non crea i figli lo stesso: figli che non si possono attaccare sono orfani, e un orfano è
 peggio di un work item troppo grande, perché in più è invisibile.
 
-**8 · Poi il draft gate**, il cancello che precede ogni scrittura su Jira. Il risultato completo
-compare in chat con le decisioni che porta con sé, e su Jira non finisce niente finché non approvi.
-Questo intento aggiunge una cosa: **l'intera scomposizione viene presentata prima che ne esista un
-solo pezzo, e approvata una volta sola** — mai figlio per figlio, perché una scomposizione
-approvata figlio per figlio è una scomposizione che nessuno ha riequilibrato. Con quella singola
-approvazione vengono poi scritti più work item; se una parte fallisce ti viene detto quali pezzi
-sono passati e quali no, e niente viene disfatto senza di te. Il blocco delle decisioni nomina i
-criteri di accettazione di ogni work item coinvolto, parent compreso: sono loro l'oggetto
-dell'accordo, e una bozza che li avesse persi resterebbe approvabile senza che nessuno se ne
-accorga.
+Il rifiuto non è il punto in cui si ferma. Il project profile sa quali work type possono contenere
+quali, quindi insieme al rifiuto arriva cosa questo progetto può sostenere, dal più economico:
+un'altra coppia di work type che la gerarchia ammette, poi arricchire il work item dov'è — l'altro
+ramo di questa skill — poi un cambio dello schema del progetto, che richiede un project admin e non
+tocca a te. Dove il project profile registra i work type come _non letti_ invece di elencarli, il
+rifiuto dice quello: ciò che non si è potuto stabilire non è la stessa cosa di ciò che il progetto
+non può fare.
+
+**8 · Poi il draft gate**, il cancello che precede ogni scrittura su Jira, nella sua forma di
+**artifact gate**: quella che mostra il contenuto di un work item, che è ciò che una scomposizione
+crea. Il risultato completo compare in chat con le decisioni che porta con sé, e su Jira non finisce
+niente finché non approvi. Questo intento aggiunge una cosa: **l'intera scomposizione viene
+presentata prima che ne esista un solo pezzo, e approvata una volta sola** — mai figlio per figlio,
+perché una scomposizione approvata figlio per figlio è una scomposizione che nessuno ha
+riequilibrato. Con quella singola approvazione vengono poi scritti più work item; se una parte
+fallisce ti viene detto quali pezzi sono passati e quali no, e niente viene disfatto senza di te. Il
+blocco delle decisioni nomina i criteri di accettazione di ogni work item coinvolto, parent
+compreso: sono loro l'oggetto dell'accordo, e una bozza che li avesse persi resterebbe approvabile
+senza che nessuno se ne accorga.
+
+Se chiedi la scomposizione e nello stesso respiro chiedi che i figli finiscano da qualche parte —
+nello sprint corrente, per dire — il cancello lo incontri due volte, una per forma: qui l'artifact
+gate, e là l'operation gate che [il processo di sviluppo](../development-process.it.md) descrive. I
+figli devono esistere prima che qualcosa possa collocarli, quindi la scomposizione si approva qui e
+la collocazione si approva nella skill che se ne occupa. Nessuna delle due approvazioni vale per
+l'altra.
 
 **9 · Con la scrittura, la dichiarazione di lavoro grezzo viene ritirata.** Dove l'intake aveva
 scritto che il work item è grezzo e in attesa di refinement, questa scrittura la rimuove — su
 entrambi i rami. Quella dichiarazione è ciò che ha permesso a un work item incompleto di esistere;
 lasciata accanto ai criteri di accettazione fa contraddire il work item con sé stesso e lo tiene
-fuori dalla pianificazione per cui adesso è pronto. Dove il work item è stato scomposto, la skill
-restringe anche il testo del work item di partenza, perché non rivendichi più quello che ora
-portano i suoi figli; e non ne aggiunge mai l'elenco: la gerarchia si interroga su Jira, e un
-elenco tenuto a mano è una seconda risposta destinata a smentire la prima.
+fuori dalla pianificazione per cui adesso è pronto.
+
+Ritirata vuol dire rimossa, non ammorbidita in una versione più tenue di sé: un work item che dice
+di essere stato grezzo tiene una seconda copia di quello che la storia di Jira già registra. Dove
+il titolo di sezione esiste solo per quella dichiarazione se ne va con lei, perché una sezione
+senza niente sotto è una forma che nessun template ammette; dove la dichiarazione sta sotto un
+titolo che porta anche altro, se ne va la dichiarazione e il resto rimane.
+
+Dove il work item è stato scomposto, la skill restringe anche il testo del work item di partenza,
+perché non rivendichi più quello che ora portano i suoi figli; e non ne aggiunge mai l'elenco: la
+gerarchia si interroga su Jira, e un elenco tenuto a mano è una seconda risposta destinata a
+smentire la prima.
 
 ## Scambio di esempio
 
@@ -246,11 +270,11 @@ L'altra cosa da guardare è che fine hanno fatto le cinque domande aperte che l'
 Quattro sono diventate criteri di accettazione — e una di quelle ha prodotto anche il link a
 PROJ-418, perché qui non le si poteva rispondere — mentre la quinta, che data sia «la prossima
 chiusura», è una domanda sul quando e non sul cosa vuol dire fatto: passa alla pianificazione.
-Nessuna delle cinque è stata lasciata cadere in silenzio. _Campi obbligatori non ancora compilati_ non c'è perché non ne restano: **Team**
-era aperto all'intake ed è stato risolto qui, e il template dice di omettere quella sezione
-invece di scriverci sotto «nessuno». Il template fissa quali sezioni compaiono e in quale ordine, e
-non fissa nessuna lingua: questo artefatto è in italiano perché lo era la conversazione che l'ha
-prodotto.
+Nessuna delle cinque è stata lasciata cadere in silenzio. _Campi obbligatori non ancora compilati_
+non c'è perché non ne restano: **Team** era aperto all'intake ed è stato risolto qui, e il template
+dice di omettere quella sezione invece di scriverci sotto «nessuno». Il template fissa quali sezioni
+compaiono e in quale ordine, e non fissa nessuna lingua: questo artefatto è in italiano perché lo
+era la conversazione che l'ha prodotto.
 
 Se la risposta sull'orizzonte di pianificazione fosse stata no, questa sezione avrebbe una forma
 diversa: PROJ-421 ristretto a quello che continua a portare da sé, e accanto i figli, ciascuno
@@ -260,9 +284,9 @@ quella domanda Jira la sa già.
 
 ### L'altro ramo, lavorato
 
-PROJ-421 è stato arricchito in place perché era già abbastanza piccolo. PROJ-388 — _reportistica
-self-service per il team finance_ — non lo è, e lo split è il ramo che finora non era mostrato da
-nessuna parte.
+PROJ-421 è stato arricchito dov'è perché era già abbastanza piccolo. PROJ-388 — _reportistica
+self-service per il team finance_ — non lo è, e la scomposizione è il ramo che finora non era
+mostrato da nessuna parte.
 
 Tre figli, perché è in tre che il lavoro si è diviso e non perché qualcuno puntasse a quel numero:
 
@@ -274,9 +298,10 @@ PROJ-388  Reportistica self-service per il team finance      ← il parent, rist
 ```
 
 Ognuno porta i propri criteri di accettazione, concordati prima che esistesse anche solo uno di
-loro: lo split intero passa dal cancello una volta sola, mai figlio per figlio. PROJ-402 è quello
-che fa vedere perché. Da solo è un confronto di niente, quindi i suoi criteri nominano la selezione
-del periodo che dà PROJ-401 — e quello diventa un link fra i due, non una frase in una descrizione.
+loro: l'intera scomposizione passa dal cancello una volta sola, mai figlio per figlio. PROJ-402 è
+quello che fa vedere perché. Da solo è un confronto di niente, quindi i suoi criteri nominano la
+selezione del periodo che dà PROJ-401 — e quello diventa un link fra i due, non una frase in una
+descrizione.
 
 **Cosa dice il parent dopo** è la parte che nessuna fonte mostrava:
 
@@ -292,10 +317,10 @@ Il parent tiene l'argomento e cede la specifica. Quello che **non** deve tenere 
 suoi figli: la gerarchia su Jira si interroga, e un elenco tenuto a mano è una seconda risposta che
 smentisce la prima il giorno in cui qualcuno aggiunge un quarto figlio.
 
-**Quando la gerarchia non lo regge**, lo split viene rifiutato — e il rifiuto non chiude lo
+**Quando la gerarchia non la regge**, la scomposizione viene rifiutata — e il rifiuto non chiude lo
 scambio. Il profilo sa quali work type possono contenere quali, quindi quello che torna è cosa
 questo progetto può sostenere, dal più economico: un'altra coppia di type che la gerarchia ammette,
-poi arricchire PROJ-388 in place, poi un cambio di schema — che è di un project admin e non tuo.
+poi arricchire PROJ-388 dov'è, poi un cambio di schema — che è di un project admin e non tuo.
 
 ## Cosa non fa
 

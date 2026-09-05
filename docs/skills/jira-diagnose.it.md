@@ -40,15 +40,23 @@ _«Continua a dare problemi»_ sta bene in tutte e due le descrizioni, quindi la
 presto se oggi qualcosa fallisce davvero; se non fallisce niente, lo dice e si ferma invece di
 archiviare come difetto quello che è un rischio.
 
-Anche il confine con [`jira-capture`](jira-capture.it.md) lo decide il materiale. Un guasto
-riportato di seconda mano che porta i passi e l'ambiente è la segnalazione di un difetto e sta
-qui, chiunque l'abbia inoltrato. Uno che non porta niente su cui qualcuno possa agire per vederlo
-accadere è intake: nessuno dei presenti può rispondere a quello che questa skill sta per chiedere,
-e capture lo registra con le parole con cui è arrivato. Quella soglia non è una checklist — una
-email che nomina il programma in cui si è rotto e la versione che usano, senza passi e senza
-l'errore, resta intake — e non è nemmeno una
-prova di completezza: il materiale parziale sta qui, e i suoi buchi sono quello per cui esistono
-le domande più sotto.
+Dove finisce il resto di «oggi non fallisce niente» lo decide **chi paga, e quando**. Un costo che
+il team si porterà dietro più avanti — una scorciatoia presa consapevolmente, una dipendenza che
+invecchia, un assetto che conoscono solo in due — è di [`jira-assess`](jira-assess.it.md). Qualcosa
+che funziona e serve male chi lo usa proprio adesso costa ai suoi utenti oggi, non al team domani:
+non ha nessun pedaggio da dichiarare e nessuna opzione da confrontare, ed è di
+[`jira-propose`](jira-propose.it.md), dove quello che si vuole è un risultato e non la registrazione
+di un costo.
+
+Anche il confine con [`jira-capture`](jira-capture.it.md) lo decide il materiale, non chi l'ha
+inoltrato. Un guasto riportato di seconda mano che non porta niente su cui qualcuno possa agire per
+vederlo accadere è intake: nessuno dei presenti può rispondere a quello che questa skill sta per
+chiedere, e capture registra la segnalazione con le parole con cui è arrivata. Superano quella
+soglia i passi, o l'errore esattamente come è stato stampato; non la supera nominare il programma in
+cui si è rotto, né dove girava. Si legge su tutto il messaggio e mai come caselle da spuntare,
+quindi una email che nomina il prodotto e la versione che usano, senza passi e senza l'errore, resta
+intake — e non è nemmeno una prova di completezza: il materiale parziale sta qui, e i suoi buchi
+sono quello per cui esistono le domande più sotto.
 
 ## Come si usa
 
@@ -77,11 +85,19 @@ Aspettati che un work type per i difetti non ci sia: un progetto creato dallo sc
 attuale non ne ha. In quel caso la skill lo archivia sotto un altro work type e l'artefatto dice
 di quale intento si tratta, così la distinzione non si perde.
 
-**6 · Poi il draft gate**, il cancello che precede ogni scrittura su Jira. La segnalazione
-completa compare in chat con le decisioni che porta con sé — titolo, work type, parent, e ogni
-campo che il progetto marca obbligatorio e che la bozza ha lasciato vuoto. Approvi, oppure chiedi
-modifiche e la rivedi. Questa skill aggiunge una cosa al gate: se i passi non sono stati
-ripercorsi almeno una volta così come sono scritti, lo dichiara — passi ricordati anziché
+**6 · Poi il draft gate** — il cancello che precede ogni scrittura su Jira — **e qui è un artifact
+gate**, la forma del gate che mostra il contenuto di un work item. Quello che approvi è quel
+contenuto per intero, sezione per sezione. L'altra forma, l'operation gate, mostra un cambiamento a
+ciò che esiste già — uno sprint riempito, del lavoro assegnato a una fix version, un work item
+portato allo status successivo — e quando si scrive ex novo non si presenta mai. La segnalazione
+completa compare in chat con le decisioni che porta con sé — titolo, work type, parent, ogni campo
+che il progetto marca obbligatorio e che la bozza ha lasciato vuoto, e, se la tua richiesta portava
+un secondo intento che questa segnalazione non soddisfa, quell'intento e la skill che se ne occupa,
+che subentra a scrittura fatta e ha un gate suo. Approvi, oppure chiedi modifiche e la rivedi.
+Oppure dici di no, e lì finisce: non viene scritto niente, ti viene detto cosa vale adesso, non ti
+viene proposta una versione più corta sperando che passi quella, e un messaggio successivo su altro
+non viene preso per un ripensamento. Questa skill aggiunge una cosa al gate: se i passi non sono
+stati ripercorsi almeno una volta così come sono scritti, lo dichiara — passi ricordati anziché
 rieseguiti sono il motivo più frequente per cui un difetto non si riproduce.
 
 ## Scambio di esempio
@@ -213,8 +229,9 @@ dimenticanza, quindi si rimuove invece di lasciarla vuota.
 - **Proporre la correzione.** Descrive cosa succede; a chi prende in carico il lavoro spetta
   scoprire perché.
 - **Attribuire colpe** a un componente, a una modifica o a una persona.
-- **Registrare qualcosa che funziona.** Se oggi non fallisce niente, il caso è di
-  [`jira-assess`](jira-assess.it.md), e la skill lo dice e si ferma.
+- **Registrare qualcosa che funziona.** Se oggi non fallisce niente la skill lo dice e si ferma.
+  Quello che costerà al team più avanti è di [`jira-assess`](jira-assess.it.md); quello che serve
+  male chi lo usa proprio adesso è di [`jira-propose`](jira-propose.it.md).
 - **Inventare un messaggio di errore.** Inventato è peggio che assente: manda qualcuno a cercare
   una stringa che non esiste.
 
@@ -222,8 +239,9 @@ dimenticanza, quindi si rimuove invece di lasciarla vuota.
 
 - [Il processo di sviluppo](../development-process.it.md) — il project profile, il draft gate, i
   due channel, e dove la segnalazione di un difetto si colloca nel percorso completo.
-- [`jira-assess`](jira-assess.it.md) — per qualcosa che oggi funziona e costerà dopo.
-- [`jira-capture`](jira-capture.it.md) — per una segnalazione che arriva da fuori e che nessuno ha
-  ancora esaminato.
+- [`jira-assess`](jira-assess.it.md) — per qualcosa che oggi funziona e costerà al team più avanti.
+- [`jira-propose`](jira-propose.it.md) — per qualcosa che funziona e serve male chi lo usa oggi.
+- [`jira-capture`](jira-capture.it.md) — per un guasto riportato di seconda mano che non porta
+  niente su cui qualcuno possa agire per vederlo accadere.
 - [`jira-refine`](jira-refine.it.md) — per trasformare questa segnalazione in qualcosa che un team
   può prendere in carico.

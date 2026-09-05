@@ -16,9 +16,9 @@
 
 Si occupa della fix version: cosa viene rilasciato insieme. Elenca le fix version che il progetto
 ha davvero, con il loro stato, assegna work item a una di esse e ce li toglie, e mostra cosa ne
-contiene una e
-quanto di quello è ancora aperto come base di un cambiamento che approvi. Due cose non le può fare — creare una fix version, rilasciarla o
-archiviarla — e le dichiara prima che tu le chieda, restituendole a te su Jira.
+contiene una e quanto di quello è ancora aperto come base di un cambiamento che approvi. Due cose
+non le può fare — creare una fix version, rilasciarla o archiviarla — e le dichiara prima che tu
+le chieda, restituendole a te su Jira.
 
 È la domanda di un Release Manager, fatta nell'unico momento in cui serve. Sapere cosa vuol dire
 rilasciare prima di rilasciare è il lavoro; scoprirlo dopo ha un nome, e non è un bel nome.
@@ -42,9 +42,10 @@ Due confini vanno detti apertamente.
 
 **Con [`jira-inspect`](jira-inspect.it.md).** Il confine è su cosa verte la domanda. Se verte sul
 lavoro **dentro** una fix version — _cosa c'è nella 2.4 e quanto di quello è ancora aperto_ — è di
-`jira-inspect`, che legge e si ferma. Se verte sulla **version stessa** — quali ne ha il progetto,
-se la 2.4 sia già stata rilasciata o archiviata — è di `jira-release`, perché quelle stanno sulla
-Jira CLI, che `jira-inspect` non dichiara.
+`jira-inspect`, che legge e si ferma. Se verte sulla **fix version stessa** — metterci del lavoro,
+toglierne, quali ne ha il progetto, se la 2.4 sia già stata rilasciata o archiviata — è di
+`jira-release`. Le ultime due stanno sulla Jira CLI, che `jira-inspect` non dichiara; le prime due
+cambiano qualcosa, e `jira-inspect` non cambia mai niente.
 
 `jira-release` legge anche il contenuto, ma come apertura di una conversazione che finisce in
 un'assegnazione che hai approvato: se chiedi il contenuto e il cambiamento nello stesso respiro sei
@@ -67,7 +68,7 @@ version che questo progetto ha e il loro stato. Se manca, si ferma e ti dice di 
 
 **2 · Dice cosa non può fare prima che tu glielo chieda.** Creare una fix version, e rilasciarla o
 archiviarla, non sono disponibili su nessuno dei due channel — le due vie con cui una skill parla
-a Jira — nelle versioni di server e CLI a cui questo plugin punta. È un buco degli strumenti, non
+a Jira — nelle versioni di server e CLI a cui questo plugin punta. È un gap degli strumenti, non
 un limite di ambizione della skill, e viene annunciato all'inizio invece che scoperto alla fine:
 quelle due le fai tu su Jira, e la skill prosegue con il resto. Non approssima mai il rilasciare
 con una transition o con una label.
@@ -97,11 +98,18 @@ leggere il resto come poca roba.
 assegnato a una fix version, niente viene pianificato in uno sprint perché lo è, e un work item
 che è già in uno sprint ci resta.
 
-**6 · Poi il draft gate**, il cancello che precede ogni scrittura su Jira. Quello che questo
-intento aggiunge: il gate elenca ogni work item la cui fix version cambierà, e quale sarà dopo.
-Un insieme assegnato in blocco è una sola azione approvata su più scritture — se una parte
-fallisce ti viene detto quale è riuscita e quale no, e niente viene annullato di iniziativa della
-skill.
+La via per uscire è la stessa per entrare, svuotata. Spostare un work item dalla 2.4 alla 2.5
+scrive lo stesso campo; toglierlo dalla 2.4 lo lascia vuoto. Nessuna delle due rilascia niente e
+nessuna delle due passa dalla Jira CLI. La skill dice quale delle due sta succedendo, perché un
+work item che lascia la 2.4 per la 2.5 e uno che lascia la 2.4 per niente sono decisioni diverse,
+e solo una delle due ha un posto dove andare.
+
+**6 · Poi il draft gate**, il cancello che precede ogni scrittura su Jira, nella sua forma di
+**operation gate**: qui non si redige niente, quindi quello che il cancello ti mostra è il
+cambiamento stesso e non un documento. Elenca ogni work item la cui fix version cambierà, e quale
+sarà dopo — oppure, dove il work item viene tolto da una, che resterà senza. Un insieme assegnato
+in blocco è una sola azione approvata su più scritture — se una parte fallisce ti viene detto
+quale è riuscita e quale no, e niente viene annullato di iniziativa della skill.
 
 ## Scambio di esempio
 
@@ -212,7 +220,7 @@ alle scritture riuscite si leggerebbe come se giovedì fosse a posto.
 
 - **Rilasciare o archiviare una fix version**, con nessuno dei mezzi che ha, e non sostituisce
   quel gesto con una transition o con una label. Nessuno dei due channel lo espone: si fa su Jira.
-- **Creare una fix version.** Stesso buco e stessa risposta: creala su Jira, poi torna qui e
+- **Creare una fix version.** Stesso gap e stessa risposta: creala su Jira, poi torna qui e
   assegnale del lavoro. Tornare non richiede di rifare niente: la skill elenca le fix version dal
   progetto e non dal project profile, quindi quella appena creata c'è. È il project profile a
   restare indietro, e te lo dice lasciando a te quando rifarlo.
@@ -227,7 +235,7 @@ alle scritture riuscite si leggerebbe come se giovedì fosse a posto.
 ## Vedi anche
 
 - [Il processo di sviluppo](../development-process.it.md) — il project profile, il draft gate, i
-  due channel con i buchi che dichiarano, e dove sta, nel percorso intero, la decisione su cosa
+  due channel con i gap che dichiarano, e dove sta, nel percorso intero, la decisione su cosa
   viene rilasciato.
 - [`jira-plan`](jira-plan.it.md) — per l'altro asse: quando il lavoro viene affrontato.
 - [`jira-inspect`](jira-inspect.it.md) — per leggere cosa contiene una fix version senza poter

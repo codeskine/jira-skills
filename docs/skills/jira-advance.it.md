@@ -35,15 +35,17 @@ a qualcun altro, rimandarlo indietro, chiuderlo.
 | «PROJ-118 è uscito dalla review, chiudilo» | `jira-advance`                       |
 | «a che punto è PROJ-118?»                  | [`jira-inspect`](jira-inspect.it.md) |
 | «metti questi quattro nello sprint»        | [`jira-plan`](jira-plan.it.md)       |
+| «togli PROJ-118 dallo sprint»              | [`jira-plan`](jira-plan.it.md)       |
 | «chiudi lo sprint, abbiamo finito»         | [`jira-plan`](jira-plan.it.md)       |
 | «c'è ancora qualcosa di bloccato?»         | [`jira-inspect`](jira-inspect.it.md) |
 
 Due confini, e una parola sta su tutti e due. **Chiudere** è una transition quando a essere chiuso
 è un work item, e questa skill la esegue; è tutt'altra cosa quando a essere chiuso è uno sprint, e
 lì [`jira-plan`](jira-plan.it.md) riporta cosa è stato consegnato e dove va il lavoro rimasto
-aperto. L'altro confine è il numero: qui un work item e una decisione, là un insieme di work item
-in una sola operazione approvata. Chiedere a che punto sono le cose non cambia niente ed è di
-[`jira-inspect`](jira-inspect.it.md).
+aperto. L'altro confine non è il numero ma cosa cambia: qui uno status, là l'appartenenza a uno
+sprint. Mettere un work item in uno sprint o toglierlo da uno è di
+[`jira-plan`](jira-plan.it.md), che sia un work item o venti. Chiedere a che punto sono le cose non
+cambia niente ed è di [`jira-inspect`](jira-inspect.it.md).
 
 ## Come si usa
 
@@ -53,14 +55,18 @@ domanda che la skill fa a Jira.
 **1 · Legge prima il project profile**, il file che registra l'esito della discovery, cioè la
 lettura della configurazione reale del progetto. `.jira/project-profile.md` le dà la chiave del
 progetto e lo strumento che esegue una transition, risolto dal project profile invece che scritto
-dentro la skill. Se il project profile manca, si ferma e ti dice di eseguire `jira-init`. Vedi
+dentro la skill. Se il project profile manca, si ferma e ti dice di eseguire `jira-init`; se il
+project profile registra l'esecuzione di una transition fra le operazioni che questa installazione
+non può fare, te lo dice prima di chiederti qualsiasi cosa e ti dà la via manuale, invece di
+rivolgersi all'altro channel, la via con cui una skill parla a Jira. Vedi
 [il processo di sviluppo](../development-process.it.md).
 
-Il project profile registra anche la forma del Jira Workflow, **e questa skill quella parte non la
-legge**. La tabella degli status non è la fonte di quello che un work item può fare oggi: può
+Il project profile registra anche la forma del Jira Workflow, e da lì **non viene mai offerta
+nessuna transition**. Quella tabella non è la fonte di quello che un work item può fare oggi: può
 essere incompleta, perché gli status si osservano solo dove del lavoro esiste già e un progetto
 che non contiene niente non ne espone nessuno — e anche completa, non conosce la condizione che
-rifiuterà una transition.
+rifiuterà una transition. Qui ha un uso solo, al punto 4, e quell'uso è spiegare un'assenza, non
+proporre una presenza.
 
 **2 · Chiede a Jira cosa può fare questo work item, in questo momento.** Le transition si valutano
 per work item, non per work type: due work item dello stesso work type, fermi nello stesso status,
@@ -82,19 +88,31 @@ Li distingue confrontando due cose che ha già. Il project profile registra qual
 raggiungibile da quale — la **forma** del tuo Jira Workflow, che è a cosa serve quella tabella — e
 la risposta di Jira su questo work item registra cosa è disponibile **adesso**. Nominata nella
 forma e assente dalla risposta di Jira vuol dire che la strada c'è e che qualcosa di questo work
-item la sta chiudendo. Assente da entrambe vuol dire che la strada non c'è.
+item la sta chiudendo. Assente da entrambe vuol dire che la strada non c'è. Quello che ti viene
+offerto non cambia in nessuno dei due casi: la tabella spiega perché qualcosa manca, non aggiunge
+mai niente a quello che Jira ha restituito.
 
 Dove il profilo non può rispondere — status non ancora osservabili perché il progetto non contiene
 work item, o una tabella che registra come non letta — dice che la causa qui non è stabilibile, ti
 dà la via manuale, e nomina `jira-init` se una nuova discovery riempirebbe la tabella. Nominare una
 causa a indovinare ti manderebbe a riparare qualcosa che non è rotto, ed è peggio che non nominarla.
 
-**5 · Poi il draft gate**, il cancello che precede ogni scrittura su Jira. Qui non c'è nessun
-artefatto da mostrare, quindi quello che il gate porta è il work item, lo status in cui si trova e
-lo status che raggiungerà; approvi, oppure chiedi altro e rivedi la scelta. Se il work item è in
-mano a qualcun altro, il gate lo dice invece di eseguire la transition in silenzio. La scrittura
-passa dall'Atlassian MCP server, l'unico channel — la via con cui una skill parla a Jira — che
-questa skill dichiara: la Jira CLI non la dichiara affatto.
+**5 · Poi il draft gate**, il cancello che precede ogni scrittura su Jira, nella forma che prende
+quando la scrittura cambia qualcosa che esiste già. Qui non viene scritto niente ex novo — il work
+item c'è prima che tu cominci — quindi non c'è nessun artefatto da mostrare, e il cancello mostra
+il cambiamento stesso: il work item, lo status in cui si trova, lo status che la transition
+dichiara di raggiungere, e cosa eseguirla **non** farà là dove potresti ragionevolmente
+aspettartelo. Se il work item è in mano a qualcun altro, il gate lo dice invece di eseguire la
+transition in silenzio. Approvi, oppure chiedi altro e rivedi la scelta. Le due forme del cancello
+sono nel [processo di sviluppo](../development-process.it.md).
+
+Se dici di no non viene scritto niente. Ti viene detto cosa vale adesso — il work item è nello
+status in cui era già — e non ti viene proposta una transition più piccola sperando che passi
+quella.
+
+La scrittura passa dall'Atlassian MCP server. Una skill raggiunge un channel solo portando la
+stringa esatta di quel channel fra i tool che dichiara, e questa porta `mcp__atlassian` e non
+`Bash(jira:*)`: la Jira CLI non le è disponibile affatto.
 
 **6 · Dopo, rilegge lo status.** Lo status che riporta è quello che Jira restituisce dopo la
 scrittura, non quello che la transition dichiarava. Quasi sempre i due coincidono. Quando non
@@ -151,7 +169,9 @@ nomina, il report dice dov'è davvero.
 > **PROJ-118 · I filtri salvati si possono condividere con un gruppo**
 >
 > In Review → **Request changes**, che dichiara In Progress. Il work item è assegnato a un'altra
-> persona. La eseguo?
+> persona. Quello che questo non fa è chiudere PROJ-118, né avvicinarlo a Done: Done resta
+> rifiutata finché PROJ-90 è aperto, e la condizione non la rimuovo io per farci passare la
+> transition. La eseguo?
 
 **Tu**
 
@@ -194,7 +214,8 @@ il pomeriggio nei due posti sbagliati.
 ## Cosa non fa
 
 - **Proporre una transition a partire dal project profile.** Il project profile registra la forma
-  del Jira Workflow; non risponde mai alla domanda su cosa questo work item può fare adesso.
+  del Jira Workflow, e l'unica cosa per cui questa skill lo legge è distinguere le due cause di
+  un'assenza. Non risponde mai alla domanda su cosa questo work item può fare adesso.
 - **Offrire una transition che Jira non ha restituito**, per quanto ragionevole suoni — compresa
   quella che hai appena chiesto per nome.
 - **Riempire un campo obbligatorio per far passare una transition rifiutata.** Dice qual è la
@@ -205,10 +226,13 @@ il pomeriggio nei due posti sbagliati.
 - **Concatenare più transition per arrivare a uno status lontano.** Ognuna è una decisione, e un
   Jira Workflow che ne richiede tre per arrivare dove stai andando ti sta dicendo qualcosa che
   vale la pena sentire.
+- **Rivolgersi alla Jira CLI quando il tool MCP manca.** Un'operazione ha un channel solo. Se il
+  project profile non ha risolto nessun tool per la transition, te lo dice e ti passa la via
+  manuale.
 - **Pianificare, fare refinement, riportare.** Decidere quando il lavoro viene affrontato è di
-  [`jira-plan`](jira-plan.it.md), rendere pronto un work item è di
-  [`jira-refine`](jira-refine.it.md), rispondere a che punto sono le cose è di
-  [`jira-inspect`](jira-inspect.it.md).
+  [`jira-plan`](jira-plan.it.md) — compreso mettere un singolo work item in uno sprint o toglierlo
+  da uno — rendere pronto un work item è di [`jira-refine`](jira-refine.it.md), rispondere a che
+  punto sono le cose è di [`jira-inspect`](jira-inspect.it.md).
 
 ## Vedi anche
 
@@ -216,7 +240,7 @@ il pomeriggio nei due posti sbagliati.
   due channel, e dove una transition si colloca nel percorso completo.
 - [`jira-inspect`](jira-inspect.it.md) — per leggere a che punto è un work item, e cosa lo blocca,
   senza cambiare niente.
-- [`jira-plan`](jira-plan.it.md) — per decidere quando un insieme di work item viene affrontato, e
-  per chiudere uno sprint.
+- [`jira-plan`](jira-plan.it.md) — per decidere quando il lavoro viene affrontato, per mettere un
+  work item in uno sprint o toglierlo da uno, e per chiudere uno sprint.
 - [`jira-refine`](jira-refine.it.md) — per rendere pronto un work item, invece di portarlo allo
   status successivo.

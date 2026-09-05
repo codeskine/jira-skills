@@ -39,13 +39,21 @@ keeps flaking"_ fits either description, so the skill establishes early that som
 fails today; if nothing does, it says so and stops rather than filing a defect that is really a
 risk.
 
-The boundary with [`jira-capture`](jira-capture.md) is decided by the material too. A fault
-relayed second-hand that carries the steps and the environment is a defect report and belongs
-here, whoever forwarded it. One that carries nothing anyone could act on to see it happen is
-intake: nobody present can answer what this skill is about to ask, and capture records it in the
-words it arrived in. That bar is not a checklist — an email naming the program it broke in and the
-version they run, with no steps and no error, is still intake — and it is not a completeness test either: partial material belongs here,
-and its gaps are what the questions below are for.
+Where the rest of "nothing fails today" goes is decided by **who pays, and when**. A cost the team
+will carry later — a shortcut taken deliberately, a dependency going stale, an arrangement only two
+people understand — belongs to [`jira-assess`](jira-assess.md). Something that works and serves the
+people using it poorly right now costs its users today rather than the team later: it has no toll to
+state and no options to rank, and it belongs to [`jira-propose`](jira-propose.md), where what is
+wanted is an outcome and not the record of a cost.
+
+The boundary with [`jira-capture`](jira-capture.md) is decided by the material, not by who forwarded
+it. A fault relayed second-hand that carries nothing anyone could act on to see it happen is intake:
+nobody present can answer what this skill is about to ask, and capture records the complaint in the
+words it arrived in. The steps, or the error exactly as it was printed, clear that bar; naming the
+program it broke in, or where it ran, does not. It is read against the whole message and never as
+boxes to tick, so an email naming the product and the version they run, with no steps and no error,
+is still intake — and it is not a completeness test either: partial material belongs here, and its
+gaps are what the questions below are for.
 
 ## How to use it
 
@@ -74,10 +82,17 @@ no defect type at all: a project created from the current default scheme has non
 the case the skill files the report under another type and the artifact itself says which intent
 it serves, so the distinction is not lost.
 
-**6 · Then the draft gate.** The complete report appears in chat with the decisions it carries —
-title, work type, parent, anything the project marks required and the draft left empty. You
-approve, or you ask for changes and see it again. This skill adds one thing to the gate: if the
-steps have not been walked through once as written, it says so, because steps that were
+**6 · Then the draft gate, which here is an artifact gate.** What you approve is the complete
+content of the work item, section by section. Its other form, an operation gate, shows a change
+reaching things that already exist — a sprint filled, work assigned to a fix version, an item moved
+to its next status — and authoring never produces one. The report appears in chat with the decisions
+it carries — title, work type, parent, anything the project marks required and the draft left empty,
+and, where your request carried a second intent this report does not satisfy, that intent and the
+skill that owns it — which takes over once this write is done, with a gate of its own. You approve,
+or you ask for changes and see it again. Or you say no, and that ends it: nothing is written, you
+are told what holds instead, you are not shown a shorter report in the hope that one passes, and a
+later message about something else is not read as a change of mind. This skill adds one thing to the
+gate: if the steps have not been walked through once as written, it says so, because steps that were
 remembered rather than replayed are the most common reason a defect cannot be reproduced.
 
 ## Worked exchange
@@ -206,8 +221,9 @@ blank.
   has looked, and it is wrong often enough to cost more than it saves.
 - **Propose the fix.** Describe what happens; let whoever picks it up find out why.
 - **Assign blame** to a component, a change or a person.
-- **Record something that works.** If nothing fails today, it belongs to
-  [`jira-assess`](jira-assess.md), and this skill says so and stops.
+- **Record something that works.** If nothing fails today the skill says so and stops. What will
+  cost the team later belongs to [`jira-assess`](jira-assess.md); what serves the people using it
+  poorly right now belongs to [`jira-propose`](jira-propose.md).
 - **Invent an error message.** An invented one is worse than none: it sends someone looking for a
   string that does not exist.
 
@@ -215,6 +231,8 @@ blank.
 
 - [The development process](../development-process.md) — the project profile, the draft gate, the
   two channels, and where reporting a defect sits in the whole path.
-- [`jira-assess`](jira-assess.md) — for something that works today and will cost later.
-- [`jira-capture`](jira-capture.md) — for a report arriving from outside that nobody has examined.
+- [`jira-assess`](jira-assess.md) — for something that works today and will cost the team later.
+- [`jira-propose`](jira-propose.md) — for something that works and serves its users poorly today.
+- [`jira-capture`](jira-capture.md) — for a fault relayed second-hand with nothing anyone could act
+  on to see it happen.
 - [`jira-refine`](jira-refine.md) — for turning this report into something a team can pick up.

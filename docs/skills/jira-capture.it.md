@@ -14,11 +14,11 @@
 
 ## Cosa fa
 
-Registra una richiesta arrivata da fuori il team — una email, un messaggio in chat, un appunto
-preso durante una riunione — con le parole con cui è arrivata, prima che qualcuno abbia capito
-cosa significhi. Conserva il testo originale, annota chi ha chiesto e per quale via, fa tre domande
-brevi ed elenca a cosa la richiesta non risponde. Poi ti mostra il testo completo e aspetta: su
-Jira non finisce niente finché non approvi.
+Registra una richiesta che ti è arrivata di seconda mano — una email, un messaggio in chat, un
+appunto preso durante una riunione — con le parole con cui è arrivata, prima che qualcuno abbia
+capito cosa significhi. Conserva il testo originale, annota chi ha chiesto e per quale via, fa
+tre domande brevi ed elenca a cosa la richiesta non risponde. Poi ti mostra il testo completo e
+aspetta: su Jira non finisce niente finché non approvi.
 
 Una richiesta che nessuno mette per iscritto è una richiesta che il team non vede; una travestita
 da pronta è peggio, perché qualcuno la pianificherà. È l'unica skill del plugin che crea
@@ -28,8 +28,8 @@ grezzo, senza refinement, non pronto per essere pianificato, con
 
 ## Quando si attiva · quando no
 
-Si attiva quando qualcosa arriva da fuori e deve stare su Jira prima che qualcuno l'abbia
-esaminato.
+Si attiva quando qualcosa ti arriva di seconda mano e deve stare su Jira prima che qualcuno
+l'abbia esaminato.
 
 | Se dici qualcosa come                                       | La skill è                             |
 | ----------------------------------------------------------- | -------------------------------------- |
@@ -38,26 +38,37 @@ esaminato.
 | «mettiamoci d'accordo sui criteri e spacchiamola»           | [`jira-refine`](jira-refine.it.md)     |
 | «vogliamo che i clienti vedano il loro storico»             | [`jira-propose`](jira-propose.it.md)   |
 | «l'export esce vuoto, va segnalato»                         | [`jira-diagnose`](jira-diagnose.it.md) |
+| «adesso funziona, ma fra sei mesi ci si ritorce contro»     | [`jira-assess`](jira-assess.it.md)     |
 
 Il confine che conta è quello con [`jira-refine`](jira-refine.it.md), e ha un verso solo: capture
 apre il percorso e il refinement lo chiude. Se sai già dire cosa vorrà dire «fatto», la richiesta
 è stata esaminata e l'intento è un altro — tutto quello che capture aggiungerebbe a quel punto è
 una decisione che nessuno ha preso.
 
-Qualcosa di rotto che arriva da fuori può essere di capture o di
-[`jira-diagnose`](jira-diagnose.it.md), e a decidere è **il materiale, non chi l'ha mandato**. Se
-il testo riportato porta già quello che rende un guasto riproducibile — i passi, e un ambiente che
-meriti il nome — è la segnalazione di un difetto e appartiene a `jira-diagnose`, per quanto
-evidentemente sia arrivata da fuori. Se non porta niente su cui qualcuno possa agire per vedere il
-guasto accadere, qui nessuno può fornirlo, e registrare la richiesta con le parole di chi l'ha
-mandata è la versione onesta. Quella soglia si legge su tutto il messaggio e mai come due caselle
-da spuntare. La superano i passi, o l'errore stesso; non la supera nominare il programma in cui si
-è rotto, o la versione che usano.
+Tutto il resto che arriva di seconda mano lo decide **il materiale, non chi l'ha mandato**. Il
+messaggio parla evidentemente di qualcosa — un guasto, un risultato che qualcuno vuole, un debito
+tecnico — e l'intento che se ne occupa dichiara una **soglia** nel proprio confine. Il materiale
+riportato arriva qui quando quella soglia non la supera: quando non porta niente da cui qualcuno
+possa partire.
 
-Lo stesso test vale verso [`jira-propose`](jira-propose.it.md), dove la soglia è più bassa di
-quanto sembri. Un desiderio riportato senza nessuna cifra dietro è intake; uno che porta un
-conteggio del sintomo — _una quarantina di chiamate il mese scorso_ — è una proposta, e la skill
-chiede poi da cosa si capirà che ha funzionato.
+| Materiale riportato su          | La soglia da superare                                                  | L'intento che allora se ne occupa      |
+| ------------------------------- | ---------------------------------------------------------------------- | -------------------------------------- |
+| un guasto                       | i passi, o l'errore stesso alla lettera                                | [`jira-diagnose`](jira-diagnose.it.md) |
+| un risultato che qualcuno vuole | un conteggio del sintomo — _una quarantina di chiamate il mese scorso_ | [`jira-propose`](jira-propose.it.md)   |
+| un debito tecnico               | qualsiasi cosa dica cosa costa rimandarlo                              | [`jira-assess`](jira-assess.it.md)     |
+
+Sotto la soglia è intake, per quanto evidentemente il messaggio parli di un guasto, di un
+risultato o di un debito: qui nessuno può fornire quello che chi ha scritto non ha mandato, e
+registrare la richiesta con le sue parole è la versione onesta. Superata la soglia, il materiale
+appartiene a quell'intento, per quanto evidentemente sia stato riportato.
+
+**Una soglia è un minimo da superare, non una checklist.** Si legge su tutto il messaggio, e
+nessun singolo elemento la decide in nessuna delle due direzioni: nominare il programma in cui un
+guasto si è rotto, o la versione che usano, non sono i passi e non sono l'errore, e non superano
+niente; e una proposta non ha bisogno di un obiettivo, perché la soglia è la cifra e da cosa si
+capirà che ha funzionato è la prima cosa che [`jira-propose`](jira-propose.it.md) chiede dopo. Una
+soglia non è nemmeno una prova di completezza: il materiale che la supera e poi lascia scoperta
+metà di quello che il suo intento chiederà va comunque a quell'intento, che chiede.
 
 Il test è scritto apposta sul testo della richiesta e non sulle persone intorno. Se qualcuno, una
 volta interpellato, saprebbe rispondere è un fatto sul futuro della conversazione, e la decisione
@@ -93,19 +104,36 @@ type, e la distinzione la porta l'artefatto stesso. Non imposta né parent, né 
 version: una richiesta grezza non si è guadagnata un posto in una gerarchia o in un piano, ed è
 l'errore che questa skill esiste per evitare.
 
-**6 · Poi il draft gate**, il cancello che precede ogni scrittura su Jira. Il record completo
-compare in chat con le decisioni che porta con sé: il titolo, il work type, e ogni campo che il
-progetto marca obbligatorio e a cui la richiesta non risponde. Approvi, oppure chiedi modifiche e
-lo rivedi. Questa skill aggiunge una cosa al gate: la dichiarazione che il work item è grezzo deve
-essere visibile nella bozza, non soltanto intesa, e il gate dice chiaramente che quello che verrà
-creato è un record grezzo e non lavoro pianificato.
+**6 · Poi il draft gate** — il cancello che precede ogni scrittura su Jira — **e qui è un artifact
+gate**, la forma del gate che mostra il contenuto di un work item. Quello che approvi è quel
+contenuto per intero, sezione per sezione: tutte le sezioni che il template non marca facoltative.
+L'altra forma, l'operation gate, mostra un cambiamento a ciò che esiste già ed è quella che
+presentano le skill che pianificano, rilasciano e portano un work item allo status successivo. Il
+record completo compare in chat con le decisioni che porta con sé — il titolo, il work type, ogni
+campo che il progetto marca obbligatorio e a cui la richiesta non risponde, e, se il tuo messaggio
+portava un secondo intento che questo record non soddisfa, quell'intento e la skill che se ne
+occupa. Approvi, oppure chiedi modifiche e lo rivedi. Oppure dici di no, e lì finisce: non viene
+scritto niente, ti viene detto cosa vale adesso — la richiesta non è su Jira, e le sue parole
+stanno ancora solo nel messaggio in cui sono arrivate — non ti viene proposto lo stesso record più
+corto sperando che passi quello, e un messaggio successivo su altro non viene preso per un
+ripensamento. Questa skill aggiunge una cosa al gate: la dichiarazione che il work item è grezzo
+deve essere visibile nella bozza, non soltanto intesa, e il gate dice chiaramente che quello che
+verrà creato è un record grezzo e non lavoro pianificato.
+
+**7 · Poi scrive, e consegna quello che non ha potuto fare.** La scrittura passa dal tool che il
+project profile ha risolto per creare un work item, e tornano la chiave e la URL. L'intake è il
+posto in cui più spesso finisce un messaggio che chiede due cose — _registrala, e mettila nel
+prossimo sprint_ — e la seconda viene nominata al gate invece di essere lasciata cadere: è di
+un'altra skill, viene dopo questa scrittura e ha un'approvazione tutta sua. Riportare la chiave
+chiude la scrittura, non la richiesta.
 
 ## Scambio di esempio
 
 **Tu**
 
 > È arrivata stamattina dal Responsabile Finance e nessuno l'ha ancora guardata. La metti su Jira
-> com'è, prima che si perda?
+> com'è, prima che si perda? E già che ci sei mettila nel prossimo sprint: continuano a chiedere
+> quando si farà.
 
 **`jira-capture`**
 
@@ -164,8 +192,12 @@ creato è un record grezzo e non lavoro pianificato.
 > Lo schema del tuo progetto ha un work type per le richieste non ancora esaminate, `Request`,
 > quindi consiglio quello. Marca `Team` obbligatorio in creazione e la richiesta non dice quale
 > team possieda i numeri, così la bozza nomina il campo invece di riempirlo. Niente parent, niente
-> sprint, niente fix version: qui non c'è stato nessun refinement. Ecco il testo completo:
-> approvalo e lo scrivo, oppure dimmi cosa cambiare.
+> sprint, niente fix version: qui non c'è stato nessun refinement.
+>
+> Lo sprint è la metà della tua richiesta che questo record non fa. È di
+> [`jira-plan`](jira-plan.it.md), è un'approvazione a sé, e prima di pianificare segnala il lavoro
+> che non è pronto — e questo non lo è. Ecco il testo completo: approvalo e lo scrivo, e poi
+> andiamo lì. Oppure dimmi cosa cambiare.
 
 ## Il risultato
 
@@ -232,11 +264,18 @@ Due sezioni del template sono facoltative e qui si comportano al contrario l'una
 `Campi obbligatori non ancora compilati` c'è perché un campo obbligatorio è rimasto vuoto, così il
 gate lo solleva invece di far fallire la scrittura. `Work type` non c'è perché questo progetto un
 work type per le richieste non ancora esaminate ce l'ha: dove un progetto non ce l'ha, è quella
-sezione a portare la distinzione che lo schema non porta. E `In attesa di refinement` non è un
-ornamento: è la dichiarazione che rende ammissibile un work item incompleto.
-[`jira-refine`](jira-refine.it.md) ritira quella dichiarazione quando fa il refinement, ed è
-quello che impedisce a un work item rifinito di portare criteri di accettazione accanto a una
-frase che dice che non ne ha.
+sezione a portare la distinzione che lo schema non porta.
+
+`In attesa di refinement` non appartiene a nessuno dei due casi. È la dichiarazione che rende
+ammissibile un work item incompleto, e il template non le dà nessuna clausola _ometti questa
+sezione quando…_ perché quel caso non esiste: tutto quello che l'intake scrive è grezzo per
+costruzione. E non è nemmeno permanente. [`jira-refine`](jira-refine.it.md) la ritira con la
+stessa scrittura che rende pronto il work item — su entrambi i rami del refinement, e mai con un
+riordino successivo. Ritirarla vuol dire rimuoverla, non ammorbidirla in _un tempo era grezzo_:
+quello lo tiene già la storia di Jira, e questo plugin non conserva una seconda copia di ciò che il
+tracker registra. L'intestazione se ne va con la dichiarazione, perché esiste solo per lei e una
+sezione senza niente sotto è una forma che nessun template ammette. Obbligatoria qui e assente lì
+sono due momenti, non due template che si contraddicono.
 
 ## Cosa non fa
 
@@ -248,7 +287,8 @@ frase che dice che non ne ha.
 - **Giudicare se la richiesta valga la pena.** Quello è un risultato da argomentare con un dato
   dietro, ed è di [`jira-propose`](jira-propose.it.md).
 - **Decidere a chi appartiene.** Niente parent, niente sprint, niente fix version, e nessun
-  proprietario scelto al posto di chi ha chiesto.
+  proprietario scelto al posto di chi ha chiesto. Se lo sprint lo chiedi nella stessa frase, viene
+  nominato al gate e consegnato a [`jira-plan`](jira-plan.it.md), mai eseguito qui di nascosto.
 - **Correggere il testo.** Nessuna correzione ortografica, nessuna traduzione, nessuna
   riformulazione. Una richiesta riscritta non è più l'evidenza di cosa è stato chiesto.
 - **Riempire un silenzio con una risposta plausibile.** Quello che chi ha chiesto non ha detto
@@ -264,3 +304,7 @@ frase che dice che non ne ha.
   invece di limitarsi a riportarlo.
 - [`jira-diagnose`](jira-diagnose.it.md) — per qualcosa di rotto che tu o il tuo team avete visto
   rompersi.
+- [`jira-assess`](jira-assess.it.md) — per un debito tecnico riportato con qualcosa che dice cosa
+  costa rimandarlo.
+- [`jira-plan`](jira-plan.it.md) — dove finisce il «e mettila nel prossimo sprint». L'intake non
+  colloca mai niente da sé.

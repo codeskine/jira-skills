@@ -26,7 +26,8 @@ win.
 
 ## When it fires · when it does not
 
-It fires when nothing is failing and you still want the cost put on the record.
+It fires when nothing is failing, the cost is one the team will carry later, and you want it on the
+record anyway.
 
 | Say something like                                 | And this is the skill you get       |
 | -------------------------------------------------- | ----------------------------------- |
@@ -39,6 +40,22 @@ The boundary with [`jira-diagnose`](jira-diagnose.md) is guarded from both sides
 _"This keeps flaking"_ fits either description, so the first question here is what happens today
 if nothing is done. If the answer is that something already fails, misbehaves or produces the
 wrong result, this skill says so and stops rather than recording a defect in softer words.
+
+Once nothing is failing, what this skill takes is narrower than "works badly", and the line is **who
+pays, and when**. It is drawn on the cost the team will carry later: the shortcut, the stale
+dependency, the design that no longer fits. Something that works and serves the people using it
+poorly right now costs its users today — there is no toll to state, no options to rank and nothing
+being deferred, so the three questions below all come back empty. That belongs to
+[`jira-propose`](jira-propose.md), and what comes out of it there is an outcome someone wants rather
+than a cost someone is paying.
+
+Debt reaches this skill relayed second-hand as readily as it is raised first-hand — a remark from
+standup, passed on before anyone forgets it — and what decides then is the material, not who said
+it. The bar here is **the toll**: whose time, how often. Carrying it makes the remark a debt record
+and it belongs here, however plainly it was relayed; carrying only an adjective sends it to
+[`jira-capture`](jira-capture.md), because nobody present can supply what is missing. The options
+and the technical impact are not part of that bar — they are what this skill works out once it has
+fired.
 
 ## How to use it
 
@@ -72,10 +89,17 @@ no work type for debt at all: a project that separates debt from other work by w
 exception. When that is the case the skill files the record under another type and the artifact
 itself says which intent it serves, so the distinction is not lost.
 
-**6 · Then the draft gate.** The complete record appears in chat with the decisions it carries —
-title, work type, parent, anything the project marks required and the draft left empty. You
-approve, or you ask for changes and see it again. This skill adds one thing to the gate: it
-states which option the record recommends, if any, and that recommending is not deciding.
+**6 · Then the draft gate, which here is an artifact gate.** What you approve is the complete
+content of the work item, section by section. Its other form, an operation gate, shows a change
+reaching things that already exist — a sprint filled, work assigned to a fix version, an item moved
+to its next status — and authoring never produces one. The record appears in chat with the decisions
+it carries — title, work type, parent, anything the project marks required and the draft left empty,
+and, where your request carried a second intent this record does not satisfy, that intent and the
+skill that owns it — which takes over once this write is done, with a gate of its own. You approve,
+or you ask for changes and see it again. Or you say no, and a no ends it: nothing is written, you
+are told what holds instead, no smaller record is offered in the hope that one passes, and a later
+message about something else is not read as a change of mind. This skill adds one thing to the gate:
+it states which option the record recommends, if any, and that recommending is not deciding.
 
 ## Worked exchange
 
@@ -225,6 +249,9 @@ exactly as the project reports it.
 - **Record something that is failing today.** If it already breaks, misbehaves or produces the
   wrong result it is a defect, it belongs to [`jira-diagnose`](jira-diagnose.md), and this skill
   says so and stops rather than writing the same thing in softer words.
+- **Record a cost that falls on users rather than on the team.** Something that works and serves
+  the people using it poorly has no toll on the team to state and no options to rank. What those
+  people want is an outcome, and that belongs to [`jira-propose`](jira-propose.md).
 - **Recommend by omission.** An option left out is an option refused, and refusing one silently
   is how a technical preference becomes a decision nobody reviewed.
 - **Turn the cost of an option into a commitment.** The options are ordered by magnitude so they
@@ -245,4 +272,6 @@ exactly as the project reports it.
 - [`jira-refine`](jira-refine.md) — for turning this record into work a team can pick up, with a
   scope and acceptance criteria.
 - [`jira-propose`](jira-propose.md) — for an outcome someone wants, rather than a cost the team is
-  already paying.
+  already paying, and for anything that works but serves its users poorly today.
+- [`jira-capture`](jira-capture.md) — for debt relayed second-hand with nothing to say what
+  deferring it costs.
