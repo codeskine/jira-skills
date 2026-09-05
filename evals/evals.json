@@ -23,6 +23,26 @@
       "why": "\"Confusing people\" sounds like a fault but nothing is reported as failing. Capture, not diagnose."
     },
     {
+      "id": "sel-capture-3",
+      "category": "selection",
+      "prompt": "A customer emailed: the invoice export has been breaking for two weeks and Excel opens the CSV mangled. Put it on Jira.",
+      "expect_skill": "jira-capture",
+      "expect_not": [
+        "jira-diagnose"
+      ],
+      "why": "Content is a fault and provenance is intake; both fit entirely. The email carries a symptom and nothing more — no steps, no environment — so it does not itself carry what a defect report asks for, and capture takes precedence. Paired with sel-diagnose-3, the same fault reported first-hand, and with sel-diagnose-4, the same fault relayed but arriving complete."
+    },
+    {
+      "id": "sel-capture-4",
+      "category": "selection",
+      "prompt": "Record this: the boss wants the portal to load faster.",
+      "expect_skill": "jira-capture",
+      "expect_not": [
+        "jira-propose"
+      ],
+      "why": "A desired outcome, relayed, with no datum behind it: nothing says who benefits or what faster would have to mean. Precedence sends it to intake rather than to a proposal that would have to invent its own measure. Paired with sel-propose-3, the same wish owned by the person stating it."
+    },
+    {
       "id": "sel-propose-1",
       "category": "selection",
       "prompt": "I want people to be able to see what delivery costs before they type an address. It should cut the drop-off at that step.",
@@ -44,6 +64,26 @@
       "why": "\"Properly\" is the signal: this is a proposition, not an unexamined request."
     },
     {
+      "id": "sel-propose-3",
+      "category": "selection",
+      "prompt": "I want the portal to load faster — it sits at eleven seconds on 4G and half the sessions from a phone end on that screen. Get it on the backlog.",
+      "expect_skill": "jira-propose",
+      "expect_not": [
+        "jira-capture"
+      ],
+      "why": "The wish of sel-capture-4, this time owned by the speaker and carrying its measure. Nothing is relayed and the datum is present, so precedence does not apply and the intent decides."
+    },
+    {
+      "id": "sel-propose-4",
+      "category": "selection",
+      "prompt": "Passing on what the CFO wrote: \"checkout sits at eleven seconds on 4G and we lose half the sessions from a phone on that screen — I want it under three.\" Get it on the backlog.",
+      "expect_skill": "jira-propose",
+      "expect_not": [
+        "jira-capture"
+      ],
+      "why": "Relayed second-hand like sel-capture-4, but arriving with its datum and its target, so it carries what a value proposal asks for and precedence does not claim it. The mirror of sel-diagnose-4 on the value axis. It exists because sel-capture-4 and sel-propose-3 move provenance and datum at the same time, and a pair that flips two variables cannot show which one routed."
+    },
+    {
       "id": "sel-diagnose-1",
       "category": "selection",
       "prompt": "The scheduled export gives me an empty file whenever the date range crosses into a new month. Works fine inside one month.",
@@ -63,6 +103,26 @@
         "jira-assess"
       ],
       "why": "A failure with impact. \"Started this week\" is a defect signal, not debt."
+    },
+    {
+      "id": "sel-diagnose-3",
+      "category": "selection",
+      "prompt": "The invoice export has been broken for two weeks. I reproduced it this morning on staging: pick any month, export, and the CSV opens in Excel with every field in one column. File it.",
+      "expect_skill": "jira-diagnose",
+      "expect_not": [
+        "jira-capture"
+      ],
+      "why": "The fault of sel-capture-3, this time first-hand and complete: steps, environment and actual result are all in the request, so capture claims no precedence and the content decides."
+    },
+    {
+      "id": "sel-diagnose-4",
+      "category": "selection",
+      "prompt": "Forwarding what the support desk sent over: \"export any month from the invoices screen on production, open the CSV in Excel 2019 — every field lands in column A. Started around the 20th.\" Get it filed.",
+      "expect_skill": "jira-diagnose",
+      "expect_not": [
+        "jira-capture"
+      ],
+      "why": "Relayed from outside like sel-capture-3, but the material arrives carrying the steps, the environment and the actual result. Precedence turns on what the material lacks, never on who typed it, so a complete fault report routes as one. Guards the reading where capture claims everything that came in by email."
     },
     {
       "id": "sel-assess-1",
