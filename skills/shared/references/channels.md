@@ -73,16 +73,30 @@ profile rather than through hard-coded calls.
 sends the user against a wall, so establish which it is before prescribing anything.
 
 **The credential is not visible to the shell the skills use.** A skill reaches the CLI through
-`Bash(jira:*)`, which runs a **non-interactive** shell — and a non-interactive shell reads only
-the startup file that every shell reads, `~/.zshenv` under zsh, never `~/.zshrc`. A token
-exported in `~/.zshrc` therefore works in the user's own terminal and is invisible here, which
-looks exactly like a CLI that was never set up. The remedy is one line in that file:
+`Bash(jira:*)`, which runs a **non-interactive** shell — and which startup file such a shell
+reads, if any, depends on the shell itself. A token exported from a file only an interactive
+shell reads therefore works in the user's own terminal and is invisible here, which looks exactly
+like a CLI that was never set up.
+
+So establish the shell before naming a file. `echo $SHELL` answers it in all three below, and the
+answer is not the same file — under one of them it is not a file at all.
+
+| Shell  | Where the export belongs                                                                                                                                                                                                   |
+| ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `zsh`  | `~/.zshenv`, which every zsh reads. Never `~/.zshrc`, which only an interactive one reads.                                                                                                                                 |
+| `bash` | `~/.bash_profile` or `~/.profile`, so the variable is already in the environment the skills inherit: a non-interactive bash reads no startup file of its own unless `BASH_ENV` names one, so `~/.bashrc` never reaches it. |
+| `fish` | `set -Ux JIRA_API_TOKEN …` at the prompt — a universal exported variable, shared by every fish session and held outside any startup file.                                                                                  |
+
+For zsh and bash the line is:
 
 ```bash
 export JIRA_API_TOKEN=<token from https://id.atlassian.com/manage-profile/security/api-tokens>
 ```
 
-It is the user's own dotfile: report the line and the file, and never edit it for them.
+Any other shell takes the same rule — the file its non-interactive form reads — and where that
+cannot be established, the export goes in the environment that launches the agent, which every
+shell inherits. Whatever the shell, the change reaches only sessions started afterwards, and it is
+the user's own configuration: report the file and the line, and never edit it for them.
 
 **The configuration was never generated.** Only here is `jira init` the remedy, and it comes
 **second**: it authenticates while it runs, so without the credential it answers
