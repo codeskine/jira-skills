@@ -15,8 +15,8 @@
 ## What it does
 
 Answers a question about state without changing any. How a parent and its children are
-progressing, what the sprint has left, what is blocked and by what, what a fix version currently
-contains. It reports counts first, then the items that carry the answer, and it says when the
+progressing, what the sprint has left, what is blocked and by what, what a fix version holds and how much
+of it is still open. It reports counts first, then the items that carry the answer, and it says when the
 answer is empty instead of returning nothing.
 
 It is the only skill here that never writes. There is no draft gate on this page because there is
@@ -31,13 +31,15 @@ It fires when you want an answer, not a change.
 | "where is the sprint at?"                    | `jira-inspect`                    |
 | "move PROJ-14 to review"                     | [`jira-advance`](jira-advance.md) |
 | "put these four in the sprint"               | [`jira-plan`](jira-plan.md)       |
-| "what still has to land before we ship 2.4?" | [`jira-release`](jira-release.md) |
+| "what still has to land before we ship 2.4?" | `jira-inspect`                    |
 | "assign these to 2.4"                        | [`jira-release`](jira-release.md) |
+| "what's in 2.4? add these two as well"       | [`jira-release`](jira-release.md) |
 
-Fix versions are the one genuine overlap. `jira-inspect` can report the contents of a fix
-version you name, because that is a search — but only [`jira-release`](jira-release.md) can
-tell you which fix versions exist and what state each is in, since that listing lives on the
-Jira CLI and this skill does not declare it. Ask about fix versions there.
+Fix versions used to be the one genuine overlap, and they are not any more. Reading what a fix
+version holds, and how much of it is still open, is this skill — the same way reading a sprint is.
+Only [`jira-release`](jira-release.md) can tell you **which** fix versions exist and what state
+each is in, since that listing lives on the Jira CLI and this skill does not declare it, and only
+`jira-release` takes a question that reads and then changes.
 
 Otherwise the pattern holds: a question is this skill, an instruction is one of the other three.
 When you ask for a change mid-answer, `jira-inspect` names the skill that owns it and stops — it

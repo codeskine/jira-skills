@@ -1,6 +1,6 @@
 ---
 name: jira-release
-description: "Jira fix version manager. Use when the user asks what a Jira fix version contains, wants to assign work to one, or wants to know what is still unfinished before shipping it. Treats what ships together as a separate question from when work is tackled. Not for planning a sprint (→ See codeskine/jira-skills@jira-plan), for making an item ready (→ See codeskine/jira-skills@jira-refine), or for reading progress without changing anything (→ See codeskine/jira-skills@jira-inspect)."
+description: "Jira fix version manager. Use when the user asks to assign work to a Jira fix version, or which fix versions the project has and what state each is in. Treats what ships together as a separate question from when work is tackled. A request that reads a fix version and then changes it is one operation, and belongs here. Not for reading what a fix version holds without changing it (→ See codeskine/jira-skills@jira-inspect), for planning a sprint (→ See codeskine/jira-skills@jira-plan), or for making an item ready (→ See codeskine/jira-skills@jira-refine)."
 user-invocable: true
 license: MIT
 compatibility: Designed for Claude Code. Requires the Atlassian MCP server configured as "atlassian". Listing fix versions needs the jira CLI authenticated; assigning work to one does not.
@@ -30,9 +30,9 @@ project has and their state.
 
 Creating a fix version, and releasing or archiving one, are gaps
 [the channel map](../shared/references/channels.md) declares. Say so before the user asks for
-them, ask them to do it in Jira, and continue on the other side. This skill reports what a fix
-version contains and stops there; it never approximates the release with a status change or a
-label.
+them, ask them to do it in Jira, and continue on the other side. This skill shows what a fix
+version contains on the way to a change and stops there; it never approximates the release with a
+status change or a label.
 
 ## 3. Read the fix versions as they are
 
@@ -53,6 +53,10 @@ does not exist, so nothing is created by guessing.
 For the fix version in question: what is assigned to it, and of that, what is unfinished, by status
 category. This is the answer to "what does shipping this mean", and it is worth giving before
 anyone asks for it.
+
+A question that only asks — what is in 4.10, what of it is still open — and changes nothing is not
+this skill: `jira-inspect` reads and stops, and owns that. Here the same picture is the ground for
+an assignment the user then approves.
 
 ## 5. Assign work to a fix version
 

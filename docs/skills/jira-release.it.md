@@ -15,8 +15,8 @@
 ## Cosa fa
 
 Si occupa della fix version: cosa viene rilasciato insieme. Elenca le fix version che il progetto
-ha davvero, con il loro stato, mostra cosa ne contiene una e quanto di quello è ancora aperto, e
-assegna work item a una di esse. Due cose non le può fare — creare una fix version, rilasciarla o
+ha davvero, con il loro stato, assegna work item a una di esse, e mostra cosa ne contiene una e
+quanto di quello è ancora aperto come base di un cambiamento che approvi. Due cose non le può fare — creare una fix version, rilasciarla o
 archiviarla — e le dichiara prima che tu le chieda, restituendole a te su Jira.
 
 È la domanda di un Release Manager, fatta nell'unico momento in cui serve. Sapere cosa vuol dire
@@ -28,20 +28,24 @@ Si attiva quando la domanda è cosa viene rilasciato insieme.
 
 | Se dici qualcosa come                              | La skill è                           |
 | -------------------------------------------------- | ------------------------------------ |
-| «cosa c'è davvero nella 2.4?»                      | `jira-release`                       |
 | «assegna questi due alla 2.4»                      | `jira-release`                       |
 | «quali fix version ha questo progetto?»            | `jira-release`                       |
+| «cosa c'è nella 2.4? mettici anche questi due»     | `jira-release`                       |
+| «cosa c'è davvero nella 2.4?»                      | [`jira-inspect`](jira-inspect.it.md) |
 | «metti questi due nello sprint»                    | [`jira-plan`](jira-plan.it.md)       |
 | «questo è troppo grosso perché qualcuno lo prenda» | [`jira-refine`](jira-refine.it.md)   |
 | «a che punto è lo sprint?»                         | [`jira-inspect`](jira-inspect.it.md) |
 
 Due confini vanno detti apertamente.
 
-**Con [`jira-inspect`](jira-inspect.it.md).** Tutte e due rispondono a _cosa c'è nella 2.4 e
-quanto di quello è ancora aperto_, e rispondono allo stesso modo. Cambia cosa può succedere dopo:
-`jira-inspect` legge e si ferma, e se chiedi un cambiamento nomina la skill che se ne occupa.
-`jira-release` legge la stessa cosa come apertura di una conversazione che può finire in
-un'assegnazione che hai approvato. Una domanda la prende solo `jira-release`: **quali** fix
+**Con [`jira-inspect`](jira-inspect.it.md).** Una domanda che si limita a chiedere — _cosa c'è
+nella 2.4 e quanto di quello è ancora aperto_ — è di `jira-inspect`, che legge e si ferma.
+`jira-release` legge la stessa cosa come apertura di una conversazione che finisce in
+un'assegnazione che hai approvato: se chiedi il contenuto e il cambiamento nello stesso respiro
+sei qui, non là. Sull'asse dello sprint il confine corre allo stesso modo, così la regola da
+imparare è una e non due.
+
+Una domanda la prende solo `jira-release`: **quali** fix
 version ha il progetto, e in che stato è ciascuna. Quell'elenco appartiene alla Jira CLI, e
 `jira-inspect` non la dichiara.
 

@@ -15,8 +15,8 @@
 ## What it does
 
 Owns the fix version — what ships together. It lists the fix versions the project actually has
-with their state, shows what one of them contains and which part of that is unfinished, and
-assigns work items to one. Two things it cannot do at all — create a fix version, and release or
+with their state, assigns work items to one, and shows what one of them contains and which part
+of that is unfinished as the ground for a change you approve. Two things it cannot do at all — create a fix version, and release or
 archive one — it names before you ask and hands back to you in Jira.
 
 It is a Release Manager's question asked at the only useful moment. Knowing what shipping means
@@ -28,19 +28,22 @@ It fires when the question is what ships together.
 
 | Say something like                           | And this is the skill you get     |
 | -------------------------------------------- | --------------------------------- |
-| "what is actually in 2.4?"                   | `jira-release`                    |
 | "assign these two to 2.4"                    | `jira-release`                    |
 | "which fix versions does this project have?" | `jira-release`                    |
+| "what's in 2.4? put these two in it as well" | `jira-release`                    |
+| "what is actually in 2.4?"                   | [`jira-inspect`](jira-inspect.md) |
 | "put these two in the sprint"                | [`jira-plan`](jira-plan.md)       |
 | "this one is too big for anyone to pick up"  | [`jira-refine`](jira-refine.md)   |
 | "where is the sprint at?"                    | [`jira-inspect`](jira-inspect.md) |
 
 Two boundaries are worth stating outright.
 
-**With [`jira-inspect`](jira-inspect.md).** Both can answer _what is in 2.4, and what of it is
-unfinished_, and both answer it the same way. What differs is what may happen next: `jira-inspect`
-reads and stops, and when you ask for a change it names the skill that owns it. `jira-release`
-reads the same thing as the opening of a conversation that can end in an assignment you approved.
+**With [`jira-inspect`](jira-inspect.md).** A question that only asks — _what is in 2.4, and what
+of it is unfinished_ — belongs to `jira-inspect`, which reads and stops. `jira-release` reads the
+same thing as the opening of a conversation that ends in an assignment you approved: ask for the
+contents and the change in one breath and you are here, not there. The line runs the same way on
+the sprint axis, so there is one rule to learn and not two.
+
 One question only `jira-release` can take: **which** fix versions the project has and what state
 each is in. That listing belongs to the Jira CLI, and `jira-inspect` does not declare it.
 
