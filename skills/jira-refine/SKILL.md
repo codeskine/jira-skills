@@ -53,12 +53,12 @@ to the gate.
 If it cannot, propose a split in which each child is **complete**. Recognise the intent each child
 serves and build it from that intent's own template, so nobody has to rewrite a stub afterwards:
 
-| The child is | Build it from                                     |
-| ------------ | ------------------------------------------------- |
-| a defect     | `../jira-diagnose/assets/defect-report.md`        |
-| debt or risk | `../jira-assess/assets/debt-record.md`            |
-| value sought | `../jira-propose/assets/value-proposal.md`        |
-| still raw    | `../jira-capture/assets/captured-request.md`      |
+| The child is | Build it from                                |
+| ------------ | -------------------------------------------- |
+| a defect     | `../jira-diagnose/assets/defect-report.md`   |
+| debt or risk | `../jira-assess/assets/debt-record.md`       |
+| value sought | `../jira-propose/assets/value-proposal.md`   |
+| still raw    | `../jira-capture/assets/captured-request.md` |
 
 A child that only makes sense next to its siblings has not been split — it has been cut.
 
@@ -85,9 +85,15 @@ split approved child by child is a split nobody rebalanced.
 Through the tools the profile resolves for creating a work item and setting a parent; see
 [the channel map](../shared/references/channels.md).
 
-Create the children, attach them, then update the item they came from so that its own text no
-longer claims what its children now carry. Never by listing them: the hierarchy is queryable on
-Jira, and a list maintained by hand is a second answer that will disagree with the first.
+Whichever branch was taken, **retire the statement that the item is raw and awaiting
+refinement**, where intake wrote one. It is what allowed an incomplete item to exist; leaving it
+next to acceptance criteria makes the artifact contradict itself and keeps the item out of
+planning it is now ready for. Retiring it is part of this write, not a later tidy-up.
+
+Where the item was split: create the children, attach them, then update the item they came from
+so that its own text no longer claims what its children now carry. Never by listing them: the
+hierarchy is queryable on Jira, and a list maintained by hand is a second answer that will
+disagree with the first.
 
 A split creates several items under one approval, so
 [the gate's rule for multi-write operations](../shared/references/draft-gate.md) governs what

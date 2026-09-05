@@ -50,13 +50,13 @@ being evidence and becomes a copy of the file.
 
 Each authoring skill adds its own, and owns them:
 
-| Intent              | Adds                                                                                                                      |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| capture a request   | the original wording preserved; the source of the request; an explicit statement that this is raw and awaiting refinement |
-| propose value       | the outcome sought; who benefits; how success is measured                                                                 |
-| report a defect     | steps to reproduce; expected result; actual result; environment; impact and frequency                                     |
-| record debt or risk | what it costs to defer; the options considered; the technical impact                                                      |
-| refine              | acceptance criteria; a scope small enough to be finished; dependencies named as links                                     |
+| Intent              | Adds                                                                                                                                           |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| capture a request   | the original wording preserved; the source of the request; an explicit statement that this is raw and awaiting refinement                      |
+| propose value       | the outcome sought; who benefits; how success is measured                                                                                      |
+| report a defect     | steps to reproduce; expected result; actual result; environment; impact and frequency                                                          |
+| record debt or risk | what it costs to defer; the options considered; the technical impact                                                                           |
+| refine              | acceptance criteria; a scope small enough to be finished; dependencies named as links; the raw declaration retired, where the item carried one |
 
 A skill may tighten these. It may not silently drop one.
 
