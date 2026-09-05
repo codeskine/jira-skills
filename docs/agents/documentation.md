@@ -156,6 +156,15 @@ Rules that hold for every section:
   `init`, `plan`, `release`, `advance`, `inspect` and `jira-doctor` there is nothing in
   `examples/` to absorb: build the scenario from the skill's own procedure, and keep it
   recognisably the same house style as the five that exist.
+- **The artifact of section 6 goes inside a fenced ` ````markdown ` block**, never as real
+  headings. Real headings would put the artifact's own sections into the document's structure,
+  where `check-docs` can no longer tell them from the contract's. The outer fence takes four
+  backticks so that a fenced block inside the artifact still closes correctly.
+- **The worked exchange is a bold speaker label followed by a blockquote**, not a code block. A
+  skill's reply carries tables and emphasis, and they have to render.
+- **Template headings are translated; the seven canonical names are not.**
+  `skills/shared/references/templates.md` settles it, and `docs/termbase.md` §2b carries the
+  agreed table. A heading absent from that table is added to the termbase, not invented locally.
 - **Prose wraps at 100 columns.** The repository does, and `prettier` preserves prose wrapping
   rather than reflowing it. Tables and links are left long.
 
