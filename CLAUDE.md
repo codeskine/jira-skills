@@ -301,6 +301,8 @@ reusing it.
    skills directory have drifted apart, or if the frontmatter would misbehave once installed.
 7. Run the description quality check: contains `Jira`, has a "Use when" trigger clause, names
    an intent rather than a work type, no over-triggering, no `openclaw` block.
+8. Write its documentation pair, `docs/skills/<name>.md` and `docs/skills/<name>.it.md`, against
+   the section contract above — `scripts/check-docs.mjs` fails without both.
 
 ### Changing the frontmatter rules
 
@@ -360,3 +362,21 @@ both environment modes — with the Jira CLI reachable and without it. The proce
 paste into a dedicated session; it stops at every finding, files a ticket, and restarts from zero
 once a fix lands. Run reports are scratch and stay out of the repository. See
 `docs/agents/e2e-testing.md`.
+
+### Documentation
+
+The bilingual documentation of the plugin lives under `docs/`: a document pair per skill in
+`docs/skills/` and per command in `docs/commands/`, `docs/development-process.md` owning the
+mechanics they share, `docs/termbase.md` fixing the English ↔ Italian vocabulary, and a README
+pair that collects them. English and Italian are peers — neither is a translation of the other,
+and nothing checks one against the other.
+
+Every page carries the same eight sections in the same order: a generated header block, _What it
+does_, _When it fires · when it does not_, _How to use it_, _Worked exchange_, _The result_,
+_What it will not do_, _See also_. The shared procedure — discovery, the draft gate, the channel
+map, the quality standard — belongs to the development process document and is linked, never
+restated, which is invariant 6 applied to prose. `scripts/check-docs.mjs` enforces the contract;
+`scripts/generate-readme-table.mjs` owns every block that restates a fact a skill already carries.
+
+The procedure that produced them is a prompt to paste into a dedicated session; screenshots are
+listed by that run and captured outside it. See `docs/agents/documentation.md`.

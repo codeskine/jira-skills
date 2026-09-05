@@ -14,10 +14,17 @@ node_modules/
 # agent worktrees
 .claude/worktrees/
 
-# local docs — decision records and agent config are versioned, the rest is scratch
+# local docs — decision records, agent configuration and the published documentation are
+# versioned; qa reports, reviews and specs are scratch
 docs/*
 !docs/adr/
 !docs/agents/
+!docs/skills/
+!docs/commands/
+!docs/assets/
+!docs/development-process.md
+!docs/development-process.it.md
+!docs/termbase.md
 
 # jira project profile — versioned in a repository that USES this plugin, scratch in the one
 # that builds it: what discovery writes here describes a test sandbox, not this project's work
