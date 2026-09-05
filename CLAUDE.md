@@ -331,9 +331,10 @@ After making changes, suggest the following as next steps. Do NOT execute automa
 
 ## Agent skills
 
-Configuration consumed by the engineering skills — where work on this repository is tracked and
-how it is labelled. Unrelated to [Agent Skills Specification](#agent-skills-specification)
-above, which governs the skills this repository _builds_.
+Configuration consumed by the engineering skills — where work on this repository is tracked, how
+it is labelled, and how the plugin is exercised end to end. Unrelated to
+[Agent Skills Specification](#agent-skills-specification) above, which governs the skills this
+repository _builds_.
 
 ### Issue tracker
 
@@ -351,3 +352,11 @@ Single-context: `CONTEXT.md` and `docs/adr/` at the repo root. The glossary list
 as well as canonical ones, and its closing section says how to tell a refused word from a literal
 command name, a mention made in order to forbid, and ordinary English — read it before removing a
 word from a shipped artifact. See `docs/agents/domain.md`.
+
+### End-to-end testing
+
+The behavioural test run: two sandbox boards driven through a full Kanban and Scrum lifecycle, in
+both environment modes — with the Jira CLI reachable and without it. The procedure is a prompt to
+paste into a dedicated session; it stops at every finding, files a ticket, and restarts from zero
+once a fix lands. Run reports are scratch and stay out of the repository. See
+`docs/agents/e2e-testing.md`.

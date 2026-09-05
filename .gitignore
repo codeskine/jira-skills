@@ -19,5 +19,9 @@ docs/*
 !docs/adr/
 !docs/agents/
 
+# jira project profile — versioned in a repository that USES this plugin, scratch in the one
+# that builds it: what discovery writes here describes a test sandbox, not this project's work
+.jira/
+
 # logs
 npm-debug.log*
