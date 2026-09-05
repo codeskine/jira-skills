@@ -83,10 +83,26 @@ Naming the destination is this skill's work; making the move out of the closing 
 § 3 says why. Decide it for every item, then hand the moves over as one list rather than one at a
 time.
 
+**The destinations are settled before the close, never after.** Once the sprint is closed the items
+are wherever Jira has put them, and a destination named at that point is a report rather than a
+decision. Read what is unfinished, settle a destination for each, gate both together, close on
+approval.
+
+Closing is the only write here, and it is coarse: `jira sprint close` takes a sprint and nothing
+else, so where an unfinished item lands is Jira's to decide and not this skill's to direct. That
+belongs at the gate rather than in a footnote, and the report afterwards lists the moves still
+waiting on the user.
+
 ## 6. Present and confirm
 
-Follow [the draft gate](../shared/references/draft-gate.md). What this intent adds: the gate lists
-every item that will move, and every unrefined item among them, before anything moves.
+Follow [the draft gate](../shared/references/draft-gate.md) in its **operation** form: nothing here
+is authored. What this intent adds differs between its two operations.
+
+- **Filling a sprint** — every item that will move, and every unrefined item among them, before
+  anything moves.
+- **Closing one** — the sprint, what was delivered and what was not, the destination settled for
+  each unfinished item, and plainly that closing is all this skill will do: the moves stay with
+  the user, and Jira decides where anything left unmoved lands.
 
 ## 7. Write
 

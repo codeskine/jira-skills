@@ -93,14 +93,15 @@ spenta da una credenziale mancante non è una CLI mai configurata, e il report n
 sprint è attivo. Uno sprint chiuso ieri è esattamente il tipo di dato che una risposta ricordata
 sbaglia, e pianificare contro quella butta via la riunione per cui il piano è stato fatto.
 
-**4 · Due passi tornano a te.** Creare uno sprint e avviarlo sono **gap dichiarati**: non sono
-disponibili su nessuno dei due channel, nelle versioni di server e CLI a cui questo plugin si
-rivolge. Sono due problemi distinti e vengono consegnati a te allo stesso modo:
+**4 · Tre passi tornano a te.** Creare uno sprint, avviarlo e togliere lavoro da uno sono **gap
+dichiarati**: non sono disponibili su nessuno dei due channel, nelle versioni di server e CLI a cui
+questo plugin si rivolge. Sono tre problemi distinti e vengono consegnati a te allo stesso modo:
 
-| Il gap             | Cosa fa invece la skill                                                                                                                    |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| creare uno sprint  | riempie e chiude gli sprint ma non ne apre uno: ti chiede di crearlo sulla board, e prosegue quando esiste                                 |
-| avviare uno sprint | uno sprint che esiste già come `future` non può essere portato ad `active`: lo riempie e lo chiude, e ti chiede di avviarlo tu sulla board |
+| Il gap                 | Cosa fa invece la skill                                                                                                                     |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| creare uno sprint      | riempie e chiude gli sprint ma non ne apre uno: ti chiede di crearlo sulla board, e prosegue quando esiste                                  |
+| avviare uno sprint     | uno sprint che esiste già come `future` non può essere portato ad `active`: lo riempie e lo chiude, e ti chiede di avviarlo tu sulla board  |
+| togliere lavoro da uno | `jira sprint` sa aggiungere, chiudere ed elencare, e non sa rimuovere: nomina il work item e dove sta andando, e la mossa sulla board è tua |
 
 Un gap non è un channel che è giù. Un gap vale ovunque e dura finché non cambia il tooling; una CLI
 non raggiungibile non è supportata qui e ora, non dice niente sul tuo progetto, e torna quando
@@ -117,9 +118,15 @@ controllo sbagliato, non un controllo severo. Quello che non regge viene nominat
 manca, **prima** di entrare. Puoi pianificarlo lo stesso: è una decisione, ed è giusto che la
 prenda tu sapendo, invece che la prenda lo strumento al posto tuo.
 
-**6 · Chiudere: ogni work item non finito riceve una destinazione.** Lo sprint successivo, il
+**6 · Chiudere: ogni work item non finito riceve una destinazione, e la riceve prima.** Lo sprint successivo, il
 backlog, o qualcosa che nomini tu. Un work item lasciato senza risposta alla chiusura sparisce dal
-piano senza che nessuno l'abbia scelto, ed è l'unico esito da cui una review non si riprende.
+piano senza che nessuno l'abbia scelto, ed è l'unico esito da cui una review non si riprende —
+quindi le destinazioni si stabiliscono e ti vengono mostrate prima che qualcosa si chiuda, mai
+dopo. Nominate dopo sarebbero un resoconto e non una decisione.
+
+Chiudere è l'unica scrittura, ed è grossolana: il comando prende uno sprint e nient'altro, quindi
+dove un work item non finito atterri davvero lo decide Jira e non questa skill. Te lo dice al
+cancello e non dopo, e il resoconto nomina gli spostamenti che restano tuoi.
 
 **7 · Poi il draft gate**, il cancello che precede ogni scrittura su Jira. L'insieme intero compare
 in chat prima che qualcosa si muova. Cosa aggiunge questa skill al gate: elenca ogni work item che
