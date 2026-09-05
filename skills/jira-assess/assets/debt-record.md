@@ -19,11 +19,11 @@ already prevented. Measured where it can be measured.>
 
 ## Options
 
-| Option              | What it takes                      | What it leaves           |
-| ------------------- | ---------------------------------- | ------------------------ |
-| <do nothing>        | <the toll, ongoing>                | <what stays constrained> |
+| Option              | What it takes                         | What it leaves           |
+| ------------------- | ------------------------------------- | ------------------------ |
+| <do nothing>        | <the toll, ongoing>                   | <what stays constrained> |
 | <the cheap partial> | <order of magnitude, not an estimate> | <what it does not solve> |
-| <the full change>   | <order of magnitude, not an estimate> | <what it unlocks>     |
+| <the full change>   | <order of magnitude, not an estimate> | <what it unlocks>        |
 
 <A recommendation may follow the table, marked as a recommendation. Deciding belongs to whoever
 prioritises.>
@@ -42,3 +42,9 @@ cannot yet be measured, what would have to be measured to settle it.>
 
 <Fields this project marks required on creation that the answers do not cover, named so the
 draft gate can raise them. Omit this section when there are none.>
+
+## Work type
+
+<That this is a record of debt or risk, filed under a work type that does not name it because this
+project's scheme has none. Omit this section when the project has a work type for this
+intent.>

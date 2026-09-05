@@ -22,6 +22,9 @@ Every artifact, whatever the intent:
 7. **Required fields are filled or flagged.** If the project marks a field required for this
    work type and the draft cannot fill it, the draft gate says so rather than letting the write
    fail.
+8. **A substituted work type is stated by the artifact.** If the project has no work type for this
+   intent and the item is filed under another, the artifact that creates it says which intent it
+   serves, rather than leaving the gate as the only place that was said.
 
 ## Evidence
 
