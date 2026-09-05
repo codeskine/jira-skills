@@ -39,8 +39,9 @@ che qualcuno decida come raggiungerlo.
 Il confine con [`jira-capture`](jira-capture.it.md) è **il dato**. Riportare il desiderio di
 qualcun altro senza niente di verificabile dietro è intake — capture lo registra con le parole con
 cui è arrivato e dichiara che è così — e resta intake per quanto chiaramente il risultato sia
-descritto. Una proposta è quello che hai quando qualcuno sa nominare il risultato, il pubblico e
-la misura, e questa skill non li fabbrica insistendo con le domande.
+descritto. La soglia è una cifra, non un obiettivo: _una quarantina di chiamate il mese scorso_ la
+supera, e la skill chiede poi da cosa si capirà che ha funzionato. Quello che non fa è fabbricare
+il risultato, il pubblico o la misura insistendo con le domande.
 
 Il confine a valle è [`jira-refine`](jira-refine.it.md). Proporre dichiara il valore e si ferma.
 I criteri di accettazione, un perimetro abbastanza piccolo da poter essere finito e i figli che

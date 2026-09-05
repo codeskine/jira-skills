@@ -15,7 +15,8 @@
 ## Cosa fa
 
 Risponde a una domanda sullo stato senza cambiarne nessuno. Come procedono un parent e i suoi
-figli, cosa resta nello sprint, cos'è bloccato e da cosa, cosa contiene adesso una fix version.
+figli, cosa resta nello sprint, cos'è bloccato e da cosa, cosa contiene una fix version e quanto
+di quello è ancora aperto.
 Riporta prima i conteggi, poi i work item che portano la risposta, e dice quando la risposta è
 vuota invece di non restituire niente.
 
@@ -31,13 +32,16 @@ Si attiva quando vuoi una risposta, non un cambiamento.
 | «a che punto è lo sprint?»                     | `jira-inspect`                       |
 | «porta PROJ-14 in review»                      | [`jira-advance`](jira-advance.it.md) |
 | «metti questi quattro nello sprint»            | [`jira-plan`](jira-plan.it.md)       |
-| «cosa manca prima di poter rilasciare la 2.4?» | [`jira-release`](jira-release.it.md) |
+| «cosa manca prima di poter rilasciare la 2.4?» | `jira-inspect`                       |
 | «assegna questi alla 2.4»                      | [`jira-release`](jira-release.it.md) |
+| «cosa c'è nella 2.4? mettici anche questi due» | [`jira-release`](jira-release.it.md) |
 
-Le fix version sono l'unica vera sovrapposizione. `jira-inspect` può riportare il contenuto
-di una fix version che le nomini, perché quella è una ricerca — ma solo
-[`jira-release`](jira-release.it.md) può dirti quali fix version esistono e in che stato
-sono, perché quell'elenco sta sulla Jira CLI e questa skill non la dichiara. Chiedilo lì.
+Le fix version erano l'unica vera sovrapposizione, e non lo sono più. Il confine è su cosa verte la
+domanda: il lavoro **dentro** una fix version — cosa contiene, quanto di quello è ancora aperto — è
+questa skill, allo stesso modo in cui lo è leggere uno sprint. La **version stessa** è di
+[`jira-release`](jira-release.it.md): quali esistono, e se una sia già stata rilasciata o
+archiviata. Quelle stanno sulla Jira CLI, che questa skill non dichiara. `jira-release` prende
+anche la domanda che legge una fix version e poi la cambia.
 
 Per il resto lo schema tiene: una domanda è questa skill, un'istruzione è una delle altre tre. Se
 chiedi un cambiamento mentre stai leggendo una risposta, `jira-inspect` nomina la skill che se ne

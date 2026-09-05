@@ -84,6 +84,20 @@ item's type and the children's, say so and stop: refuse the split, explain why, 
 whole. Creating children that cannot be attached produces orphans, and an orphan is worse than an
 item that is too large, because it is also invisible.
 
+Refusing is not the whole answer, and the profile holds most of the rest. Say what this project can
+support, cheapest first:
+
+1. **Other work types the hierarchy does allow.** The profile's table answers this rather than a
+   guess: where some pair of types would hold the split, name it and ask whether it fits the work.
+2. **Enriching the item in place** — this skill's other branch. An item too large to finish is
+   still an item that can be made ready, and that is a smaller change than either of the others.
+3. **A change to the project's scheme**, last, because it needs a project admin and is not the
+   user's to make. Name it as a real option and say whose it is, rather than leaving it as the
+   only one.
+
+Where the profile records the work types as not read, say that too: the refusal is then about what
+could not be established, and not about what the project cannot do.
+
 ## 6. Assemble
 
 Fill [the template](assets/refined-item.md) for the item being refined. Children are built from
@@ -91,8 +105,9 @@ the templates named above, one each.
 
 ## 7. Present the whole split
 
-Follow [the draft gate](../shared/references/draft-gate.md). What this intent adds: **every**
-child is presented in full before any of them exists, and the whole split is approved once. A
+Follow [the draft gate](../shared/references/draft-gate.md) in its **artifact** form — a split
+creates items. What this intent adds: **every** child is presented in full before any of them
+exists, and the whole split is approved once. A
 split approved child by child is a split nobody rebalanced.
 
 The block of decisions names the acceptance criteria of every item involved, the parent included.
@@ -108,6 +123,14 @@ Whichever branch was taken, **retire the statement that the item is raw and awai
 refinement**, where intake wrote one. It is what allowed an incomplete item to exist; leaving it
 next to acceptance criteria makes the artifact contradict itself and keeps the item out of
 planning it is now ready for. Retiring it is part of this write, not a later tidy-up.
+
+Retiring means **removing the claim**, not softening it into a milder one. An item that says it
+was once raw is telling a reader something Jira's own history already holds, and this plugin does
+not keep a second copy of what the tracker records. The heading goes with the claim where the
+heading exists for it alone — a section with nothing under it is a shape no template permits.
+Where the claim sits inside a section carrying other content, or under a heading intake chose for
+itself, remove the claim and leave the rest: what is retired is the statement, never a heading
+matched by name.
 
 Where the item was split: create the children, attach them, then update the item they came from
 so that its own text no longer claims what its children now carry. Never by listing them: the

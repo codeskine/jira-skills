@@ -25,27 +25,36 @@ aperto prima che lo sprint gli si chiuda sopra. Le domande sono quelle di uno Sc
 piano fatto su quello che la board contiene davvero regge l'impatto con la settimana, uno fatto su
 quello che tutti davano per scontato no.
 
-Due cose non le può fare affatto: creare uno sprint e avviarlo. Nessuna delle due è disponibile su
-nessuno dei due channel — la via con cui una skill parla a Jira — quindi tornano tutte e due a te,
-invece di essere simulate.
+Tre cose non le può fare affatto: creare uno sprint, avviarlo, e togliere lavoro da uno. Nessuna
+delle tre è disponibile su nessuno dei due channel — la via con cui una skill parla a Jira —
+quindi tornano tutte e tre a te invece di essere simulate; e per la terza ti consegna la decisione
+presa e una mossa da fare, non un rifiuto.
 
 ## Quando si attiva · quando no
 
 Si attiva quando la domanda è _quando_, e la risposta è uno sprint.
 
-| Se dici qualcosa come                             | La skill è                           |
-| ------------------------------------------------- | ------------------------------------ |
-| «metti questi quattro nello sprint»               | `jira-plan`                          |
-| «chiudi lo Sprint 24, venerdì finiamo»            | `jira-plan`                          |
-| «questi tre devono uscire nella 2.4»              | [`jira-release`](jira-release.it.md) |
-| «PROJ-121 non è pronto perché qualcuno lo prenda» | [`jira-refine`](jira-refine.it.md)   |
-| «fai partire PROJ-99, me ne occupo io»            | [`jira-advance`](jira-advance.it.md) |
-| «come sta andando lo sprint?»                     | [`jira-inspect`](jira-inspect.it.md) |
+| Se dici qualcosa come                              | La skill è                           |
+| -------------------------------------------------- | ------------------------------------ |
+| «metti questi quattro nello sprint»                | `jira-plan`                          |
+| «chiudi lo Sprint 24, venerdì finiamo»             | `jira-plan`                          |
+| «togli KAN-12 dallo sprint, rimettilo nel backlog» | `jira-plan`                          |
+| «mettilo nel backlog per bene» (un'idea nuova)     | [`jira-propose`](jira-propose.it.md) |
+| «questi tre devono uscire nella 2.4»               | [`jira-release`](jira-release.it.md) |
+| «PROJ-121 non è pronto perché qualcuno lo prenda»  | [`jira-refine`](jira-refine.it.md)   |
+| «fai partire PROJ-99, me ne occupo io»             | [`jira-advance`](jira-advance.it.md) |
+| «come sta andando lo sprint?»                      | [`jira-inspect`](jira-inspect.it.md) |
 
 Due di questi confini vale la pena dirli ad alta voce. Lo sprint dice _quando_ si affronta il
 lavoro, la fix version dice _cosa esce insieme_: sono assi ortogonali, e confonderli è il modo in
 cui il «quando» diventa in silenzio il «cosa». E un work item che non è pronto resta non pronto:
 `jira-plan` te lo dice prima di pianificarlo, e non lo rende pronto passando.
+
+**Backlog sono due parole in una.** Detto di un work item che esiste già — _rimetti KAN-12 nel
+backlog_ — è un posto sulla board, e la mossa è di questa skill. Detto di un'idea che nessuno ha
+ancora scritto — _mettilo nel backlog per bene_ — vuol dire registralo, e quello è
+[`jira-propose`](jira-propose.it.md), o [`jira-capture`](jira-capture.it.md) se è arrivato da
+qualcun altro. A separarli è se la cosa è già registrata, non la parola.
 
 Leggere uno sprint senza cambiarlo è di [`jira-inspect`](jira-inspect.it.md). Ma una richiesta che
 legge uno sprint **e poi lo cambia** — «fammi vedere cosa resta e togli i bloccati» — è una sola
@@ -84,14 +93,15 @@ spenta da una credenziale mancante non è una CLI mai configurata, e il report n
 sprint è attivo. Uno sprint chiuso ieri è esattamente il tipo di dato che una risposta ricordata
 sbaglia, e pianificare contro quella butta via la riunione per cui il piano è stato fatto.
 
-**4 · Due passi tornano a te.** Creare uno sprint e avviarlo sono **gap dichiarati**: non sono
-disponibili su nessuno dei due channel, nelle versioni di server e CLI a cui questo plugin si
-rivolge. Sono due problemi distinti e vengono consegnati a te allo stesso modo:
+**4 · Tre passi tornano a te.** Creare uno sprint, avviarlo e togliere lavoro da uno sono **gap
+dichiarati**: non sono disponibili su nessuno dei due channel, nelle versioni di server e CLI a cui
+questo plugin si rivolge. Sono tre problemi distinti e vengono consegnati a te allo stesso modo:
 
-| Il gap             | Cosa fa invece la skill                                                                                                                    |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| creare uno sprint  | riempie e chiude gli sprint ma non ne apre uno: ti chiede di crearlo sulla board, e prosegue quando esiste                                 |
-| avviare uno sprint | uno sprint che esiste già come `future` non può essere portato ad `active`: lo riempie e lo chiude, e ti chiede di avviarlo tu sulla board |
+| Il gap                 | Cosa fa invece la skill                                                                                                                     |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| creare uno sprint      | riempie e chiude gli sprint ma non ne apre uno: ti chiede di crearlo sulla board, e prosegue quando esiste                                  |
+| avviare uno sprint     | uno sprint che esiste già come `future` non può essere portato ad `active`: lo riempie e lo chiude, e ti chiede di avviarlo tu sulla board  |
+| togliere lavoro da uno | `jira sprint` sa aggiungere, chiudere ed elencare, e non sa rimuovere: nomina il work item e dove sta andando, e la mossa sulla board è tua |
 
 Un gap non è un channel che è giù. Un gap vale ovunque e dura finché non cambia il tooling; una CLI
 non raggiungibile non è supportata qui e ora, non dice niente sul tuo progetto, e torna quando
@@ -108,9 +118,15 @@ controllo sbagliato, non un controllo severo. Quello che non regge viene nominat
 manca, **prima** di entrare. Puoi pianificarlo lo stesso: è una decisione, ed è giusto che la
 prenda tu sapendo, invece che la prenda lo strumento al posto tuo.
 
-**6 · Chiudere: ogni work item non finito riceve una destinazione.** Lo sprint successivo, il
+**6 · Chiudere: ogni work item non finito riceve una destinazione, e la riceve prima.** Lo sprint successivo, il
 backlog, o qualcosa che nomini tu. Un work item lasciato senza risposta alla chiusura sparisce dal
-piano senza che nessuno l'abbia scelto, ed è l'unico esito da cui una review non si riprende.
+piano senza che nessuno l'abbia scelto, ed è l'unico esito da cui una review non si riprende —
+quindi le destinazioni si stabiliscono e ti vengono mostrate prima che qualcosa si chiuda, mai
+dopo. Nominate dopo sarebbero un resoconto e non una decisione.
+
+Chiudere è l'unica scrittura, ed è grossolana: il comando prende uno sprint e nient'altro, quindi
+dove un work item non finito atterri davvero lo decide Jira e non questa skill. Te lo dice al
+cancello e non dopo, e il resoconto nomina gli spostamenti che restano tuoi.
 
 **7 · Poi il draft gate**, il cancello che precede ogni scrittura su Jira. L'insieme intero compare
 in chat prima che qualcosa si muova. Cosa aggiunge questa skill al gate: elenca ogni work item che
@@ -215,9 +231,10 @@ il compito invece di inventare qualcosa che assomigli a uno sprint avviato.
 
 ## Cosa non fa
 
-- **Creare uno sprint, o avviarlo.** Nessuna delle due è disponibile su nessuno dei due channel. Ti
-  chiede di farle sulla board, e non mette una label o una convenzione di nomi al posto dello
-  sprint che manca.
+- **Creare uno sprint, avviarlo, o togliere lavoro da uno.** Nessuna delle tre è disponibile su
+  nessuno dei due channel. Ti chiede di farle sulla board — e per la terza prima ti nomina il work
+  item e dove sta andando, così quello che fai lì è una mossa sola e non un rebus. E non mette una
+  label o una convenzione di nomi al posto dello sprint che manca.
 - **Rendere pronto un work item.** Dice cosa manca e nomina [`jira-refine`](jira-refine.it.md). I
   criteri di accettazione scritti mentre si entra in uno sprint sono criteri che non ha concordato
   nessuno.

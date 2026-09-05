@@ -31,7 +31,7 @@ and fix versions.
 | statuses, and which transitions connect them           | so `jira-advance` offers only permitted transitions      |
 | fields that are required on creation, per work type    | so a draft is not rejected on write                      |
 | boards, and the active sprint of each                  | so `jira-plan` plans against reality                     |
-| fix versions                                           | so `jira-release` knows what already exists              |
+| fix versions, and whether each is released or archived | so `jira-release` knows what exists and what can ship    |
 | the MCP tool serving each operation in the channel map | so no tool name is hard-coded                            |
 | operations with no available tool                      | so degradation is explicit, not a surprise               |
 
@@ -39,16 +39,35 @@ and fix versions.
 
 A profile is valid when it states, at minimum: the project key, the work types with their
 hierarchy, the intents no work type serves, the statuses as far as they can be observed, the
-resolved operation → tool mapping, and the list of unsupported operations. Anything else is
-convenience.
+boards, the fix versions with the release state of each, the resolved operation → tool mapping,
+and the list of unsupported operations. Anything else is convenience.
+
+**Boards and fix versions are recorded in one of three states, never two.** They are listed, or
+the project has none, or they were **not read** because the channel that serves them did not
+answer. The third is not the second, and the difference is the whole of it: a skill that reads
+_no board_ where the profile means _nobody asked_ sends the user to create one instead of
+restoring a channel. Skills branch on that marker, so it is part of the contract and not a note
+about how the file is written.
 
 **Statuses are observable only where work already exists.** They are read from the items that
 occupy them, so a project holding no work item exposes none — which is the state of every project
 on the day it is created, and often the day this plugin is installed. A profile without them is
 valid, provided it says they were not observable yet and what will make them so. Nothing is lost
 by waiting: an empty project has no item whose status could be asked about, and the skill that
-moves an item between statuses never reads that table anyway — it asks Jira for that item, at that
-moment, because no table knows the condition that will refuse a transition.
+moves an item between statuses never proposes a transition from that table — it asks Jira for that
+item, at that moment, because no table knows the condition that will refuse one. What the table is
+for is the **shape**: which status is reachable from which. That is what makes a transition the
+user expected and did not get explainable rather than merely absent, and it is why the table is
+worth recording at all.
+
+**What makes an operation unsupported is this setup, not the channel map.** The map assigns every
+operation to a channel; the profile records whether this installation can actually perform it. An
+operation lands in the unsupported list when discovery resolves no tool for it, when the channel
+that serves it did not answer, when the account is not permitted, or when the concept is absent
+from this project. So **any** operation in the map can be unsupported here, including ones the map
+declares no gap for — a gap is a fact about the tooling everywhere, and this list is a fact about
+one project on one machine. A skill that depends on an operation says so when the profile lists
+it, and owes no argument for why it might be there.
 
 Absences are stated, not inferred. A skill acts on what the profile says; it does not audit a
 table for what is missing from it.

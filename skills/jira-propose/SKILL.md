@@ -1,6 +1,6 @@
 ---
 name: jira-propose
-description: "Jira value proposal author. Use when someone wants an outcome recorded on Jira in a form that survives a prioritisation discussion — the value sought, who benefits, how success will be known. Asks for the datum or metric behind the proposal, so priority rests on something checkable rather than on conviction. Not for relaying someone else's wish with no datum behind it (→ See codeskine/jira-skills@jira-capture), for reporting something broken (→ See codeskine/jira-skills@jira-diagnose), or for recording technical debt or risk (→ See codeskine/jira-skills@jira-assess)."
+description: "Jira value proposal author. Use when someone wants an outcome recorded on Jira in a form that survives a prioritisation discussion — the value sought, who benefits, how success will be known. Asks for the datum or metric behind the proposal, so priority rests on something checkable rather than on conviction. Not for relaying someone else's wish with no datum behind it at all — a count of the symptom clears that floor, a target is not required (→ See codeskine/jira-skills@jira-capture), for reporting something broken (→ See codeskine/jira-skills@jira-diagnose), or for recording technical debt or risk (→ See codeskine/jira-skills@jira-assess)."
 user-invocable: true
 license: MIT
 compatibility: Designed for Claude Code. Requires the Atlassian MCP server configured as "atlassian".
@@ -70,7 +70,7 @@ Fill [the template](assets/value-proposal.md).
 
 ## 7. Present and confirm
 
-Follow [the draft gate](../shared/references/draft-gate.md). What this intent adds: when the item
+Follow [the draft gate](../shared/references/draft-gate.md) in its **artifact** form. What this intent adds: when the item
 will have no parent, the gate says why not.
 
 ## 8. Write

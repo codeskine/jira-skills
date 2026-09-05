@@ -1,6 +1,6 @@
 ---
 name: jira-advance
-description: "Jira transition runner. Use when the user wants a Jira work item to reach its next status — start it, hand it over, put it back, close it — without opening Jira. Offers only the transitions the item allows at that moment, asked of Jira rather than inferred, and explains why an expected one is unavailable. Not for reading where things stand (→ See codeskine/jira-skills@jira-inspect), and not for planning a set of items into a sprint (→ See codeskine/jira-skills@jira-plan)."
+description: "Jira transition runner. Use when the user wants a Jira work item to reach its next status — start it, hand it over, put it back, close it — without opening Jira. Offers only the transitions the item allows at that moment, asked of Jira rather than inferred, and explains why an expected one is unavailable. Not for reading where things stand (→ See codeskine/jira-skills@jira-inspect), and not for moving a work item into or out of a sprint, whether one or many (→ See codeskine/jira-skills@jira-plan)."
 user-invocable: true
 license: MIT
 compatibility: Designed for Claude Code. Requires the Atlassian MCP server configured as "atlassian".
@@ -49,10 +49,30 @@ When the user expects a transition that is not there, say which of the two it is
 The first is something the user can act on. The second only a project admin can change.
 Reporting "unavailable" without saying which sends the user to the wrong person.
 
+**What tells them apart is the profile.** Its table of statuses records what is reachable from
+what — the shape of the Jira Workflow, which is the reason it is recorded at all — while Jira's
+answer for this item records what is available right now. The difference between the two is the
+cause:
+
+- **named in the shape, absent from Jira's answer** → the item. The path exists, and something
+  about this one is closing it.
+- **absent from both** → the Jira Workflow. There is no such path from this status, and no field
+  the user could fill would produce one.
+
+This is the one use that table has here, and it is not the use § 2 refuses: nothing is offered
+from it, and the transitions presented are still only the ones Jira returned.
+
+**Where the profile cannot answer, say so instead of choosing.** Two of its three states are
+silence — statuses not observable yet because the project holds no work item, and a table recorded
+as not read. Then report that the transition is not available and that which of the two causes it
+is cannot be established here, with the manual path, and name `jira-init` where a run would fill
+the table in. A cause named by guess sends the user to repair something that is not broken, which
+is worse than a cause not named.
+
 ## 5. Confirm and perform it
 
-Follow [the draft gate](../shared/references/draft-gate.md): the item, the status it is in, and
-the status it will reach. Then perform the transition through the tool the profile resolves; see
+Follow [the draft gate](../shared/references/draft-gate.md) in its **operation** form: the item,
+the status it is in, and the status it will reach. Then perform the transition through the tool the profile resolves; see
 [the channel map](../shared/references/channels.md).
 
 Report the status the item is in afterwards, read back rather than assumed. A transition can

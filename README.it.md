@@ -66,7 +66,7 @@ leggere prima di installare.
 | Claude Code                          | L'unico harness a cui questo plugin si rivolge                                                                                                                                                                                                                                                                                             |
 | L'Atlassian MCP server               | Work item, campi, commenti, transition, ricerca e metadati di progetto                                                                                                                                                                                                                                                                     |
 | — raggiungibile con l'id `atlassian` | Le skill dichiarano quell'id staticamente, quindi un server con qualunque altro nome per loro non esiste. Un connettore Atlassian aggiunto dalle impostazioni di claude.ai è uno di quei nomi: risulta connesso, espone i suoi tool sotto un identificatore proprio, e non serve nessuna skill qui. Aggiungere `atlassian` non lo disturba |
-| La `jira` CLI, autenticata           | Solo per la superficie Agile — board, sprint, backlog. Senza, `jira-plan` e l'elenco delle fix version non sono disponibili e tutto il resto continua a funzionare                                                                                                                                                                         |
+| La `jira` CLI, autenticata           | Solo per la superficie Agile — board, sprint, l'elenco delle fix version. Senza, `jira-plan` e quell'elenco non sono disponibili e tutto il resto continua a funzionare                                                                                                                                                                    |
 
 Il modo più semplice per ottenere quell'id è un `.mcp.json` alla radice del repository dove tracci
 il lavoro:
@@ -150,10 +150,10 @@ l'artefatto o il report che produce.
 
 **Avanzamento** — Fai avanzare un work item nel suo Jira Workflow e leggi a che punto sta.
 
-| Skill          | Cosa fa                                                                                                                                                                                       | Pagina                                  |
-| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
-| `jira-advance` | Porta un work item a un altro status.                                                                                                                                                         | [leggi](docs/skills/jira-advance.it.md) |
-| `jira-inspect` | Risponde a una domanda sullo stato senza cambiarne nessuno. Come procedono un parent e i suoi figli, cosa resta nello sprint, cos'è bloccato e da cosa, cosa contiene adesso una fix version. | [leggi](docs/skills/jira-inspect.it.md) |
+| Skill          | Cosa fa                                                     | Pagina                                  |
+| -------------- | ----------------------------------------------------------- | --------------------------------------- |
+| `jira-advance` | Porta un work item a un altro status.                       | [leggi](docs/skills/jira-advance.it.md) |
+| `jira-inspect` | Risponde a una domanda sullo stato senza cambiarne nessuno. | [leggi](docs/skills/jira-inspect.it.md) |
 
 <!-- skills:end -->
 

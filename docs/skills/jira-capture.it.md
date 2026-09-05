@@ -46,11 +46,18 @@ una decisione che nessuno ha preso.
 
 Qualcosa di rotto che arriva da fuori può essere di capture o di
 [`jira-diagnose`](jira-diagnose.it.md), e a decidere è **il materiale, non chi l'ha mandato**. Se
-il testo riportato porta già quello che rende un guasto riproducibile — i passi e l'ambiente — è
-la segnalazione di un difetto e appartiene a `jira-diagnose`, per quanto evidentemente sia
-arrivata da fuori. Se non porta né gli uni né l'altro, qui nessuno può fornirli, e registrare la
-richiesta con le parole di chi l'ha mandata è la versione onesta. Lo stesso test vale verso
-[`jira-propose`](jira-propose.it.md): un desiderio riportato senza un dato dietro è intake.
+il testo riportato porta già quello che rende un guasto riproducibile — i passi, e un ambiente che
+meriti il nome — è la segnalazione di un difetto e appartiene a `jira-diagnose`, per quanto
+evidentemente sia arrivata da fuori. Se non porta niente su cui qualcuno possa agire per vedere il
+guasto accadere, qui nessuno può fornirlo, e registrare la richiesta con le parole di chi l'ha
+mandata è la versione onesta. Quella soglia si legge su tutto il messaggio e mai come due caselle
+da spuntare. La superano i passi, o l'errore stesso; non la supera nominare il programma in cui si
+è rotto, o la versione che usano.
+
+Lo stesso test vale verso [`jira-propose`](jira-propose.it.md), dove la soglia è più bassa di
+quanto sembri. Un desiderio riportato senza nessuna cifra dietro è intake; uno che porta un
+conteggio del sintomo — _una quarantina di chiamate il mese scorso_ — è una proposta, e la skill
+chiede poi da cosa si capirà che ha funzionato.
 
 Il test è scritto apposta sul testo della richiesta e non sulle persone intorno. Se qualcuno, una
 volta interpellato, saprebbe rispondere è un fatto sul futuro della conversazione, e la decisione

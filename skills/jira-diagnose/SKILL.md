@@ -1,6 +1,6 @@
 ---
 name: jira-diagnose
-description: "Jira defect author. Use when the user reports that something is broken, behaves unexpectedly, or fails — and it has to reach Jira in a form someone who was not there can reproduce. Asks for the steps, the expected and the actual result, the environment, and carries the error or log verbatim. Not for something that works but will cost the team later (→ See codeskine/jira-skills@jira-assess), for something that works but serves its users poorly today (→ See codeskine/jira-skills@jira-propose), or for a fault relayed second-hand with nothing to reproduce it from — no steps, no environment (→ See codeskine/jira-skills@jira-capture)."
+description: "Jira defect author. Use when the user reports that something is broken, behaves unexpectedly, or fails — and it has to reach Jira in a form someone who was not there can reproduce. Asks for the steps, the expected and the actual result, the environment, and carries the error or log verbatim. Not for something that works but will cost the team later (→ See codeskine/jira-skills@jira-assess), for something that works but serves its users poorly today (→ See codeskine/jira-skills@jira-propose), or for a fault relayed second-hand that carries nothing anyone could act on to see it happen — steps or a verbatim error clear that floor, naming the product or where it ran does not (→ See codeskine/jira-skills@jira-capture)."
 user-invocable: true
 license: MIT
 compatibility: Designed for Claude Code. Requires the Atlassian MCP server configured as "atlassian".
@@ -80,7 +80,7 @@ Fill [the template](assets/defect-report.md).
 
 ## 8. Present and confirm
 
-Follow [the draft gate](../shared/references/draft-gate.md). What this intent adds: if the steps
+Follow [the draft gate](../shared/references/draft-gate.md) in its **artifact** form. What this intent adds: if the steps
 have not been walked through once as written, say so at the gate. Steps that were
 remembered rather than replayed are the most common reason a defect cannot be reproduced.
 

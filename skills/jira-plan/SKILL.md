@@ -1,6 +1,6 @@
 ---
 name: jira-plan
-description: "Jira sprint planner. Use when the user asks to fill or empty a sprint on a Jira board, or to close one and account for what was delivered and what was not. Reads the open sprints from the board rather than assuming them, moves a set of items in one approved operation, and flags work that is not ready before it is planned. A request that reads a sprint and then changes it is one operation, and belongs here. Not for reading what a sprint holds without changing it (→ See codeskine/jira-skills@jira-inspect), for deciding what ships together (→ See codeskine/jira-skills@jira-release), for making an item ready (→ See codeskine/jira-skills@jira-refine), or for transitioning a single item (→ See codeskine/jira-skills@jira-advance)."
+description: "Jira sprint planner. Use when the user asks to fill a sprint on a Jira board, to move a work item already recorded out of a sprint or onto the backlog, or to close one and account for what was delivered and what was not. Reads the open sprints from the board rather than assuming them, moves a set of items in one approved operation, and flags work that is not ready before it is planned. A request that reads a sprint and then changes it is one operation, and belongs here. Not for putting on the backlog something nobody has recorded yet — that is a proposal, not a placement (→ See codeskine/jira-skills@jira-propose), for reading what a sprint holds without changing it (→ See codeskine/jira-skills@jira-inspect), for deciding what ships together (→ See codeskine/jira-skills@jira-release), for making an item ready (→ See codeskine/jira-skills@jira-refine), or for transitioning a single item (→ See codeskine/jira-skills@jira-advance)."
 user-invocable: true
 license: MIT
 compatibility: Designed for Claude Code. Requires the Atlassian MCP server configured as "atlassian" and the jira CLI authenticated.
@@ -45,9 +45,15 @@ wrong, and planning against it wastes the meeting it was made for.
 
 ## 3. Say what cannot be done here
 
-Creating a sprint is one of the gaps [the channel map](../shared/references/channels.md)
-declares. When the user needs one, ask them to open it on the board and continue once it exists.
-Never present the gap as a failure: their own path around it takes a minute.
+Creating a sprint and starting one are gaps [the channel map](../shared/references/channels.md)
+declares, and so is taking work back out of a sprint. When the user needs any of them, ask them to
+do it on the board and continue once it is done. Never present a gap as a failure: their own path
+around it takes a minute.
+
+The third is the one users ask for by name — _take KAN-12 off the sprint_, _put it back on the
+backlog_. Name the item and where it is going, say the move is theirs to make on the board, and
+carry on with whatever does not depend on it. The backlog is where a work item is when it is in no
+sprint, so there is nothing to write to it: what they do on the board is the whole operation.
 
 ## 4. Filling a sprint
 
@@ -73,10 +79,30 @@ Every unfinished item then needs an explicit destination — the next sprint, th
 decision the user names. An item left unhandled at close disappears from the plan without anyone
 choosing that, which is the one outcome a review cannot recover from.
 
+Naming the destination is this skill's work; making the move out of the closing sprint is not, and
+§ 3 says why. Decide it for every item, then hand the moves over as one list rather than one at a
+time.
+
+**The destinations are settled before the close, never after.** Once the sprint is closed the items
+are wherever Jira has put them, and a destination named at that point is a report rather than a
+decision. Read what is unfinished, settle a destination for each, gate both together, close on
+approval.
+
+Closing is the only write here, and it is coarse: `jira sprint close` takes a sprint and nothing
+else, so where an unfinished item lands is Jira's to decide and not this skill's to direct. That
+belongs at the gate rather than in a footnote, and the report afterwards lists the moves still
+waiting on the user.
+
 ## 6. Present and confirm
 
-Follow [the draft gate](../shared/references/draft-gate.md). What this intent adds: the gate lists
-every item that will move, and every unrefined item among them, before anything moves.
+Follow [the draft gate](../shared/references/draft-gate.md) in its **operation** form: nothing here
+is authored. What this intent adds differs between its two operations.
+
+- **Filling a sprint** — every item that will move, and every unrefined item among them, before
+  anything moves.
+- **Closing one** — the sprint, what was delivered and what was not, the destination settled for
+  each unfinished item, and plainly that closing is all this skill will do: the moves stay with
+  the user, and Jira decides where anything left unmoved lands.
 
 ## 7. Write
 

@@ -45,11 +45,17 @@ adds at that point is a decision nobody made.
 
 Something broken that arrives from outside can be capture's or
 [`jira-diagnose`](jira-diagnose.md)'s, and what decides is **the material, not who sent it**. If
-the relayed text already carries what makes a fault reproducible — the steps and the environment —
-it is a defect report and belongs to `jira-diagnose`, however plainly it arrived from elsewhere.
-If it carries neither, nobody here can supply them, and recording the complaint in the sender's
-words is the honest version. The same test runs against [`jira-propose`](jira-propose.md): a
-relayed wish with no datum behind it is intake.
+the relayed text already carries what makes a fault reproducible — the steps, and an environment
+worth the name — it is a defect report and belongs to `jira-diagnose`, however plainly it arrived
+from elsewhere. If it carries nothing anyone could act on to see the fault happen, nobody here can
+supply that, and recording the complaint in the sender's words is the honest version. That bar is
+read against the whole message and never as boxes to tick. Steps, or the error itself, clear it;
+naming the program it broke in, or which version they run, does not.
+
+The same test runs against [`jira-propose`](jira-propose.md), where the bar is lower than it
+sounds. A relayed wish with no figure behind it at all is intake; one carrying a count of the
+symptom — _about forty calls last month_ — is a proposal, and the skill goes on to ask what
+success would have to look like.
 
 The test is deliberately written on the text of the request and not on the people around it.
 Whether someone, once asked, would know the answer is a fact about the conversation's future, and

@@ -1,31 +1,72 @@
 # The draft gate
 
-No write to Jira happens before the user has seen the complete artifact and approved it. One
-form, every skill, no exceptions other than the read-only skill, which never writes.
+No write to Jira happens before the user has seen exactly what it will do and approved it. One
+gate, every skill, no exceptions other than the read-only skill, which never writes.
+
+## Two forms
+
+What the user is shown takes one of two forms. Which one is decided by what the write produces,
+never by which skill is running.
+
+**An artifact gate** shows the thing that will exist: the complete content of a work item, section
+by section, before it is created or enriched. This is what the authoring intents present.
+
+**An operation gate** shows the change that will reach things that already exist: which items,
+what changes about each, and what will be true of them afterwards. Planning a sprint, closing one,
+assigning to a fix version and running a transition are all this shape. There is no artifact to
+assemble, and assembling one would mean inventing a document for the user to approve instead of
+the change they asked for.
+
+Both are the same gate — the same completeness, the same explicit approval, the same refusal to
+write anything approved in part. Only step 1 and the block in step 3 differ.
+
+One request can need both. A split creates children and may then place them; each is gated on its
+own, in the order the material forces.
 
 ## Procedure
 
-1. **Assemble the artifact in full.** Not a summary, not an outline: the exact content that
-   will be written, in the language the user is working in. In full means every section its
-   template defines and does not mark optional; a section that cannot be filled is raised at the
-   gate as a gap, never quietly dropped.
+1. **Assemble what is to be approved, in full.** Not a summary, not an outline.
+   - _An artifact:_ the exact content that will be written, in the language the user is working
+     in. In full means every section its template defines and does not mark optional; a section
+     that cannot be filled is raised at the gate as a gap, never quietly dropped.
+   - _An operation:_ every item it reaches, named, with what changes about each. Not a count and
+     not a sample — a list the user can refuse one line of. An operation touching more items than
+     are worth reading is one to ask the user to narrow, never one to summarise.
 2. **Present it in chat.** Never in a file. After a write the truth is Jira, and a local copy
    nobody reads is drift waiting to happen.
-3. **State the decisions the artifact carries**, immediately after it, as a short block:
+3. **State the decisions it carries**, immediately after it, as a short block.
+
+   For an artifact:
    - the title
    - the work type
    - the parent, if any
    - the sprint and the fix version, if any
    - anything the project marks as required and the draft has left empty
    - a work type standing in for an intent the project has none for, and whether the draft says so
-   - the intent the request carried that this artifact does not satisfy, and the skill that owns it
+
+   For an operation:
+   - what changes, and on which items
+   - what will be true of them once it has run, including anything that becomes irreversible
+   - what the operation will **not** do where a user could reasonably expect it to — a move this
+     plugin cannot make, a placement Jira decides for itself. An approval given without that is an
+     approval of an outcome the user did not picture.
+
+   For either:
+   - the intent the request carried that this does not satisfy, and the skill that owns it
+
 4. **Ask for explicit approval.** A question the user answers, not an announcement of what is
    about to happen.
 5. **On a change request**, apply it and return to step 2 with the revised artifact. Loop as
    many times as the user wants. Never write a partially approved artifact.
-6. **On approval**, perform the write through the channel the map assigns, then report the key
+6. **On a refusal**, write nothing and say what now holds: the artifact does not exist, or the
+   change did not happen, and what the user has instead. A refusal is an answer, not a failure —
+   do not re-present the draft unasked, do not offer a smaller version of it hoping that one
+   passes, and do not read a later unrelated message as a change of mind. Where the refused write
+   is one other skills depend on, name them and say what they will do instead: a refusal whose
+   consequences surface three steps later was not really answered.
+7. **On approval**, perform the write through the channel the map assigns, then report the key
    and the URL of what was created or changed.
-7. **On failure**, report what failed and what the state now is. Never retry a write silently:
+8. **On failure**, report what failed and what the state now is. Never retry a write silently:
    a duplicate work item is worse than an error message.
 
 ## What counts as approval

@@ -85,7 +85,8 @@ sessione non c'è nessun tool Atlassian, l'ambiente è a posto e la sessione è 
 nuova ed esegui di nuovo il controllo.
 
 **3 · Il controllo della CLI distingue due guasti diversi.** La `jira` CLI serve solo per il
-dominio Agile — board, sprint, backlog — quindi la sua assenza è una degradazione parziale, non un
+dominio Agile — board, sprint, l'elenco delle fix version — quindi la sua assenza è una
+degradazione parziale, non un
 ambiente morto, e il controllo prosegue fino in fondo comunque. Se è installata ma non risponde,
 due cause si somigliano dall'esterno e vogliono rimedi diversi. `/jira-doctor` stabilisce quale
 sia prima di prescrivere qualcosa, verificando separatamente la credenziale e il file di
@@ -165,7 +166,7 @@ skill parla a Jira — e per cosa possiede ciascuno.
 > `mcp__atlassian`. Lascialo dov'è e dichiara accanto a lui il server che serve, in un `.mcp.json`
 > alla radice di questo repository: le quattro righe sono sotto il report.
 >
-> Sulla CLI: `jira` 1.5.2 è installata, `jira me` non risponde, e le verifiche dicono
+> Sulla CLI: `jira` è installata, `jira me` non risponde, e le verifiche dicono
 > `credential: absent`, `config: present`, `shell: zsh`. Sotto zsh la riga di export va in
 > `~/.zshenv`: aggiungila e apri una sessione nuova.
 
@@ -217,7 +218,7 @@ MCP server       ❌  connesso, e inutilizzabile da queste skill
                  parte non autenticato — autenticalo prima di eseguire qualsiasi cosa
 
 Jira CLI         ❌  il token non è visibile a questa shell
-     trovato     jira version 1.5.2 · credential: absent · config: present · shell: zsh
+     trovato     credential: absent · config: present · shell: zsh
      perché      le skill raggiungono la CLI attraverso una shell non interattiva, che sotto
                  zsh legge ~/.zshenv e mai ~/.zshrc — un token esportato in ~/.zshrc funziona
                  nel tuo terminale ed è invisibile qui
@@ -233,7 +234,8 @@ Project profile  ❌  nessun project profile
      rimedio     esegui la skill jira-init — scopre il progetto e scrive il file
 
 Non ancora utilizzabile. Ogni skill di scrittura passa dall'MCP server, quindi parti da lì. La
-CLI presidia solo board, sprint e backlog; il resto del plugin funziona anche senza.
+CLI presidia solo board, sprint e l'elenco delle fix version; il resto del plugin funziona anche
+senza.
 ```
 
 Tre cose rendono questo report degno di essere letto invece che rieseguito. Le tre righe sono
@@ -248,7 +250,7 @@ Quando passano tutti e tre, lo stesso report sono quattro righe:
 
 ```text
 MCP server       ✅  atlassian — connesso
-Jira CLI         ✅  jira version 1.5.2 — autenticata
+Jira CLI         ✅  autenticata
 Project profile  ✅  .jira/project-profile.md
 
 Pronto.

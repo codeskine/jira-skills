@@ -47,7 +47,7 @@ A skill reaches Jira through one of two channels, never through a third:
 | Channel                  | Owns                                                                | Declared as      |
 | ------------------------ | ------------------------------------------------------------------- | ---------------- |
 | **Atlassian MCP server** | work items, fields, comments, transitions, search, project metadata | `mcp__atlassian` |
-| **Jira CLI** (`jira`)    | the Agile domain only — boards, sprints, backlog                    | `Bash(jira:*)`   |
+| **Jira CLI** (`jira`)    | the Agile domain only — boards, sprints, the fix version listing    | `Bash(jira:*)`   |
 
 The MCP server MUST be reachable under the server id `atlassian`; skills declare that id
 statically and `/jira-doctor` verifies it. A server connected under any other name — including
@@ -151,14 +151,20 @@ Read Glob Grep mcp__atlassian AskUserQuestion
 
 **Skill-specific extras:**
 
-| Extra tool     | When to add                                                     |
-| -------------- | --------------------------------------------------------------- |
-| `Bash(jira:*)` | Skills touching the Agile domain — boards, sprints, backlog     |
-| `Write` `Edit` | Skills that write the project profile — in practice `jira-init` |
-| `WebFetch`     | Skills that fetch external documentation or resources           |
-| `Agent`        | Skills that dispatch a sub-agent — none so far, so justify it   |
+| Extra tool     | When to add                                                      |
+| -------------- | ---------------------------------------------------------------- |
+| `Bash(jira:*)` | Skills touching the Agile domain — boards, sprints, fix versions |
+| `Write`        | Skills that write the project profile — in practice `jira-init`  |
+| `WebFetch`     | Skills that fetch external documentation or resources            |
+| `Agent`        | Skills that dispatch a sub-agent — none so far, so justify it    |
 
 `Bash(git:*)` is **not** in the default set. This plugin does not touch git.
+
+Exactly two of these entries are **channels** — `mcp__atlassian` and `Bash(jira:*)` — and a skill
+reaches a channel only by carrying that exact string. Everything else in the list is a capability
+of the agent, not a way to Jira. The rule lives in
+`skills/shared/references/channels.md` § What makes an entry a channel; do not restate it here or
+in a script.
 
 ## Skill Body
 

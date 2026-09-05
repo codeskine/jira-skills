@@ -102,7 +102,15 @@ modifica a un artefatto che tutto il team condivide, quindi passa dallo stesso d
 cancello che precede ogni scrittura su Jira — descritto nel
 [processo di sviluppo](../development-process.it.md): il project profile completo in chat, il
 progetto che descrive, quanto è stato trovato di ogni soggetto, e ogni operazione non supportata,
-quest'ultima perché è quello che sorprende dopo. Approvi, oppure chiedi modifiche e lo rivedi.
+quest'ultima perché è quello che sorprende dopo. Approvi, chiedi modifiche e lo rivedi, oppure dici
+di no.
+
+Dire di no merita una frase a parte qui, perché questa è l'unica skill in cui un rifiuto non resta
+locale alla cosa rifiutata. Non viene scritto niente, il che vuol dire che ogni altra skill del
+plugin si fermerà al proprio primo passo rimandandoti qui — quindi te lo dice quando rifiuti,
+invece di lasciartelo incontrare tre passi dopo, e lascia quello che ha trovato nella conversazione
+invece di mettere il file in un posto più tranquillo.
+
 All'approvazione scrive `.jira/project-profile.md`, creando la directory se serve e sovrascrivendo
 il project profile che ci fosse già: di quel file è l'unica scrittrice, quindi non c'è niente da
 fondere. Poi ti dice di committarlo, e perché.

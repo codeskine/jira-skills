@@ -24,26 +24,35 @@ everything unfinished before the sprint closes over it. The questions are a Scru
 made against what the board actually holds survives contact with the week, and one made against
 what everybody assumed does not.
 
-Two things it cannot do at all: create a sprint, and start one. Neither is available on either
-channel, so both come back to you rather than being simulated.
+Three things it cannot do at all: create a sprint, start one, and take work back out of one.
+None is available on either channel, so all three come back to you rather than being simulated —
+and for the third it hands you the decision made and one move to perform, rather than a refusal.
 
 ## When it fires · when it does not
 
 It fires when the question is _when_, and the answer is a sprint.
 
-| Say something like                            | And this is the skill you get     |
-| --------------------------------------------- | --------------------------------- |
-| "put these four in the sprint"                | `jira-plan`                       |
-| "close Sprint 24, we finish Friday"           | `jira-plan`                       |
-| "these three should go out in 2.4"            | [`jira-release`](jira-release.md) |
-| "PROJ-121 is not ready for anyone to pick up" | [`jira-refine`](jira-refine.md)   |
-| "start PROJ-99, I am on it"                   | [`jira-advance`](jira-advance.md) |
-| "how is the sprint looking?"                  | [`jira-inspect`](jira-inspect.md) |
+| Say something like                                | And this is the skill you get     |
+| ------------------------------------------------- | --------------------------------- |
+| "put these four in the sprint"                    | `jira-plan`                       |
+| "close Sprint 24, we finish Friday"               | `jira-plan`                       |
+| "take KAN-12 off the sprint, back to the backlog" | `jira-plan`                       |
+| "put that on the backlog properly" (a new idea)   | [`jira-propose`](jira-propose.md) |
+| "these three should go out in 2.4"                | [`jira-release`](jira-release.md) |
+| "PROJ-121 is not ready for anyone to pick up"     | [`jira-refine`](jira-refine.md)   |
+| "start PROJ-99, I am on it"                       | [`jira-advance`](jira-advance.md) |
+| "how is the sprint looking?"                      | [`jira-inspect`](jira-inspect.md) |
 
 Two of those boundaries are worth saying out loud. A sprint says _when_ work is tackled and a fix
 version says _what ships together_: they are orthogonal axes, and conflating them is how "when"
 quietly becomes "what". And an item that is not ready stays not ready — `jira-plan` tells you so
 before it plans it, and never makes it ready in passing.
+
+**The backlog is two words in one.** Said of a work item that already exists — _put KAN-12 back on
+the backlog_ — it is a place on the board, and this skill owns the move. Said of an idea nobody has
+written down — _put that on the backlog properly_ — it means record this, and that is
+[`jira-propose`](jira-propose.md), or [`jira-capture`](jira-capture.md) when it arrived from
+someone else. What separates them is whether the thing is recorded yet, not the word.
 
 Reading a sprint without changing it belongs to [`jira-inspect`](jira-inspect.md). But a request
 that reads a sprint **and then changes it** — "show me what is left and drop the blocked ones" —
@@ -81,14 +90,15 @@ by a missing credential is not a CLI that was never set up, and the report will 
 and which sprint is active. A sprint that closed yesterday is exactly the kind of fact a remembered
 answer gets wrong, and planning against it wastes the meeting the plan was made for.
 
-**4 · Two steps come back to you.** Creating a sprint and starting one are **declared gaps** — not
-available on either channel, on the server and CLI versions this plugin targets. They are distinct
-problems, and both are handed over the same way:
+**4 · Three steps come back to you.** Creating a sprint, starting one and taking work back out of
+one are **declared gaps** — not available on either channel, on the server and CLI versions this
+plugin targets. They are distinct problems, and all three are handed over the same way:
 
-| The gap         | What the skill does instead                                                                                                               |
-| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| create a sprint | it fills and closes sprints but cannot open one, so it asks you to create it on the board and continues once it exists                    |
-| start a sprint  | a sprint that already exists as `future` cannot be moved to `active`, so it fills it and closes it, and asks you to start it on the board |
+| The gap            | What the skill does instead                                                                                                               |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| create a sprint    | it fills and closes sprints but cannot open one, so it asks you to create it on the board and continues once it exists                    |
+| start a sprint     | a sprint that already exists as `future` cannot be moved to `active`, so it fills it and closes it, and asks you to start it on the board |
+| take work back out | `jira sprint` can add, close and list, and cannot remove — so it names the item and where it is going, and the move on the board is yours |
 
 A gap is not a channel that is down. A gap holds everywhere and lasts until the tooling changes; an
 unreachable CLI is unsupported here and now, says nothing about your project, and returns when the
@@ -103,9 +113,15 @@ not a check that is strict. What falls short is named, with what it is missing, 
 in. You can plan it anyway. That is a decision, and it should be one you take knowingly rather than
 one the tool takes for you.
 
-**6 · Closing: every unfinished item gets a destination.** The next sprint, the backlog, or
-something you name. An item left unhandled at close disappears from the plan without anyone
-choosing that, which is the one outcome a review cannot recover from.
+**6 · Closing: every unfinished item gets a destination, and it gets one first.** The next sprint,
+the backlog, or something you name. An item left unhandled at close disappears from the plan
+without anyone choosing that, which is the one outcome a review cannot recover from — so the
+destinations are settled and shown to you before anything closes, never after. Named afterwards
+they would be a report rather than a decision.
+
+Closing is the only write in it, and it is coarse: the command takes a sprint and nothing else, so
+where an unfinished item actually lands is Jira's to decide and not this skill's to direct. You are
+told that at the gate rather than after it, and the report names the moves that are still yours.
 
 **7 · Then the draft gate.** The whole set is presented in chat before anything moves. What this
 skill adds to the gate: it lists every item that will move, and every unrefined item among them.
@@ -208,9 +224,10 @@ looks like a started sprint.
 
 ## What it will not do
 
-- **Create a sprint, or start one.** Neither is available on either channel. It asks you to do both
-  on the board, and it will not stand a label or a naming convention in for the sprint that is
-  missing.
+- **Create a sprint, start one, or take work back out of one.** None of the three is available on
+  either channel. It asks you to do them on the board — and for the third it names the item and
+  where it is going first, so what you do there is one move rather than a puzzle. It will not stand
+  a label or a naming convention in for a sprint that is missing.
 - **Make an item ready.** It says what is missing and names [`jira-refine`](jira-refine.md).
   Acceptance criteria written on the way into a sprint are criteria nobody agreed to.
 - **Decide what ships together.** A sprint and a fix version are orthogonal axes;

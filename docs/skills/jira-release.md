@@ -15,8 +15,9 @@
 ## What it does
 
 Owns the fix version — what ships together. It lists the fix versions the project actually has
-with their state, shows what one of them contains and which part of that is unfinished, and
-assigns work items to one. Two things it cannot do at all — create a fix version, and release or
+with their state, assigns work items to one and takes them off again, and shows what one contains
+and which part
+of that is unfinished as the ground for a change you approve. Two things it cannot do at all — create a fix version, and release or
 archive one — it names before you ask and hands back to you in Jira.
 
 It is a Release Manager's question asked at the only useful moment. Knowing what shipping means
@@ -28,21 +29,26 @@ It fires when the question is what ships together.
 
 | Say something like                           | And this is the skill you get     |
 | -------------------------------------------- | --------------------------------- |
-| "what is actually in 2.4?"                   | `jira-release`                    |
 | "assign these two to 2.4"                    | `jira-release`                    |
+| "take PROJ-88 out of 2.4"                    | `jira-release`                    |
 | "which fix versions does this project have?" | `jira-release`                    |
+| "what's in 2.4? put these two in it as well" | `jira-release`                    |
+| "what is actually in 2.4?"                   | [`jira-inspect`](jira-inspect.md) |
 | "put these two in the sprint"                | [`jira-plan`](jira-plan.md)       |
 | "this one is too big for anyone to pick up"  | [`jira-refine`](jira-refine.md)   |
 | "where is the sprint at?"                    | [`jira-inspect`](jira-inspect.md) |
 
 Two boundaries are worth stating outright.
 
-**With [`jira-inspect`](jira-inspect.md).** Both can answer _what is in 2.4, and what of it is
-unfinished_, and both answer it the same way. What differs is what may happen next: `jira-inspect`
-reads and stops, and when you ask for a change it names the skill that owns it. `jira-release`
-reads the same thing as the opening of a conversation that can end in an assignment you approved.
-One question only `jira-release` can take: **which** fix versions the project has and what state
-each is in. That listing belongs to the Jira CLI, and `jira-inspect` does not declare it.
+**With [`jira-inspect`](jira-inspect.md).** The line is what the question is _about_. Ask about the
+work **inside** a fix version — _what is in 2.4, and what of it is unfinished_ — and it is
+`jira-inspect`, which reads and stops. Ask about the **version itself** — which ones the project
+has, whether 2.4 has been released or archived — and it is `jira-release`, because those live on the
+Jira CLI, which `jira-inspect` does not declare.
+
+`jira-release` also reads the contents, as the opening of a conversation that ends in an assignment
+you approved: ask for the contents and the change in one breath and you are here, not there. The
+line runs the same way on the sprint axis, so there is one rule to learn and not two.
 
 **With [`jira-plan`](jira-plan.md).** "Ships in 2.4" and "is in Sprint 25" are two independent
 facts about the same work item. The fix version says what it ships with, the sprint says when it
@@ -202,7 +208,9 @@ would read as though Thursday were taken care of.
 - **Release or archive a fix version**, by any means it has, and it will not stand in for the act
   with a transition or a label. Neither channel exposes it; you do it in Jira.
 - **Create a fix version.** The same gap, and the same answer: create it in Jira, then come back
-  and assign to it.
+  and assign to it. Coming back needs nothing re-run — the skill lists the fix versions from the
+  project rather than from the profile, so the one you just made is there. The profile is the
+  thing that is now behind, and it will say so and leave the re-run to you.
 - **Plan an item into a sprint** because it belongs to a fix version. That is
   [`jira-plan`](jira-plan.md), and it is a decision nobody made yet.
 - **Transition anything.** Assigning is an edit of a field; moving a work item to its next status

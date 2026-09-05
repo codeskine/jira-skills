@@ -3,13 +3,26 @@
 A skill reaches Jira through one of two channels, never through a third. It does not choose:
 it looks the operation up here.
 
-| Channel              | Owns                                                                            | Declared as      |
-| -------------------- | ------------------------------------------------------------------------------- | ---------------- |
-| Atlassian MCP server | work items, fields, comments, transitions, search, project metadata             | `mcp__atlassian` |
-| Jira CLI (`jira`)    | the Agile domain only — boards, sprints, and listings of epics and fix versions | `Bash(jira:*)`   |
+| Channel              | Owns                                                                 | Declared as      |
+| -------------------- | -------------------------------------------------------------------- | ---------------- |
+| Atlassian MCP server | work items, fields, comments, transitions, search, project metadata  | `mcp__atlassian` |
+| Jira CLI (`jira`)    | the Agile domain only — boards, sprints, and the fix version listing | `Bash(jira:*)`   |
 
 Two channels rather than one because neither covers the whole domain: the MCP server does not
 expose the Agile surface, and the CLI is not the channel the agent speaks natively.
+
+## What makes an entry a channel
+
+The **Declared as** column is the whole of the answer. A skill reaches a channel by carrying that
+exact string in its `allowed-tools`, and a skill that does not carry it cannot use that channel
+however plainly its steps describe one — the string is matched, never interpreted, and
+`allowed-tools` is static frontmatter that cannot read a file.
+
+So there are exactly two channel strings, and every other entry a skill declares — `Read`,
+`Write`, `Glob`, `Grep`, `AskUserQuestion` — is a capability of the agent and not a way to Jira. A
+third Jira channel would mean a third row in the table above and a third string; until there is
+one, a skill that needs an operation must declare the string the map assigns to it, and a skill
+that declares neither string reaches Jira not at all.
 
 ## Resolving MCP tool names
 
@@ -27,15 +40,15 @@ remediation.
 
 | Operation                                                  | Channel | Note                                   |
 | ---------------------------------------------------------- | ------- | -------------------------------------- |
-| list projects and their metadata                           | MCP     | falls back to `jira project list`      |
+| list projects and their metadata                           | MCP     |                                        |
 | read the work types of a project                           | MCP     | needed for every authoring skill       |
 | read the statuses and available transitions of a work item | MCP     | transitions are per item, not per type |
 | create a work item                                         | MCP     |                                        |
 | read a work item                                           | MCP     |                                        |
 | edit a work item                                           | MCP     |                                        |
 | comment on a work item                                     | MCP     |                                        |
-| transition a work item                                     | MCP     | `jira issue move` is the fallback      |
-| link two work items                                        | MCP     | `jira issue link` is the fallback      |
+| transition a work item                                     | MCP     |                                        |
+| link two work items                                        | MCP     |                                        |
 | set the parent of a work item                              | MCP     |                                        |
 | search work items by JQL                                   | MCP     | the backbone of every read-only view   |
 | list boards                                                | CLI     | `jira board list`                      |
@@ -44,6 +57,14 @@ remediation.
 | close a sprint                                             | CLI     | `jira sprint close`                    |
 | list the fix versions of a project                         | CLI     | `jira release list`                    |
 | assign a work item to a fix version                        | MCP     | it is a field on the work item         |
+| take a work item off a fix version                         | MCP     | the same field, cleared                |
+
+**The map carries no cross-channel fallbacks, and this is deliberate.** An operation has one
+channel. Where the profile resolves no tool for an MCP operation,
+[discovery](discovery.md) governs — say so and offer the manual path — rather than reaching for
+the CLI. A fallback would have to be declared in `allowed-tools` by the skill that needs it, and
+`jira issue move` and `jira issue link` are not the Agile domain: declaring the CLI for them would
+widen the perimeter this map exists to hold, for a path no skill has ever taken.
 
 ## Declared gaps
 
@@ -56,12 +77,13 @@ on this machine** — a CLI with no token — is a different thing: it is unsupp
 it returns when the channel does, and it says nothing about the project. Both are announced;
 only the first is permanent, and the profile records which is which.
 
-| Missing operation                | Consequence                                                                                                                                                                       |
-| -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| create a sprint                  | `jira-plan` can fill and close sprints but cannot create one. It asks the user to create the sprint on the board, then continues.                                                 |
-| start a sprint                   | Distinct from creating one: a sprint that already exists as `future` cannot be moved to `active`. `jira-plan` fills it and closes it, and asks the user to start it on the board. |
-| create a fix version             | `jira-release` can list fix versions and assign work to them, but the fix version itself is created by the user in Jira.                                                          |
-| release or archive a fix version | Same. The skill reports what the fix version contains and stops at the release action.                                                                                            |
+| Missing operation                | Consequence                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| create a sprint                  | `jira-plan` can fill and close sprints but cannot create one. It asks the user to create the sprint on the board, then continues.                                                                                                                                                                                                                                                                                                      |
+| start a sprint                   | Distinct from creating one: a sprint that already exists as `future` cannot be moved to `active`. `jira-plan` fills it and closes it, and asks the user to start it on the board.                                                                                                                                                                                                                                                      |
+| create a fix version             | `jira-release` can list fix versions and assign work to them, but the fix version itself is created by the user in Jira.                                                                                                                                                                                                                                                                                                               |
+| release or archive a fix version | Same. The skill reports what the fix version contains and stops at the release action.                                                                                                                                                                                                                                                                                                                                                 |
+| move a work item out of a sprint | `jira-plan` can fill a sprint and close one, and cannot take work back out of either: `jira sprint` carries `add`, `close` and `list`, and no removal. Whether the MCP server can write the Sprint field is a fact about the project's own configuration and is not assumable, so the plugin treats it as absent. The skill names the destination — the next sprint, or the backlog — and asks the user to move the item on the board. |
 
 If a future MCP server exposes any of these, the profile will record it during discovery and the
 gap closes without touching a skill. That is the whole point of resolving operations through the

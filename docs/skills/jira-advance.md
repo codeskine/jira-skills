@@ -75,6 +75,17 @@ the two it is:
 - **the Jira Workflow** — no such transition exists from this status at all, for anyone. Only a
   project admin adds a path that is not there.
 
+It tells them apart by comparing two things it already has. The project profile records which
+status is reachable from which — the **shape** of your Jira Workflow, which is what that table is
+for — and Jira's answer for this work item records what is available **right now**. Named in the
+shape and missing from Jira's answer means the path exists and something about this item is
+closing it. Missing from both means there is no path.
+
+Where the profile cannot answer — statuses not observable yet because the project holds no work
+item, or a table it records as not read — it says the cause cannot be established here, gives you
+the manual path, and names `jira-init` if a run would fill the table in. A cause named by guess
+would send you to repair something that is not broken, and that is worse than a cause not named.
+
 **5 · Then the draft gate.** There is no artifact to show here, so what the gate carries is the
 item, the status it is in, and the status it will reach; you approve, or you ask for something
 else and see the choice again. Where the item is held by someone else, the gate says so rather

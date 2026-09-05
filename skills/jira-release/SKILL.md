@@ -1,6 +1,6 @@
 ---
 name: jira-release
-description: "Jira fix version manager. Use when the user asks what a Jira fix version contains, wants to assign work to one, or wants to know what is still unfinished before shipping it. Treats what ships together as a separate question from when work is tackled. Not for planning a sprint (→ See codeskine/jira-skills@jira-plan), for making an item ready (→ See codeskine/jira-skills@jira-refine), or for reading progress without changing anything (→ See codeskine/jira-skills@jira-inspect)."
+description: "Jira fix version manager. Use when the user asks to assign work to a Jira fix version or take it off one, or for the list of fix versions the project has, or whether one of them has been released or archived. Treats what ships together as a separate question from when work is tackled. A request that reads a fix version and then changes it is one operation, and belongs here. Not for what is inside a fix version rather than the version itself — what one holds, or what of it is unfinished — read without changing anything (→ See codeskine/jira-skills@jira-inspect), for planning a sprint (→ See codeskine/jira-skills@jira-plan), or for making an item ready (→ See codeskine/jira-skills@jira-refine)."
 user-invocable: true
 license: MIT
 compatibility: Designed for Claude Code. Requires the Atlassian MCP server configured as "atlassian". Listing fix versions needs the jira CLI authenticated; assigning work to one does not.
@@ -30,9 +30,16 @@ project has and their state.
 
 Creating a fix version, and releasing or archiving one, are gaps
 [the channel map](../shared/references/channels.md) declares. Say so before the user asks for
-them, ask them to do it in Jira, and continue on the other side. This skill reports what a fix
-version contains and stops there; it never approximates the release with a status change or a
-label.
+them, ask them to do it in Jira, and continue on the other side. This skill shows what a fix
+version contains on the way to a change and stops there; it never approximates the release with a
+status change or a label.
+
+**Continuing is literal.** § 3 reads the fix versions from the project rather than from the
+profile, so one created while the user was away is there and can be assigned to at once — nothing
+has to be re-run first. What is now behind is the profile, and that is the state
+[discovery](../shared/references/discovery.md) § Staleness names exactly: a fix version the
+profile does not list. Say so, and leave the run to them. The work in hand does not need it; the
+next skill to read the profile does.
 
 ## 3. Read the fix versions as they are
 
@@ -54,9 +61,18 @@ For the fix version in question: what is assigned to it, and of that, what is un
 category. This is the answer to "what does shipping this mean", and it is worth giving before
 anyone asks for it.
 
+A question that only asks — what is in 4.10, what of it is still open — and changes nothing is not
+this skill: `jira-inspect` reads and stops, and owns that. Here the same picture is the ground for
+an assignment the user then approves.
+
 ## 5. Assign work to a fix version
 
-The fix version is a field on the work item, so assigning is an edit, not a transition.
+The fix version is a field on the work item, so assigning is an edit, not a transition. The way off
+is the way on: moving an item to a different fix version sets the field, taking it off one clears
+it, and neither is a release nor needs the Agile channel.
+
+Say which of the two is happening. An item that leaves 4.10 for 4.11 and one that leaves 4.10 for
+nothing are different decisions, and only one of them has somewhere to be.
 
 Assign independently of any sprint. An item can belong to a sprint and a fix version at once, and
 the two answer different questions: the sprint says when it is tackled, the fix version says what
@@ -73,8 +89,9 @@ the unfinished items after they do it.
 
 ## 7. Present and confirm
 
-Follow [the draft gate](../shared/references/draft-gate.md). What this intent adds: the gate lists
-every item whose fix version will change, and the one it will change to.
+Follow [the draft gate](../shared/references/draft-gate.md) in its **operation** form: nothing here
+is authored. What this intent adds: the gate lists every item whose fix version will change, and the one it will change to — or, where it is being
+taken off one, that it will end up assigned to none.
 
 ## 8. Write
 
