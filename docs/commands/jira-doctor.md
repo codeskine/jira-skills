@@ -91,20 +91,33 @@ configuration file separately. Neither test prints your token, and neither must 
 
 | What it finds                             | What it means                                               | What you do                                 |
 | ----------------------------------------- | ----------------------------------------------------------- | ------------------------------------------- |
-| credential absent                         | the token is not visible to the shell the skills use        | export it in `~/.zshenv`                    |
+| credential absent                         | the token is not visible to the shell the skills use        | export it where your shell reads it, below  |
 | credential present, configuration absent  | installed but never configured                              | run `jira init` yourself, it is interactive |
 | credential present, configuration present | the credential is refused — expired or revoked, most likely | a new token, exported the same way          |
 
 The first row is the one that catches people. Skills reach the CLI through `Bash(jira:*)`, a
-**non-interactive** shell, and a non-interactive shell reads only the startup file every shell
-reads — `~/.zshenv` under zsh, never `~/.zshrc`. A token exported in `~/.zshrc` therefore works
-perfectly in your own terminal and is invisible to every skill, which is exactly what a CLI that
-was never set up looks like. The line goes in your own dotfile, so the command reports the file and
-the line and never edits it for you:
+**non-interactive** shell, and which startup file such a shell reads — if any — depends on the
+shell. A token exported from a file only an interactive shell reads therefore works perfectly in
+your own terminal and is invisible to every skill, which is exactly what a CLI that was never set
+up looks like.
+
+So the command establishes your shell before it names a file, because the answer is not the same
+file — and under one of the three it is not a file at all:
+
+| Your shell | Where the export belongs                                                                                                                                     |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `zsh`      | `~/.zshenv`, read by every zsh. Never `~/.zshrc`, which only an interactive one reads.                                                                       |
+| `bash`     | `~/.bash_profile` or `~/.profile` — `~/.bashrc` will not do it, because a non-interactive bash reads no startup file of its own unless `BASH_ENV` names one. |
+| `fish`     | `set -Ux JIRA_API_TOKEN …` at the prompt: a universal exported variable, which lives outside any startup file.                                               |
+
+For zsh and bash the line is the same, and it goes in your own configuration, so the command
+reports the file and the line and never edits it for you:
 
 ```bash
 export JIRA_API_TOKEN=<token from https://id.atlassian.com/manage-profile/security/api-tokens>
 ```
+
+Whatever the shell, the change reaches only sessions you start afterwards.
 
 `jira init` is the remedy for the second row only, and it comes second on purpose: it
 authenticates while it runs, so on a missing token it answers `401 Unauthorized` and writes
@@ -147,8 +160,8 @@ skill goes through it; profile missing means run `jira-init`. See
 > of this repository — I have printed the four lines below the report.
 >
 > For the CLI: `jira` 1.5.2 is installed, `jira me` does not answer, and the probes say
-> `credential: absent`, `config: present`. Add the export line to `~/.zshenv` and open a new
-> session.
+> `credential: absent`, `config: present`, `shell: zsh`. Under zsh the export line goes in
+> `~/.zshenv` — open a new session after it.
 
 **You**
 
@@ -160,7 +173,7 @@ skill goes through it; profile missing means run `jira-init`. See
 > configuration file is already there; what is missing is the token, in the shell the skills use.
 > `jira init` authenticates while it runs, so without the token it would answer `401 Unauthorized`
 > and write nothing, and you would come back thinking your configuration is broken. Export
-> `JIRA_API_TOKEN` in `~/.zshenv` — not `~/.zshrc`, which a non-interactive shell never reads —
+> `JIRA_API_TOKEN` in `~/.zshenv` — not `~/.zshrc`, which a non-interactive zsh never reads —
 > and run me again.
 
 **You**
@@ -199,7 +212,7 @@ MCP server       ❌  connected, and unusable by these skills
                  it starts unauthenticated — authenticate it before running anything
 
 Jira CLI         ❌  the token is not visible to this shell
-     found       jira version 1.5.2 · credential: absent · config: present
+     found       jira version 1.5.2 · credential: absent · config: present · shell: zsh
      why         skills reach the CLI through a non-interactive shell, which under zsh reads
                  ~/.zshenv and never ~/.zshrc — a token exported in ~/.zshrc works in your
                  own terminal and is invisible here
@@ -240,7 +253,7 @@ Ready.
 
 - **Log you in.** No interactive login, ever — not the MCP server's authentication, not
   `jira init`. It prints the command and stops.
-- **Write configuration for you.** Not `.mcp.json`, not `~/.zshenv`, not
+- **Write configuration for you.** Not `.mcp.json`, not your shell's startup file, not
   `.jira/project-profile.md`. One of those is your own dotfile, and the last one belongs to
   [`jira-init`](../skills/jira-init.md).
 - **Print your credential.** The probes report presence or absence and never a value.

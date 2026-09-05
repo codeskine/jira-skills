@@ -92,22 +92,35 @@ sia prima di prescrivere qualcosa, verificando separatamente la credenziale e il
 configurazione. Nessuna delle due verifiche stampa il tuo token, e nessuna deve mai essere fatta
 stampare.
 
-| Cosa trova                                    | Cosa significa                                                        | Cosa fai                                   |
-| --------------------------------------------- | --------------------------------------------------------------------- | ------------------------------------------ |
-| credenziale assente                           | il token non è visibile alla shell che usano le skill                 | esportalo in `~/.zshenv`                   |
-| credenziale presente, configurazione assente  | installata ma mai configurata                                         | esegui tu `jira init`, è interattivo       |
-| credenziale presente, configurazione presente | la credenziale è rifiutata — scaduta o revocata, con ogni probabilità | un token nuovo, esportato allo stesso modo |
+| Cosa trova                                    | Cosa significa                                                        | Cosa fai                                    |
+| --------------------------------------------- | --------------------------------------------------------------------- | ------------------------------------------- |
+| credenziale assente                           | il token non è visibile alla shell che usano le skill                 | esportalo dove la tua shell lo legge, sotto |
+| credenziale presente, configurazione assente  | installata ma mai configurata                                         | esegui tu `jira init`, è interattivo        |
+| credenziale presente, configurazione presente | la credenziale è rifiutata — scaduta o revocata, con ogni probabilità | un token nuovo, esportato allo stesso modo  |
 
 La prima riga è quella su cui si inciampa. Le skill raggiungono la CLI attraverso `Bash(jira:*)`,
-una shell **non interattiva**, e una shell non interattiva legge solo il file di avvio che ogni
-shell legge — `~/.zshenv` sotto zsh, mai `~/.zshrc`. Un token esportato in `~/.zshrc` funziona
-quindi benissimo nel tuo terminale ed è invisibile a ogni skill, che è esattamente l'aspetto di
-una CLI mai configurata. La riga va in un tuo dotfile, quindi il comando riporta il file e la riga
-e non la scrive mai al posto tuo:
+una shell **non interattiva**, e quale file di avvio una shell così legga — ammesso che ne legga
+uno — dipende dalla shell. Un token esportato da un file che legge solo una shell interattiva
+funziona quindi benissimo nel tuo terminale ed è invisibile a ogni skill, che è esattamente
+l'aspetto di una CLI mai configurata.
+
+Per questo il comando stabilisce quale sia la tua shell prima di nominare un file: la risposta non
+è lo stesso file, e sotto una delle tre non è affatto un file.
+
+| La tua shell | Dove va l'export                                                                                                                                                           |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `zsh`        | `~/.zshenv`, che ogni zsh legge. Mai `~/.zshrc`, che legge solo una shell interattiva.                                                                                     |
+| `bash`       | `~/.bash_profile` oppure `~/.profile` — `~/.bashrc` non basta, perché una bash non interattiva non legge alcun file di avvio suo, a meno che `BASH_ENV` non ne nomini uno. |
+| `fish`       | `set -Ux JIRA_API_TOKEN …` al prompt: una variabile universale esportata, che vive fuori da ogni file di avvio.                                                            |
+
+Per zsh e bash la riga è la stessa, e va in una tua configurazione, quindi il comando riporta il
+file e la riga e non la scrive mai al posto tuo:
 
 ```bash
 export JIRA_API_TOKEN=<token da https://id.atlassian.com/manage-profile/security/api-tokens>
 ```
+
+Qualunque sia la shell, la modifica raggiunge solo le sessioni che apri dopo.
 
 `jira init` è il rimedio solo per la seconda riga, e viene per secondo apposta: si autentica
 mentre gira, quindi senza token risponde `401 Unauthorized` e non scrive niente. Prescritto per
@@ -153,8 +166,8 @@ skill parla a Jira — e per cosa possiede ciascuno.
 > alla radice di questo repository: le quattro righe sono sotto il report.
 >
 > Sulla CLI: `jira` 1.5.2 è installata, `jira me` non risponde, e le verifiche dicono
-> `credential: absent`, `config: present`. Aggiungi la riga di export a `~/.zshenv` e apri una
-> sessione nuova.
+> `credential: absent`, `config: present`, `shell: zsh`. Sotto zsh la riga di export va in
+> `~/.zshenv`: aggiungila e apri una sessione nuova.
 
 **Tu**
 
@@ -166,7 +179,7 @@ skill parla a Jira — e per cosa possiede ciascuno.
 > l'hai già; quello che manca è il token, nella shell che usano le skill. `jira init` si autentica
 > mentre gira, quindi senza token risponderebbe `401 Unauthorized` e non scriverebbe niente, e
 > torneresti qui convinto che la tua configurazione sia rotta. Esporta `JIRA_API_TOKEN` in
-> `~/.zshenv` — non in `~/.zshrc`, che una shell non interattiva non legge mai — e rieseguimi.
+> `~/.zshenv` — non in `~/.zshrc`, che una zsh non interattiva non legge mai — e rieseguimi.
 
 **Tu**
 
@@ -204,7 +217,7 @@ MCP server       ❌  connesso, e inutilizzabile da queste skill
                  parte non autenticato — autenticalo prima di eseguire qualsiasi cosa
 
 Jira CLI         ❌  il token non è visibile a questa shell
-     trovato     jira version 1.5.2 · credential: absent · config: present
+     trovato     jira version 1.5.2 · credential: absent · config: present · shell: zsh
      perché      le skill raggiungono la CLI attraverso una shell non interattiva, che sotto
                  zsh legge ~/.zshenv e mai ~/.zshrc — un token esportato in ~/.zshrc funziona
                  nel tuo terminale ed è invisibile qui
@@ -245,8 +258,8 @@ Pronto.
 
 - **Autenticarti.** Nessun login interattivo, mai: né l'autenticazione dell'MCP server né
   `jira init`. Stampa il comando e si ferma.
-- **Scrivere configurazione al posto tuo.** Né `.mcp.json`, né `~/.zshenv`, né
-  `.jira/project-profile.md`. Uno di questi è un tuo dotfile, e l'ultimo è di
+- **Scrivere configurazione al posto tuo.** Né `.mcp.json`, né il file di avvio della tua shell,
+  né `.jira/project-profile.md`. Uno di questi è un tuo dotfile, e l'ultimo è di
   [`jira-init`](../skills/jira-init.it.md).
 - **Stampare la tua credenziale.** Le verifiche riportano presenza o assenza, mai un valore.
 - **Fermarsi al primo fallimento.** Tutti e tre i controlli girano, e una CLI assente non chiude
