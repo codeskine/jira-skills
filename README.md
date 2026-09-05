@@ -116,15 +116,15 @@ your whole team, and every future session, learns the same facts without asking 
 
 | Skill          | What it does                                                                                                                                                                  |
 | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `jira-plan`    | Jira sprint planner. Use when the user asks what is in the current sprint, wants to fill or empty one, or wants to close one and see what was delivered.                      |
+| `jira-plan`    | Jira sprint planner. Use when the user asks to fill or empty a sprint on a Jira board, or to close one and account for what was delivered and what was not.                   |
 | `jira-release` | Jira fix version manager. Use when the user asks what a Jira fix version contains, wants to assign work to one, or wants to know what is still unfinished before shipping it. |
 
 **Progress** — Advance a work item through its Jira Workflow and read where it stands.
 
-| Skill          | What it does                                                                                                                                                                                                                                                 |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `jira-advance` | Jira transition runner. Use when the user wants a Jira work item to reach its next status — start it, hand it over, put it back, close it — without opening Jira.                                                                                            |
-| `jira-inspect` | Jira read-only reporter. Use when the user asks where something stands on Jira — how a parent and its children are progressing, what a sprint has left, what is blocked, what a fix version currently contains — and expects an answer rather than a change. |
+| Skill          | What it does                                                                                                                                                                                                                                                                      |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `jira-advance` | Jira transition runner. Use when the user wants a Jira work item to reach its next status — start it, hand it over, put it back, close it — without opening Jira.                                                                                                                 |
+| `jira-inspect` | Jira read-only reporter. Use when the user asks where something stands on Jira — how a parent and its children are progressing, what a sprint contains and what it has left, what is blocked, what a fix version currently contains — and expects an answer rather than a change. |
 
 <!-- skills:end -->
 

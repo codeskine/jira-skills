@@ -251,6 +251,16 @@
       "why": "Read-only, no container named."
     },
     {
+      "id": "sel-inspect-3",
+      "category": "selection",
+      "prompt": "What's in the current sprint?",
+      "expect_skill": "jira-inspect",
+      "expect_not": [
+        "jira-plan"
+      ],
+      "why": "A sprint read that changes nothing. The half of the pair jira-plan gives up."
+    },
+    {
       "id": "sel-init-1",
       "category": "selection",
       "prompt": "I've just installed this on our repo. Set it up.",

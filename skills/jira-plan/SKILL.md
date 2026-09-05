@@ -1,6 +1,6 @@
 ---
 name: jira-plan
-description: "Jira sprint planner. Use when the user asks what is in the current sprint, wants to fill or empty one, or wants to close one and see what was delivered. Reads the open sprints from the board rather than assuming them, moves a set of items in one approved operation, and flags work that is not ready before it is planned. Not for deciding what ships together (→ See codeskine/jira-skills@jira-release), for making an item ready (→ See codeskine/jira-skills@jira-refine), or for transitioning a single item (→ See codeskine/jira-skills@jira-advance)."
+description: "Jira sprint planner. Use when the user asks to fill or empty a sprint on a Jira board, or to close one and account for what was delivered and what was not. Reads the open sprints from the board rather than assuming them, moves a set of items in one approved operation, and flags work that is not ready before it is planned. A request that reads a sprint and then changes it is one operation, and belongs here. Not for reading what a sprint holds without changing it (→ See codeskine/jira-skills@jira-inspect), for deciding what ships together (→ See codeskine/jira-skills@jira-release), for making an item ready (→ See codeskine/jira-skills@jira-refine), or for transitioning a single item (→ See codeskine/jira-skills@jira-advance)."
 user-invocable: true
 license: MIT
 compatibility: Designed for Claude Code. Requires the Atlassian MCP server configured as "atlassian" and the jira CLI authenticated.
