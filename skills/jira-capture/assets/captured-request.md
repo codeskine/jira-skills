@@ -41,7 +41,12 @@ draft gate can raise them. Omit this section when there are none.>
 
 <The statement that this item is raw: captured as it arrived, with no acceptance criteria, no
 agreed scope and no estimate, and therefore not ready to be planned. Names `jira-refine` as the
-intent that owns it next.>
+intent that owns it next.
+
+This section carries no _Omit this section when …_ because there is no such case: everything this
+template writes is raw by construction. It is not permanent either — `jira-refine` removes the
+claim when it discharges it, and the section goes with it. Mandatory here and absent there are two
+moments, not two templates disagreeing.>
 
 ## Work type
 
