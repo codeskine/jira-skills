@@ -66,6 +66,31 @@ If a future MCP server exposes any of these, the profile will record it during d
 gap closes without touching a skill. That is the whole point of resolving operations through the
 profile rather than through hard-coded calls.
 
+## When the CLI channel is not reachable
+
+`jira me` fails for two different reasons, and they take different remedies. Naming the wrong one
+sends the user against a wall, so establish which it is before prescribing anything.
+
+**The credential is not visible to the shell the skills use.** A skill reaches the CLI through
+`Bash(jira:*)`, which runs a **non-interactive** shell — and a non-interactive shell reads only
+the startup file that every shell reads, `~/.zshenv` under zsh, never `~/.zshrc`. A token
+exported in `~/.zshrc` therefore works in the user's own terminal and is invisible here, which
+looks exactly like a CLI that was never set up. The remedy is one line in that file:
+
+```bash
+export JIRA_API_TOKEN=<token from https://id.atlassian.com/manage-profile/security/api-tokens>
+```
+
+It is the user's own dotfile: report the line and the file, and never edit it for them.
+
+**The configuration was never generated.** Only here is `jira init` the remedy, and it comes
+**second**: it authenticates while it runs, so without the credential it answers
+`401 Unauthorized` and writes nothing.
+
+Test for the credential without ever printing it, and look for the configuration file rather than
+assuming either state. A CLI that is installed, configured and merely unlit by a missing
+credential is not a CLI that was never set up, and the report must not say it was.
+
 ## What a skill must never do
 
 - Call a channel for an operation the map assigns to the other one.
