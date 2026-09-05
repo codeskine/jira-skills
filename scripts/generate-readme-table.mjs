@@ -7,8 +7,19 @@
 //
 // Groups come from skills.sh.json; names and summaries from each SKILL.md frontmatter. Run with
 // --check to fail instead of writing, which is what a pre-publish check wants.
+//
+// The result is handed to Prettier before it is written. Prettier owns Markdown formatting in
+// this repository, and a table it would re-pad is a table that drifts on the next `prettier
+// --write` — so the generator asks it rather than imitating it. Imitating it is harder than it
+// looks: Prettier pads to display width, and an em dash counts two, which is most of the rows
+// here.
+//
+// Unlike the integrity check and the tests, this one needs `npm install` first: Prettier is a
+// pinned devDependency. Run it as `npm run readme`.
 
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
+
+import { format, resolveConfig } from "prettier";
 
 import { parseFrontmatter } from "./skill-frontmatter.mjs";
 
@@ -54,7 +65,10 @@ if (before === -1 || after === -1) {
   process.exit(1);
 }
 
-const updated = `${readme.slice(0, before + START.length)}\n\n${table}\n\n${readme.slice(after)}`;
+const updated = await format(
+  `${readme.slice(0, before + START.length)}\n\n${table}\n\n${readme.slice(after)}`,
+  { ...(await resolveConfig("README.md")), parser: "markdown" },
+);
 
 if (process.argv.includes("--check")) {
   if (updated !== readme) {
