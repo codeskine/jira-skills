@@ -1,6 +1,6 @@
 ---
 name: jira-advance
-description: "Jira transition runner. Use when the user wants a Jira work item to reach its next status — start it, hand it over, put it back, close it — without opening Jira. Offers only the transitions the item allows at that moment, asked of Jira rather than inferred, and explains why an expected one is unavailable. Not for reading where things stand (→ See codeskine/jira-skills@jira-inspect), and not for planning a set of items into a sprint (→ See codeskine/jira-skills@jira-plan)."
+description: "Jira transition runner. Use when the user wants a Jira work item to reach its next status — start it, hand it over, put it back, close it — without opening Jira. Offers only the transitions the item allows at that moment, asked of Jira rather than inferred, and explains why an expected one is unavailable. Not for reading where things stand (→ See codeskine/jira-skills@jira-inspect), and not for moving a work item into or out of a sprint, whether one or many (→ See codeskine/jira-skills@jira-plan)."
 user-invocable: true
 license: MIT
 compatibility: Designed for Claude Code. Requires the Atlassian MCP server configured as "atlassian".

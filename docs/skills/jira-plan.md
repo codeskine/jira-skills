@@ -24,8 +24,9 @@ everything unfinished before the sprint closes over it. The questions are a Scru
 made against what the board actually holds survives contact with the week, and one made against
 what everybody assumed does not.
 
-Two things it cannot do at all: create a sprint, and start one. Neither is available on either
-channel, so both come back to you rather than being simulated.
+Three things it cannot do at all: create a sprint, start one, and take work back out of one.
+None is available on either channel, so all three come back to you rather than being simulated —
+and for the third it hands you the decision made and one move to perform, rather than a refusal.
 
 ## When it fires · when it does not
 
@@ -36,6 +37,7 @@ It fires when the question is _when_, and the answer is a sprint.
 | "put these four in the sprint"                    | `jira-plan`                       |
 | "close Sprint 24, we finish Friday"               | `jira-plan`                       |
 | "take KAN-12 off the sprint, back to the backlog" | `jira-plan`                       |
+| "put that on the backlog properly" (a new idea)   | [`jira-propose`](jira-propose.md) |
 | "these three should go out in 2.4"                | [`jira-release`](jira-release.md) |
 | "PROJ-121 is not ready for anyone to pick up"     | [`jira-refine`](jira-refine.md)   |
 | "start PROJ-99, I am on it"                       | [`jira-advance`](jira-advance.md) |
@@ -45,6 +47,12 @@ Two of those boundaries are worth saying out loud. A sprint says _when_ work is 
 version says _what ships together_: they are orthogonal axes, and conflating them is how "when"
 quietly becomes "what". And an item that is not ready stays not ready — `jira-plan` tells you so
 before it plans it, and never makes it ready in passing.
+
+**The backlog is two words in one.** Said of a work item that already exists — _put KAN-12 back on
+the backlog_ — it is a place on the board, and this skill owns the move. Said of an idea nobody has
+written down — _put that on the backlog properly_ — it means record this, and that is
+[`jira-propose`](jira-propose.md), or [`jira-capture`](jira-capture.md) when it arrived from
+someone else. What separates them is whether the thing is recorded yet, not the word.
 
 Reading a sprint without changing it belongs to [`jira-inspect`](jira-inspect.md). But a request
 that reads a sprint **and then changes it** — "show me what is left and drop the blocked ones" —

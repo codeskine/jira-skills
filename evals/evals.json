@@ -249,7 +249,19 @@
         "jira-advance",
         "jira-refine"
       ],
-      "why": "The placement case: \"the backlog\" is among the most ordinary words a user reaches for and no description claimed it, so a routing replay read the phrase as create this and sent it to jira-propose. jira-plan now claims taking work out of a sprint, and the backlog by name. Paired with sel-propose-2, where the same words mean create an item rather than move one — the pair moves one variable, and it is whether the item already exists."
+      "why": "The placement case: \"the backlog\" is among the most ordinary words a user reaches for and no description claimed it, so a routing replay read the phrase as create this and sent it to jira-propose. Paired with sel-propose-2, where the same words mean create an item rather than move one. The discriminator is whether the item is already recorded, and it is stated on both sides — a first wording left only the word \"back\" to carry it, which a replay flagged as a cue it had promoted to a rule by itself."
+    },
+    {
+      "id": "sel-plan-4",
+      "category": "selection",
+      "prompt": "Put KAN-12 on the backlog.",
+      "expect_skill": "jira-plan",
+      "expect_not": [
+        "jira-propose",
+        "jira-capture",
+        "jira-advance"
+      ],
+      "why": "sel-plan-3 with the word \"back\" removed, which is the whole point of it. A replay routed the backlog family correctly and reported that the only separator it had was that one word: strip it and the distinction collapses. Here it is stripped. What must decide instead is that KAN-12 names an item that already exists, which is what both descriptions now say — jira-plan claims a work item already recorded, and disclaims the backlog of things nobody has written down."
     },
     {
       "id": "sel-release-1",

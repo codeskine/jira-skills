@@ -25,9 +25,10 @@ aperto prima che lo sprint gli si chiuda sopra. Le domande sono quelle di uno Sc
 piano fatto su quello che la board contiene davvero regge l'impatto con la settimana, uno fatto su
 quello che tutti davano per scontato no.
 
-Due cose non le può fare affatto: creare uno sprint e avviarlo. Nessuna delle due è disponibile su
-nessuno dei due channel — la via con cui una skill parla a Jira — quindi tornano tutte e due a te,
-invece di essere simulate.
+Tre cose non le può fare affatto: creare uno sprint, avviarlo, e togliere lavoro da uno. Nessuna
+delle tre è disponibile su nessuno dei due channel — la via con cui una skill parla a Jira —
+quindi tornano tutte e tre a te invece di essere simulate; e per la terza ti consegna la decisione
+presa e una mossa da fare, non un rifiuto.
 
 ## Quando si attiva · quando no
 
@@ -38,6 +39,7 @@ Si attiva quando la domanda è _quando_, e la risposta è uno sprint.
 | «metti questi quattro nello sprint»                | `jira-plan`                          |
 | «chiudi lo Sprint 24, venerdì finiamo»             | `jira-plan`                          |
 | «togli KAN-12 dallo sprint, rimettilo nel backlog» | `jira-plan`                          |
+| «mettilo nel backlog per bene» (un'idea nuova)     | [`jira-propose`](jira-propose.it.md) |
 | «questi tre devono uscire nella 2.4»               | [`jira-release`](jira-release.it.md) |
 | «PROJ-121 non è pronto perché qualcuno lo prenda»  | [`jira-refine`](jira-refine.it.md)   |
 | «fai partire PROJ-99, me ne occupo io»             | [`jira-advance`](jira-advance.it.md) |
@@ -47,6 +49,12 @@ Due di questi confini vale la pena dirli ad alta voce. Lo sprint dice _quando_ s
 lavoro, la fix version dice _cosa esce insieme_: sono assi ortogonali, e confonderli è il modo in
 cui il «quando» diventa in silenzio il «cosa». E un work item che non è pronto resta non pronto:
 `jira-plan` te lo dice prima di pianificarlo, e non lo rende pronto passando.
+
+**Backlog sono due parole in una.** Detto di un work item che esiste già — _rimetti KAN-12 nel
+backlog_ — è un posto sulla board, e la mossa è di questa skill. Detto di un'idea che nessuno ha
+ancora scritto — _mettilo nel backlog per bene_ — vuol dire registralo, e quello è
+[`jira-propose`](jira-propose.it.md), o [`jira-capture`](jira-capture.it.md) se è arrivato da
+qualcun altro. A separarli è se la cosa è già registrata, non la parola.
 
 Leggere uno sprint senza cambiarlo è di [`jira-inspect`](jira-inspect.it.md). Ma una richiesta che
 legge uno sprint **e poi lo cambia** — «fammi vedere cosa resta e togli i bloccati» — è una sola
