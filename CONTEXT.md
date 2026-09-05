@@ -136,6 +136,18 @@ The test is one question: **does this word stand where the canonical term belong
 moment of the move" stands where _transition_ belongs, and is a defect. "`jira issue move` is the
 fallback" does not.
 
+### And when the artifact is not in English?
+
+The canonical terms are not translated. Everything else is: prose, headings, the wording of a
+question put to the user. The seven names — work item, work type, parent, status, transition,
+sprint, fix version — name objects Jira owns, and their _values_ already cross untranslated, a
+status being recorded exactly as the project reports it. An Italian artifact says _il work item_
+and _la fix version_ for the same reason it says _In Progress_.
+
+The rule is stated once, in `skills/shared/references/quality-standard.md`, criterion 5. It is
+here because the _Avoid_ lists are read while reviewing artifacts, and half of those are not in
+English.
+
 ### Is this checkable mechanically?
 
 **No, not as a word list, and the sweep of 2026-09-04 is the evidence.** Every refused word that

@@ -7,7 +7,9 @@ for all of them and are stated here once.
   It defines nothing else.
 - **It fixes no language.** The artifact is written in the language the user is working in, and
   its headings are translated with it. The English in a template names the structure; it is not
-  the wording of the result.
+  the wording of the result. The canonical names are the exception — see
+  [the quality standard](quality-standard.md), criterion 5 — so a heading that is one of them,
+  _Fix versions_ say, keeps it.
 - **It presumes no technology.** No platform, no programming language, no assumption about how
   the thing being described is built or run.
 - **Angle brackets are replaced.** `<like this>` marks what the author supplies.
