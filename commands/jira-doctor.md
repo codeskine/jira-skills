@@ -137,10 +137,27 @@ jira me
 
 - **credential absent** → ❌ **the token is not visible to this shell.** Not the same as an
   unconfigured CLI, and saying so would send the user to the wrong fix. Skills reach the CLI
-  through `Bash(jira:*)`, a **non-interactive** shell, which reads only the startup file every
-  shell reads — `~/.zshenv` under zsh, never `~/.zshrc`. So a token exported in `~/.zshrc` works
-  in the user's own terminal and is invisible to every skill, which is exactly what this looks
-  like. Report the file and the line; it is their dotfile, so never edit it for them:
+  through `Bash(jira:*)`, a **non-interactive** shell, and which startup file such a shell reads
+  — if any — depends on the shell. So a token exported from a file only an interactive shell
+  reads works in the user's own terminal and is invisible to every skill, which is exactly what
+  this looks like.
+
+  The remedy names a file, so find out which shell first:
+
+  ```bash
+  echo "$SHELL"
+  ```
+
+  | Shell  | Where the export belongs                                                                                                                                  |
+  | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  | `zsh`  | `~/.zshenv`, read by every zsh. Never `~/.zshrc`, which only an interactive one reads.                                                                    |
+  | `bash` | `~/.bash_profile` or `~/.profile` — `~/.bashrc` never reaches a non-interactive bash, which reads no startup file of its own unless `BASH_ENV` names one. |
+  | `fish` | `set -Ux JIRA_API_TOKEN …` at the prompt: a universal exported variable, held outside any startup file.                                                   |
+  | other  | The file its non-interactive form reads; failing that, the environment this session was started with.                                                     |
+
+  For zsh and bash, report this line and the file it belongs in. It is the user's own
+  configuration, so never edit it for them, and the change reaches only sessions started
+  afterwards:
 
   ```bash
   export JIRA_API_TOKEN=<token from https://id.atlassian.com/manage-profile/security/api-tokens>
@@ -190,11 +207,11 @@ missing **and** the CLI is unconfigured saves the user a second round trip.
 
 ## Troubleshooting
 
-| Symptom                                       | Cause                                           | Fix                                                                                           |
-| --------------------------------------------- | ----------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| a skill's Jira calls silently do nothing      | the server is not reachable as `atlassian`      | add one under that id (Step 1)                                                                |
-| Atlassian shows as `claude.ai Atlassian`      | a connector's tools are not named after its row | declare `atlassian` in `.mcp.json` and leave the connector in place (Step 1)                  |
-| `jira: command not found`                     | CLI not installed or not on `PATH`              | install it; confirm with `command -v jira`                                                    |
-| `The tool needs a Jira API token`             | no credential in this shell, or no config yet   | export `JIRA_API_TOKEN` in `~/.zshenv`; `jira init` only if the config is absent too (Step 2) |
-| a skill stops asking for the profile          | no discovery has been run in this repository    | run `jira-init`                                                                               |
-| the profile lists an operation as unsupported | no available tool covers it                     | expected — the skill hands that step to the user                                              |
+| Symptom                                       | Cause                                           | Fix                                                                                                                            |
+| --------------------------------------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| a skill's Jira calls silently do nothing      | the server is not reachable as `atlassian`      | add one under that id (Step 1)                                                                                                 |
+| Atlassian shows as `claude.ai Atlassian`      | a connector's tools are not named after its row | declare `atlassian` in `.mcp.json` and leave the connector in place (Step 1)                                                   |
+| `jira: command not found`                     | CLI not installed or not on `PATH`              | install it; confirm with `command -v jira`                                                                                     |
+| `The tool needs a Jira API token`             | no credential in this shell, or no config yet   | export `JIRA_API_TOKEN` where a non-interactive shell of yours reads it; `jira init` only if the config is absent too (Step 2) |
+| a skill stops asking for the profile          | no discovery has been run in this repository    | run `jira-init`                                                                                                                |
+| the profile lists an operation as unsupported | no available tool covers it                     | expected — the skill hands that step to the user                                                                               |
