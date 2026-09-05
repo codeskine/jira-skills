@@ -11,14 +11,14 @@
 // No dependencies: the check runs on `prepack`, before anything is installed.
 
 // The prefix the installer requires, and the only directory a skill may live in.
-const PREFIX = './skills/';
+const PREFIX = "./skills/";
 
 /** The directory name an entry points at, or null when the entry is not a well-formed path. */
 export function skillNameFromEntry(entry) {
-  if (typeof entry !== 'string' || !entry.startsWith(PREFIX)) return null;
+  if (typeof entry !== "string" || !entry.startsWith(PREFIX)) return null;
 
   const name = entry.slice(PREFIX.length);
-  return name.length > 0 && !name.includes('/') ? name : null;
+  return name.length > 0 && !name.includes("/") ? name : null;
 }
 
 /**
@@ -33,26 +33,34 @@ export function validateManifestSkills(entries) {
   const seen = new Set();
 
   for (const entry of entries) {
-    if (typeof entry !== 'string') {
-      errors.push(`.claude-plugin/plugin.json: skills entry ${JSON.stringify(entry)} is not a string`);
+    if (typeof entry !== "string") {
+      errors.push(
+        `.claude-plugin/plugin.json: skills entry ${JSON.stringify(entry)} is not a string`,
+      );
       continue;
     }
 
     // Reported apart from the shape below, because a bare name is the mistake an author actually
     // makes and the installer's own message names this rule.
-    if (!entry.startsWith('./')) {
-      errors.push(`.claude-plugin/plugin.json: skills entry "${entry}" must start with "./" — the installer rejects bare names`);
+    if (!entry.startsWith("./")) {
+      errors.push(
+        `.claude-plugin/plugin.json: skills entry "${entry}" must start with "./" — the installer rejects bare names`,
+      );
       continue;
     }
 
     const name = skillNameFromEntry(entry);
     if (name === null) {
-      errors.push(`.claude-plugin/plugin.json: skills entry "${entry}" must be of the form "${PREFIX}<name>"`);
+      errors.push(
+        `.claude-plugin/plugin.json: skills entry "${entry}" must be of the form "${PREFIX}<name>"`,
+      );
       continue;
     }
 
     if (seen.has(name)) {
-      errors.push(`.claude-plugin/plugin.json: skills entry "${entry}" is declared twice`);
+      errors.push(
+        `.claude-plugin/plugin.json: skills entry "${entry}" is declared twice`,
+      );
       continue;
     }
 

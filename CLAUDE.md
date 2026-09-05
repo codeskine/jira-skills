@@ -63,7 +63,7 @@ This project does **not** use `openclaw` metadata.
 | Field            | Required         | Constraints                                                                                                                                   |
 | ---------------- | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | `name`           | Spec-required    | 1–64 chars. Lowercase `a-z`, digits, hyphens. No leading/trailing/consecutive hyphens. Must match parent directory name.                      |
-| `description`    | Spec-required    | 1–1,000 chars. Must include a "Use when" or "Apply when" trigger clause. Must contain the word `Jira`.                                         |
+| `description`    | Spec-required    | 1–1,000 chars. Must include a "Use when" or "Apply when" trigger clause. Must contain the word `Jira`.                                        |
 | `license`        | Project-required | `MIT`                                                                                                                                         |
 | `compatibility`  | Project-required | Base: `Designed for Claude Code. Requires the Atlassian MCP server configured as "atlassian".` Extend when the skill also needs the Jira CLI. |
 | `metadata`       | Project-required | Must include `author` (string) and `version` (semver `a.b.c`, e.g. `"1.0.0"`). No `openclaw` block.                                           |

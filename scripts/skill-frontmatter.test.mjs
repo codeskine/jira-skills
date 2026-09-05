@@ -1,7 +1,7 @@
 // Tests for the frontmatter rules, run with `npm test`.
 //
 // The integrity check asserts things about skills; this asserts that the check tells the truth.
-// It is not a third seam — see docs/adr/0005 — and it is never in the publish path.
+// It is the third seam — see docs/adr/0005 — and it is never in the publish path.
 //
 // node:test and node:assert only: a contributor adding a rule must be able to run this on a
 // clean clone, before anything is installed.
