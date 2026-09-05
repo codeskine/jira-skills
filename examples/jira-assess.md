@@ -30,11 +30,11 @@ morning, costing about three hours between two people. Time spent on schedule ch
 
 ## Options
 
-| Option                                     | What it costs                                | What it leaves                                             |
-| ------------------------------------------ | -------------------------------------------- | ---------------------------------------------------------- |
-| Do nothing                                 | ~35 minutes per change, ongoing; the same class of error recurs | Two people able to change a schedule; the risk unchanged |
-| Add a consistency check to the review path | Around a day; no change to how schedules are written | The three places, but disagreement caught before it ships |
-| Move the schedule to one place, generate the rest | Around a week; one migration with a rollback | One place to change, and anyone able to change it     |
+| Option                                            | What it costs                                                   | What it leaves                                            |
+| ------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------- |
+| Do nothing                                        | ~35 minutes per change, ongoing; the same class of error recurs | Two people able to change a schedule; the risk unchanged  |
+| Add a consistency check to the review path        | Around a day; no change to how schedules are written            | The three places, but disagreement caught before it ships |
+| Move the schedule to one place, generate the rest | Around a week; one migration with a rollback                    | One place to change, and anyone able to change it         |
 
 Recommended: the consistency check first, because it removes the error class at a tenth of the
 cost, and it does not foreclose the full change. This is a recommendation; prioritising is not

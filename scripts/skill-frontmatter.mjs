@@ -20,23 +20,24 @@ const DESCRIPTION_LIMIT = 1000;
 // Work types belong to the project scheme. They are renamed, added and removed by project
 // admins, so a description that requires one can trigger on a project where it does not exist.
 // Longest first, so "sub-task" is reported as itself rather than as "task".
-const WORK_TYPES = /\b(sub-tasks?|subtasks?|stories|story|epics?|bugs?|tasks?)\b/i;
+const WORK_TYPES =
+  /\b(sub-tasks?|subtasks?|stories|story|epics?|bugs?|tasks?)\b/i;
 
 const TRIGGER_CLAUSE = /\b(use|apply) when\b/i;
 
 // The vocabulary a skill may declare: the default set, plus the extras the project documents.
 // An allowlist rather than a denylist, because `Bash` and `Bash(*)` grant git without naming it.
 const TOOL_VOCABULARY = new Set([
-  'Read',
-  'Glob',
-  'Grep',
-  'mcp__atlassian',
-  'Agent',
-  'AskUserQuestion',
-  'Write',
-  'Edit',
-  'WebFetch',
-  'Bash(jira:*)',
+  "Read",
+  "Glob",
+  "Grep",
+  "mcp__atlassian",
+  "Agent",
+  "AskUserQuestion",
+  "Write",
+  "Edit",
+  "WebFetch",
+  "Bash(jira:*)",
 ]);
 
 const SEMVER = /^\d+\.\d+\.\d+$/;
@@ -50,8 +51,8 @@ const unquote = (value) => {
 };
 
 const scalar = (value) => {
-  if (value === 'true') return true;
-  if (value === 'false') return false;
+  if (value === "true") return true;
+  if (value === "false") return false;
   return unquote(value);
 };
 
@@ -68,7 +69,7 @@ export function parseFrontmatter(text) {
 
   const entries = [];
   for (const line of match[1].split(/\r?\n/)) {
-    if (line.trim() === '') continue;
+    if (line.trim() === "") continue;
     const top = /^([A-Za-z0-9_-]+):[ \t]*(.*)$/.exec(line);
     if (top) entries.push({ key: top[1], inline: top[2], continuation: [] });
     else if (entries.length > 0) entries.at(-1).continuation.push(line);
@@ -77,7 +78,7 @@ export function parseFrontmatter(text) {
   const result = {};
   for (const { key, inline, continuation } of entries) {
     const nested =
-      inline === '' &&
+      inline === "" &&
       continuation.length > 0 &&
       continuation.every((line) => /^\s+[A-Za-z0-9_-]+:/.test(line));
 
@@ -92,8 +93,8 @@ export function parseFrontmatter(text) {
     }
 
     const folded = [inline, ...continuation.map((line) => line.trim())]
-      .filter((part) => part !== '')
-      .join(' ');
+      .filter((part) => part !== "")
+      .join(" ");
     result[key] = scalar(folded);
   }
 
@@ -107,23 +108,26 @@ export function parseFrontmatter(text) {
  */
 export function validateSkill(directory, text) {
   const frontmatter = parseFrontmatter(text);
-  if (frontmatter === null) return ['has no YAML frontmatter'];
+  if (frontmatter === null) return ["has no YAML frontmatter"];
 
   const errors = [];
   const { name, description, license, compatibility, metadata } = frontmatter;
-  const userInvocable = frontmatter['user-invocable'];
-  const allowedTools = frontmatter['allowed-tools'];
+  const userInvocable = frontmatter["user-invocable"];
+  const allowedTools = frontmatter["allowed-tools"];
 
-  if (typeof name !== 'string' || name === '') errors.push('name is missing');
+  if (typeof name !== "string" || name === "") errors.push("name is missing");
   else if (name !== directory)
     errors.push(`name "${name}" does not match its directory "${directory}"`);
 
-  if (typeof description !== 'string' || description === '') {
-    errors.push('description is missing');
+  if (typeof description !== "string" || description === "") {
+    errors.push("description is missing");
   } else {
-    if (!description.includes('Jira')) errors.push('description does not contain the word "Jira"');
+    if (!description.includes("Jira"))
+      errors.push('description does not contain the word "Jira"');
     if (!TRIGGER_CLAUSE.test(description))
-      errors.push('description has no "Use when" or "Apply when" trigger clause');
+      errors.push(
+        'description has no "Use when" or "Apply when" trigger clause',
+      );
     if (description.length > DESCRIPTION_LIMIT)
       errors.push(
         `description is ${description.length} characters; the limit is 1,000 characters`,
@@ -135,31 +139,39 @@ export function validateSkill(directory, text) {
       );
   }
 
-  if (license === undefined) errors.push('license is missing');
-  else if (license !== 'MIT') errors.push(`license is "${license}"; it must be MIT`);
+  if (license === undefined) errors.push("license is missing");
+  else if (license !== "MIT")
+    errors.push(`license is "${license}"; it must be MIT`);
 
-  if (userInvocable === undefined) errors.push('user-invocable is missing');
-  else if (userInvocable !== true) errors.push('user-invocable must be true');
+  if (userInvocable === undefined) errors.push("user-invocable is missing");
+  else if (userInvocable !== true) errors.push("user-invocable must be true");
 
-  if (typeof compatibility !== 'string' || !compatibility.startsWith(COMPATIBILITY_PREFIX))
+  if (
+    typeof compatibility !== "string" ||
+    !compatibility.startsWith(COMPATIBILITY_PREFIX)
+  )
     errors.push(`compatibility must start from: ${COMPATIBILITY_PREFIX}`);
 
-  if (metadata === undefined || typeof metadata !== 'object') {
-    errors.push('metadata is missing its author and version');
+  if (metadata === undefined || typeof metadata !== "object") {
+    errors.push("metadata is missing its author and version");
   } else {
-    if (typeof metadata.author !== 'string' || metadata.author === '')
-      errors.push('metadata.author is missing');
-    if (typeof metadata.version !== 'string' || !SEMVER.test(metadata.version))
-      errors.push(`metadata.version "${metadata.version ?? ''}" is not a semver like "1.0.0"`);
+    if (typeof metadata.author !== "string" || metadata.author === "")
+      errors.push("metadata.author is missing");
+    if (typeof metadata.version !== "string" || !SEMVER.test(metadata.version))
+      errors.push(
+        `metadata.version "${metadata.version ?? ""}" is not a semver like "1.0.0"`,
+      );
   }
 
-  if (typeof allowedTools !== 'string' || allowedTools === '') {
-    errors.push('allowed-tools is missing');
+  if (typeof allowedTools !== "string" || allowedTools === "") {
+    errors.push("allowed-tools is missing");
   } else {
-    for (const tool of allowedTools.split(/\s+/).filter((t) => t !== '')) {
+    for (const tool of allowedTools.split(/\s+/).filter((t) => t !== "")) {
       if (TOOL_VOCABULARY.has(tool)) continue;
       if (/^Bash\(git/.test(tool))
-        errors.push('allowed-tools grants git access; this plugin does not touch git');
+        errors.push(
+          "allowed-tools grants git access; this plugin does not touch git",
+        );
       else
         errors.push(
           `allowed-tools declares "${tool}", which is not in the documented tool vocabulary`,

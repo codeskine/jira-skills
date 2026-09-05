@@ -10,7 +10,10 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 
-import { skillNameFromEntry, validateManifestSkills } from "./plugin-manifest.mjs";
+import {
+  skillNameFromEntry,
+  validateManifestSkills,
+} from "./plugin-manifest.mjs";
 
 const errorsFor = (entries) => validateManifestSkills(entries).errors;
 const namesFor = (entries) => validateManifestSkills(entries).names;
@@ -21,9 +24,17 @@ test("a well-formed entry passes and resolves to its directory name", () => {
 });
 
 test("the whole real manifest shape passes", () => {
-  const entries = ["./skills/jira-init", "./skills/jira-capture", "./skills/jira-inspect"];
+  const entries = [
+    "./skills/jira-init",
+    "./skills/jira-capture",
+    "./skills/jira-inspect",
+  ];
   assert.deepEqual(errorsFor(entries), []);
-  assert.deepEqual(namesFor(entries), ["jira-init", "jira-capture", "jira-inspect"]);
+  assert.deepEqual(namesFor(entries), [
+    "jira-init",
+    "jira-capture",
+    "jira-inspect",
+  ]);
 });
 
 test("a bare name is refused — this is the defect the check used to miss", () => {
@@ -41,7 +52,10 @@ test("a skill outside skills/ is refused", () => {
 });
 
 test("a nested path is refused", () => {
-  assert.match(errorsFor(["./skills/jira-init/SKILL.md"])[0], /must be of the form/);
+  assert.match(
+    errorsFor(["./skills/jira-init/SKILL.md"])[0],
+    /must be of the form/,
+  );
 });
 
 test("a trailing slash leaves no name, so it is refused", () => {
@@ -52,7 +66,9 @@ test("the same skill declared twice is refused once", () => {
   const errors = errorsFor(["./skills/jira-init", "./skills/jira-init"]);
   assert.equal(errors.length, 1);
   assert.match(errors[0], /declared twice/);
-  assert.deepEqual(namesFor(["./skills/jira-init", "./skills/jira-init"]), ["jira-init"]);
+  assert.deepEqual(namesFor(["./skills/jira-init", "./skills/jira-init"]), [
+    "jira-init",
+  ]);
 });
 
 test("a non-string entry is refused without throwing", () => {
