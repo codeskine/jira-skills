@@ -26,8 +26,11 @@ The two channels fail independently, and only one of them is a precondition.
   types, statuses or fields. Point the user at `/jira-doctor`.
 - **`jira` CLI missing or unauthenticated** — degrade, as
   [the channel map](../shared/references/channels.md) requires of any missing capability.
-  Discover what the MCP server reaches, and record the Agile surface as unsupported with
-  `jira init` as the manual path.
+  Discover what the MCP server reaches, and record the Agile surface as unsupported **on this
+  machine** — not as missing from the tooling. The remedy depends on which of the two causes it
+  is, and [the channel map](../shared/references/channels.md) § When the CLI channel is not
+  reachable tells them apart: do not name `jira init` before establishing that the credential is
+  there.
 
 Record which channels answered. Read and not reachable are different facts, and the profile
 must keep them apart.

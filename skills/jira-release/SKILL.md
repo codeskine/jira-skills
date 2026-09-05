@@ -42,8 +42,10 @@ alike on a board.
 
 Where the profile records the versions as **not read** rather than absent, the listing is gone
 but the work is not: assigning a work item to a version is a field on the item, carried by the
-MCP server. Say the list could not be read, name `jira init`, and ask the user for the version
-name rather than offering a choice you cannot compile. Assignment fails closed on a name that
+MCP server. Say the list could not be read, give the remedy
+[the channel map](../shared/references/channels.md) § When the CLI channel is not reachable
+assigns to the cause at hand — `jira init` answers only one of the two — and ask the user for
+the version name rather than offering a choice you cannot compile. Assignment fails closed on a name that
 does not exist, so nothing is created by guessing.
 
 ## 4. Show what a fix version contains
