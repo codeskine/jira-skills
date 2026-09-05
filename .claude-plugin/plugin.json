@@ -25,15 +25,15 @@
     "agile"
   ],
   "skills": [
-    "jira-init",
-    "jira-capture",
-    "jira-propose",
-    "jira-diagnose",
-    "jira-assess",
-    "jira-refine",
-    "jira-plan",
-    "jira-release",
-    "jira-advance",
-    "jira-inspect"
+    "./skills/jira-init",
+    "./skills/jira-capture",
+    "./skills/jira-propose",
+    "./skills/jira-diagnose",
+    "./skills/jira-assess",
+    "./skills/jira-refine",
+    "./skills/jira-plan",
+    "./skills/jira-release",
+    "./skills/jira-advance",
+    "./skills/jira-inspect"
   ]
 }

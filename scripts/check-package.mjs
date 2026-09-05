@@ -6,6 +6,7 @@
 
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 
+import { validateManifestSkills } from './plugin-manifest.mjs';
 import { validateSkill } from './skill-frontmatter.mjs';
 
 const read = (p) => JSON.parse(readFileSync(p, 'utf8'));
@@ -19,7 +20,11 @@ if (pkg.version !== version) errors.push(`VERSION is ${version} but package.json
 if (manifest.version !== version) errors.push(`.claude-plugin/plugin.json is ${manifest.version} but VERSION is ${version}`);
 if (!Array.isArray(manifest.skills)) errors.push('.claude-plugin/plugin.json has no "skills" array');
 
-const declared = manifest.skills ?? [];
+// The manifest declares paths, not names: the installer requires "./skills/<name>". Everything
+// below compares against directory names, so the entries are checked and reduced to names here.
+const { names: declared, errors: manifestErrors } = validateManifestSkills(manifest.skills ?? []);
+errors.push(...manifestErrors);
+
 const present = existsSync('skills')
   ? readdirSync('skills', { withFileTypes: true }).filter((e) => e.isDirectory()).map((e) => e.name)
   : [];
