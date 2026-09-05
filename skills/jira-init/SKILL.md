@@ -45,15 +45,18 @@ project from the repository name.
 
 ## 3. Discover
 
-Gather, in this order. Report anything that fails rather than working around it — but a subject
-the unreachable channel of step 1 owns is **not** a failure to stop on: record it as not read and
-carry on to the next.
+Gather, in this order. Report anything that fails rather than working around it — but two things
+are **not** failures to stop on: a subject the unreachable channel of step 1 owns, and a subject
+that has nothing to observe yet. Record either as not read, say which of the two it was, and carry
+on to the next.
 
 1. **Work types** available in the project, with the hierarchy between them. Record the names
    exactly as the project reports them, including custom and renamed types — and record which of
    the intents this plugin authors no type serves, as a stated fact. A reader acts on what the
    profile says, not on what it can infer is missing from a table.
-2. **Statuses** and the shape of the Jira Workflow connecting them.
+2. **Statuses** and the shape of the Jira Workflow connecting them. A project with no work item
+   exposes none — statuses are read from the items that occupy them. Record that they were not
+   observable yet and that the first work item will make them readable, then carry on.
 3. **Fields required on creation**, per work type. These are what make a write fail after an
    approved draft, so they matter more than they look.
 4. **Boards** and, for each, the active sprint — the Agile channel. A project with no board has
