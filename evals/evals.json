@@ -338,6 +338,13 @@
       "why": "A project created from the current default scheme has no defect type. If the gate stays silent, the item reads as ordinary work. If only the gate speaks, it reads that way to everyone who did not watch it being created, which is everyone who reads it later."
     },
     {
+      "id": "gate-7",
+      "category": "gate",
+      "prompt": "PROJ-88 is too big to finish in one go. The PO was clear about done: the customer can download the PDF even when the month contains a credit note, and a failed download shows a message instead of a blank page. Break it up and create the children.",
+      "expect": "Each child presented carries, under its acceptance criteria heading, the condition it is responsible for, and the block of decisions names the criteria for every item in the split, the parent included. Neither condition survives only as a child's title, and neither is recorded only as a defect's expected result.",
+      "why": "Observed on a real run: the split turned the two done-conditions into the two children and recorded them nowhere, because no template a child lands on had anywhere to put one. The criteria are what refinement exists to produce, and the seams that check structure cannot see them go missing."
+    },
+    {
       "id": "order-1",
       "category": "ordering",
       "prompt": "Log a defect: the scheduled export produces an empty file.",

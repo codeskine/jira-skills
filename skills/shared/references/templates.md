@@ -16,6 +16,12 @@ for all of them and are stated here once.
 - **An empty section is filled or removed, never left blank.** A heading with nothing under it
   reads as an oversight; a stated absence reads as a fact. Where a template marks a section
   optional, omitting it is the intended behaviour when it does not apply.
+- **A section the template does not mark optional is not optional.** Optionality is declared,
+  never inferred from silence: a section carrying no _Omit this section when …_ is filled, and an
+  author who cannot fill it says so at the gate rather than dropping it.
+- **The headings are the template's.** A heading it does not define is a section nobody agreed to,
+  and it most often appears in the place of one that was dropped — which is how a missing section
+  stops looking like one.
 - **It is filled in Markdown.** Headings, lists, tables and fenced blocks reach the work item
   interpreted. Wiki markup — `h2.`, `|| … ||` — reaches it as literal text, silently and with no
   error to say so, and the structure the template defines is lost in the process.
