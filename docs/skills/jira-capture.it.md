@@ -44,10 +44,17 @@ apre il percorso e il refinement lo chiude. Se sai già dire cosa vorrà dire «
 è stata esaminata e l'intento è un altro — tutto quello che capture aggiungerebbe a quel punto è
 una decisione che nessuno ha preso.
 
-Anche la segnalazione di qualcosa di rotto, quando arriva da fuori, è di capture e non di
-[`jira-diagnose`](jira-diagnose.it.md). Una segnalazione di difetto deve rispondere a domande a
-cui sa rispondere solo chi ha visto succedere il fatto, e qui quella persona non è in stanza:
-registrare la richiesta con le sue parole è la versione onesta.
+Qualcosa di rotto che arriva da fuori può essere di capture o di
+[`jira-diagnose`](jira-diagnose.it.md), e a decidere è **il materiale, non chi l'ha mandato**. Se
+il testo riportato porta già quello che rende un guasto riproducibile — i passi e l'ambiente — è
+la segnalazione di un difetto e appartiene a `jira-diagnose`, per quanto evidentemente sia
+arrivata da fuori. Se non porta né gli uni né l'altro, qui nessuno può fornirli, e registrare la
+richiesta con le parole di chi l'ha mandata è la versione onesta. Lo stesso test vale verso
+[`jira-propose`](jira-propose.it.md): un desiderio riportato senza un dato dietro è intake.
+
+Il test è scritto apposta sul testo della richiesta e non sulle persone intorno. Se qualcuno, una
+volta interpellato, saprebbe rispondere è un fatto sul futuro della conversazione, e la decisione
+di instradamento si prende prima che sia stato chiesto niente.
 
 ## Come si usa
 

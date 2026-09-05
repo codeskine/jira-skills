@@ -35,10 +35,11 @@ how to reach it.
 | "the export comes out empty, we need to file this" | [`jira-diagnose`](jira-diagnose.md) |
 | "this works but it will bite us in six months"     | [`jira-assess`](jira-assess.md)     |
 
-The line against [`jira-capture`](jira-capture.md) is whether anyone has examined the thing yet.
-A request that arrived this morning and has not been read is intake: capture records it in the
-words it arrived in and says so. A proposal is what you have once someone can name the outcome,
-the audience and the measure — and this skill will not manufacture those three by asking harder.
+The line against [`jira-capture`](jira-capture.md) is **the datum**. Relaying someone else's wish
+with nothing checkable behind it is intake — capture records it in the words it arrived in and
+says so — and it stays intake however clearly the outcome is described. A proposal is what you
+have once someone can name the outcome, the audience and the measure, and this skill will not
+manufacture those three by asking harder.
 
 The line downstream is [`jira-refine`](jira-refine.md). Proposing states the value and stops.
 Acceptance criteria, a scope small enough to finish, and the children the proposal implies are

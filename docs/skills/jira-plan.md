@@ -45,6 +45,10 @@ version says _what ships together_: they are orthogonal axes, and conflating the
 quietly becomes "what". And an item that is not ready stays not ready — `jira-plan` tells you so
 before it plans it, and never makes it ready in passing.
 
+Reading a sprint without changing it belongs to [`jira-inspect`](jira-inspect.md). But a request
+that reads a sprint **and then changes it** — "show me what is left and drop the blocked ones" —
+is one operation, not two, and it is this skill's from the start.
+
 ## How to use it
 
 Name the sprint and the work items, or ask to close the one that is running. Nothing moves until

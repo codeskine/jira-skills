@@ -134,6 +134,10 @@ Poi approvi, oppure chiedi modifiche e lo rivedi. Quante volte vuoi.
   un insieme di work item spostati in uno sprint. Il cancello resta unico: si presenta tutto, si
   approva una volta, poi si esegue. Se una parte fallisce ti viene detto quali sono riuscite, e
   sei tu a decidere se tenere il risultato parziale.
+- **«Per intero» vuol dire per intero.** Ci sono tutte le sezioni che il template definisce e non
+  marca come facoltative. Una sezione che non si riesce a compilare viene sollevata al cancello
+  come una lacuna, mai lasciata cadere in silenzio: la facoltatività la dichiara il template, non
+  si deduce dal silenzio.
 - **Dopo la scrittura la verità è Jira.** Di quello che è stato pubblicato non resta nessuna copia
   locale, da nessuna parte.
 

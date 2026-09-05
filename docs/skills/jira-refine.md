@@ -82,20 +82,37 @@ template, so nobody has to rewrite one afterwards.
 
 A child that only makes sense next to its siblings has not been split — it has been cut.
 
-**6 · It refuses a split the hierarchy cannot hold.** The profile says which work types may
+**6 · Every child carries acceptance criteria too.** Whatever intent a child serves, it also gets
+the acceptance criteria section of the refined-item template — what a team picks up, plans and
+finishes is the child, and a child nobody can call finished is not a unit of work. The section
+sits after the ones that child's own template defines, and before the two that close every
+template, so the agreement reads as the conclusion of the report rather than its preface.
+
+They are **allocated, never duplicated**: every criterion stated for the item lands on exactly one
+child, and whatever no child claims stays with the item they came from. A child that claims none
+has been cut in the sense above, and the answer is to redraw the split — not to invent a criterion
+to fill it.
+
+A child that is still raw is the exception. It declares itself awaiting refinement, so it carries
+no criteria, and whatever would have landed on it stays with the parent until that child is
+refined in its turn.
+
+**7 · It refuses a split the hierarchy cannot hold.** The profile says which work types may
 contain which. Where it allows no parent-child relation between the item's type and the
 children's, the skill says so, explains why, and leaves the item whole. It does not create the
 children anyway: children that cannot be attached are orphans, and an orphan is worse than an item
 that is too large, because it is also invisible.
 
-**7 · Then the draft gate.** The complete result appears in chat with the decisions it carries,
+**8 · Then the draft gate.** The complete result appears in chat with the decisions it carries,
 and nothing reaches Jira until you approve it. This intent adds one thing: **the whole split is
 presented before any of it exists, and approved once** — never child by child, because a split
 approved child by child is a split nobody rebalanced. Several items are then written under that
 single approval; if part of it fails you are told which parts landed and which did not, and
-nothing is undone without you.
+nothing is undone without you. The block of decisions names the acceptance criteria of every item
+involved, the parent included: they are what is being agreed, and a draft that lost them is
+otherwise approvable without anyone noticing.
 
-**8 · On the write, the raw declaration is retired.** Where intake wrote a statement saying the
+**9 · On the write, the raw declaration is retired.** Where intake wrote a statement saying the
 item is raw and awaiting refinement, this write removes it — on both branches. That statement is
 what allowed an incomplete item to exist; left standing beside acceptance criteria it makes the
 item contradict itself and keeps it out of the planning it is now ready for. Where the item was

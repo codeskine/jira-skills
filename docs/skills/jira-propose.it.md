@@ -36,11 +36,11 @@ che qualcuno decida come raggiungerlo.
 | «l'export esce vuoto, va segnalato»                         | [`jira-diagnose`](jira-diagnose.it.md) |
 | «adesso funziona, ma fra sei mesi ci si ritorce contro»     | [`jira-assess`](jira-assess.it.md)     |
 
-Il confine con [`jira-capture`](jira-capture.it.md) sta nel fatto che qualcuno l'abbia già
-esaminata o no. Una richiesta arrivata stamattina e non ancora letta è intake: capture la
-registra con le parole con cui è arrivata e dichiara che è così. Una proposta è quello che hai
-quando qualcuno sa nominare il risultato, il pubblico e la misura — e questa skill non li
-fabbrica insistendo con le domande.
+Il confine con [`jira-capture`](jira-capture.it.md) è **il dato**. Riportare il desiderio di
+qualcun altro senza niente di verificabile dietro è intake — capture lo registra con le parole con
+cui è arrivato e dichiara che è così — e resta intake per quanto chiaramente il risultato sia
+descritto. Una proposta è quello che hai quando qualcuno sa nominare il risultato, il pubblico e
+la misura, e questa skill non li fabbrica insistendo con le domande.
 
 Il confine a valle è [`jira-refine`](jira-refine.it.md). Proporre dichiara il valore e si ferma.
 I criteri di accettazione, un perimetro abbastanza piccolo da poter essere finito e i figli che

@@ -43,10 +43,17 @@ direction: capture opens the path and refinement closes it. If you can already s
 would look like, the request has been examined and this is the wrong intent — everything capture
 adds at that point is a decision nobody made.
 
-A report of something broken that arrives from outside is capture's too, not
-[`jira-diagnose`](jira-diagnose.md)'s. A defect report has to answer questions only the person who
-watched it happen can answer, and here that person is not in the room; recording the complaint in
-their words is the honest version.
+Something broken that arrives from outside can be capture's or
+[`jira-diagnose`](jira-diagnose.md)'s, and what decides is **the material, not who sent it**. If
+the relayed text already carries what makes a fault reproducible — the steps and the environment —
+it is a defect report and belongs to `jira-diagnose`, however plainly it arrived from elsewhere.
+If it carries neither, nobody here can supply them, and recording the complaint in the sender's
+words is the honest version. The same test runs against [`jira-propose`](jira-propose.md): a
+relayed wish with no datum behind it is intake.
+
+The test is deliberately written on the text of the request and not on the people around it.
+Whether someone, once asked, would know the answer is a fact about the conversation's future, and
+the routing decision is taken before anything has been asked.
 
 ## How to use it
 

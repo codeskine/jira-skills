@@ -1,6 +1,6 @@
 ---
 name: jira-inspect
-description: "Jira read-only reporter. Use when the user asks where something stands on Jira — how a parent and its children are progressing, what a sprint has left, what is blocked, what a fix version currently contains — and expects an answer rather than a change. Never writes anything. Not for transitioning an item (→ See codeskine/jira-skills@jira-advance), for planning a sprint (→ See codeskine/jira-skills@jira-plan), or for assigning work to a fix version (→ See codeskine/jira-skills@jira-release)."
+description: "Jira read-only reporter. Use when the user asks where something stands on Jira — how a parent and its children are progressing, what a sprint contains and what it has left, what is blocked, what a fix version currently contains — and expects an answer rather than a change. Never writes anything. Not for transitioning an item (→ See codeskine/jira-skills@jira-advance), for planning a sprint (→ See codeskine/jira-skills@jira-plan), or for assigning work to a fix version (→ See codeskine/jira-skills@jira-release)."
 user-invocable: true
 license: MIT
 compatibility: Designed for Claude Code. Requires the Atlassian MCP server configured as "atlassian".
@@ -48,8 +48,9 @@ asked:
   them.
 - **A fix version** — what is currently assigned to it, and how much of that is unfinished.
 
-Where a question needs the Agile channel to be answered properly — the boards a project has, or a
-sprint the profile does not name — say so and name `jira-plan`, which holds that channel.
+Where a question needs the Agile channel to be answered properly, say so and name the skill that
+holds it for the object asked about: `jira-plan` for the boards a project has or a sprint the
+profile does not name, `jira-release` for a fix version it does not name.
 
 ## 3. Report what is true, including the gaps
 

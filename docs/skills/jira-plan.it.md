@@ -47,6 +47,10 @@ lavoro, la fix version dice _cosa esce insieme_: sono assi ortogonali, e confond
 cui il «quando» diventa in silenzio il «cosa». E un work item che non è pronto resta non pronto:
 `jira-plan` te lo dice prima di pianificarlo, e non lo rende pronto passando.
 
+Leggere uno sprint senza cambiarlo è di [`jira-inspect`](jira-inspect.it.md). Ma una richiesta che
+legge uno sprint **e poi lo cambia** — «fammi vedere cosa resta e togli i bloccati» — è una sola
+operazione, non due, ed è di questa skill fin dall'inizio.
+
 ## Come si usa
 
 Nomina lo sprint e i work item, oppure chiedi di chiudere quello in corso. Niente si muove finché

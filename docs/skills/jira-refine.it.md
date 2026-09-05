@@ -88,21 +88,40 @@ quell'intento, così che nessuno debba riscriverlo dopo.
 
 Un figlio che ha senso solo accanto ai suoi fratelli non è stato scomposto: è stato tagliato.
 
-**6 · Rifiuta una scomposizione che la gerarchia non può reggere.** Il project profile dice quali
+**6 · Anche ogni figlio porta i criteri di accettazione.** Qualunque intento serva, un figlio
+riceve anche la sezione dei criteri di accettazione del template dell'item rifinito: quello che un
+team prende in carico, pianifica e finisce è il figlio, e un figlio che nessuno può dire finito
+non è un'unità di lavoro. La sezione sta dopo quelle che il template proprio del figlio definisce
+e prima delle due che chiudono ogni template, così l'accordo si legge come la conclusione del
+documento e non come la sua premessa.
+
+I criteri si **ripartiscono, non si duplicano**: ogni criterio formulato per il work item atterra
+su esattamente un figlio, e quello che nessun figlio rivendica resta al work item da cui vengono.
+Un figlio che non ne rivendica nessuno è stato tagliato nel senso di sopra, e la risposta è
+ridisegnare la scomposizione — non inventare un criterio per riempirlo.
+
+Un figlio ancora grezzo è l'eccezione. Si dichiara in attesa di refinement, quindi non porta
+criteri, e quello che gli sarebbe atterrato resta al parent finché quel figlio non viene rifinito
+a sua volta.
+
+**7 · Rifiuta una scomposizione che la gerarchia non può reggere.** Il project profile dice quali
 work type possono contenere quali. Dove non ammette nessuna relazione parent-figlio fra il work
 type del work item e quello dei figli, la skill lo dice, spiega perché, e lascia il work item
 intero. Non crea i figli lo stesso: figli che non si possono attaccare sono orfani, e un orfano è
 peggio di un work item troppo grande, perché in più è invisibile.
 
-**7 · Poi il draft gate**, il cancello che precede ogni scrittura su Jira. Il risultato completo
+**8 · Poi il draft gate**, il cancello che precede ogni scrittura su Jira. Il risultato completo
 compare in chat con le decisioni che porta con sé, e su Jira non finisce niente finché non approvi.
 Questo intento aggiunge una cosa: **l'intera scomposizione viene presentata prima che ne esista un
 solo pezzo, e approvata una volta sola** — mai figlio per figlio, perché una scomposizione
 approvata figlio per figlio è una scomposizione che nessuno ha riequilibrato. Con quella singola
 approvazione vengono poi scritti più work item; se una parte fallisce ti viene detto quali pezzi
-sono passati e quali no, e niente viene disfatto senza di te.
+sono passati e quali no, e niente viene disfatto senza di te. Il blocco delle decisioni nomina i
+criteri di accettazione di ogni work item coinvolto, parent compreso: sono loro l'oggetto
+dell'accordo, e una bozza che li avesse persi resterebbe approvabile senza che nessuno se ne
+accorga.
 
-**8 · Con la scrittura, la dichiarazione di lavoro grezzo viene ritirata.** Dove l'intake aveva
+**9 · Con la scrittura, la dichiarazione di lavoro grezzo viene ritirata.** Dove l'intake aveva
 scritto che il work item è grezzo e in attesa di refinement, questa scrittura la rimuove — su
 entrambi i rami. Quella dichiarazione è ciò che ha permesso a un work item incompleto di esistere;
 lasciata accanto ai criteri di accettazione fa contraddire il work item con sé stesso e lo tiene

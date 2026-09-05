@@ -40,6 +40,12 @@ _«Continua a dare problemi»_ sta bene in tutte e due le descrizioni, quindi la
 presto se oggi qualcosa fallisce davvero; se non fallisce niente, lo dice e si ferma invece di
 archiviare come difetto quello che è un rischio.
 
+Anche il confine con [`jira-capture`](jira-capture.it.md) lo decide il materiale. Un guasto
+riportato di seconda mano che porta i passi e l'ambiente è la segnalazione di un difetto e sta
+qui, chiunque l'abbia inoltrato. Uno che non porta né gli uni né l'altro è intake: nessuno dei
+presenti può rispondere a quello che questa skill sta per chiedere, e capture lo registra con le
+parole con cui è arrivato.
+
 ## Come si usa
 
 Non serve nominare la skill. Racconta cosa si è rotto, con parole tue, e rispondi alle domande.

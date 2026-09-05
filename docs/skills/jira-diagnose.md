@@ -39,6 +39,11 @@ keeps flaking"_ fits either description, so the skill establishes early that som
 fails today; if nothing does, it says so and stops rather than filing a defect that is really a
 risk.
 
+The boundary with [`jira-capture`](jira-capture.md) is decided by the material too. A fault
+relayed second-hand that carries the steps and the environment is a defect report and belongs
+here, whoever forwarded it. One that carries neither is intake: nobody present can answer what
+this skill is about to ask, and capture records it in the words it arrived in.
+
 ## How to use it
 
 You do not need to name the skill. Describe what broke, in your own words, and answer the

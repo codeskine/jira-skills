@@ -39,11 +39,14 @@ di una fix version che le nomini, perché quella è una ricerca — ma solo
 [`jira-release`](jira-release.it.md) può dirti quali fix version esistono e in che stato
 sono, perché quell'elenco sta sulla Jira CLI e questa skill non la dichiara. Chiedilo lì.
 
-Per il resto lo schema tiene: una domanda è questa skill, un'istruzione è una delle altre
-tre. Se chiedi un
-cambiamento mentre stai leggendo una risposta, `jira-inspect` nomina la skill che se ne occupa e
-si ferma — non si offre di farlo lei, perché un'offerta accettata nello stesso respiro di una
-domanda è una scrittura che nessun cancello ha visto.
+Per il resto lo schema tiene: una domanda è questa skill, un'istruzione è una delle altre tre. Se
+chiedi un cambiamento mentre stai leggendo una risposta, `jira-inspect` nomina la skill che se ne
+occupa e si ferma — non si offre di farlo lei, perché un'offerta accettata nello stesso respiro di
+una domanda è una scrittura che nessun cancello ha visto.
+
+Una richiesta che chiede le due cose insieme non è un cambiamento a metà risposta: «fammi vedere
+cosa resta nello sprint e togli i bloccati» è una sola operazione e appartiene a
+[`jira-plan`](jira-plan.it.md) fin dall'inizio.
 
 ## Come si usa
 

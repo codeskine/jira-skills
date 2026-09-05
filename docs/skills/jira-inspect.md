@@ -39,11 +39,14 @@ version you name, because that is a search — but only [`jira-release`](jira-re
 tell you which fix versions exist and what state each is in, since that listing lives on the
 Jira CLI and this skill does not declare it. Ask about fix versions there.
 
-Otherwise the pattern holds: a question is this skill, an instruction is one of the other
-three. When you ask for
-a change mid-answer, `jira-inspect` names the skill that owns it and stops — it does not offer to
-make the change itself, because an offer accepted in the same breath as a question is a write
-nobody gated.
+Otherwise the pattern holds: a question is this skill, an instruction is one of the other three.
+When you ask for a change mid-answer, `jira-inspect` names the skill that owns it and stops — it
+does not offer to make the change itself, because an offer accepted in the same breath as a
+question is a write nobody gated.
+
+A request that asks for both at once is not a mid-answer change: "show me what is left in the
+sprint and drop the blocked ones" is one operation and belongs to
+[`jira-plan`](jira-plan.md) from the start.
 
 ## How to use it
 

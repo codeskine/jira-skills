@@ -132,6 +132,9 @@ Then you approve, or you ask for changes and see it again. As many times as you 
   set of work item moved into a sprint. The gate stays single: all of it is presented, approved
   once, then executed. If part of it fails you are told which parts succeeded, and you decide
   whether the partial result is kept.
+- **In full means in full.** Every section the template defines and does not mark optional is
+  there. A section that cannot be filled is raised at the gate as a gap, never quietly dropped —
+  optionality is declared in the template, never inferred from silence.
 - **After the write, Jira is the truth.** No local copy of what was published is kept, anywhere.
 
 <!-- shot:SHOT-02 pending -->
