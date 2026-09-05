@@ -2,12 +2,12 @@
 
 <!-- skill-header:start -->
 
-|                       |                                                                                       |
-| --------------------- | ------------------------------------------------------------------------------------- |
-| **Name**              | `jira-diagnose`                                                                       |
-| **Version**           | 1.0.0                                                                                 |
-| **Invocable by name** | yes                                                                                   |
-| **Channel**           | Atlassian MCP server                                                                  |
+|                       |                                                                                        |
+| --------------------- | -------------------------------------------------------------------------------------- |
+| **Name**              | `jira-diagnose`                                                                        |
+| **Version**           | 1.0.0                                                                                  |
+| **Invocable by name** | yes                                                                                    |
+| **Channel**           | Atlassian MCP server                                                                   |
 | **Environment**       | Designed for Claude Code. Requires the Atlassian MCP server configured as "atlassian". |
 
 <!-- skill-header:end -->
@@ -27,12 +27,12 @@ currently the only one who can make it happen again, and ending that is the whol
 It fires when you say something is broken, behaves unexpectedly or fails, and it has to be
 recorded.
 
-| Say something like                                  | And this is the skill you get |
-| --------------------------------------------------- | ----------------------------- |
-| "the export comes out empty, we need to file this"  | `jira-diagnose`               |
-| "this works but it will bite us in six months"      | [`jira-assess`](jira-assess.md) |
-| "finance sent this over, nobody has looked at it"   | [`jira-capture`](jira-capture.md) |
-| "we want customers to see their history"            | [`jira-propose`](jira-propose.md) |
+| Say something like                                 | And this is the skill you get     |
+| -------------------------------------------------- | --------------------------------- |
+| "the export comes out empty, we need to file this" | `jira-diagnose`                   |
+| "this works but it will bite us in six months"     | [`jira-assess`](jira-assess.md)   |
+| "finance sent this over, nobody has looked at it"  | [`jira-capture`](jira-capture.md) |
+| "we want customers to see their history"           | [`jira-propose`](jira-propose.md) |
 
 The boundary with [`jira-assess`](jira-assess.md) is guarded from both sides on purpose. _"This
 keeps flaking"_ fits either description, so the skill establishes early that something actually

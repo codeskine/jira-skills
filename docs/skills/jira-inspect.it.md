@@ -2,12 +2,12 @@
 
 <!-- skill-header:start -->
 
-|                         |                                                                                       |
-| ----------------------- | ------------------------------------------------------------------------------------- |
-| **Nome**                | `jira-inspect`                                                                        |
-| **Versione**            | 1.0.0                                                                                 |
-| **Invocabile per nome** | sì                                                                                    |
-| **Channel**             | Atlassian MCP server                                                                  |
+|                         |                                                                                        |
+| ----------------------- | -------------------------------------------------------------------------------------- |
+| **Nome**                | `jira-inspect`                                                                         |
+| **Versione**            | 1.0.0                                                                                  |
+| **Invocabile per nome** | sì                                                                                     |
+| **Channel**             | Atlassian MCP server                                                                   |
 | **Ambiente**            | Designed for Claude Code. Requires the Atlassian MCP server configured as "atlassian". |
 
 <!-- skill-header:end -->
@@ -26,15 +26,21 @@ c'è niente da sottoporre a un cancello.
 
 Si attiva quando vuoi una risposta, non un cambiamento.
 
-| Se dici qualcosa come                          | La skill è                            |
-| ---------------------------------------------- | ------------------------------------- |
-| «a che punto è lo sprint?»                     | `jira-inspect`                        |
-| «porta PROJ-14 in review»                      | [`jira-advance`](jira-advance.it.md)  |
-| «metti questi quattro nello sprint»            | [`jira-plan`](jira-plan.it.md)        |
-| «cosa manca prima di poter rilasciare la 2.4?» | `jira-inspect`                        |
-| «assegna questi alla 2.4»                      | [`jira-release`](jira-release.it.md)  |
+| Se dici qualcosa come                          | La skill è                           |
+| ---------------------------------------------- | ------------------------------------ |
+| «a che punto è lo sprint?»                     | `jira-inspect`                       |
+| «porta PROJ-14 in review»                      | [`jira-advance`](jira-advance.it.md) |
+| «metti questi quattro nello sprint»            | [`jira-plan`](jira-plan.it.md)       |
+| «cosa manca prima di poter rilasciare la 2.4?» | [`jira-release`](jira-release.it.md) |
+| «assegna questi alla 2.4»                      | [`jira-release`](jira-release.it.md) |
 
-Lo schema: una domanda è questa skill, un'istruzione è una delle altre tre. Se chiedi un
+Le fix version sono l'unica vera sovrapposizione. `jira-inspect` può riportare il contenuto
+di una fix version che le nomini, perché quella è una ricerca — ma solo
+[`jira-release`](jira-release.it.md) può dirti quali fix version esistono e in che stato
+sono, perché quell'elenco sta sulla Jira CLI e questa skill non la dichiara. Chiedilo lì.
+
+Per il resto lo schema tiene: una domanda è questa skill, un'istruzione è una delle altre
+tre. Se chiedi un
 cambiamento mentre stai leggendo una risposta, `jira-inspect` nomina la skill che se ne occupa e
 si ferma — non si offre di farlo lei, perché un'offerta accettata nello stesso respiro di una
 domanda è una scrittura che nessun cancello ha visto.
@@ -50,12 +56,12 @@ riferisce. Se il project profile manca, si ferma e ti dice di eseguire `jira-ini
 
 **2 · Risponde cercando.** Quattro forme coprono quasi tutto quello che viene chiesto:
 
-| Se chiedi di      | Riporta                                                                       |
-| ----------------- | ------------------------------------------------------------------------------ |
-| un parent         | i suoi figli, i loro status, e cosa resta                                     |
-| uno sprint        | cosa contiene raggruppato per categoria di status, e cosa non è partito       |
-| cos'è bloccato    | i work item con link di blocco non risolti, e cosa li blocca                  |
-| una fix version   | cosa le è assegnato, e quanto di quello è ancora aperto                       |
+| Se chiedi di    | Riporta                                                                 |
+| --------------- | ----------------------------------------------------------------------- |
+| un parent       | i suoi figli, i loro status, e cosa resta                               |
+| uno sprint      | cosa contiene raggruppato per categoria di status, e cosa non è partito |
+| cos'è bloccato  | i work item con link di blocco non risolti, e cosa li blocca            |
+| una fix version | cosa le è assegnato, e quanto di quello è ancora aperto                 |
 
 **3 · Legge attraverso un channel solo.** Tutto quello che c'è sopra è una ricerca, quindi
 `jira-inspect` non tocca mai la Jira CLI: non la dichiara nemmeno. È deliberato — nessuna domanda

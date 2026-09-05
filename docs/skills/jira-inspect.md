@@ -2,12 +2,12 @@
 
 <!-- skill-header:start -->
 
-|                       |                                                                                       |
-| --------------------- | ------------------------------------------------------------------------------------- |
-| **Name**              | `jira-inspect`                                                                        |
-| **Version**           | 1.0.0                                                                                 |
-| **Invocable by name** | yes                                                                                   |
-| **Channel**           | Atlassian MCP server                                                                  |
+|                       |                                                                                        |
+| --------------------- | -------------------------------------------------------------------------------------- |
+| **Name**              | `jira-inspect`                                                                         |
+| **Version**           | 1.0.0                                                                                  |
+| **Invocable by name** | yes                                                                                    |
+| **Channel**           | Atlassian MCP server                                                                   |
 | **Environment**       | Designed for Claude Code. Requires the Atlassian MCP server configured as "atlassian". |
 
 <!-- skill-header:end -->
@@ -26,15 +26,21 @@ nothing to gate.
 
 It fires when you want an answer, not a change.
 
-| Say something like                            | And this is the skill you get       |
-| --------------------------------------------- | ----------------------------------- |
-| "where is the sprint at?"                     | `jira-inspect`                      |
-| "move PROJ-14 to review"                      | [`jira-advance`](jira-advance.md)   |
-| "put these four in the sprint"                | [`jira-plan`](jira-plan.md)         |
-| "what still has to land before we ship 2.4?"  | `jira-inspect`                      |
-| "assign these to 2.4"                         | [`jira-release`](jira-release.md)   |
+| Say something like                           | And this is the skill you get     |
+| -------------------------------------------- | --------------------------------- |
+| "where is the sprint at?"                    | `jira-inspect`                    |
+| "move PROJ-14 to review"                     | [`jira-advance`](jira-advance.md) |
+| "put these four in the sprint"               | [`jira-plan`](jira-plan.md)       |
+| "what still has to land before we ship 2.4?" | [`jira-release`](jira-release.md) |
+| "assign these to 2.4"                        | [`jira-release`](jira-release.md) |
 
-The pattern: a question is this skill, an instruction is one of the other three. When you ask for
+Fix versions are the one genuine overlap. `jira-inspect` can report the contents of a fix
+version you name, because that is a search — but only [`jira-release`](jira-release.md) can
+tell you which fix versions exist and what state each is in, since that listing lives on the
+Jira CLI and this skill does not declare it. Ask about fix versions there.
+
+Otherwise the pattern holds: a question is this skill, an instruction is one of the other
+three. When you ask for
 a change mid-answer, `jira-inspect` names the skill that owns it and stops — it does not offer to
 make the change itself, because an offer accepted in the same breath as a question is a write
 nobody gated.
@@ -50,12 +56,12 @@ the profile is missing it stops and tells you to run `jira-init`. See
 
 **2 · It answers by searching.** Four shapes cover most of what gets asked:
 
-| You ask about        | It reports                                                                    |
-| -------------------- | ------------------------------------------------------------------------------ |
-| a parent             | its children, their statuses, and what remains                                |
-| a sprint             | what is in it grouped by status category, and what has not started            |
-| what is blocked      | items whose blocking links are unresolved, and what is blocking them          |
-| a fix version        | what is assigned to it, and how much of that is unfinished                    |
+| You ask about   | It reports                                                           |
+| --------------- | -------------------------------------------------------------------- |
+| a parent        | its children, their statuses, and what remains                       |
+| a sprint        | what is in it grouped by status category, and what has not started   |
+| what is blocked | items whose blocking links are unresolved, and what is blocking them |
+| a fix version   | what is assigned to it, and how much of that is unfinished           |
 
 **3 · It reads through one channel only.** Everything above is a search, so `jira-inspect` never
 touches the Jira CLI — it is not even declared. That is deliberate: no question you can ask it
@@ -81,11 +87,11 @@ bucket for it.
 
 > **Sprint 24 — 11 work item, day 7 of 10**
 >
-> | Status category | Count | Work item                                         |
-> | --------------- | ----- | ------------------------------------------------- |
-> | Done            | 4     | PROJ-98, PROJ-101, PROJ-104, PROJ-110             |
-> | In Progress     | 3     | PROJ-99, PROJ-107, PROJ-112                       |
-> | To Do           | 4     | PROJ-102, PROJ-103, PROJ-113, PROJ-115            |
+> | Status category | Count | Work item                              |
+> | --------------- | ----- | -------------------------------------- |
+> | Done            | 4     | PROJ-98, PROJ-101, PROJ-104, PROJ-110  |
+> | In Progress     | 3     | PROJ-99, PROJ-107, PROJ-112            |
+> | To Do           | 4     | PROJ-102, PROJ-103, PROJ-113, PROJ-115 |
 >
 > Four have not started with the sprint at day 7 of 10. Two of those, PROJ-113 and PROJ-115, are
 > blocked: both are waiting on PROJ-88, which is not in this sprint and sits in To Do.
@@ -141,7 +147,7 @@ the project and this skill does not reinterpret them.
 
 - [The development process](../development-process.md) — the project profile, the two channels,
   and why the read-only skill declines one of them.
-- [`jira-advance`](jira-advance.md) — to move a single work item to its next status.
+- [`jira-advance`](jira-advance.md) — to run the next transition on a single work item.
 - [`jira-plan`](jira-plan.md) — to change what a sprint contains, and for questions that need the
   Agile channel.
 - [`jira-release`](jira-release.md) — to change what a fix version contains.

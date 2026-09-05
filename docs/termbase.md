@@ -32,30 +32,30 @@ The seven names of criterion 4, plus the Jira object that owns two of them. Engl
 documents, with the Italian article and plural fixed here so that eleven authors do not each
 choose their own.
 
-| Object           | English      | In Italian prose         | Plural (IT)      |
-| ---------------- | ------------ | ------------------------ | ---------------- |
-| the unit of work | work item    | **il** work item         | i work item      |
-| its class        | work type    | **il** work type         | i work type      |
-| its container    | parent       | **il** parent            | i parent         |
-| its position     | status       | **lo** status            | gli status       |
-| the move         | transition   | **la** transition        | le transition    |
-| the time box     | sprint       | **lo** sprint            | gli sprint       |
-| the ship target  | fix version  | **la** fix version       | le fix version   |
-| the Jira object  | Jira Workflow | **il** Jira Workflow    | i Jira Workflow  |
+| Object           | English       | In Italian prose     | Plural (IT)     |
+| ---------------- | ------------- | -------------------- | --------------- |
+| the unit of work | work item     | **il** work item     | i work item     |
+| its class        | work type     | **il** work type     | i work type     |
+| its container    | parent        | **il** parent        | i parent        |
+| its position     | status        | **lo** status        | gli status      |
+| the move         | transition    | **la** transition    | le transition   |
+| the time box     | sprint        | **lo** sprint        | gli sprint      |
+| the ship target  | fix version   | **la** fix version   | le fix version  |
+| the Jira object  | Jira Workflow | **il** Jira Workflow | i Jira Workflow |
 
 English loanwords are **invariant in the plural**: _i work item_, never _i work items_.
 
 Refused as the name of the concept — in both languages:
 
-| Object        | Refused in English                             | Refused in Italian                                                    |
-| ------------- | ---------------------------------------------- | --------------------------------------------------------------------- |
-| work item     | issue, ticket, task, story, work element       | issue, ticket, attività, task, storia, scheda, elemento di lavoro     |
-| work type     | issue type, kind, category, `type::*`          | tipo di issue, tipologia, categoria, genere                           |
-| parent        | epic link, `kind::epic`, simulated hierarchy   | epica, elemento padre, genitore, gerarchia simulata, tabella dei figli |
-| status        | workflow state, `workflow::*`, phase, column   | stato del workflow, fase, colonna, stato di avanzamento               |
-| transition    | state change, move                             | cambio di stato, passaggio, spostamento, avanzamento                  |
-| sprint        | iteration, milestone, cycle, cadence           | iterazione, milestone, ciclo, cadenza                                 |
-| fix version   | release, version, milestone, tag               | release, versione, milestone, tag, rilascio                           |
+| Object      | Refused in English                           | Refused in Italian                                                     |
+| ----------- | -------------------------------------------- | ---------------------------------------------------------------------- |
+| work item   | issue, ticket, task, story, work element     | issue, ticket, attività, task, storia, scheda, elemento di lavoro      |
+| work type   | issue type, kind, category, `type::*`        | tipo di issue, tipologia, categoria, genere                            |
+| parent      | epic link, `kind::epic`, simulated hierarchy | epica, elemento padre, genitore, gerarchia simulata, tabella dei figli |
+| status      | workflow state, `workflow::*`, phase, column | stato del workflow, fase, colonna, stato di avanzamento                |
+| transition  | state change, move                           | cambio di stato, passaggio, spostamento, avanzamento                   |
+| sprint      | iteration, milestone, cycle, cadence         | iterazione, milestone, ciclo, cadenza                                  |
+| fix version | release, version, milestone, tag             | release, versione, milestone, tag, rilascio                            |
 
 Two of these need the test of §4 applied rather than the list read:
 
@@ -79,13 +79,16 @@ reader will meet it in the repository, in a skill and in a commit message, and a
 is worth more than a translated one. The Italian gloss is given **once per document**, at first
 use, and never again.
 
-| Mechanism       | In Italian prose  | Gloss at first use                                    | Refused in Italian                        |
-| --------------- | ----------------- | ----------------------------------------------------- | ----------------------------------------- |
-| draft gate      | il draft gate     | il cancello che precede ogni scrittura su Jira        | conferma, approvazione (come nome), revisione interna |
-| discovery       | la discovery      | la lettura della configurazione reale del progetto    | introspezione, sonda, rilevamento, scansione |
-| project profile | il project profile | il file che registra l'esito della discovery         | configurazione, mirror, stato locale, "la cache" |
-| channel         | il channel        | la via con cui una skill parla a Jira                 | backend, provider, adattatore, integrazione |
-| surrogate       | il surrogate      | un concetto inventato al posto di uno nativo di Jira  | workaround, emulazione, simulazione       |
+| Mechanism       | In Italian prose   | Gloss at first use                                                  | Refused in Italian                                    |
+| --------------- | ------------------ | ------------------------------------------------------------------- | ----------------------------------------------------- |
+| draft gate      | il draft gate      | il cancello che precede ogni scrittura su Jira                      | conferma, approvazione (come nome), revisione interna |
+| discovery       | la discovery       | la lettura della configurazione reale del progetto                  | introspezione, sonda, rilevamento, scansione          |
+| project profile | il project profile | il file che registra l'esito della discovery                        | configurazione, mirror, stato locale, "la cache"      |
+| channel         | il channel         | la via con cui una skill parla a Jira                               | backend, provider, adattatore, integrazione           |
+| surrogate       | il surrogate       | un concetto inventato al posto di uno nativo di Jira                | workaround, emulazione, simulazione                   |
+| connector       | il connettore      | un connettore Atlassian aggiunto dalle impostazioni di claude.ai    | channel (NON è un channel)                            |
+| degradation     | la degradazione    | un channel irraggiungibile qui e ora, non un limite dello strumento | guasto, errore, malfunzionamento                      |
+| declared gap    | il gap dichiarato  | un'operazione che non esiste su nessuno dei due channel             | buco, mancanza, limitazione                           |
 
 **`Evidence` is translated**, and is the exception to this section. It is not a Jira object and it
 is a section heading in three templates — say **evidenza**, and _l'evidenza_ in running prose.
@@ -106,21 +109,71 @@ The headings the templates use, fixed once here:
 
 | English                        | Italian                                |
 | ------------------------------ | -------------------------------------- |
-| Steps to reproduce             | Passi per riprodurre                   |
-| Expected result                | Risultato atteso                       |
-| Actual result                  | Risultato effettivo                    |
-| Evidence                       | Evidenza                               |
-| Where it happened              | Dove è successo                        |
-| Impact                         | Impatto                                |
-| Frequency                      | Frequenza                              |
-| Required fields not yet filled | Campi obbligatori non ancora compilati |
-| Work type                      | Work type                              |
-| Source                         | Provenienza                            |
-| Not yet known                  | Non ancora noto                        |
-| Awaiting refinement            | In attesa di refinement                |
 | Acceptance criteria            | Criteri di accettazione                |
-| Out of scope                   | Fuori perimetro                        |
+| Actual result                  | Risultato effettivo                    |
+| Assumptions                    | Assunzioni                             |
+| Awaiting refinement            | In attesa di refinement                |
+| Boards and sprints             | Board e sprint                         |
 | Dependencies                   | Dipendenze                             |
+| Evidence                       | Evidenza                               |
+| Expected result                | Risultato atteso                       |
+| Fix versions                   | Fix version                            |
+| Frequency                      | Frequenza                              |
+| Hierarchy                      | Gerarchia                              |
+| How success is measured        | Come si misura il successo             |
+| Impact                         | Impatto                                |
+| Intents no work type serves    | Intenti che nessun work type serve     |
+| Measurements                   | Misurazioni                            |
+| Not yet known                  | Non ancora noto                        |
+| Operation resolution           | Risoluzione delle operazioni           |
+| Options                        | Opzioni                                |
+| Out of scope                   | Fuori perimetro                        |
+| Outcome sought                 | Risultato perseguito                   |
+| Required fields not yet filled | Campi obbligatori non ancora compilati |
+| Source                         | Provenienza                            |
+| Statuses and transitions       | Status e transition                    |
+| Steps to reproduce             | Passi per riprodurre                   |
+| Technical impact               | Impatto tecnico                        |
+| Unsupported operations         | Operazioni non supportate              |
+| Urgency, as stated             | Urgenza, come dichiarata               |
+| What it costs to defer         | Cosa costa rimandare                   |
+| What the requester expects     | Cosa si aspetta chi ha chiesto         |
+| What works today               | Cosa funziona oggi                     |
+| Where it happened              | Dove è successo                        |
+| Who benefits                   | Chi ne trae beneficio                  |
+| Work type                      | Work type                              |
+| Work types                     | Work type                              |
+
+_Outcome sought_ is deliberately **not** _Risultato atteso_: that pair is already bound to
+_Expected result_ in a defect report, and one Italian phrase cannot name two different things.
+
+A **table column inside an artifact** is translated on the same rule, and the ones the templates
+use are fixed here too:
+
+| English              | Italian                    | Template         |
+| -------------------- | -------------------------- | ---------------- |
+| Option               | Opzione                    | debt record      |
+| What it takes        | Cosa richiede              | debt record      |
+| What it leaves       | Cosa lascia                | debt record      |
+| Field / Value        | Campo / Valore             | captured request |
+| From                 | Da                         | captured request |
+| Received             | Ricevuta                   | captured request |
+| Route                | Tramite                    | captured request |
+| Recorded by          | Registrata da              | captured request |
+| Level                | Livello                    | project profile  |
+| Can be a child of    | Può essere figlio di       | project profile  |
+| Category             | Categoria                  | project profile  |
+| Reachable from       | Raggiungibile da           | project profile  |
+| Operation            | Operazione                 | project profile  |
+| Tool or command      | Tool o comando             | project profile  |
+| Manual path          | Percorso manuale           | project profile  |
+| Active sprint        | Sprint attivo              | project profile  |
+| Notes                | Note                       | project profile  |
+| Why                  | Perché                     | project profile  |
+| Required on creation | Obbligatori alla creazione | project profile  |
+
+_Route_ is **Tramite** and never _Canale_: §2 reserves `channel` for the route a skill uses to
+reach Jira, and a request arriving by email has nothing to do with it.
 
 An agent that needs a heading absent from this table adds it and says so in its return, rather
 than choosing one on its own.
@@ -131,18 +184,62 @@ than choosing one on its own.
 
 Not domain vocabulary. Fixed here so that eleven documents agree.
 
-| English              | Italian                     | Note                                                      |
-| -------------------- | --------------------------- | --------------------------------------------------------- |
-| skill                | la skill                    | invariant plural: _le skill_                              |
-| plugin               | il plugin                   |                                                            |
-| command              | il comando                  | `/jira-doctor` is a command, not a skill                  |
-| Agent Skill          | Agent Skill                 | the specification's own name, unchanged                   |
-| development process  | il processo di sviluppo     | the title of `development-process.md` and its Italian pair |
-| sub-agent            | il sub-agent                | build-time only; it never appears in user documentation   |
-| shot                 | lo shot                     | an entry in the shot list — build-time only               |
-| worked exchange      | lo scambio di esempio       | section 5 of every document                               |
-| the result           | il risultato                | section 6 of every document                               |
-| project profile file | `.jira/project-profile.md`  | quoted as a path, never described in words alone          |
+| English                    | Italian                       | Note                                                                                                                   |
+| -------------------------- | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| skill                      | la skill                      | invariant plural: _le skill_                                                                                           |
+| plugin                     | il plugin                     |                                                                                                                        |
+| command                    | il comando                    | `/jira-doctor` is a command, not a skill                                                                               |
+| Agent Skill                | Agent Skill                   | the specification's own name, unchanged                                                                                |
+| development process        | il processo di sviluppo       | the title of `development-process.md` and its Italian pair                                                             |
+| artifact                   | l'artefatto                   |                                                                                                                        |
+| intent                     | l'intento                     |                                                                                                                        |
+| template                   | il template                   |                                                                                                                        |
+| report                     | il report                     | the reply a read-only skill returns in chat                                                                            |
+| finding                    | il rilievo                    |                                                                                                                        |
+| tool                       | il tool                       | invariant plural: _i tool_                                                                                             |
+| board                      | la board                      | invariant plural: _le board_ — a Jira object, but not one of the seven                                                 |
+| backlog                    | il backlog                    |                                                                                                                        |
+| label                      | la label                      | English, as `CONTEXT.md` names the scoped labels                                                                       |
+| intake                     | l'intake                      | two authors kept it English independently; ratified here                                                               |
+| refinement                 | il refinement                 | the activity and the noun, matching _In attesa di refinement_                                                          |
+| refined                    | rifinito                      | _un work item rifinito_                                                                                                |
+| raw                        | grezzo / grezza               |                                                                                                                        |
+| child / children           | il figlio / i figli           | and _relazione parent-figlio_ for the mixed form                                                                       |
+| split, decomposition       | la scomposizione, scomporre   |                                                                                                                        |
+| orphan                     | l'orfano                      |                                                                                                                        |
+| planning horizon           | orizzonte di pianificazione   |                                                                                                                        |
+| hierarchy                  | la gerarchia                  | ordinary Italian — only _gerarchia simulata_ is refused                                                                |
+| technical debt             | il debito tecnico             | never _debito tecnologico_                                                                                             |
+| risk                       | il rischio                    |                                                                                                                        |
+| project admin              | l'amministratore del progetto |                                                                                                                        |
+| condition                  | la condizione                 | _condizione non soddisfatta_ for an unmet one                                                                          |
+| blocking link              | il link di blocco             |                                                                                                                        |
+| status category            | la categoria di status        |                                                                                                                        |
+| what ships together        | cosa viene rilasciato insieme |                                                                                                                        |
+| the state of a fix version | lo stato della fix version    | _rilasciata_ / _non rilasciata_ / _archiviata_. Deliberately **not** _status_, which names the position of a work item |
+| credential                 | la credenziale                |                                                                                                                        |
+| non-interactive shell      | shell non interattiva         |                                                                                                                        |
+| dotfile                    | il dotfile                    |                                                                                                                        |
+| single writer              | l'unica scrittrice            | of the project profile                                                                                                 |
+| staleness                  | l'invalidazione               | explicit, never time-based                                                                                             |
+| value proposal             | la proposta di valore         |                                                                                                                        |
+| project style              | lo stile del progetto         | values `team-managed` / `company-managed` untranslated                                                                 |
+| sub-agent                  | il sub-agent                  | build-time only; never in user documentation                                                                           |
+| shot                       | lo shot                       | an entry in the shot list — build-time only                                                                            |
+| worked exchange            | lo scambio di esempio         | section 5 of every document                                                                                            |
+| the result                 | il risultato                  | section 6 of every document                                                                                            |
+
+A persona's role name is **not** translated: _QA Engineer_, _Scrum Master_, _Business Analyst_,
+_Delivery Manager_. Neither is a Jira field name or a work type value — _Team_, _Task_,
+_In Progress_ — for the reason criterion 5 gives.
+
+Two words to avoid in Italian that no _Avoid_ list catches: **il record** for a work item, which
+stands exactly where the canonical term belongs, and **canale** for anything but a `channel`.
+
+A **chat report has no template**, so its labels are not in §2b. The one shape the set has settled
+is a transition outcome: Transition run / Status before / Status declared / Status now / Not
+offered, and why → _Transition eseguita / Status prima / Status dichiarato / Status adesso / Non
+offerte, e perché_.
 
 ---
 

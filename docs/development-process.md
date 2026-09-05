@@ -67,16 +67,16 @@ how your whole team, and every future session, learns the same facts without ask
 
 What it records, and why each entry earns its place:
 
-| It records                                          | Because otherwise a skill would                         |
-| --------------------------------------------------- | -------------------------------------------------------- |
-| the project key and name                            | not know what it is scoped to                           |
-| the work types, and how they nest                   | offer a type that does not exist, at a level that cannot |
-| the statuses and the transitions connecting them    | infer a move Jira will refuse                           |
-| the fields required on creation, per work type      | have a draft rejected after you approved it             |
-| the boards, and the active sprint of each           | plan against a sprint that is not there                 |
-| the fix versions                                    | invent one                                              |
-| which MCP tool serves which operation               | hard-code a tool name that changes between versions     |
-| the operations with no tool at all                  | fail where it could have announced a limit              |
+| It records                                       | Because otherwise a skill would                          |
+| ------------------------------------------------ | -------------------------------------------------------- |
+| the project key and name                         | not know what it is scoped to                            |
+| the work types, and how they nest                | offer a type that does not exist, at a level that cannot |
+| the statuses and the transitions connecting them | infer a move Jira will refuse                            |
+| the fields required on creation, per work type   | have a draft rejected after you approved it              |
+| the boards, and the active sprint of each        | plan against a sprint that is not there                  |
+| the fix versions                                 | invent one                                               |
+| which MCP tool serves which operation            | hard-code a tool name that changes between versions      |
+| the operations with no tool at all               | fail where it could have announced a limit               |
 
 Three properties of the profile are worth knowing before you meet them:
 
@@ -195,14 +195,14 @@ Every artifact these skills write meets the same bar, whatever the intent:
 
 Evidence is required, and code is only one of its forms:
 
-| The claim                                | The evidence                                                              |
-| ---------------------------------------- | --------------------------------------------------------------------------- |
-| code behaves a certain way               | a fenced snippet of 5–20 lines, with an exact `path/file.ext` line N citation |
-| something fails                          | the exact error or log line, verbatim, not paraphrased                     |
-| something is slow, large or frequent     | the measurement, and how it was obtained                                    |
-| users want or struggle with something    | the observation, the request, or the datum behind it                        |
-| this depends on other work               | a link to the work item, not a description of it                            |
-| this is how it is meant to behave        | a reference to the decision or document that says so                        |
+| The claim                             | The evidence                                                                  |
+| ------------------------------------- | ----------------------------------------------------------------------------- |
+| code behaves a certain way            | a fenced snippet of 5–20 lines, with an exact `path/file.ext` line N citation |
+| something fails                       | the exact error or log line, verbatim, not paraphrased                        |
+| something is slow, large or frequent  | the measurement, and how it was obtained                                      |
+| users want or struggle with something | the observation, the request, or the datum behind it                          |
+| this depends on other work            | a link to the work item, not a description of it                              |
+| this is how it is meant to behave     | a reference to the decision or document that says so                          |
 
 An artifact with no checkable content is an opinion, and it reads as one — marked as an
 assumption rather than dressed as a fact.
@@ -233,19 +233,19 @@ will eventually disagree with the first.
 
 ## The whole path, skill by skill
 
-| Phase       | Skill                                          | You get                                              |
-| ----------- | ---------------------------------------------- | ---------------------------------------------------- |
-| Setup       | [`jira-init`](skills/jira-init.md)             | the project profile, discovered once and committed   |
-| Setup       | [`/jira-doctor`](commands/jira-doctor.md)      | three independent checks, each with its own remedy   |
-| Intake      | [`jira-capture`](skills/jira-capture.md)       | a request recorded in the words it arrived in        |
-| Intake      | [`jira-propose`](skills/jira-propose.md)       | an outcome, with the datum that makes it arguable    |
-| Intake      | [`jira-diagnose`](skills/jira-diagnose.md)     | a defect someone else can reproduce                  |
-| Intake      | [`jira-assess`](skills/jira-assess.md)         | debt or risk, with what deferring it costs           |
-| Refinement  | [`jira-refine`](skills/jira-refine.md)         | acceptance criteria, a finishable scope, or children |
-| Planning    | [`jira-plan`](skills/jira-plan.md)             | a sprint filled, emptied or closed                   |
-| Planning    | [`jira-release`](skills/jira-release.md)       | a fix version's contents, and what is unfinished     |
-| Progress    | [`jira-advance`](skills/jira-advance.md)       | the transitions Jira allows right now, and no others |
-| Progress    | [`jira-inspect`](skills/jira-inspect.md)       | an answer, and never a change                        |
+| Phase      | Skill                                      | You get                                              |
+| ---------- | ------------------------------------------ | ---------------------------------------------------- |
+| Setup      | [`jira-init`](skills/jira-init.md)         | the project profile, discovered once and committed   |
+| Setup      | [`/jira-doctor`](commands/jira-doctor.md)  | three independent checks, each with its own remedy   |
+| Intake     | [`jira-capture`](skills/jira-capture.md)   | a request recorded in the words it arrived in        |
+| Intake     | [`jira-propose`](skills/jira-propose.md)   | an outcome, with the datum that makes it arguable    |
+| Intake     | [`jira-diagnose`](skills/jira-diagnose.md) | a defect someone else can reproduce                  |
+| Intake     | [`jira-assess`](skills/jira-assess.md)     | debt or risk, with what deferring it costs           |
+| Refinement | [`jira-refine`](skills/jira-refine.md)     | acceptance criteria, a finishable scope, or children |
+| Planning   | [`jira-plan`](skills/jira-plan.md)         | a sprint filled, emptied or closed                   |
+| Planning   | [`jira-release`](skills/jira-release.md)   | a fix version's contents, and what is unfinished     |
+| Progress   | [`jira-advance`](skills/jira-advance.md)   | the transitions Jira allows right now, and no others |
+| Progress   | [`jira-inspect`](skills/jira-inspect.md)   | an answer, and never a change                        |
 
 Only `jira-capture` is allowed to produce something incomplete, and it declares it: what it
 writes is explicitly raw and awaiting refinement. Every other skill is bound by one handover

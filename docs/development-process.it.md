@@ -69,16 +69,16 @@ sessione futura, impara gli stessi fatti senza richiederli a Jira.
 
 Cosa registra, e perché ogni voce si guadagna il posto:
 
-| Registra                                            | Perché altrimenti una skill                                    |
-| --------------------------------------------------- | --------------------------------------------------------------- |
-| chiave e nome del progetto                          | non saprebbe su cosa sta agendo                                 |
-| i work type, e come si annidano                     | offrirebbe un tipo inesistente, a un livello impossibile        |
-| gli status e le transition che li collegano         | dedurrebbe un movimento che Jira rifiuta                        |
-| i campi obbligatori alla creazione, per work type   | si vedrebbe rifiutare una bozza che avevi già approvato         |
-| le board, e lo sprint attivo di ciascuna            | pianificherebbe su uno sprint che non c'è                       |
-| le fix version                                      | se ne inventerebbe una                                          |
-| quale tool MCP serve quale operazione               | fisserebbe un nome di tool che cambia fra le versioni           |
-| le operazioni per cui non esiste alcun tool         | fallirebbe dove poteva annunciare un limite                     |
+| Registra                                          | Perché altrimenti una skill                              |
+| ------------------------------------------------- | -------------------------------------------------------- |
+| chiave e nome del progetto                        | non saprebbe su cosa sta agendo                          |
+| i work type, e come si annidano                   | offrirebbe un tipo inesistente, a un livello impossibile |
+| gli status e le transition che li collegano       | dedurrebbe un movimento che Jira rifiuta                 |
+| i campi obbligatori alla creazione, per work type | si vedrebbe rifiutare una bozza che avevi già approvato  |
+| le board, e lo sprint attivo di ciascuna          | pianificherebbe su uno sprint che non c'è                |
+| le fix version                                    | se ne inventerebbe una                                   |
+| quale tool MCP serve quale operazione             | fisserebbe un nome di tool che cambia fra le versioni    |
+| le operazioni per cui non esiste alcun tool       | fallirebbe dove poteva annunciare un limite              |
 
 Tre proprietà del project profile conviene conoscerle prima di incontrarle:
 
@@ -169,7 +169,7 @@ impostazioni di claude.ai è esattamente uno di quei nomi.
 
 **Quattro operazioni non esistono su nessuno dei due channel** e ti vengono restituite invece che
 simulate: creare uno sprint, avviarlo, creare una fix version, e rilasciarla o archiviarla. Le
-skill lo dicono prima che tu lo chieda. Sono buchi degli strumenti, e valgono ovunque.
+skill lo dicono prima che tu lo chieda. Sono gap degli strumenti, e valgono ovunque.
 
 **Un channel semplicemente irraggiungibile sulla tua macchina è un'altra cosa**: è una
 degradazione, torna quando torna il channel, e non dice niente sul tuo progetto. Senza una `jira`
@@ -201,14 +201,14 @@ Ogni artefatto che queste skill scrivono rispetta la stessa asticella, qualunque
 
 L'evidenza è obbligatoria, e il codice è solo una delle sue forme:
 
-| L'affermazione                              | L'evidenza                                                                        |
-| ------------------------------------------- | ----------------------------------------------------------------------------------- |
-| il codice si comporta in un certo modo      | uno snippet di 5–20 righe, con citazione esatta `path/file.ext` riga N              |
-| qualcosa fallisce                           | l'errore o la riga di log esatti, verbatim, non parafrasati                         |
-| qualcosa è lento, grande o frequente        | la misura, e come è stata ottenuta                                                  |
-| gli utenti vogliono o faticano su qualcosa  | l'osservazione, la richiesta, o il dato che c'è dietro                              |
-| questo dipende da altro lavoro              | un link al work item, non una sua descrizione                                       |
-| è così che deve comportarsi                 | un riferimento alla decisione o al documento che lo dice                            |
+| L'affermazione                             | L'evidenza                                                             |
+| ------------------------------------------ | ---------------------------------------------------------------------- |
+| il codice si comporta in un certo modo     | uno snippet di 5–20 righe, con citazione esatta `path/file.ext` riga N |
+| qualcosa fallisce                          | l'errore o la riga di log esatti, verbatim, non parafrasati            |
+| qualcosa è lento, grande o frequente       | la misura, e come è stata ottenuta                                     |
+| gli utenti vogliono o faticano su qualcosa | l'osservazione, la richiesta, o il dato che c'è dietro                 |
+| questo dipende da altro lavoro             | un link al work item, non una sua descrizione                          |
+| è così che deve comportarsi                | un riferimento alla decisione o al documento che lo dice               |
 
 Un artefatto senza contenuto verificabile è un'opinione, e si legge come tale — marcato come
 assunzione invece che travestito da fatto.
@@ -241,19 +241,19 @@ seconda risposta che prima o poi contraddirà la prima.
 
 ## Il percorso completo, skill per skill
 
-| Fase       | Skill                                             | Ottieni                                                   |
-| ---------- | ------------------------------------------------- | ---------------------------------------------------------- |
-| Setup      | [`jira-init`](skills/jira-init.it.md)             | il project profile, scoperto una volta e committato       |
-| Setup      | [`/jira-doctor`](commands/jira-doctor.it.md)      | tre verifiche indipendenti, ognuna con il proprio rimedio |
-| Intake     | [`jira-capture`](skills/jira-capture.it.md)       | una richiesta registrata con le parole con cui è arrivata |
-| Intake     | [`jira-propose`](skills/jira-propose.it.md)       | un risultato atteso, con il dato che lo rende discutibile |
-| Intake     | [`jira-diagnose`](skills/jira-diagnose.it.md)     | un difetto che un altro riesce a riprodurre               |
-| Intake     | [`jira-assess`](skills/jira-assess.it.md)         | debito o rischio, con quanto costa rimandarlo             |
-| Refinement | [`jira-refine`](skills/jira-refine.it.md)         | criteri di accettazione, un perimetro finibile, o i figli |
-| Planning   | [`jira-plan`](skills/jira-plan.it.md)             | uno sprint riempito, svuotato o chiuso                    |
-| Planning   | [`jira-release`](skills/jira-release.it.md)       | il contenuto di una fix version, e cosa resta aperto      |
-| Progress   | [`jira-advance`](skills/jira-advance.it.md)       | le transition che Jira consente adesso, e nessun'altra    |
-| Progress   | [`jira-inspect`](skills/jira-inspect.it.md)       | una risposta, e mai un cambiamento                        |
+| Fase       | Skill                                         | Ottieni                                                   |
+| ---------- | --------------------------------------------- | --------------------------------------------------------- |
+| Setup      | [`jira-init`](skills/jira-init.it.md)         | il project profile, scoperto una volta e committato       |
+| Setup      | [`/jira-doctor`](commands/jira-doctor.it.md)  | tre verifiche indipendenti, ognuna con il proprio rimedio |
+| Intake     | [`jira-capture`](skills/jira-capture.it.md)   | una richiesta registrata con le parole con cui è arrivata |
+| Intake     | [`jira-propose`](skills/jira-propose.it.md)   | un risultato atteso, con il dato che lo rende discutibile |
+| Intake     | [`jira-diagnose`](skills/jira-diagnose.it.md) | un difetto che un altro riesce a riprodurre               |
+| Intake     | [`jira-assess`](skills/jira-assess.it.md)     | debito o rischio, con quanto costa rimandarlo             |
+| Refinement | [`jira-refine`](skills/jira-refine.it.md)     | criteri di accettazione, un perimetro finibile, o i figli |
+| Planning   | [`jira-plan`](skills/jira-plan.it.md)         | uno sprint riempito, svuotato o chiuso                    |
+| Planning   | [`jira-release`](skills/jira-release.it.md)   | il contenuto di una fix version, e cosa resta aperto      |
+| Progress   | [`jira-advance`](skills/jira-advance.it.md)   | le transition che Jira consente adesso, e nessun'altra    |
+| Progress   | [`jira-inspect`](skills/jira-inspect.it.md)   | una risposta, e mai un cambiamento                        |
 
 Solo `jira-capture` può produrre qualcosa di incompleto, e lo dichiara: quello che scrive è
 esplicitamente grezzo e in attesa di refinement. Ogni altra skill è vincolata da una sola regola di

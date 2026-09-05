@@ -1,0 +1,30 @@
+{
+  "comment": "Italian group titles and descriptions for README.it.md. Read alongside skills.sh.json by scripts/generate-readme-table.mjs. Kept separate because skills.sh.json declares an external $schema that may not accept extra keys. The 'skills' arrays are not repeated here: the grouping lives in skills.sh.json and is matched by position of 'title'.",
+  "groupings": [
+    {
+      "title": "Setup",
+      "titleIt": "Setup",
+      "descriptionIt": "Scopri com'è davvero configurato il progetto Jira e registra il project profile che ogni altra skill legge."
+    },
+    {
+      "title": "Authoring",
+      "titleIt": "Redazione",
+      "descriptionIt": "Trasforma una richiesta, un difetto o un rischio tecnico in un work item Jira fatto bene."
+    },
+    {
+      "title": "Refinement",
+      "titleIt": "Refinement",
+      "descriptionIt": "Arricchisci un work item e scomponilo in figli completi."
+    },
+    {
+      "title": "Planning",
+      "titleIt": "Pianificazione",
+      "descriptionIt": "Decidi quando il lavoro viene affrontato e cosa esce insieme."
+    },
+    {
+      "title": "Progress",
+      "titleIt": "Avanzamento",
+      "descriptionIt": "Fai avanzare un work item nel suo Jira Workflow e leggi a che punto sta."
+    }
+  ]
+}

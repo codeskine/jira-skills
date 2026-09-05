@@ -2,13 +2,13 @@
 
 <!-- skill-header:start -->
 
-|                          |                                                                                       |
-| ------------------------ | ------------------------------------------------------------------------------------- |
-| **Nome**                 | `jira-diagnose`                                                                       |
-| **Versione**             | 1.0.0                                                                                 |
-| **Invocabile per nome**  | sì                                                                                    |
-| **Channel**              | Atlassian MCP server                                                                  |
-| **Ambiente**             | Designed for Claude Code. Requires the Atlassian MCP server configured as "atlassian". |
+|                         |                                                                                        |
+| ----------------------- | -------------------------------------------------------------------------------------- |
+| **Nome**                | `jira-diagnose`                                                                        |
+| **Versione**            | 1.0.0                                                                                  |
+| **Invocabile per nome** | sì                                                                                     |
+| **Channel**             | Atlassian MCP server                                                                   |
+| **Ambiente**            | Designed for Claude Code. Requires the Atlassian MCP server configured as "atlassian". |
 
 <!-- skill-header:end -->
 
@@ -28,12 +28,12 @@ mettere fine a quella condizione.
 Si attiva quando dici che qualcosa è rotto, si comporta in modo inatteso o fallisce, e va messo
 agli atti.
 
-| Se dici qualcosa come                                        | La skill è                          |
-| ------------------------------------------------------------ | ----------------------------------- |
-| «l'export esce vuoto, va segnalato»                          | `jira-diagnose`                     |
-| «adesso funziona, ma fra sei mesi ci si ritorce contro»      | [`jira-assess`](jira-assess.it.md)  |
-| «è arrivata questa richiesta, nessuno l'ha ancora guardata»  | [`jira-capture`](jira-capture.it.md) |
-| «vogliamo che i clienti vedano il loro storico»              | [`jira-propose`](jira-propose.it.md) |
+| Se dici qualcosa come                                       | La skill è                           |
+| ----------------------------------------------------------- | ------------------------------------ |
+| «l'export esce vuoto, va segnalato»                         | `jira-diagnose`                      |
+| «adesso funziona, ma fra sei mesi ci si ritorce contro»     | [`jira-assess`](jira-assess.it.md)   |
+| «è arrivata questa richiesta, nessuno l'ha ancora guardata» | [`jira-capture`](jira-capture.it.md) |
+| «vogliamo che i clienti vedano il loro storico»             | [`jira-propose`](jira-propose.it.md) |
 
 Il confine con [`jira-assess`](jira-assess.it.md) è presidiato da entrambi i lati apposta.
 _«Continua a dare problemi»_ sta bene in tutte e due le descrizioni, quindi la skill stabilisce
