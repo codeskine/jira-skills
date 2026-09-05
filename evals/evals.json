@@ -517,6 +517,22 @@
       "why": "The gap is declared and the request is still this skill's. Announcing a gap is not refusing the request: what the user should be left holding is the decision made and one move to perform. Guards the reading where a declared gap becomes a dead end."
     },
     {
+      "id": "order-9",
+      "category": "ordering",
+      "prompt": "We should let customers see delivery cost before they type an address.",
+      "setup": "A profile exists and lists setting the parent of a work item among its unsupported operations, with the manual path.",
+      "expect": "The unsupported operation is named before any question is asked, with the manual path the profile records. The proposal is still authored; the parent is what the user sets in Jira afterwards.",
+      "why": "This fixture exists to prove the warning is reachable, which is what its own issue doubted. The channel map assigns setting a parent to MCP and declares no gap for it — but a gap is a fact about the tooling everywhere, and the profile's unsupported list is a fact about one project on one machine. An MCP server exposing no tool for it, or an account not permitted, produces exactly this profile. Paired with order-2, the same shape on an operation nobody questioned."
+    },
+    {
+      "id": "order-10",
+      "category": "ordering",
+      "prompt": "Put PROJ-88 in 4.11. I just created it in Jira while you were asking.",
+      "setup": "A profile exists and lists fix versions, but not 4.11 — it was created after the profile was written. The Agile channel is reachable.",
+      "expect": "4.11 is listed from the project and assigned to, with no demand that discovery be re-run first. The skill says the profile is behind and names re-running it as the user's to trigger, without blocking on it.",
+      "why": "The state the skill walks the user into itself: it declares creating a fix version a gap, sends them to Jira, and says continue. What continuing means was undocumented. It reads fix versions live rather than from the profile, so the answer is that nothing has to be re-run — and the staleness rule still applies to the profile, which the next skill to read it will need. Guards both wrong endings: refusing to assign until discovery runs, and never mentioning that the profile no longer matches."
+    },
+    {
       "id": "hand-1",
       "category": "handover",
       "prompt": "KAN-12 is too big to finish in one go, and it needs to be in the current sprint.",
