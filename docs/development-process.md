@@ -115,16 +115,29 @@ stateDiagram-v2
     Jira --> [*] : report the key and the URL
 ```
 
-This is the **draft gate**, and it has one form across every skill that writes. What reaches the
-gate is the exact content that will be written — not a summary, not an outline — in the language
-you are working in.
+This is the **draft gate**, and it is one gate across every skill that writes. What reaches it
+takes one of two shapes, decided by what the write produces rather than by which skill is running.
 
-Presented with it, you also get the decisions it carries: the title, the work type, the parent if
-any, the sprint and the fix version if any, anything your project marks required that the draft
-left empty, and — where your scheme has no work type for the intent — which type it is being
-filed under instead.
+**When something is authored** — a request captured, a proposal, a defect report, a debt record,
+the children of a split — you get the exact content that will be written, not a summary and not an
+outline, in the language you are working in. With it come the decisions it carries: the title, the
+work type, the parent if any, the sprint and the fix version if any, anything your project marks
+required that the draft left empty, and — where your scheme has no work type for the intent —
+which type it is being filed under instead.
 
-Then you approve, or you ask for changes and see it again. As many times as you want.
+**When something already existing is changed** — a sprint filled or closed, work assigned to a fix
+version or taken off one, a work item moved to its next status — there is no document to show you,
+so you get the change itself: every item it reaches, named, with what changes about each, what
+will be true of them afterwards, and what the operation will **not** do where you could reasonably
+expect it to. That last one is the point of the shape. Closing a sprint cannot place the work left
+unfinished in it, and being told that at the gate is the difference between approving an outcome
+and discovering it.
+
+Then you approve, or you ask for changes and see it again — as many times as you want — or you say
+no. Saying no is an answer and gets treated as one: nothing is written, you are told what now holds
+instead, and you are not shown a smaller version of the same thing in the hope that one passes.
+Where what you refused is something other skills rely on, they are named. Refusing the project
+profile is the case that matters, because every other skill stops at its first step without it.
 
 - **Approval is explicit.** Not silence, not an unrelated message, and not your original request:
   the request is what produced the draft, not what approves it.

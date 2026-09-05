@@ -98,7 +98,15 @@ archiving one.
 to an artifact your whole team shares, so it passes
 [the same gate](../development-process.md): the complete profile in chat, the project it
 describes, how much of each subject was found, and every unsupported operation — that last one
-because it is what surprises people later. You approve, or you ask for changes and see it again.
+because it is what surprises people later. You approve, you ask for changes and see it again, or
+you say no.
+
+Saying no is worth its own sentence here, because this is the one skill where a refusal is not
+local to the thing refused. Nothing is written, which means every other skill in the plugin will
+stop at its own first step and send you back here — so it tells you that when you refuse, rather
+than letting you meet it three steps later, and it leaves what it found in the conversation instead
+of putting the file somewhere quieter.
+
 On approval it writes `.jira/project-profile.md`, creating the directory if needed and overwriting
 any profile already there; it is that file's only writer, so there is nothing to merge. Then it
 tells you to commit it, and why.

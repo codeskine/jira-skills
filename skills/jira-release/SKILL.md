@@ -89,8 +89,8 @@ the unfinished items after they do it.
 
 ## 7. Present and confirm
 
-Follow [the draft gate](../shared/references/draft-gate.md). What this intent adds: the gate lists
-every item whose fix version will change, and the one it will change to — or, where it is being
+Follow [the draft gate](../shared/references/draft-gate.md) in its **operation** form: nothing here
+is authored. What this intent adds: the gate lists every item whose fix version will change, and the one it will change to — or, where it is being
 taken off one, that it will end up assigned to none.
 
 ## 8. Write

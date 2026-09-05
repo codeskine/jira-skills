@@ -64,7 +64,7 @@ Fill [the template](assets/debt-record.md).
 
 ## 7. Present and confirm
 
-Follow [the draft gate](../shared/references/draft-gate.md). What this intent adds: state which
+Follow [the draft gate](../shared/references/draft-gate.md) in its **artifact** form. What this intent adds: state which
 option the artifact recommends, if any, and that recommending is not deciding.
 
 ## 8. Write

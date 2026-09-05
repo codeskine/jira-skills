@@ -80,7 +80,7 @@ Fill [the template](assets/defect-report.md).
 
 ## 8. Present and confirm
 
-Follow [the draft gate](../shared/references/draft-gate.md). What this intent adds: if the steps
+Follow [the draft gate](../shared/references/draft-gate.md) in its **artifact** form. What this intent adds: if the steps
 have not been walked through once as written, say so at the gate. Steps that were
 remembered rather than replayed are the most common reason a defect cannot be reproduced.
 

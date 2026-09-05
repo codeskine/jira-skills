@@ -91,8 +91,9 @@ the templates named above, one each.
 
 ## 7. Present the whole split
 
-Follow [the draft gate](../shared/references/draft-gate.md). What this intent adds: **every**
-child is presented in full before any of them exists, and the whole split is approved once. A
+Follow [the draft gate](../shared/references/draft-gate.md) in its **artifact** form — a split
+creates items. What this intent adds: **every** child is presented in full before any of them
+exists, and the whole split is approved once. A
 split approved child by child is a split nobody rebalanced.
 
 The block of decisions names the acceptance criteria of every item involved, the parent included.
@@ -108,6 +109,14 @@ Whichever branch was taken, **retire the statement that the item is raw and awai
 refinement**, where intake wrote one. It is what allowed an incomplete item to exist; leaving it
 next to acceptance criteria makes the artifact contradict itself and keeps the item out of
 planning it is now ready for. Retiring it is part of this write, not a later tidy-up.
+
+Retiring means **removing the claim**, not softening it into a milder one. An item that says it
+was once raw is telling a reader something Jira's own history already holds, and this plugin does
+not keep a second copy of what the tracker records. The heading goes with the claim where the
+heading exists for it alone — a section with nothing under it is a shape no template permits.
+Where the claim sits inside a section carrying other content, or under a heading intake chose for
+itself, remove the claim and leave the rest: what is retired is the statement, never a heading
+matched by name.
 
 Where the item was split: create the children, attach them, then update the item they came from
 so that its own text no longer claims what its children now carry. Never by listing them: the

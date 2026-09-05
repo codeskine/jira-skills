@@ -51,8 +51,8 @@ Reporting "unavailable" without saying which sends the user to the wrong person.
 
 ## 5. Confirm and perform it
 
-Follow [the draft gate](../shared/references/draft-gate.md): the item, the status it is in, and
-the status it will reach. Then perform the transition through the tool the profile resolves; see
+Follow [the draft gate](../shared/references/draft-gate.md) in its **operation** form: the item,
+the status it is in, and the status it will reach. Then perform the transition through the tool the profile resolves; see
 [the channel map](../shared/references/channels.md).
 
 Report the status the item is in afterwards, read back rather than assumed. A transition can

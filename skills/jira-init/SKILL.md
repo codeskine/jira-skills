@@ -97,6 +97,13 @@ Ask for approval. Apply changes and re-present until approved. Writing this file
 to Jira, but it is a change to a shared, versioned artifact and follows
 [the same gate](../shared/references/draft-gate.md).
 
+**A refusal here is not local, and this is the one skill where that is true.** The profile is not
+written, so every other skill in this plugin stops at its own first step and sends the user back
+to `jira-init` — which is exactly the case the gate's refusal branch means when it says to name
+what a refused write leaves waiting. Say so when it happens, name it as the consequence rather
+than leaving it to be met later, and leave the findings in the conversation: a profile the user
+refused is not a file to put somewhere quieter.
+
 ## 6. Write
 
 Write `.jira/project-profile.md`, creating the directory if needed. Overwrite an existing

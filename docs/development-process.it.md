@@ -117,16 +117,31 @@ stateDiagram-v2
     Jira --> [*] : riporta la chiave e la URL
 ```
 
-Questo è il **draft gate**, il cancello che precede ogni scrittura su Jira, e ha una forma sola in
-tutte le skill che scrivono. Quello che arriva al cancello è il contenuto esatto che verrà
-scritto — non un riassunto, non una scaletta — nella lingua in cui stai lavorando.
+Questo è il **draft gate**, il cancello che precede ogni scrittura su Jira, ed è un cancello solo
+in tutte le skill che scrivono. Quello che ci arriva ha una di due forme, decisa da cosa produce la
+scrittura e non da quale skill sta girando.
 
-Insieme all'artefatto ricevi le decisioni che porta con sé: il titolo, il work type, il parent se
-c'è, lo sprint e la fix version se ci sono, tutto ciò che il tuo progetto marca obbligatorio e che
-la bozza ha lasciato vuoto, e — se il tuo schema non ha un work type per quell'intento — sotto
-quale tipo viene archiviato invece.
+**Quando qualcosa viene scritto ex novo** — una richiesta registrata, una proposta, la segnalazione
+di un difetto, un debito, i figli di uno split — ricevi il contenuto esatto che verrà scritto, non
+un riassunto e non una scaletta, nella lingua in cui stai lavorando. Con esso le decisioni che
+porta con sé: il titolo, il work type, il parent se c'è, lo sprint e la fix version se ci sono,
+tutto ciò che il tuo progetto marca obbligatorio e che la bozza ha lasciato vuoto, e — se il tuo
+schema non ha un work type per quell'intento — sotto quale tipo viene archiviato invece.
 
-Poi approvi, oppure chiedi modifiche e lo rivedi. Quante volte vuoi.
+**Quando cambia qualcosa che esiste già** — uno sprint riempito o chiuso, del lavoro assegnato a
+una fix version o tolto da una, un work item portato allo status successivo — non c'è nessun
+documento da mostrarti, quindi ricevi il cambiamento stesso: ogni work item che tocca, nominato,
+con cosa cambia di ciascuno, cosa sarà vero dopo, e cosa l'operazione **non** farà là dove
+potresti ragionevolmente aspettartelo. È quest'ultimo il punto della forma. Chiudere uno sprint non
+può collocare il lavoro rimasto aperto dentro, e sentirselo dire al cancello è la differenza fra
+approvare un esito e scoprirlo.
+
+Poi approvi, oppure chiedi modifiche e lo rivedi — quante volte vuoi — oppure dici di no. Dire di
+no è una risposta e viene trattata come tale: non viene scritto niente, ti viene detto cosa vale
+adesso al suo posto, e non ti viene riproposta una versione più piccola della stessa cosa sperando
+che passi quella. Se ciò che hai rifiutato è qualcosa su cui altre skill contano, te le nomina. Il
+caso che conta è il rifiuto del project profile, perché senza di esso ogni altra skill si ferma al
+primo passo.
 
 - **L'approvazione è esplicita.** Non il silenzio, non un messaggio su altro, e non la tua
   richiesta iniziale: la richiesta è ciò che ha prodotto la bozza, non ciò che la approva.

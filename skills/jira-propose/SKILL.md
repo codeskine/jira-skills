@@ -70,7 +70,7 @@ Fill [the template](assets/value-proposal.md).
 
 ## 7. Present and confirm
 
-Follow [the draft gate](../shared/references/draft-gate.md). What this intent adds: when the item
+Follow [the draft gate](../shared/references/draft-gate.md) in its **artifact** form. What this intent adds: when the item
 will have no parent, the gate says why not.
 
 ## 8. Write

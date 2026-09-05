@@ -64,7 +64,8 @@ Fill [the template](assets/captured-request.md).
 
 ## 6. Present and confirm
 
-Follow [the draft gate](../shared/references/draft-gate.md). One thing this intent adds to it:
+Follow [the draft gate](../shared/references/draft-gate.md) in its **artifact** form. One thing
+this intent adds to it:
 the statement that the item is raw must be **visible in the draft**, not merely intended, and the
 gate says plainly that what will be created is a raw record rather than planned work.
 
