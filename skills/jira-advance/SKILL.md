@@ -49,6 +49,26 @@ When the user expects a transition that is not there, say which of the two it is
 The first is something the user can act on. The second only a project admin can change.
 Reporting "unavailable" without saying which sends the user to the wrong person.
 
+**What tells them apart is the profile.** Its table of statuses records what is reachable from
+what — the shape of the Jira Workflow, which is the reason it is recorded at all — while Jira's
+answer for this item records what is available right now. The difference between the two is the
+cause:
+
+- **named in the shape, absent from Jira's answer** → the item. The path exists, and something
+  about this one is closing it.
+- **absent from both** → the Jira Workflow. There is no such path from this status, and no field
+  the user could fill would produce one.
+
+This is the one use that table has here, and it is not the use § 2 refuses: nothing is offered
+from it, and the transitions presented are still only the ones Jira returned.
+
+**Where the profile cannot answer, say so instead of choosing.** Two of its three states are
+silence — statuses not observable yet because the project holds no work item, and a table recorded
+as not read. Then report that the transition is not available and that which of the two causes it
+is cannot be established here, with the manual path, and name `jira-init` where a run would fill
+the table in. A cause named by guess sends the user to repair something that is not broken, which
+is worse than a cause not named.
+
 ## 5. Confirm and perform it
 
 Follow [the draft gate](../shared/references/draft-gate.md) in its **operation** form: the item,

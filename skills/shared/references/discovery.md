@@ -54,8 +54,11 @@ occupy them, so a project holding no work item exposes none — which is the sta
 on the day it is created, and often the day this plugin is installed. A profile without them is
 valid, provided it says they were not observable yet and what will make them so. Nothing is lost
 by waiting: an empty project has no item whose status could be asked about, and the skill that
-moves an item between statuses never reads that table anyway — it asks Jira for that item, at that
-moment, because no table knows the condition that will refuse a transition.
+moves an item between statuses never proposes a transition from that table — it asks Jira for that
+item, at that moment, because no table knows the condition that will refuse one. What the table is
+for is the **shape**: which status is reachable from which. That is what makes a transition the
+user expected and did not get explainable rather than merely absent, and it is why the table is
+worth recording at all.
 
 **What makes an operation unsupported is this setup, not the channel map.** The map assigns every
 operation to a channel; the profile records whether this installation can actually perform it. An

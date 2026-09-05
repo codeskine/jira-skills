@@ -78,6 +78,17 @@ casi si tratta:
 - **il Jira Workflow** — da questo status quella transition non esiste affatto, per nessuno. Una
   strada che non c'è la aggiunge solo un amministratore del progetto.
 
+Li distingue confrontando due cose che ha già. Il project profile registra quale status è
+raggiungibile da quale — la **forma** del tuo Jira Workflow, che è a cosa serve quella tabella — e
+la risposta di Jira su questo work item registra cosa è disponibile **adesso**. Nominata nella
+forma e assente dalla risposta di Jira vuol dire che la strada c'è e che qualcosa di questo work
+item la sta chiudendo. Assente da entrambe vuol dire che la strada non c'è.
+
+Dove il profilo non può rispondere — status non ancora osservabili perché il progetto non contiene
+work item, o una tabella che registra come non letta — dice che la causa qui non è stabilibile, ti
+dà la via manuale, e nomina `jira-init` se una nuova discovery riempirebbe la tabella. Nominare una
+causa a indovinare ti manderebbe a riparare qualcosa che non è rotto, ed è peggio che non nominarla.
+
 **5 · Poi il draft gate**, il cancello che precede ogni scrittura su Jira. Qui non c'è nessun
 artefatto da mostrare, quindi quello che il gate porta è il work item, lo status in cui si trova e
 lo status che raggiungerà; approvi, oppure chiedi altro e rivedi la scelta. Se il work item è in
