@@ -30,7 +30,7 @@
       "expect_not": [
         "jira-diagnose"
       ],
-      "why": "Content is a fault and provenance is intake; both fit entirely. The email names a product and carries a symptom, and nothing that would let anyone else see the fault happen — no steps — so it does not itself carry what a defect report asks for, and capture takes precedence. Naming Excel does not clear the floor on its own: the floor is read against the whole of the material, never as a list of fields to tick. Paired with sel-diagnose-3, the same fault reported first-hand; with sel-diagnose-4, the same fault relayed but arriving complete; and with sel-capture-6, the same fault relayed with the environment named properly and still nothing to reproduce it from."
+      "why": "Content is a fault and provenance is intake; both fit entirely. The email names a product and carries a symptom, and neither steps nor the error itself, so it does not carry what a defect report asks for and capture takes precedence. Naming Excel does not clear the floor: the floor names what clears it, and where it ran is not on that list. This is the hardest of the family — three replay rounds routed it here and each called it the weakest call in the set, because \"Excel opens the CSV mangled\" is an actual result that can be read as a gesture at a reproduction path. What the floor does not fix is the minimum that counts as steps. Paired with sel-diagnose-3, the same fault reported first-hand; with sel-diagnose-4, the same fault relayed but arriving complete; and with sel-capture-6, the same fault relayed with the environment named properly and still nothing to work from."
     },
     {
       "id": "sel-capture-4",

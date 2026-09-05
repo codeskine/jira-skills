@@ -36,11 +36,12 @@ Si attiva quando vuoi una risposta, non un cambiamento.
 | «assegna questi alla 2.4»                      | [`jira-release`](jira-release.it.md) |
 | «cosa c'è nella 2.4? mettici anche questi due» | [`jira-release`](jira-release.it.md) |
 
-Le fix version erano l'unica vera sovrapposizione, e non lo sono più. Leggere cosa contiene una
-fix version, e quanto di quello è ancora aperto, è questa skill — allo stesso modo in cui lo è
-leggere uno sprint. Solo [`jira-release`](jira-release.it.md) può dirti **quali** fix version
-esistono e in che stato sono, perché quell'elenco sta sulla Jira CLI e questa skill non la
-dichiara, e solo `jira-release` prende una domanda che legge e poi cambia.
+Le fix version erano l'unica vera sovrapposizione, e non lo sono più. Il confine è su cosa verte la
+domanda: il lavoro **dentro** una fix version — cosa contiene, quanto di quello è ancora aperto — è
+questa skill, allo stesso modo in cui lo è leggere uno sprint. La **version stessa** è di
+[`jira-release`](jira-release.it.md): quali esistono, e se una sia già stata rilasciata o
+archiviata. Quelle stanno sulla Jira CLI, che questa skill non dichiara. `jira-release` prende
+anche la domanda che legge una fix version e poi la cambia.
 
 Per il resto lo schema tiene: una domanda è questa skill, un'istruzione è una delle altre tre. Se
 chiedi un cambiamento mentre stai leggendo una risposta, `jira-inspect` nomina la skill che se ne

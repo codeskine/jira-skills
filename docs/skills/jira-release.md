@@ -38,14 +38,15 @@ It fires when the question is what ships together.
 
 Two boundaries are worth stating outright.
 
-**With [`jira-inspect`](jira-inspect.md).** A question that only asks — _what is in 2.4, and what
-of it is unfinished_ — belongs to `jira-inspect`, which reads and stops. `jira-release` reads the
-same thing as the opening of a conversation that ends in an assignment you approved: ask for the
-contents and the change in one breath and you are here, not there. The line runs the same way on
-the sprint axis, so there is one rule to learn and not two.
+**With [`jira-inspect`](jira-inspect.md).** The line is what the question is _about_. Ask about the
+work **inside** a fix version — _what is in 2.4, and what of it is unfinished_ — and it is
+`jira-inspect`, which reads and stops. Ask about the **version itself** — which ones the project
+has, whether 2.4 has been released or archived — and it is `jira-release`, because those live on the
+Jira CLI, which `jira-inspect` does not declare.
 
-One question only `jira-release` can take: the **list** of fix versions the project has and the
-state of each. That listing belongs to the Jira CLI, and `jira-inspect` does not declare it.
+`jira-release` also reads the contents, as the opening of a conversation that ends in an assignment
+you approved: ask for the contents and the change in one breath and you are here, not there. The
+line runs the same way on the sprint axis, so there is one rule to learn and not two.
 
 **With [`jira-plan`](jira-plan.md).** "Ships in 2.4" and "is in Sprint 25" are two independent
 facts about the same work item. The fix version says what it ships with, the sprint says when it

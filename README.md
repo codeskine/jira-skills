@@ -143,10 +143,10 @@ the artifact or report it produces.
 
 **Planning** — Decide when work is tackled and what ships together.
 
-| Skill          | What it does                                                                                                                                                  | Page                                |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- |
-| `jira-plan`    | Jira sprint planner. Use when the user asks to fill or empty a sprint on a Jira board, or to close one and account for what was delivered and what was not.   | [read](docs/skills/jira-plan.md)    |
-| `jira-release` | Jira fix version manager. Use when the user asks to assign work to a Jira fix version, or for the list of fix versions the project has and the state of each. | [read](docs/skills/jira-release.md) |
+| Skill          | What it does                                                                                                                                                                                  | Page                                |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- |
+| `jira-plan`    | Jira sprint planner. Use when the user asks to fill or empty a sprint on a Jira board, or to close one and account for what was delivered and what was not.                                   | [read](docs/skills/jira-plan.md)    |
+| `jira-release` | Jira fix version manager. Use when the user asks to assign work to a Jira fix version, or for the list of fix versions the project has, or whether one of them has been released or archived. | [read](docs/skills/jira-release.md) |
 
 **Progress** — Advance a work item through its Jira Workflow and read where it stands.
 

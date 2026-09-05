@@ -38,16 +38,16 @@ Si attiva quando la domanda è cosa viene rilasciato insieme.
 
 Due confini vanno detti apertamente.
 
-**Con [`jira-inspect`](jira-inspect.it.md).** Una domanda che si limita a chiedere — _cosa c'è
-nella 2.4 e quanto di quello è ancora aperto_ — è di `jira-inspect`, che legge e si ferma.
-`jira-release` legge la stessa cosa come apertura di una conversazione che finisce in
-un'assegnazione che hai approvato: se chiedi il contenuto e il cambiamento nello stesso respiro
-sei qui, non là. Sull'asse dello sprint il confine corre allo stesso modo, così la regola da
-imparare è una e non due.
+**Con [`jira-inspect`](jira-inspect.it.md).** Il confine è su cosa verte la domanda. Se verte sul
+lavoro **dentro** una fix version — _cosa c'è nella 2.4 e quanto di quello è ancora aperto_ — è di
+`jira-inspect`, che legge e si ferma. Se verte sulla **version stessa** — quali ne ha il progetto,
+se la 2.4 sia già stata rilasciata o archiviata — è di `jira-release`, perché quelle stanno sulla
+Jira CLI, che `jira-inspect` non dichiara.
 
-Una domanda la prende solo `jira-release`: l'**elenco** delle fix
-version che il progetto ha, e lo stato di ciascuna. Quell'elenco appartiene alla Jira CLI, e
-`jira-inspect` non la dichiara.
+`jira-release` legge anche il contenuto, ma come apertura di una conversazione che finisce in
+un'assegnazione che hai approvato: se chiedi il contenuto e il cambiamento nello stesso respiro sei
+qui, non là. Sull'asse dello sprint il confine corre allo stesso modo, così la regola da imparare è
+una e non due.
 
 **Con [`jira-plan`](jira-plan.it.md).** «Esce con la 2.4» e «è nello Sprint 25» sono due fatti
 indipendenti sullo stesso work item. La fix version dice con cosa viene rilasciato, lo sprint dice

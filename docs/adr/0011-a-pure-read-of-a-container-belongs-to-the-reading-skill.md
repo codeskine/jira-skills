@@ -43,8 +43,8 @@ a container" differently depending on which container was named has a boundary n
 ## The discriminant that is founded in the sources is the channel
 
 Worth recording, because it is the argument that survives the tie and it is not in the issue that
-raised it. Listing **which** fix versions the project has and what state each is in is
-`jira release list` — the Agile channel. `jira-release` declares `Bash(jira:*)`; `jira-inspect`
+raised it. Listing **which** fix versions the project has, and whether one has been released or
+archived, is `jira release list` — the Agile channel. `jira-release` declares `Bash(jira:*)`; `jira-inspect`
 deliberately does not, and its read-only contract says the Agile channel is not declared at all.
 
 So that listing is a fix-version question only `jira-release` can answer, and it stays with it, on
@@ -72,14 +72,25 @@ and could not be read off the channel map.
 - **The three signals now agree**, and the one that was right was the live run. That is worth
   saying plainly: the fixture encoded an intention the descriptions did not carry, and a fixture
   that resolves an ambiguity by fiat will pass in review and fail in use.
-- **The trigger and the exclusion had to be told apart in words, not left to inference.** A first
-  wording kept "which fix versions the project has" next to "not for reading what a fix version
-  holds without changing it", and a replay routed the catalogue question at low confidence, having
+- **The boundary is named as an axis, and it took four replay rounds to get there.** The first
+  wording set "which fix versions the project has" beside "not for reading what a fix version holds
+  without changing it", and a replay routed the catalogue question at low confidence, having
   invented the distinction it needed — _holds_ as the contents of one version, _has_ as the
-  catalogue, which it called "a two-word hinge holding up three routings". The hinge is real and it
-  is the channel, so the description states it: **the list of** fix versions and the state of each,
-  against what **one** fix version holds. A distinction a reader has to supply is a distinction the
-  description does not have.
+  catalogue, "a two-word hinge holding up three routings". Each repair moved the problem rather
+  than closing it: naming Jira's release states removed the collision with "unfinished" but bound
+  the lifecycle claim to a **list**, leaving the release state of one named version claimed by
+  nobody; adding the singular claim and its reciprocal disclaimer closed that, and left the pair
+  precise only where a user echoes its four nouns.
+
+  What holds is the axis itself, stated on both sides — **what is inside a fix version** against
+  **the fix version itself** — with the instances kept underneath it. That is ADR-0006's move
+  applied here: name the test on both sides so it is decidable whichever description is read first,
+  rather than enumerating the cases. It converted two questions from routable-only-by-synonym to
+  routable-by-category and regressed none, which is the whole of what an axis can do: _"adding a
+  category name above a list does not add a member to the list."_ Words a user reaches for that sit
+  on neither side — "state", "done", "up to" — are still unroutable, and that is filed rather than
+  papered over.
+
 - **Nothing changes in either skill's channel or contract.** `jira-inspect` still never writes and
   still declares no Agile channel; `jira-release` still needs the CLI for the listing and not for
   assignment. This is a boundary between intents, which is where ADR-0004 said boundaries go.

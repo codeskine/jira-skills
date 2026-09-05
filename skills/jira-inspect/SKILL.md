@@ -1,6 +1,6 @@
 ---
 name: jira-inspect
-description: "Jira read-only reporter. Use when the user asks where something stands on Jira — how a parent and its children are progressing, what a sprint contains and what it has left, what is blocked, what a fix version holds and what of it is unfinished — and expects an answer rather than a change. Never writes anything. Not for transitioning an item (→ See codeskine/jira-skills@jira-advance), for planning a sprint (→ See codeskine/jira-skills@jira-plan), or for assigning work to a fix version (→ See codeskine/jira-skills@jira-release)."
+description: "Jira read-only reporter. Use when the user asks where something stands on Jira — how a parent and its children are progressing, what a sprint contains and what it has left, what is blocked, what a fix version holds and what of it is unfinished — and expects an answer rather than a change. Never writes anything. Not for transitioning an item (→ See codeskine/jira-skills@jira-advance), for planning a sprint (→ See codeskine/jira-skills@jira-plan), or for the fix version itself rather than the work inside it — assigning to one, or whether one has been released or archived (→ See codeskine/jira-skills@jira-release)."
 user-invocable: true
 license: MIT
 compatibility: Designed for Claude Code. Requires the Atlassian MCP server configured as "atlassian".

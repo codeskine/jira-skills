@@ -35,11 +35,12 @@ It fires when you want an answer, not a change.
 | "assign these to 2.4"                        | [`jira-release`](jira-release.md) |
 | "what's in 2.4? add these two as well"       | [`jira-release`](jira-release.md) |
 
-Fix versions used to be the one genuine overlap, and they are not any more. Reading what a fix
-version holds, and how much of it is still open, is this skill — the same way reading a sprint is.
-Only [`jira-release`](jira-release.md) can tell you **which** fix versions exist and what state
-each is in, since that listing lives on the Jira CLI and this skill does not declare it, and only
-`jira-release` takes a question that reads and then changes.
+Fix versions used to be the one genuine overlap, and they are not any more. The line is what the
+question is _about_: the work **inside** a fix version — what it holds, how much of it is still
+open — is this skill, the same way reading a sprint is. The **version itself** is
+[`jira-release`](jira-release.md): which ones exist, and whether one has been released or archived.
+Those live on the Jira CLI, which this skill does not declare. `jira-release` also takes a question
+that reads a fix version and then changes it.
 
 Otherwise the pattern holds: a question is this skill, an instruction is one of the other three.
 When you ask for a change mid-answer, `jira-inspect` names the skill that owns it and stops — it

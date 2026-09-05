@@ -38,10 +38,10 @@ Applied to the two:
 
 - **`jira-diagnose`.** What governs is whether the material carries anything anyone could act on
   to see the fault happen. The enumeration stays, because ADR-0006 was right that a test has to be
-  decidable from the text of a request — but it is **inverted**. It no longer lists absences; it
-  describes the failing state as a whole: _a symptom, and at most a product or a version, with no
-  steps_. Why it had to be inverted is recorded below, and it is the one part of this decision a
-  replay caught rather than confirmed.
+  decidable from the text of a request — but it is stated the way `jira-propose`'s floor is
+  stated, in the positive, on both sides: _steps or a verbatim error clear that floor, naming the
+  product or where it ran does not_. What it took to get there is recorded below, and it is the one
+  part of this decision a replay caught rather than confirmed.
 - **`jira-propose`.** Any figure that says the problem is real clears the floor; a target is not
   required. The exclusion says so rather than leaving one word to carry both meanings.
 
@@ -82,10 +82,30 @@ what the fixture exists for.
 exclusion needs only one listed item to be present, and a general condition placed last reads as the
 third item rather than as the test. Putting the governing clause at the end does not make it govern.
 
-The wording that holds inverts the list: it names what a failing case **carries** rather than what it
-lacks, so there is nothing to satisfy item by item, and _at most_ says outright that naming where it
-ran does not lift the exclusion. The lesson is not local to this floor — a negative enumeration
-cannot carry a conjunctive test anywhere the reader is looking for an exit.
+The second wording inverted the list, naming what a failing case **carries** rather than what it
+lacks — _a symptom, and at most a product or a version, with no steps_. It routed the fixture
+correctly, and a second replay round showed it had bought the right answer for the wrong reason:
+
+> "At most" read as a ceiling, not a floor. I treated a request carrying a version _and_ an
+> environment as still below the bar because steps were missing, rather than as having exceeded the
+> "at most". That is a choice; the opposite reading is available.
+
+A ceiling can be exceeded, so a case carrying more environment than the gloss allows falls out of
+the exclusion by arithmetic. The round got the routing right only by ranking steps above the rest —
+a rule it invented, and had to invent twice.
+
+**The wording that holds names what clears the floor, not what fails it**, on the model of
+`jira-propose`'s floor in the same batch — which both rounds routed at high confidence and quoted
+verbatim as the decider, while calling this one's "a gesture" by comparison:
+
+> steps or a verbatim error clear that floor, naming the product or where it ran does not
+
+Nothing to satisfy item by item, no ceiling to exceed, and the case the earlier wordings left in a
+gap — material carrying an environment and no steps — is now answered in the clause itself.
+
+The lesson is not local to this floor. **A floor is stated in the positive or it is not stated.** A
+list of absences reads disjunctively; a bounded list of presences reads as a ceiling; only naming
+what clears the bar, and what does not, leaves a reader nothing to invent.
 
 ## Consequences
 
@@ -123,8 +143,9 @@ cannot carry a conjunctive test anywhere the reader is looking for an exit.
 - **Drop the enumeration and state only "nothing to reproduce it from".** Shortest, and the head
   clause is what governs anyway. Rejected because ADR-0006 named the two fields for a reason: they
   are what a reader can check against the text of a request, and a bare "nothing to reproduce it
-  from" asks for a judgement with nothing to anchor it. The enumeration earns its characters as
-  long as it cannot be mistaken for the test.
+  from" asks for a judgement with nothing to anchor it. What replaced the enumeration is neither
+  keeping it nor dropping it: the floor names what **clears** it and what does not, so the anchor
+  survives without a list anyone can work through item by item.
 - **Set `jira-propose`'s floor at a measure of success.** It matches the skill's own third question
   and would make the floor sharper to evaluate. Rejected because it breaks the symmetry that makes
   the precedence rule learnable: two intents would then name floors of different kinds, one a
