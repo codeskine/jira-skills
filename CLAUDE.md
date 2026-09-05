@@ -376,6 +376,16 @@ paste into a dedicated session; it stops at every finding, files a ticket, and r
 once a fix lands. Run reports are scratch and stay out of the repository. See
 `docs/agents/e2e-testing.md`.
 
+### Behavioural verification
+
+The `selection` and `handover` fixtures, run one per fresh session against an install proved to
+carry the commit under test. It is the third seam: the other two assert that a description is well
+formed and that the rules checking it still run, and neither can tell whether a skill fires when
+someone speaks. Distinct from the isolated routing replay, which is cheap, needs no install, and
+says whether the _words_ decide rather than whether the triggering mechanism uses them. A runner
+exists in the CLI and is gated; re-check it by running it, never by `--help`, which prints in full
+either way. See `docs/agents/behavioural-verification.md`.
+
 ### Documentation
 
 The bilingual documentation of the plugin lives under `docs/`: a document pair per skill in
