@@ -453,6 +453,22 @@
       "why": "Observed on a real run: the split turned the two done-conditions into the two children and recorded them nowhere, because no template a child lands on had anywhere to put one. The criteria are what refinement exists to produce, and the seams that check structure cannot see them go missing."
     },
     {
+      "id": "gate-8",
+      "category": "gate",
+      "prompt": "Close Sprint 24.",
+      "setup": "A profile exists and lists boards. Sprint 24 is active and holds six items, two of them unfinished.",
+      "expect": "The gate takes the operation form: the sprint, what was delivered and what was not, a destination settled for each of the two unfinished items, and an explicit statement that closing is all the skill will do — the moves stay with the user, and where an unmoved item lands is Jira's to decide. Approval closes the sprint and nothing else. A gate that presents an artifact, or that omits what the close will not do, has failed.",
+      "why": "The case that showed the gate had only one shape. An artifact gate has nothing to show here — nothing is authored — and the block of authoring fields the shared procedure listed says nothing about a close. What earns the second form is the last line: a user who approves a close without being told it cannot place the remaining work has approved an outcome they did not picture."
+    },
+    {
+      "id": "gate-9",
+      "category": "gate",
+      "prompt": "I have just installed this on our repo. Set it up. … [after the profile is presented] No, do not write that.",
+      "setup": "The Atlassian MCP server responds under the id atlassian. No .jira/project-profile.md exists.",
+      "expect": "Nothing is written. The refusal is answered as an answer: what now holds is stated, the draft is not re-presented unasked, and no smaller version of it is offered. Because this is the profile, the consequence is named — every other skill in the plugin will stop at its first step and send the user back to jira-init — rather than left to be met three steps later.",
+      "why": "The gate covered a change request and an approval and not a refusal. For most skills a refusal is local to the thing refused; for jira-init it is not, which is why the general branch lives in the shared procedure and the consequence lives in the skill. Guards two failure modes: treating a refusal as a failure to work around, and treating it as local when it is not."
+    },
+    {
       "id": "order-1",
       "category": "ordering",
       "prompt": "Log a defect: the scheduled export produces an empty file.",
