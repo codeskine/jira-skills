@@ -160,7 +160,7 @@ skill goes through it; profile missing means run `jira-init`. See
 > Leave it where it is and declare the server they need alongside it, in a `.mcp.json` at the root
 > of this repository — I have printed the four lines below the report.
 >
-> For the CLI: `jira` 1.5.2 is installed, `jira me` does not answer, and the probes say
+> For the CLI: `jira` is installed, `jira me` does not answer, and the probes say
 > `credential: absent`, `config: present`, `shell: zsh`. Under zsh the export line goes in
 > `~/.zshenv` — open a new session after it.
 
@@ -213,7 +213,7 @@ MCP server       ❌  connected, and unusable by these skills
                  it starts unauthenticated — authenticate it before running anything
 
 Jira CLI         ❌  the token is not visible to this shell
-     found       jira version 1.5.2 · credential: absent · config: present · shell: zsh
+     found       credential: absent · config: present · shell: zsh
      why         skills reach the CLI through a non-interactive shell, which under zsh reads
                  ~/.zshenv and never ~/.zshrc — a token exported in ~/.zshrc works in your
                  own terminal and is invisible here
@@ -244,7 +244,7 @@ When all three pass, the same report is four lines:
 
 ```text
 MCP server       ✅  atlassian — connected
-Jira CLI         ✅  jira version 1.5.2 — authenticated
+Jira CLI         ✅  authenticated
 Project profile  ✅  .jira/project-profile.md
 
 Ready.

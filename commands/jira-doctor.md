@@ -103,12 +103,7 @@ before Step 3.
 command -v jira
 ```
 
-- A path → the CLI is installed. Read its version:
-
-  ```bash
-  jira version
-  ```
-
+- A path → the CLI is installed.
 - No output → ❌ **not installed**. Report the install route and go straight to Step 3; there is
   nothing left here to interrogate.
 
@@ -170,8 +165,16 @@ jira me
   jira init
   ```
 
-- **credential present, config present, still failing** → ❌ **the credential is refused**.
-  Expired or revoked, most likely. A new token from the same address, exported the same way.
+- **credential present, config present, still failing** → ❌ **configured, and Jira is not
+  answering.** That is exactly what the probes establish and no more: a token is exported, a
+  configuration exists, and the call does not come back. **Why** is not visible from here. An
+  expired or revoked token is the common case; a configuration naming a site the user no longer
+  means, and a network that does not reach Atlassian, look identical at this distance.
+
+  So report the state and hand over the two things that tell them apart, rather than asserting a
+  cause the step cannot see: a fresh token from the same address, exported the way the table above
+  prescribes, and the site the configuration names — which the user can compare against the one
+  they mean.
 
 `jira init` is never the first step: it authenticates while it runs, so on an absent credential it
 answers `401 Unauthorized` and writes nothing. Prescribing it for a missing token costs the user a
@@ -193,6 +196,14 @@ Reading the file rather than testing for it in a shell keeps this step inside wh
 declares, and an absent file comes back as an ordinary "not found" instead of a non-zero exit that
 reads like a failure.
 
+**Run outside a repository, this step reports a different thing.** A profile lives in the
+repository whose work it describes, so with no repository under the command there is nowhere for
+one to be — and telling the user to run `jira-init` would send them to write a file into a
+directory that is not their project. Say that instead: the check ran outside a repository, this
+step could not be answered, and the command wants running from the root of the repository the work
+is tracked in. Step 1 is unaffected either way, though its `.mcp.json` remedy is the project-scoped
+route of two — outside a repository the user-scoped `claude mcp add` is the one that applies.
+
 ## Step 4 — Report
 
 Report the three checks together, never just the first failure: knowing that the MCP server is
@@ -204,6 +215,29 @@ missing **and** the CLI is unconfigured saves the user a second round trip.
 | MCP ok, CLI missing | usable, but sprint and board operations are unavailable        |
 | MCP missing         | not usable — every authoring skill goes through the MCP server |
 | profile missing     | run `jira-init`                                                |
+
+### The shape of the report
+
+Fixed here, so that two runs of this command produce reports a user can compare. One block per
+check, in the order the steps run, each headed by the subject and its marker; then a closing line
+that says whether the environment is usable and what the first move is.
+
+```text
+<subject>        <✅ or ❌>  <the state, in the words this command's steps use>
+     found       <what was observed — the row, the probe results, the shell>
+     why         <only where the state is one a user would otherwise misread>
+     remedy      <what they do, and never what the command will do for them>
+```
+
+- **`found` carries the observation, not a judgement.** It is what makes the report checkable
+  against the machine rather than believed.
+- **`why` is omitted where the state explains itself.** An absent profile needs no paragraph; a
+  server that is connected and still unusable needs one, and that asymmetry is the point.
+- **`remedy` is written as an instruction to the user.** Every fix in this command is theirs:
+  re-authenticating, editing their own shell configuration, running an interactive `jira init`.
+- **A ✅ block carries `found` and stops.** There is nothing to remedy and nothing to explain.
+- **The closing line names one next move**, not three. Where more than one check failed, the MCP
+  server is first: without it nothing authors at all.
 
 ## Troubleshooting
 

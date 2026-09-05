@@ -166,7 +166,7 @@ skill parla a Jira — e per cosa possiede ciascuno.
 > `mcp__atlassian`. Lascialo dov'è e dichiara accanto a lui il server che serve, in un `.mcp.json`
 > alla radice di questo repository: le quattro righe sono sotto il report.
 >
-> Sulla CLI: `jira` 1.5.2 è installata, `jira me` non risponde, e le verifiche dicono
+> Sulla CLI: `jira` è installata, `jira me` non risponde, e le verifiche dicono
 > `credential: absent`, `config: present`, `shell: zsh`. Sotto zsh la riga di export va in
 > `~/.zshenv`: aggiungila e apri una sessione nuova.
 
@@ -218,7 +218,7 @@ MCP server       ❌  connesso, e inutilizzabile da queste skill
                  parte non autenticato — autenticalo prima di eseguire qualsiasi cosa
 
 Jira CLI         ❌  il token non è visibile a questa shell
-     trovato     jira version 1.5.2 · credential: absent · config: present · shell: zsh
+     trovato     credential: absent · config: present · shell: zsh
      perché      le skill raggiungono la CLI attraverso una shell non interattiva, che sotto
                  zsh legge ~/.zshenv e mai ~/.zshrc — un token esportato in ~/.zshrc funziona
                  nel tuo terminale ed è invisibile qui
@@ -250,7 +250,7 @@ Quando passano tutti e tre, lo stesso report sono quattro righe:
 
 ```text
 MCP server       ✅  atlassian — connesso
-Jira CLI         ✅  jira version 1.5.2 — autenticata
+Jira CLI         ✅  autenticata
 Project profile  ✅  .jira/project-profile.md
 
 Pronto.
