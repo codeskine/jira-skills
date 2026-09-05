@@ -549,6 +549,30 @@
       "why": "The state the skill walks the user into itself: it declares creating a fix version a gap, sends them to Jira, and says continue. What continuing means was undocumented. It reads fix versions live rather than from the profile, so the answer is that nothing has to be re-run — and the staleness rule still applies to the profile, which the next skill to read it will need. Guards both wrong endings: refusing to assign until discovery runs, and never mentioning that the profile no longer matches."
     },
     {
+      "id": "order-11",
+      "category": "ordering",
+      "prompt": "Put KAN-9 back to To Do.",
+      "setup": "A profile exists with a populated status table: To Do is reachable from In Progress, and not from In Review. KAN-9 is In Review, and Jira's transition list for it does not offer To Do.",
+      "expect": "The skill reports that no such path exists from In Review at all, and that only a project admin adds one. It does not name a condition on the item, and it does not report the absence without naming which of the two causes it is.",
+      "why": "The cause is the difference between two sources the skill already has: the profile records the shape of the Jira Workflow, Jira's answer records what is available now. Absent from both means there is no path. Paired with order-12, which holds everything fixed and removes the profile's ability to answer."
+    },
+    {
+      "id": "order-12",
+      "category": "ordering",
+      "prompt": "Put KAN-9 back to To Do.",
+      "setup": "A profile exists and records that statuses were not observable yet, because the project held no work item when discovery ran. KAN-9 is In Review, and Jira's transition list for it does not offer To Do.",
+      "expect": "The skill reports the transition as unavailable and says plainly that which of the two causes it is cannot be established here, with the manual path and jira-init named as what would fill the table in. Naming either cause is a failure, and so is reporting the absence as though the question had not been asked.",
+      "why": "The half that keeps order-11 honest. A mechanism that answers when it can and guesses when it cannot is worse than no mechanism: naming the wrong cause sends the user to repair something that is not broken. This is the three-state discipline of the profile contract reaching a skill that has to act on the third state."
+    },
+    {
+      "id": "order-13",
+      "category": "ordering",
+      "prompt": "PROJ-388 is too big. Break it into three.",
+      "setup": "A profile exists whose work types allow no parent-child relation that would hold the split — the item's type can contain nothing the children could be.",
+      "expect": "The split is refused and the item left whole, and the refusal comes with what this project can support instead, cheapest first: another pair of work types the profile does allow, enriching the item in place, and a change to the scheme named as a project admin's. No children are created.",
+      "why": "Refusing was the whole of the answer, and the profile holds most of the rest — it already knows which types may contain which. Guards two failures: creating children that cannot be attached, and stopping at a refusal while the information that would unblock the user sits unread in the profile."
+    },
+    {
       "id": "hand-1",
       "category": "handover",
       "prompt": "KAN-12 is too big to finish in one go, and it needs to be in the current sprint.",
