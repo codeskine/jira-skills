@@ -38,8 +38,17 @@ and fix versions.
 ## Profile contract
 
 A profile is valid when it states, at minimum: the project key, the work types with their
-hierarchy, the intents no work type serves, the statuses, the resolved operation → tool mapping,
-and the list of unsupported operations. Anything else is convenience.
+hierarchy, the intents no work type serves, the statuses as far as they can be observed, the
+resolved operation → tool mapping, and the list of unsupported operations. Anything else is
+convenience.
+
+**Statuses are observable only where work already exists.** They are read from the items that
+occupy them, so a project holding no work item exposes none — which is the state of every project
+on the day it is created, and often the day this plugin is installed. A profile without them is
+valid, provided it says they were not observable yet and what will make them so. Nothing is lost
+by waiting: an empty project has no item whose status could be asked about, and the skill that
+moves an item between statuses never reads that table anyway — it asks Jira for that item, at that
+moment, because no table knows the condition that will refuse a transition.
 
 Absences are stated, not inferred. A skill acts on what the profile says; it does not audit a
 table for what is missing from it.

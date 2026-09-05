@@ -41,6 +41,10 @@ sentences. If the project supports levels above the top container, say so and na
 | ------ | ----------------------------------------- | ------------------------ | -------------------- |
 | <name> | <to do / in progress / done, as reported> | <statuses, or "initial"> | <conditions, if any> |
 
+<Three cases, as elsewhere: the statuses listed; none observable yet, because the project holds
+no work item and statuses are read from the items that occupy them — the first one will change
+that; or not readable, because the tool that serves them did not answer. State which.>
+
 Transitions in Jira are evaluated per work item, not per type: this table is the shape of the
 Jira Workflow, and the transitions actually available are asked of Jira when one is attempted.
 
