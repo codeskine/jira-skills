@@ -16,6 +16,12 @@ other skill reads the profile as its first step and does not repeat discovery.
 Versioned in the repository, so the whole team shares one answer and changes to it are
 reviewable. It is the only local cache this plugin keeps, and it is kept because it is read.
 
+**One repository, one project.** The profile records a single project, and running discovery
+again replaces it rather than adding to it. Work spanning two Jira projects from one repository
+is not supported: every skill would act on whichever project was discovered last. Before
+replacing a profile, say what goes with it — the previous project's work types, statuses, boards
+and fix versions.
+
 ## What discovery reads
 
 | Subject                                                | Why a skill needs it                                     |

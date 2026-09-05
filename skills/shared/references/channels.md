@@ -56,11 +56,12 @@ on this machine** — a CLI with no token — is a different thing: it is unsupp
 it returns when the channel does, and it says nothing about the project. Both are announced;
 only the first is permanent, and the profile records which is which.
 
-| Missing operation                | Consequence                                                                                                                     |
-| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| create a sprint                  | `jira-plan` can fill and close sprints but cannot open one. It asks the user to create the sprint on the board, then continues. |
-| create a fix version             | `jira-release` can list fix versions and assign work to them, but the fix version itself is created by the user in Jira.        |
-| release or archive a fix version | Same. The skill reports what the fix version contains and stops at the release action.                                          |
+| Missing operation                | Consequence                                                                                                                                                                       |
+| -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| create a sprint                  | `jira-plan` can fill and close sprints but cannot create one. It asks the user to create the sprint on the board, then continues.                                                 |
+| start a sprint                   | Distinct from creating one: a sprint that already exists as `future` cannot be moved to `active`. `jira-plan` fills it and closes it, and asks the user to start it on the board. |
+| create a fix version             | `jira-release` can list fix versions and assign work to them, but the fix version itself is created by the user in Jira.                                                          |
+| release or archive a fix version | Same. The skill reports what the fix version contains and stops at the release action.                                                                                            |
 
 If a future MCP server exposes any of these, the profile will record it during discovery and the
 gap closes without touching a skill. That is the whole point of resolving operations through the
