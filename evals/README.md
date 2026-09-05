@@ -11,11 +11,12 @@ Ten skills were separated by the **intent a user expresses**, and their descript
 thing enforcing that separation. Nothing else in the repository can catch a description that has
 drifted into its neighbour's territory.
 
-| Category    | The question it asks                                                                                                                                          |
-| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `selection` | Given a phrase someone would really say, does the right skill fire — and do the wrong ones stay quiet?                                                        |
-| `gate`      | Is the complete artifact presented and approval awaited, rather than written?                                                                                 |
-| `ordering`  | Is the project profile read before anything is proposed — and, where it or a channel cannot supply something, is the gap announced rather than worked around? |
+| Category    | The question it asks                                                                                                                                              |
+| ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `selection` | Given a phrase someone would really say, does the right skill fire — and do the wrong ones stay quiet?                                                            |
+| `gate`      | Is the complete artifact presented and approval awaited, rather than written?                                                                                     |
+| `ordering`  | Is the project profile read before anything is proposed — and, where it or a channel cannot supply something, is the gap announced rather than worked around?     |
+| `handover`  | Where one utterance carried two intents, do both happen — in the order the material forces, with the outstanding one named at the first gate rather than dropped? |
 
 **What is deliberately not tested:** the wording of any template, the phrasing of any question,
 the content of any persona. Those are editorial, they will change, and asserting on them produces
@@ -34,7 +35,13 @@ expectation was met is the work.
    on a profile that is absent, incomplete, or describes a project that cannot do the thing.
 3. Paste the `prompt` into a **fresh session**. This matters: a session that has already loaded
    a skill will keep choosing it, and selection is exactly what is under test.
-4. Compare what happened against `expect_skill` and `expect_not`, or against `expect`.
+4. Compare what happened against `expect_skill` and `expect_not`, against `expect_sequence`, or
+   against `expect`.
+
+A `handover` fixture asserts an **order**, not a single choice: `expect_sequence` lists the skills
+in the order they must run, and `expect` says what has to be true between them — which gate names
+what, and what a stated condition decides. A run where both skills fired but the second one was
+never announced at the first gate has failed the fixture, however right the final state looks.
 
 For a change to the descriptions, running the `selection` category alone is the useful signal,
 and it is the one to run before merging any description edit.
@@ -62,3 +69,7 @@ The pairs most likely to be confused already have fixtures, and they are the one
 a new ambiguity appears: intake against refinement, a proposal against a risk, a defect against
 debt, a sprint against a fix version, and every read-only question against the skill that would
 write.
+
+- **A `handover` fixture needs its single-intent twin.** `hand-4` is `hand-1` with the second
+  intent removed, and it exists because fixtures that pinned only the composite cases would pass
+  just as well against a plugin that had learned to announce a successor every time.

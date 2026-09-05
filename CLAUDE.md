@@ -237,9 +237,16 @@ skill discovers it and guides the user to it. See
 
 Every skill presents the complete artifact **in chat** and waits for explicit user
 confirmation before any write to Jira. The confirmation prompt must include the title, the
-work type, the parent if any, and the sprint or fix version if any. If the user requests
-changes, apply them and re-present the draft. Repeat until approved. There is one form of
-this gate and no local mirror of the artifact: after publication the truth is Jira.
+work type, the parent if any, the sprint or fix version if any, and — where one utterance
+carried two intents — the one this artifact does not satisfy and the skill that owns it. If
+the user requests changes, apply them and re-present the draft. Repeat until approved. There
+is one form of this gate and no local mirror of the artifact: after publication the truth is
+Jira.
+
+A request that carried a second intent does not end at the write: the skill that owns what
+is outstanding is entered afterwards, and each intent keeps its own gate. The rule lives with
+the gate rather than in ten descriptions, because the descriptions already name the successor
+and what was missing was the obligation to reach it.
 
 **4. Evidence**
 

@@ -18,6 +18,7 @@ form, every skill, no exceptions other than the read-only skill, which never wri
    - the sprint and the fix version, if any
    - anything the project marks as required and the draft has left empty
    - a work type standing in for an intent the project has none for, and whether the draft says so
+   - the intent the request carried that this artifact does not satisfy, and the skill that owns it
 4. **Ask for explicit approval.** A question the user answers, not an announcement of what is
    about to happen.
 5. **On a change request**, apply it and return to step 2 with the revised artifact. Loop as
@@ -41,3 +42,24 @@ approve **once**, then execute.
 
 If part of a multi-write operation fails, report which parts succeeded and which did not. Do not
 roll back on your own initiative: the user decides whether a partial result is kept or undone.
+
+## A request that carried more than one intent
+
+One sentence can ask for two things — "it is too large, and it needs to go in the current sprint";
+"how is it doing, and plan it if it is ready". Both are real, both must happen, and the skill that
+fired owns one of them.
+
+- **Name the other at the gate.** It belongs in the block of decisions. An approval given without
+  it is an approval of half a request the user believes they made whole.
+- **Order is not a choice.** The intent whose result the other operates on runs first: a split
+  before the sprint that holds its children, a read before the write it conditions. Where neither
+  consumes the other, the order the user stated stands.
+- **Two gates, never one.** The second artifact cannot be assembled before the first is written,
+  because its subject does not exist yet. Approving the first approves nothing of the second.
+- **Continue after the write.** Reporting the key ends the write, not the request. Hand over to
+  the skill that owns what is outstanding, and say that is what you are doing.
+- **Ask when the first intent changed the subject of the second.** After a split, "put it in the
+  sprint" no longer names one item. Which level a team plans belongs to the project, and the
+  profile is what says so. Ask; never resolve it by default.
+- **A condition the user stated is a condition.** "Plan it if it is ready" is not satisfied by
+  planning it.
