@@ -30,7 +30,7 @@
       "expect_not": [
         "jira-diagnose"
       ],
-      "why": "Content is a fault and provenance is intake; both fit entirely. The email carries a symptom and nothing more — no steps, no environment — so it does not itself carry what a defect report asks for, and capture takes precedence. Paired with sel-diagnose-3, the same fault reported first-hand, and with sel-diagnose-4, the same fault relayed but arriving complete."
+      "why": "Content is a fault and provenance is intake; both fit entirely. The email names a product and carries a symptom, and nothing that would let anyone else see the fault happen — no steps — so it does not itself carry what a defect report asks for, and capture takes precedence. Naming Excel does not clear the floor on its own: the floor is read against the whole of the material, never as a list of fields to tick. Paired with sel-diagnose-3, the same fault reported first-hand; with sel-diagnose-4, the same fault relayed but arriving complete; and with sel-capture-6, the same fault relayed with the environment named properly and still nothing to reproduce it from."
     },
     {
       "id": "sel-capture-4",
@@ -40,7 +40,7 @@
       "expect_not": [
         "jira-propose"
       ],
-      "why": "A desired outcome, relayed, with no datum behind it: nothing says who benefits or what faster would have to mean. Precedence sends it to intake rather than to a proposal that would have to invent its own measure. Paired with sel-propose-3, the same wish owned by the person stating it."
+      "why": "A desired outcome, relayed, with no datum behind it at all: nothing says who benefits or what faster would have to mean. Precedence sends it to intake rather than to a proposal that would have to invent its own measure. Paired with sel-propose-3, the same wish owned by the person stating it, and with sel-propose-6, the same wish relayed but carrying a figure."
     },
     {
       "id": "sel-capture-5",
@@ -51,6 +51,16 @@
         "jira-assess"
       ],
       "why": "Debt relayed second-hand, arriving as an adjective and nothing else: nothing says whose time it costs or how often, which is the floor jira-assess names in its own exclusion. The precedence test turns on what the material carries, whatever intent it is about, so it belongs to intake first. The architect is on the team, so this also holds intake to material arriving second-hand rather than to where it came from: a routing test cannot ask a reader to judge an organisation the request text does not describe. Paired with sel-assess-3, the same remark carrying its toll."
+    },
+    {
+      "id": "sel-capture-6",
+      "category": "selection",
+      "prompt": "A customer emailed: invoicing has been mangling the CSV for a fortnight. They're on 4.9, in the production tenant. Put it on Jira.",
+      "expect_skill": "jira-capture",
+      "expect_not": [
+        "jira-diagnose"
+      ],
+      "why": "sel-capture-3 with one variable moved: the environment is named properly — what they run and where — and there are still no steps and nothing that would let anyone else see the fault happen. It is intake, which is what pins the floor's enumeration as illustration rather than a list of fields to tick. Read as a conjunction requiring both halves to fail, this one would have to be a defect report."
     },
     {
       "id": "sel-propose-1",
@@ -103,6 +113,16 @@
         "jira-diagnose"
       ],
       "why": "Something that works and costs, like sel-assess-1, with one variable moved: the cost falls on the people it serves now rather than on the team later. This is the case jira-diagnose used to hand to jira-assess, which has no technical impact to ask about here and would have to record the toll as one."
+    },
+    {
+      "id": "sel-propose-6",
+      "category": "selection",
+      "prompt": "Passing on what support wrote: \"about forty calls last month from people stuck on the delivery-options step — they can't tell what it will cost them until the end.\" Get it on the backlog.",
+      "expect_skill": "jira-propose",
+      "expect_not": [
+        "jira-capture"
+      ],
+      "why": "Relayed like sel-capture-4 and carrying a figure, but a count of the symptom and no target. Any datum clears the floor, so the intent takes it and the skill asks what success would have to look like. Paired with sel-capture-4, the same relayed shape with no figure at all: the pair moves one variable, and it is whether a number is there."
     },
     {
       "id": "sel-diagnose-1",
@@ -222,13 +242,13 @@
     {
       "id": "sel-release-1",
       "category": "selection",
-      "prompt": "What's going out in 4.10, and is any of it still open?",
+      "prompt": "What's already in 4.10? Put PROJ-88 and PROJ-91 in it too.",
       "expect_skill": "jira-release",
       "expect_not": [
         "jira-inspect",
         "jira-plan"
       ],
-      "why": "The genuinely ambiguous one: a question about a fix version, owned by release."
+      "why": "Reads a fix version and then changes it, which is one operation and belongs to the skill that owns the change. Paired with sel-inspect-4, the same read with the change removed: the pair moves one variable, and that variable is the change. It replaces the prompt this id used to carry, which was a pure read asserted to jira-release by fiat."
     },
     {
       "id": "sel-release-2",
@@ -291,6 +311,17 @@
         "jira-plan"
       ],
       "why": "A sprint read that changes nothing. The half of the pair jira-plan gives up."
+    },
+    {
+      "id": "sel-inspect-4",
+      "category": "selection",
+      "prompt": "What's going out in 4.10, and is any of it still open?",
+      "expect_skill": "jira-inspect",
+      "expect_not": [
+        "jira-release",
+        "jira-plan"
+      ],
+      "why": "A fix version read twice over — what it holds, then what of it is unfinished — and nothing is changed. The twin of sel-inspect-3 on the other container: the read jira-release gives up. This was sel-release-1, which asserted the opposite while the live run and two rounds of the isolated routing replay went the other way."
     },
     {
       "id": "sel-init-1",
