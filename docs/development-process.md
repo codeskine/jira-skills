@@ -245,7 +245,7 @@ will eventually disagree with the first.
 | Intake     | [`jira-diagnose`](skills/jira-diagnose.md) | a defect someone else can reproduce                  |
 | Intake     | [`jira-assess`](skills/jira-assess.md)     | debt or risk, with what deferring it costs           |
 | Refinement | [`jira-refine`](skills/jira-refine.md)     | acceptance criteria, a finishable scope, or children |
-| Planning   | [`jira-plan`](skills/jira-plan.md)         | a sprint filled, emptied or closed                   |
+| Planning   | [`jira-plan`](skills/jira-plan.md)         | a sprint filled or closed, and what leaves one named |
 | Planning   | [`jira-release`](skills/jira-release.md)   | a fix version's contents, and what is unfinished     |
 | Progress   | [`jira-advance`](skills/jira-advance.md)   | the transitions Jira allows right now, and no others |
 | Progress   | [`jira-inspect`](skills/jira-inspect.md)   | an answer, and never a change                        |

@@ -85,7 +85,8 @@ sessione non c'è nessun tool Atlassian, l'ambiente è a posto e la sessione è 
 nuova ed esegui di nuovo il controllo.
 
 **3 · Il controllo della CLI distingue due guasti diversi.** La `jira` CLI serve solo per il
-dominio Agile — board, sprint, backlog — quindi la sua assenza è una degradazione parziale, non un
+dominio Agile — board, sprint, l'elenco delle fix version — quindi la sua assenza è una
+degradazione parziale, non un
 ambiente morto, e il controllo prosegue fino in fondo comunque. Se è installata ma non risponde,
 due cause si somigliano dall'esterno e vogliono rimedi diversi. `/jira-doctor` stabilisce quale
 sia prima di prescrivere qualcosa, verificando separatamente la credenziale e il file di
@@ -233,7 +234,8 @@ Project profile  ❌  nessun project profile
      rimedio     esegui la skill jira-init — scopre il progetto e scrive il file
 
 Non ancora utilizzabile. Ogni skill di scrittura passa dall'MCP server, quindi parti da lì. La
-CLI presidia solo board, sprint e backlog; il resto del plugin funziona anche senza.
+CLI presidia solo board, sprint e l'elenco delle fix version; il resto del plugin funziona anche
+senza.
 ```
 
 Tre cose rendono questo report degno di essere letto invece che rieseguito. Le tre righe sono

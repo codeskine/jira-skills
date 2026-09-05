@@ -83,7 +83,8 @@ session. When the row says connected and no Atlassian tool is available, the env
 and the session is stale — start a new one and run the check again.
 
 **3 · The CLI check tells two different failures apart.** The `jira` CLI is needed only for the
-Agile domain — boards, sprints, backlog — so an absent one is a partial degradation, not a dead
+Agile domain — boards, sprints, the fix version listing — so an absent one is a partial
+degradation, not a dead
 environment, and the check carries on to the end regardless. If it is installed but does not
 answer, two causes look identical from the outside and take different remedies. `/jira-doctor`
 establishes which before prescribing anything, by testing for the credential and for the
@@ -228,7 +229,7 @@ Project profile  ❌  no project profile
      remedy      run the jira-init skill — it discovers the project and writes the file
 
 Not usable yet. Every authoring skill goes through the MCP server, so start there. The CLI
-gates only boards, sprints and the backlog; the rest of the plugin works without it.
+gates only boards, sprints and the fix version listing; the rest of the plugin works without it.
 ```
 
 Three things make this report worth reading rather than worth re-running. The three lines are

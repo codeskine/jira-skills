@@ -77,6 +77,13 @@ The native time container, owned by a board: it defines _when_ a Work item is ta
 a start, an end, and it closes.
 _Avoid_: iteration, milestone, cycle, cadence
 
+**Backlog**:
+Where a Work item is when it belongs to no Sprint — a position on the board, not a field. An
+item reaches it by leaving a Sprint, and nothing is written to it. It is named here because
+users name it, and naming it is separate from reaching it: the channel map declares moving work
+out of a Sprint a gap, so the plugin can say where an item belongs and cannot put it there.
+_Avoid_: icebox, inbox, wishlist, the pile
+
 **Fix Version**:
 The native versioned release target: it defines _what_ ships together. It has no duration, it
 has a version, and it is released or archived.
@@ -91,7 +98,8 @@ axes. The term **milestone** does not belong to this domain.
 The route a skill uses to talk to Jira. There are two, and the choice is not free: the
 **Atlassian MCP server** is the primary channel for work items, fields, comments, transitions
 and search; the **Jira CLI** covers what the server does not expose, namely the Agile domain —
-boards, sprints, backlog. The operation → channel map is declared once and shared.
+boards, sprints, and the fix version listing. The operation → channel map is declared once and
+shared, and it is the authority: this entry summarises it and never overrides it.
 _Avoid_: backend, provider, adapter, integration
 
 ### Process invariants

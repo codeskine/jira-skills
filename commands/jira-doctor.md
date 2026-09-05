@@ -92,8 +92,8 @@ Read the output and classify:
 
 ## Step 2 — The Jira CLI
 
-Needed only for the Agile domain — boards, sprints, backlog. Everything else goes through the
-MCP server, so a missing CLI is a **partial** degradation, not a dead environment.
+Needed only for the Agile domain — boards, sprints, the fix version listing. Everything else goes
+through the MCP server, so a missing CLI is a **partial** degradation, not a dead environment.
 
 **Nothing in this step ends the check.** Run the commands, classify what comes back, and carry the
 outcome to Step 4 — an absent or unauthenticated CLI is a state to report, not a reason to stop

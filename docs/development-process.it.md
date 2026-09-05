@@ -254,7 +254,7 @@ seconda risposta che prima o poi contraddirà la prima.
 | Intake     | [`jira-diagnose`](skills/jira-diagnose.it.md) | un difetto che un altro riesce a riprodurre               |
 | Intake     | [`jira-assess`](skills/jira-assess.it.md)     | debito o rischio, con quanto costa rimandarlo             |
 | Refinement | [`jira-refine`](skills/jira-refine.it.md)     | criteri di accettazione, un perimetro finibile, o i figli |
-| Planning   | [`jira-plan`](skills/jira-plan.it.md)         | uno sprint riempito, svuotato o chiuso                    |
+| Planning   | [`jira-plan`](skills/jira-plan.it.md)         | uno sprint riempito o chiuso, e nominato ciò che ne esce  |
 | Planning   | [`jira-release`](skills/jira-release.it.md)   | il contenuto di una fix version, e cosa resta aperto      |
 | Progress   | [`jira-advance`](skills/jira-advance.it.md)   | le transition che Jira consente adesso, e nessun'altra    |
 | Progress   | [`jira-inspect`](skills/jira-inspect.it.md)   | una risposta, e mai un cambiamento                        |

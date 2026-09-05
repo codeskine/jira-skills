@@ -7,7 +7,7 @@ compatibility: Designed for Claude Code. Requires the Atlassian MCP server confi
 metadata:
   author: codeskine
   version: "1.0.0"
-allowed-tools: Read Write Edit Glob Grep mcp__atlassian Bash(jira:*) AskUserQuestion
+allowed-tools: Read Write Glob Grep mcp__atlassian Bash(jira:*) AskUserQuestion
 ---
 
 This skill **discovers**. It never creates, renames or configures anything in Jira: work types,
