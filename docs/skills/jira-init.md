@@ -14,10 +14,10 @@
 
 ## What it does
 
-Reads how your Jira project is actually configured — the work types and how they nest, the
-statuses, the fields required on creation, the boards with their active sprint, the fix versions —
-and writes what it found into `.jira/project-profile.md`, the file every other skill reads as its
-first step. It creates nothing in Jira and changes nothing there.
+Reads how your Jira project is actually configured and writes what it found into
+`.jira/project-profile.md`, the file every other skill reads as its first step. It looks at the
+work types and how they nest, the statuses, the fields required on creation, the boards with their
+active sprint, and the fix versions. It creates nothing in Jira and changes nothing there.
 
 It is the first thing you run in a repository, after `/jira-doctor`, and the only skill that runs
 discovery or writes that file. It brings no opinion of its own: it records what the project

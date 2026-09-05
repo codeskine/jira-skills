@@ -14,10 +14,10 @@
 
 ## What it does
 
-Takes a work item that already exists and makes it something a team can pick up: acceptance
-criteria stated as outcomes someone could check, dependencies recorded as links to the work items
-concerned, and a boundary saying what was deliberately left out. When the item is too large to
-finish, it breaks it into children instead — each one complete on its own.
+Takes a work item that already exists and makes it something a team can pick up. That means three
+things: acceptance criteria stated as outcomes someone could check, dependencies recorded as links
+to the work items concerned, and a boundary saying what was deliberately left out. When the item is
+too large to finish, it breaks it into children instead — each one complete on its own.
 
 It is a Business Analyst's set of questions. "Done" agreed before the work starts is the cheapest
 agreement anyone will ever make, and the only one that can still be made honestly.

@@ -122,9 +122,9 @@ l'artefatto o il report che produce.
 
 **Setup** — Scopri com'è davvero configurato il progetto Jira e registra il project profile che ogni altra skill legge.
 
-| Skill       | Cosa fa                                                                                                                                                                                                                                                                                                        | Pagina                               |
-| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
-| `jira-init` | Legge com'è configurato davvero il tuo progetto Jira — i work type e come si annidano, gli status, i campi obbligatori alla creazione, le board con il loro sprint attivo, le fix version — e scrive quello che ha trovato in `.jira/project-profile.md`, il file che ogni altra skill legge come primo passo. | [leggi](docs/skills/jira-init.it.md) |
+| Skill       | Cosa fa                                                                                                                                                                 | Pagina                               |
+| ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
+| `jira-init` | Legge com'è configurato davvero il tuo progetto Jira e scrive quello che ha trovato in `.jira/project-profile.md`, il file che ogni altra skill legge come primo passo. | [leggi](docs/skills/jira-init.it.md) |
 
 **Redazione** — Trasforma una richiesta, un difetto o un rischio tecnico in un work item Jira fatto bene.
 
@@ -137,9 +137,9 @@ l'artefatto o il report che produce.
 
 **Refinement** — Arricchisci un work item e scomponilo in figli completi.
 
-| Skill         | Cosa fa                                                                                                                                                                                                                                                                                        | Pagina                                 |
-| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
-| `jira-refine` | Prende un work item che esiste già e lo porta al punto in cui un team può prenderlo in carico: criteri di accettazione formulati come esiti che qualcuno può verificare, dipendenze registrate come link ai work item interessati, e un confine che dice cosa è stato deliberatamente escluso. | [leggi](docs/skills/jira-refine.it.md) |
+| Skill         | Cosa fa                                                                                        | Pagina                                 |
+| ------------- | ---------------------------------------------------------------------------------------------- | -------------------------------------- |
+| `jira-refine` | Prende un work item che esiste già e lo porta al punto in cui un team può prenderlo in carico. | [leggi](docs/skills/jira-refine.it.md) |
 
 **Pianificazione** — Decidi quando il lavoro viene affrontato e cosa esce insieme.
 

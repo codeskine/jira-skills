@@ -14,10 +14,10 @@
 
 ## Cosa fa
 
-Legge com'è configurato davvero il tuo progetto Jira — i work type e come si annidano, gli status,
-i campi obbligatori alla creazione, le board con il loro sprint attivo, le fix version — e scrive
-quello che ha trovato in `.jira/project-profile.md`, il file che ogni altra skill legge come primo
-passo. Su Jira non crea niente e non cambia niente.
+Legge com'è configurato davvero il tuo progetto Jira e scrive quello che ha trovato in
+`.jira/project-profile.md`, il file che ogni altra skill legge come primo passo. Guarda i work type
+e come si annidano, gli status, i campi obbligatori alla creazione, le board con il loro sprint
+attivo, le fix version. Su Jira non crea niente e non cambia niente.
 
 Questa lettura è la discovery, cioè la lettura della configurazione reale del progetto, e il file
 che ne registra l'esito è il project profile. È la prima cosa che esegui in un repository, dopo

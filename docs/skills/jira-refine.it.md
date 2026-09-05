@@ -14,11 +14,11 @@
 
 ## Cosa fa
 
-Prende un work item che esiste già e lo porta al punto in cui un team può prenderlo in carico:
-criteri di accettazione formulati come esiti che qualcuno può verificare, dipendenze registrate
-come link ai work item interessati, e un confine che dice cosa è stato deliberatamente escluso.
-Quando il work item è troppo grande per essere finito, lo scompone in figli, ciascuno completo per
-conto proprio.
+Prende un work item che esiste già e lo porta al punto in cui un team può prenderlo in carico. Vuol
+dire tre cose: criteri di accettazione formulati come esiti che qualcuno può verificare, dipendenze
+registrate come link ai work item interessati, e un confine che dice cosa è stato deliberatamente
+escluso. Quando il work item è troppo grande per essere finito, lo scompone in figli, ciascuno
+completo per conto proprio.
 
 Sono le domande di un Business Analyst. Il «fatto» concordato prima che il lavoro cominci è
 l'accordo meno costoso che qualcuno stipulerà mai, ed è l'unico che si possa ancora stipulare
