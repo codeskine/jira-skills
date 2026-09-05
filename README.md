@@ -66,7 +66,7 @@ to read before installing.
 | Claude Code                          | The only harness this plugin targets                                                                                                                                                                                                                                                                          |
 | The Atlassian MCP server             | Work items, fields, comments, transitions, search and project metadata                                                                                                                                                                                                                                        |
 | — reachable under the id `atlassian` | Skills declare that id statically, so a server under any other name is invisible to them. An Atlassian connector added through claude.ai settings is one such name: it shows as connected, exposes its tools under an identifier of its own, and serves no skill here. Adding `atlassian` does not disturb it |
-| The `jira` CLI, authenticated        | Only for the Agile surface — boards, sprints, backlog. Without it, `jira-plan` and the fix-version listing are unavailable and everything else still works                                                                                                                                                    |
+| The `jira` CLI, authenticated        | Only for the Agile surface — boards, sprints, the fix-version listing. Without it, `jira-plan` and that listing are unavailable and everything else still works                                                                                                                                               |
 
 The simplest way to get that id is a `.mcp.json` at the root of the repository where your work
 is tracked:
@@ -143,10 +143,10 @@ the artifact or report it produces.
 
 **Planning** — Decide when work is tackled and what ships together.
 
-| Skill          | What it does                                                                                                                                                                                  | Page                                |
-| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- |
-| `jira-plan`    | Jira sprint planner. Use when the user asks to fill or empty a sprint on a Jira board, or to close one and account for what was delivered and what was not.                                   | [read](docs/skills/jira-plan.md)    |
-| `jira-release` | Jira fix version manager. Use when the user asks to assign work to a Jira fix version, or for the list of fix versions the project has, or whether one of them has been released or archived. | [read](docs/skills/jira-release.md) |
+| Skill          | What it does                                                                                                                                                                                                     | Page                                |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- |
+| `jira-plan`    | Jira sprint planner. Use when the user asks to fill a sprint on a Jira board, to take work back out of one or onto the backlog, or to close one and account for what was delivered and what was not.             | [read](docs/skills/jira-plan.md)    |
+| `jira-release` | Jira fix version manager. Use when the user asks to assign work to a Jira fix version or take it off one, or for the list of fix versions the project has, or whether one of them has been released or archived. | [read](docs/skills/jira-release.md) |
 
 **Progress** — Advance a work item through its Jira Workflow and read where it stands.
 

@@ -240,6 +240,18 @@
       "why": "The report is part of closing, not a question about state."
     },
     {
+      "id": "sel-plan-3",
+      "category": "selection",
+      "prompt": "Take KAN-12 off the sprint and put it back on the backlog.",
+      "expect_skill": "jira-plan",
+      "expect_not": [
+        "jira-propose",
+        "jira-advance",
+        "jira-refine"
+      ],
+      "why": "The placement case: \"the backlog\" is among the most ordinary words a user reaches for and no description claimed it, so a routing replay read the phrase as create this and sent it to jira-propose. jira-plan now claims taking work out of a sprint, and the backlog by name. Paired with sel-propose-2, where the same words mean create an item rather than move one — the pair moves one variable, and it is whether the item already exists."
+    },
+    {
       "id": "sel-release-1",
       "category": "selection",
       "prompt": "What's already in 4.10? Put PROJ-88 and PROJ-91 in it too.",
@@ -259,6 +271,17 @@
         "jira-plan"
       ],
       "why": "Explicitly orthogonal to sprints; picking plan would conflate the two axes."
+    },
+    {
+      "id": "sel-release-3",
+      "category": "selection",
+      "prompt": "Take PROJ-88 out of 2.4, it isn't shipping with that.",
+      "expect_skill": "jira-release",
+      "expect_not": [
+        "jira-plan",
+        "jira-advance"
+      ],
+      "why": "The way off a fix version, which had no row in the channel map and no sentence in the skill. Mechanically it is the way on with the field cleared, so it is an edit and not a transition — which is what makes jira-advance the wrong answer rather than a near one. Paired with sel-release-2, the assignment."
     },
     {
       "id": "sel-advance-1",
@@ -472,6 +495,14 @@
       "setup": "A profile exists and records that fix versions were not read, because the Agile channel was not reachable.",
       "expect": "The skill says the list could not be read, names the remedy, and asks for the version name instead of offering a choice — then assigns through the MCP server. It does not declare the operation unavailable: listing and assigning travel on different channels.",
       "why": "The degradation is partial. Reporting the whole operation as dead would be as wrong as pretending the list was read."
+    },
+    {
+      "id": "order-8",
+      "category": "ordering",
+      "prompt": "Take KAN-12 off the sprint and put it back on the backlog.",
+      "setup": "A profile exists and lists boards. The current sprint holds KAN-12.",
+      "expect": "The skill names KAN-12 and the backlog as its destination, says the move is the user's to make on the board, and writes nothing. It does not transition the item, does not stand a label in for the move, and does not report the request as unsupported without first naming where the item is going.",
+      "why": "The gap is declared and the request is still this skill's. Announcing a gap is not refusing the request: what the user should be left holding is the decision made and one move to perform. Guards the reading where a declared gap becomes a dead end."
     },
     {
       "id": "hand-1",
