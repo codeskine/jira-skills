@@ -31,14 +31,15 @@ channel, so both come back to you rather than being simulated.
 
 It fires when the question is _when_, and the answer is a sprint.
 
-| Say something like                            | And this is the skill you get     |
-| --------------------------------------------- | --------------------------------- |
-| "put these four in the sprint"                | `jira-plan`                       |
-| "close Sprint 24, we finish Friday"           | `jira-plan`                       |
-| "these three should go out in 2.4"            | [`jira-release`](jira-release.md) |
-| "PROJ-121 is not ready for anyone to pick up" | [`jira-refine`](jira-refine.md)   |
-| "start PROJ-99, I am on it"                   | [`jira-advance`](jira-advance.md) |
-| "how is the sprint looking?"                  | [`jira-inspect`](jira-inspect.md) |
+| Say something like                                | And this is the skill you get     |
+| ------------------------------------------------- | --------------------------------- |
+| "put these four in the sprint"                    | `jira-plan`                       |
+| "close Sprint 24, we finish Friday"               | `jira-plan`                       |
+| "take KAN-12 off the sprint, back to the backlog" | `jira-plan`                       |
+| "these three should go out in 2.4"                | [`jira-release`](jira-release.md) |
+| "PROJ-121 is not ready for anyone to pick up"     | [`jira-refine`](jira-refine.md)   |
+| "start PROJ-99, I am on it"                       | [`jira-advance`](jira-advance.md) |
+| "how is the sprint looking?"                      | [`jira-inspect`](jira-inspect.md) |
 
 Two of those boundaries are worth saying out loud. A sprint says _when_ work is tackled and a fix
 version says _what ships together_: they are orthogonal axes, and conflating them is how "when"
@@ -208,9 +209,10 @@ looks like a started sprint.
 
 ## What it will not do
 
-- **Create a sprint, or start one.** Neither is available on either channel. It asks you to do both
-  on the board, and it will not stand a label or a naming convention in for the sprint that is
-  missing.
+- **Create a sprint, start one, or take work back out of one.** None of the three is available on
+  either channel. It asks you to do them on the board — and for the third it names the item and
+  where it is going first, so what you do there is one move rather than a puzzle. It will not stand
+  a label or a naming convention in for a sprint that is missing.
 - **Make an item ready.** It says what is missing and names [`jira-refine`](jira-refine.md).
   Acceptance criteria written on the way into a sprint are criteria nobody agreed to.
 - **Decide what ships together.** A sprint and a fix version are orthogonal axes;

@@ -33,14 +33,15 @@ invece di essere simulate.
 
 Si attiva quando la domanda è _quando_, e la risposta è uno sprint.
 
-| Se dici qualcosa come                             | La skill è                           |
-| ------------------------------------------------- | ------------------------------------ |
-| «metti questi quattro nello sprint»               | `jira-plan`                          |
-| «chiudi lo Sprint 24, venerdì finiamo»            | `jira-plan`                          |
-| «questi tre devono uscire nella 2.4»              | [`jira-release`](jira-release.it.md) |
-| «PROJ-121 non è pronto perché qualcuno lo prenda» | [`jira-refine`](jira-refine.it.md)   |
-| «fai partire PROJ-99, me ne occupo io»            | [`jira-advance`](jira-advance.it.md) |
-| «come sta andando lo sprint?»                     | [`jira-inspect`](jira-inspect.it.md) |
+| Se dici qualcosa come                              | La skill è                           |
+| -------------------------------------------------- | ------------------------------------ |
+| «metti questi quattro nello sprint»                | `jira-plan`                          |
+| «chiudi lo Sprint 24, venerdì finiamo»             | `jira-plan`                          |
+| «togli KAN-12 dallo sprint, rimettilo nel backlog» | `jira-plan`                          |
+| «questi tre devono uscire nella 2.4»               | [`jira-release`](jira-release.it.md) |
+| «PROJ-121 non è pronto perché qualcuno lo prenda»  | [`jira-refine`](jira-refine.it.md)   |
+| «fai partire PROJ-99, me ne occupo io»             | [`jira-advance`](jira-advance.it.md) |
+| «come sta andando lo sprint?»                      | [`jira-inspect`](jira-inspect.it.md) |
 
 Due di questi confini vale la pena dirli ad alta voce. Lo sprint dice _quando_ si affronta il
 lavoro, la fix version dice _cosa esce insieme_: sono assi ortogonali, e confonderli è il modo in
@@ -215,9 +216,10 @@ il compito invece di inventare qualcosa che assomigli a uno sprint avviato.
 
 ## Cosa non fa
 
-- **Creare uno sprint, o avviarlo.** Nessuna delle due è disponibile su nessuno dei due channel. Ti
-  chiede di farle sulla board, e non mette una label o una convenzione di nomi al posto dello
-  sprint che manca.
+- **Creare uno sprint, avviarlo, o togliere lavoro da uno.** Nessuna delle tre è disponibile su
+  nessuno dei due channel. Ti chiede di farle sulla board — e per la terza prima ti nomina il work
+  item e dove sta andando, così quello che fai lì è una mossa sola e non un rebus. E non mette una
+  label o una convenzione di nomi al posto dello sprint che manca.
 - **Rendere pronto un work item.** Dice cosa manca e nomina [`jira-refine`](jira-refine.it.md). I
   criteri di accettazione scritti mentre si entra in uno sprint sono criteri che non ha concordato
   nessuno.

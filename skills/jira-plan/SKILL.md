@@ -1,6 +1,6 @@
 ---
 name: jira-plan
-description: "Jira sprint planner. Use when the user asks to fill or empty a sprint on a Jira board, or to close one and account for what was delivered and what was not. Reads the open sprints from the board rather than assuming them, moves a set of items in one approved operation, and flags work that is not ready before it is planned. A request that reads a sprint and then changes it is one operation, and belongs here. Not for reading what a sprint holds without changing it (→ See codeskine/jira-skills@jira-inspect), for deciding what ships together (→ See codeskine/jira-skills@jira-release), for making an item ready (→ See codeskine/jira-skills@jira-refine), or for transitioning a single item (→ See codeskine/jira-skills@jira-advance)."
+description: "Jira sprint planner. Use when the user asks to fill a sprint on a Jira board, to take work back out of one or onto the backlog, or to close one and account for what was delivered and what was not. Reads the open sprints from the board rather than assuming them, moves a set of items in one approved operation, and flags work that is not ready before it is planned. A request that reads a sprint and then changes it is one operation, and belongs here. Not for reading what a sprint holds without changing it (→ See codeskine/jira-skills@jira-inspect), for deciding what ships together (→ See codeskine/jira-skills@jira-release), for making an item ready (→ See codeskine/jira-skills@jira-refine), or for transitioning a single item (→ See codeskine/jira-skills@jira-advance)."
 user-invocable: true
 license: MIT
 compatibility: Designed for Claude Code. Requires the Atlassian MCP server configured as "atlassian" and the jira CLI authenticated.
@@ -45,9 +45,15 @@ wrong, and planning against it wastes the meeting it was made for.
 
 ## 3. Say what cannot be done here
 
-Creating a sprint is one of the gaps [the channel map](../shared/references/channels.md)
-declares. When the user needs one, ask them to open it on the board and continue once it exists.
-Never present the gap as a failure: their own path around it takes a minute.
+Creating a sprint and starting one are gaps [the channel map](../shared/references/channels.md)
+declares, and so is taking work back out of a sprint. When the user needs any of them, ask them to
+do it on the board and continue once it is done. Never present a gap as a failure: their own path
+around it takes a minute.
+
+The third is the one users ask for by name — _take KAN-12 off the sprint_, _put it back on the
+backlog_. Name the item and where it is going, say the move is theirs to make on the board, and
+carry on with whatever does not depend on it. The backlog is where a work item is when it is in no
+sprint, so there is nothing to write to it: what they do on the board is the whole operation.
 
 ## 4. Filling a sprint
 
@@ -72,6 +78,10 @@ anyone's memory of it.
 Every unfinished item then needs an explicit destination — the next sprint, the backlog, or a
 decision the user names. An item left unhandled at close disappears from the plan without anyone
 choosing that, which is the one outcome a review cannot recover from.
+
+Naming the destination is this skill's work; making the move out of the closing sprint is not, and
+§ 3 says why. Decide it for every item, then hand the moves over as one list rather than one at a
+time.
 
 ## 6. Present and confirm
 
