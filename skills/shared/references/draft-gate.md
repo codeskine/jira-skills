@@ -6,7 +6,9 @@ form, every skill, no exceptions other than the read-only skill, which never wri
 ## Procedure
 
 1. **Assemble the artifact in full.** Not a summary, not an outline: the exact content that
-   will be written, in the language the user is working in.
+   will be written, in the language the user is working in. In full means every section its
+   template defines and does not mark optional; a section that cannot be filled is raised at the
+   gate as a gap, never quietly dropped.
 2. **Present it in chat.** Never in a file. After a write the truth is Jira, and a local copy
    nobody reads is drift waiting to happen.
 3. **State the decisions the artifact carries**, immediately after it, as a short block:

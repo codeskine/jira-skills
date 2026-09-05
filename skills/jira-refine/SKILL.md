@@ -62,6 +62,21 @@ serves and build it from that intent's own template, so nobody has to rewrite a 
 
 A child that only makes sense next to its siblings has not been split — it has been cut.
 
+Each child also carries the acceptance criteria section of [the refined-item
+template](assets/refined-item.md), whatever intent it serves. What a team picks up, plans and
+finishes is the child, and a child nobody can call finished is not a unit of work. It goes after
+the sections the child's own template defines and before the two that close every template — the
+fields still unfilled, and the work type — so the agreement reads as the conclusion of the
+report rather than as its preface.
+
+Allocate, never duplicate: **every criterion stated for the item lands on exactly one child**, and
+what no child claims stays with the item they came from. A child that claims none has been cut in
+the sense above, and the split is redrawn rather than a criterion invented to fill it.
+
+A child that is still raw is the exception. It declares itself awaiting refinement, so it
+carries no criteria, and whatever would have landed on it stays with the parent until that child
+is refined in its turn.
+
 ## 5. Check the hierarchy allows it
 
 The profile says which types may contain which. If it allows no parent-child relation between the
@@ -79,6 +94,10 @@ the templates named above, one each.
 Follow [the draft gate](../shared/references/draft-gate.md). What this intent adds: **every**
 child is presented in full before any of them exists, and the whole split is approved once. A
 split approved child by child is a split nobody rebalanced.
+
+The block of decisions names the acceptance criteria of every item involved, the parent included.
+They are what is being agreed; a draft that lost them is otherwise approvable without anyone
+noticing.
 
 ## 8. Write
 
