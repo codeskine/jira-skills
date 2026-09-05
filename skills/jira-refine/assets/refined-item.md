@@ -7,6 +7,12 @@ rather than left blank — are in [reading a template](../../shared/references/t
 This template **adds to** what the item already holds; it does not replace it. Whatever the item
 carried from the intent that created it stays, including the original wording of a request.
 
+One thing does not stay: the statement that the item is **raw and awaiting refinement**, where
+intake wrote one. That statement is the declaration that made an incomplete item admissible, and
+this intent is what discharges it. Left in place beside acceptance criteria it contradicts them,
+and it tells anyone planning the work — and `jira-plan`, which flags what is not ready — that the
+item is not ready when it now is.
+
 ---
 
 ## Acceptance criteria
