@@ -122,38 +122,38 @@ l'artefatto o il report che produce.
 
 **Setup** — Scopri com'è davvero configurato il progetto Jira e registra il project profile che ogni altra skill legge.
 
-| Skill       | Cosa fa                                                                                                                                                                                               | Pagina                               |
-| ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
-| `jira-init` | Jira project discovery. Use when the user sets up this plugin on a repository, asks how their Jira project is configured, or when another skill reports that the project profile is missing or stale. | [leggi](docs/skills/jira-init.it.md) |
+| Skill       | Cosa fa                                                                                                                                                                                                                                                                                                        | Pagina                               |
+| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
+| `jira-init` | Legge com'è configurato davvero il tuo progetto Jira — i work type e come si annidano, gli status, i campi obbligatori alla creazione, le board con il loro sprint attivo, le fix version — e scrive quello che ha trovato in `.jira/project-profile.md`, il file che ogni altra skill legge come primo passo. | [leggi](docs/skills/jira-init.it.md) |
 
 **Redazione** — Trasforma una richiesta, un difetto o un rischio tecnico in un work item Jira fatto bene.
 
-| Skill           | Cosa fa                                                                                                                                                                                                                                                            | Pagina                                   |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------- |
-| `jira-capture`  | Jira intake author. Use when a request arrives from outside the team — an email, a chat message, a note taken during a call — and has to be recorded on Jira before anyone has understood it, without losing the wording it arrived in.                            | [leggi](docs/skills/jira-capture.it.md)  |
-| `jira-propose`  | Jira value proposal author. Use when someone wants an outcome recorded on Jira in a form that survives a prioritisation discussion — the value sought, who benefits, how success will be known.                                                                    | [leggi](docs/skills/jira-propose.it.md)  |
-| `jira-diagnose` | Jira defect author. Use when the user reports that something is broken, behaves unexpectedly, or fails — and it has to reach Jira in a form someone who was not there can reproduce.                                                                               | [leggi](docs/skills/jira-diagnose.it.md) |
-| `jira-assess`   | Jira technical debt and risk author. Use when the user wants to record something that works today but will cost the team later — a shortcut taken deliberately, a dependency going stale, a design that no longer fits, an arrangement only two people understand. | [leggi](docs/skills/jira-assess.it.md)   |
+| Skill           | Cosa fa                                                                                                                                                                                                        | Pagina                                   |
+| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| `jira-capture`  | Registra una richiesta arrivata da fuori il team — una email, un messaggio in chat, un appunto preso durante una riunione — con le parole con cui è arrivata, prima che qualcuno abbia capito cosa significhi. | [leggi](docs/skills/jira-capture.it.md)  |
+| `jira-propose`  | Mette agli atti un risultato che qualcuno vuole ottenere, in una forma che sopravvive a una discussione sulle priorità.                                                                                        | [leggi](docs/skills/jira-propose.it.md)  |
+| `jira-diagnose` | Trasforma qualcosa che hai visto rompersi in una segnalazione che chi non era presente riesce a riprodurre.                                                                                                    | [leggi](docs/skills/jira-diagnose.it.md) |
+| `jira-assess`   | Registra qualcosa che oggi funziona e che costerà al team più avanti — una scorciatoia presa consapevolmente, una dipendenza che invecchia, un design che non calza più, un assetto che conoscono solo in due. | [leggi](docs/skills/jira-assess.it.md)   |
 
 **Refinement** — Arricchisci un work item e scomponilo in figli completi.
 
-| Skill         | Cosa fa                                                                                                                                                                                                                                            | Pagina                                 |
-| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
-| `jira-refine` | Jira refinement author. Use when an existing Jira work item has to become something a team can pick up — acceptance criteria agreed, scope small enough to finish, dependencies linked — or when it is too large and must be broken into children. | [leggi](docs/skills/jira-refine.it.md) |
+| Skill         | Cosa fa                                                                                                                                                                                                                                                                                        | Pagina                                 |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
+| `jira-refine` | Prende un work item che esiste già e lo porta al punto in cui un team può prenderlo in carico: criteri di accettazione formulati come esiti che qualcuno può verificare, dipendenze registrate come link ai work item interessati, e un confine che dice cosa è stato deliberatamente escluso. | [leggi](docs/skills/jira-refine.it.md) |
 
 **Pianificazione** — Decidi quando il lavoro viene affrontato e cosa esce insieme.
 
-| Skill          | Cosa fa                                                                                                                                                                       | Pagina                                  |
-| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
-| `jira-plan`    | Jira sprint planner. Use when the user asks what is in the current sprint, wants to fill or empty one, or wants to close one and see what was delivered.                      | [leggi](docs/skills/jira-plan.it.md)    |
-| `jira-release` | Jira fix version manager. Use when the user asks what a Jira fix version contains, wants to assign work to one, or wants to know what is still unfinished before shipping it. | [leggi](docs/skills/jira-release.it.md) |
+| Skill          | Cosa fa                                                     | Pagina                                  |
+| -------------- | ----------------------------------------------------------- | --------------------------------------- |
+| `jira-plan`    | Decide **quando** si affronta il lavoro.                    | [leggi](docs/skills/jira-plan.it.md)    |
+| `jira-release` | Si occupa della fix version: cosa viene rilasciato insieme. | [leggi](docs/skills/jira-release.it.md) |
 
 **Avanzamento** — Fai avanzare un work item nel suo Jira Workflow e leggi a che punto sta.
 
-| Skill          | Cosa fa                                                                                                                                                                                                                                                      | Pagina                                  |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------- |
-| `jira-advance` | Jira transition runner. Use when the user wants a Jira work item to reach its next status — start it, hand it over, put it back, close it — without opening Jira.                                                                                            | [leggi](docs/skills/jira-advance.it.md) |
-| `jira-inspect` | Jira read-only reporter. Use when the user asks where something stands on Jira — how a parent and its children are progressing, what a sprint has left, what is blocked, what a fix version currently contains — and expects an answer rather than a change. | [leggi](docs/skills/jira-inspect.it.md) |
+| Skill          | Cosa fa                                                                                                                                                                                       | Pagina                                  |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
+| `jira-advance` | Porta un work item a un altro status.                                                                                                                                                         | [leggi](docs/skills/jira-advance.it.md) |
+| `jira-inspect` | Risponde a una domanda sullo stato senza cambiarne nessuno. Come procedono un parent e i suoi figli, cosa resta nello sprint, cos'è bloccato e da cosa, cosa contiene adesso una fix version. | [leggi](docs/skills/jira-inspect.it.md) |
 
 <!-- skills:end -->
 

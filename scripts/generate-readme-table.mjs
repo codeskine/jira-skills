@@ -38,6 +38,27 @@ const summarise = (description) =>
     .trim();
 
 /**
+ * The Italian column cannot come from the frontmatter: a skill's description is English by design,
+ * because it is what the model reads when it chooses a skill, and it is not a text to translate.
+ * The Italian page's own opening paragraph is the Italian voice of that skill, so the summary is
+ * taken from there — one source, already maintained, already checked by check-docs.mjs.
+ */
+const summariseItalian = (path) => {
+  const text = readFileSync(path, "utf8");
+  const section = text.split("\n## Cosa fa\n")[1];
+  if (section === undefined) {
+    errors.push(`${path} has no "## Cosa fa" section to summarise`);
+    return "";
+  }
+  const paragraph = section.trim().split(/\n\s*\n/)[0].replace(/\s+/g, " ").trim();
+  // One sentence, unless it is short enough that the next one still fits a table cell. A cell
+  // longer than the English column's two-sentence summary stops being an index entry.
+  const [first, second] = paragraph.split(/(?<=\.)\s+/);
+  const pair = second === undefined ? first : `${first} ${second}`;
+  return (first.length < 90 && pair.length < 200 ? pair : first).trim();
+};
+
+/**
  * The channels a skill reaches Jira through, read from what it is actually allowed to call.
  * One spelling, generated, because three documents spelled it three ways when it was prose.
  */
@@ -109,9 +130,9 @@ const skillTable = (lang) => {
       }
       const page = lang === "it" ? `docs/skills/${name}.it.md` : `docs/skills/${name}.md`;
       const link = lang === "it" ? "leggi" : "read";
-      rows.push(
-        `| \`${frontmatter.name}\` | ${summarise(frontmatter.description)} | [${link}](${page}) |`,
-      );
+      const what =
+        lang === "it" ? summariseItalian(page) : summarise(frontmatter.description);
+      rows.push(`| \`${frontmatter.name}\` | ${what} | [${link}](${page}) |`);
     }
     rows.push("");
   }
