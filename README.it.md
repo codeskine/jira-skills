@@ -150,10 +150,10 @@ l'artefatto o il report che produce.
 
 **Avanzamento** — Fai avanzare un work item nel suo Jira Workflow e leggi a che punto sta.
 
-| Skill          | Cosa fa                                                                                                                                                                                       | Pagina                                  |
-| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
-| `jira-advance` | Porta un work item a un altro status.                                                                                                                                                         | [leggi](docs/skills/jira-advance.it.md) |
-| `jira-inspect` | Risponde a una domanda sullo stato senza cambiarne nessuno. Come procedono un parent e i suoi figli, cosa resta nello sprint, cos'è bloccato e da cosa, cosa contiene adesso una fix version. | [leggi](docs/skills/jira-inspect.it.md) |
+| Skill          | Cosa fa                                                     | Pagina                                  |
+| -------------- | ----------------------------------------------------------- | --------------------------------------- |
+| `jira-advance` | Porta un work item a un altro status.                       | [leggi](docs/skills/jira-advance.it.md) |
+| `jira-inspect` | Risponde a una domanda sullo stato senza cambiarne nessuno. | [leggi](docs/skills/jira-inspect.it.md) |
 
 <!-- skills:end -->
 
