@@ -213,7 +213,9 @@ alle scritture riuscite si leggerebbe come se giovedì fosse a posto.
 - **Rilasciare o archiviare una fix version**, con nessuno dei mezzi che ha, e non sostituisce
   quel gesto con una transition o con una label. Nessuno dei due channel lo espone: si fa su Jira.
 - **Creare una fix version.** Stesso buco e stessa risposta: creala su Jira, poi torna qui e
-  assegnale del lavoro.
+  assegnale del lavoro. Tornare non richiede di rifare niente: la skill elenca le fix version dal
+  progetto e non dal project profile, quindi quella appena creata c'è. È il project profile a
+  restare indietro, e te lo dice lasciando a te quando rifarlo.
 - **Pianificare un work item in uno sprint** perché appartiene a una fix version. Quello è
   [`jira-plan`](jira-plan.it.md), ed è una decisione che nessuno ha ancora preso.
 - **Eseguire una transition.** Assegnare è la modifica di un campo; portare un work item allo

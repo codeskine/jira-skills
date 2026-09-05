@@ -208,7 +208,9 @@ would read as though Thursday were taken care of.
 - **Release or archive a fix version**, by any means it has, and it will not stand in for the act
   with a transition or a label. Neither channel exposes it; you do it in Jira.
 - **Create a fix version.** The same gap, and the same answer: create it in Jira, then come back
-  and assign to it.
+  and assign to it. Coming back needs nothing re-run — the skill lists the fix versions from the
+  project rather than from the profile, so the one you just made is there. The profile is the
+  thing that is now behind, and it will say so and leave the re-run to you.
 - **Plan an item into a sprint** because it belongs to a fix version. That is
   [`jira-plan`](jira-plan.md), and it is a decision nobody made yet.
 - **Transition anything.** Assigning is an edit of a field; moving a work item to its next status

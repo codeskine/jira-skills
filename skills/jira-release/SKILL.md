@@ -34,6 +34,13 @@ them, ask them to do it in Jira, and continue on the other side. This skill show
 version contains on the way to a change and stops there; it never approximates the release with a
 status change or a label.
 
+**Continuing is literal.** § 3 reads the fix versions from the project rather than from the
+profile, so one created while the user was away is there and can be assigned to at once — nothing
+has to be re-run first. What is now behind is the profile, and that is the state
+[discovery](../shared/references/discovery.md) § Staleness names exactly: a fix version the
+profile does not list. Say so, and leave the run to them. The work in hand does not need it; the
+next skill to read the profile does.
+
 ## 3. Read the fix versions as they are
 
 List them from the project, with their state, rather than from memory of what was planned. A fix
