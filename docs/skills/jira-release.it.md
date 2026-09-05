@@ -15,7 +15,8 @@
 ## Cosa fa
 
 Si occupa della fix version: cosa viene rilasciato insieme. Elenca le fix version che il progetto
-ha davvero, con il loro stato, assegna work item a una di esse, e mostra cosa ne contiene una e
+ha davvero, con il loro stato, assegna work item a una di esse e ce li toglie, e mostra cosa ne
+contiene una e
 quanto di quello è ancora aperto come base di un cambiamento che approvi. Due cose non le può fare — creare una fix version, rilasciarla o
 archiviarla — e le dichiara prima che tu le chieda, restituendole a te su Jira.
 
@@ -29,6 +30,7 @@ Si attiva quando la domanda è cosa viene rilasciato insieme.
 | Se dici qualcosa come                              | La skill è                           |
 | -------------------------------------------------- | ------------------------------------ |
 | «assegna questi due alla 2.4»                      | `jira-release`                       |
+| «togli PROJ-88 dalla 2.4»                          | `jira-release`                       |
 | «quali fix version ha questo progetto?»            | `jira-release`                       |
 | «cosa c'è nella 2.4? mettici anche questi due»     | `jira-release`                       |
 | «cosa c'è davvero nella 2.4?»                      | [`jira-inspect`](jira-inspect.it.md) |

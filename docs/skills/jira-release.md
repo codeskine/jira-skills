@@ -15,7 +15,8 @@
 ## What it does
 
 Owns the fix version — what ships together. It lists the fix versions the project actually has
-with their state, assigns work items to one, and shows what one of them contains and which part
+with their state, assigns work items to one and takes them off again, and shows what one contains
+and which part
 of that is unfinished as the ground for a change you approve. Two things it cannot do at all — create a fix version, and release or
 archive one — it names before you ask and hands back to you in Jira.
 
@@ -29,6 +30,7 @@ It fires when the question is what ships together.
 | Say something like                           | And this is the skill you get     |
 | -------------------------------------------- | --------------------------------- |
 | "assign these two to 2.4"                    | `jira-release`                    |
+| "take PROJ-88 out of 2.4"                    | `jira-release`                    |
 | "which fix versions does this project have?" | `jira-release`                    |
 | "what's in 2.4? put these two in it as well" | `jira-release`                    |
 | "what is actually in 2.4?"                   | [`jira-inspect`](jira-inspect.md) |

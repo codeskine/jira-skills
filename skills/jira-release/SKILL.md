@@ -1,6 +1,6 @@
 ---
 name: jira-release
-description: "Jira fix version manager. Use when the user asks to assign work to a Jira fix version, or for the list of fix versions the project has, or whether one of them has been released or archived. Treats what ships together as a separate question from when work is tackled. A request that reads a fix version and then changes it is one operation, and belongs here. Not for what is inside a fix version rather than the version itself — what one holds, or what of it is unfinished — read without changing anything (→ See codeskine/jira-skills@jira-inspect), for planning a sprint (→ See codeskine/jira-skills@jira-plan), or for making an item ready (→ See codeskine/jira-skills@jira-refine)."
+description: "Jira fix version manager. Use when the user asks to assign work to a Jira fix version or take it off one, or for the list of fix versions the project has, or whether one of them has been released or archived. Treats what ships together as a separate question from when work is tackled. A request that reads a fix version and then changes it is one operation, and belongs here. Not for what is inside a fix version rather than the version itself — what one holds, or what of it is unfinished — read without changing anything (→ See codeskine/jira-skills@jira-inspect), for planning a sprint (→ See codeskine/jira-skills@jira-plan), or for making an item ready (→ See codeskine/jira-skills@jira-refine)."
 user-invocable: true
 license: MIT
 compatibility: Designed for Claude Code. Requires the Atlassian MCP server configured as "atlassian". Listing fix versions needs the jira CLI authenticated; assigning work to one does not.
@@ -60,7 +60,12 @@ an assignment the user then approves.
 
 ## 5. Assign work to a fix version
 
-The fix version is a field on the work item, so assigning is an edit, not a transition.
+The fix version is a field on the work item, so assigning is an edit, not a transition. The way off
+is the way on: moving an item to a different fix version sets the field, taking it off one clears
+it, and neither is a release nor needs the Agile channel.
+
+Say which of the two is happening. An item that leaves 4.10 for 4.11 and one that leaves 4.10 for
+nothing are different decisions, and only one of them has somewhere to be.
 
 Assign independently of any sprint. An item can belong to a sprint and a fix version at once, and
 the two answer different questions: the sprint says when it is tackled, the fix version says what
@@ -78,7 +83,8 @@ the unfinished items after they do it.
 ## 7. Present and confirm
 
 Follow [the draft gate](../shared/references/draft-gate.md). What this intent adds: the gate lists
-every item whose fix version will change, and the one it will change to.
+every item whose fix version will change, and the one it will change to — or, where it is being
+taken off one, that it will end up assigned to none.
 
 ## 8. Write
 
