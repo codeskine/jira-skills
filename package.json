@@ -33,7 +33,8 @@
   ],
   "scripts": {
     "test": "node --test scripts/*.test.mjs",
-    "prepack": "node scripts/check-package.mjs"
+    "prepack": "node scripts/check-package.mjs",
+    "readme": "node scripts/generate-readme-table.mjs"
   },
   "repository": {
     "type": "git",
@@ -42,5 +43,8 @@
   "homepage": "https://github.com/codeskine/jira-skills#readme",
   "bugs": {
     "url": "https://github.com/codeskine/jira-skills/issues"
+  },
+  "devDependencies": {
+    "prettier": "3.9.6"
   }
 }
