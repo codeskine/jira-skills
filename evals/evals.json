@@ -441,6 +441,49 @@
       "setup": "A profile exists and records that fix versions were not read, because the Agile channel was not reachable.",
       "expect": "The skill says the list could not be read, names the remedy, and asks for the version name instead of offering a choice — then assigns through the MCP server. It does not declare the operation unavailable: listing and assigning travel on different channels.",
       "why": "The degradation is partial. Reporting the whole operation as dead would be as wrong as pretending the list was read."
+    },
+    {
+      "id": "hand-1",
+      "category": "handover",
+      "prompt": "KAN-12 is too big to finish in one go, and it needs to be in the current sprint.",
+      "expect_sequence": [
+        "jira-refine",
+        "jira-plan"
+      ],
+      "expect": "Refinement runs first, because the sprint holds what the split produces. Its gate names the sprint as the intent this artifact does not satisfy. After the split is written, planning is entered rather than the request ending at the keys. Two gates, and the first does not approve the second.",
+      "why": "The plain composite. Each description hands the other half away — refine says \"not for deciding when the work is tackled\", plan says \"not for making an item ready\" — and before this contract a skill that fired on the first intent had nothing telling it to continue."
+    },
+    {
+      "id": "hand-2",
+      "category": "handover",
+      "prompt": "How is KAN-4 doing? And if it's ready, put it in the sprint.",
+      "expect_sequence": [
+        "jira-inspect",
+        "jira-plan"
+      ],
+      "expect": "The question is answered first, from a search. The condition the user stated then decides, and the answer says which way it fell. Planning regardless of what the read found is a failure; so is planning without ever answering the question asked first.",
+      "why": "The harder shape: the read is a precondition on the write, not a separate task. jira-inspect never writes and must not offer to, but naming what is outstanding and handing over is not an offer — the skill that owns it brings its own gate."
+    },
+    {
+      "id": "hand-3",
+      "category": "handover",
+      "prompt": "PROJ-88 is way too large — break it up and get it into next sprint.",
+      "expect_sequence": [
+        "jira-refine",
+        "jira-plan"
+      ],
+      "expect": "After the split, \"it\" no longer names one item. The second gate asks which of the parent and the children are to be planned, and takes the answer from the hierarchy the profile records rather than from a default.",
+      "why": "The consequence the issue raised and nobody had addressed: decomposition changes the subject of the sentence that follows it. Distinct from hand-1, where the user named the item before it had children."
+    },
+    {
+      "id": "hand-4",
+      "category": "handover",
+      "prompt": "KAN-12 is too big to finish in one go.",
+      "expect_sequence": [
+        "jira-refine"
+      ],
+      "expect": "Refinement runs and stops. No sprint is mentioned, no successor is announced, and no second gate appears.",
+      "why": "The guard against the contract firing on its own. A rule that makes every skill look for a successor invents a second gate nobody asked for, and fixtures that pinned only the composite cases would pass against exactly that. hand-1 with one variable removed."
     }
   ]
 }

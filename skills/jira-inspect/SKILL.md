@@ -25,7 +25,9 @@ cannot express this and the boundary is held here instead:
 - no operation that creates, edits, transitions, links or assigns;
 - no write offered as a next step at the end of an answer, because an offer accepted in the same
   breath as a question is a write nobody gated;
-- when the user asks for a change, name the skill that owns it and stop.
+- when the user asks for a change, name the skill that owns it and hand over. The stop is about
+  what this skill writes — nothing — not about where the request ends: a change asked for in the
+  same breath as the question is still asked for, and the skill that owns it has its own gate.
 
 The Agile channel is not declared at all. Boards and their sprints are named in the profile, and
 membership of a sprint is a searchable field, so every question below is answered by search and
