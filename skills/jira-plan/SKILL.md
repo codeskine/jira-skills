@@ -52,9 +52,14 @@ Never present the gap as a failure: their own path around it takes a minute.
 ## 4. Filling a sprint
 
 Gather the items the user wants planned and check each against
-[the criteria for a refined item](../shared/references/quality-standard.md). One that does not
-meet them is flagged **before** it is planned, with what it is missing. The user may plan it anyway; that is a decision, and it should be one they take
-knowingly rather than one the tool takes for them.
+[the universal criteria](../shared/references/quality-standard.md), plus whatever the intent that
+authored it adds. A sprint holds work of every intent — a defect, a debt record, a proposal — and
+each was written to its own bar; measuring all of them against the criteria for a refined item
+asks a defect report for acceptance criteria it was never meant to carry.
+
+One that does not meet them is flagged **before** it is planned, with what it is missing. The user
+may plan it anyway; that is a decision, and it should be one they take knowingly rather than one
+the tool takes for them.
 
 Present the whole set, then move it in one approved operation. Ten confirmations for one decision
 is how planning stops being done through the tool at all.

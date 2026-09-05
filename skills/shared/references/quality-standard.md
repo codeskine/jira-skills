@@ -16,7 +16,11 @@ Every artifact, whatever the intent:
    version — the words Jira itself uses. Tracker-generic synonyms (ticket, issue, milestone,
    epic link, workflow state) encode a different model and are defects, not stylistic choices.
 5. **The language is the user's.** Structure comes from the template, language from the
-   conversation. Neither is hard-coded.
+   conversation. Neither is hard-coded. The seven names in criterion 4 are the exception, and
+   they are not translated: they name objects Jira owns, and their _values_ are already carried
+   across untouched — a work type or a status is recorded exactly as the project reports it,
+   whatever language the artifact is written in. An Italian artifact says _il work item_ and _la
+   fix version_ for the same reason it says _In Progress_ rather than a translation of it.
 6. **No technology stack is assumed.** An example may show code; it must not presume which
    language the project is written in.
 7. **Required fields are filled or flagged.** If the project marks a field required for this
