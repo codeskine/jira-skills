@@ -85,6 +85,30 @@ Every skill, as its first step:
 3. If the operation it needs is listed as unsupported, it says so before asking the user
    anything, and offers the manual path.
 
+## Resolving a container the user named
+
+A sprint, a fix version and a status are all named, and a name on its own does not say which it
+is. `2.4` is as plausible a sprint as a fix version. `To Do` is a status in one project and a
+board's leftmost column in another. `Backlog` is a placement, and in some schemes also a status.
+
+Routing cannot settle this: a description is matched against a request before any profile has been
+read, so no wording can carry knowledge that lives in the profile. The skill settles it, at its
+first step, with the profile already in hand.
+
+1. **Resolve the name against the profile** — its sprints, its fix versions, its statuses.
+2. **One kind matches** → proceed. The ordinary case, and it costs nothing.
+3. **More than one kind matches** → ask which was meant, naming both and what each would do.
+   Never prefer the kind this skill happens to own: a skill resolving an ambiguity in its own
+   favour is the failure this rule exists to prevent.
+4. **No kind matches** → say so and name what the profile does hold. A name the project does not
+   carry is far more often a typo or a stale profile than a thing to go and create.
+5. **A container of a kind no skill owns** — a board, most often → say that plainly. A board is a
+   filter over work items, and nothing either channel exposes takes a work item off one. It is a
+   declared gap, not a request to reinterpret as the nearest thing that is possible.
+
+Resolve before acting, never after. "Which 2.4 did you mean" is cheap before a write and expensive
+once one has happened.
+
 ## Choosing a work type
 
 Every authoring skill reaches this point and does the same thing with it.

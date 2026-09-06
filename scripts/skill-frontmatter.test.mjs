@@ -9,7 +9,11 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 
-import { parseFrontmatter, validateSkill } from "./skill-frontmatter.mjs";
+import {
+  parseFrontmatter,
+  validateCommand,
+  validateSkill,
+} from "./skill-frontmatter.mjs";
 
 // A skill that passes every rule. Each case below breaks exactly one thing in it, so a failure
 // names the rule that broke rather than everything that happens to be wrong.
@@ -370,4 +374,70 @@ test("errors come back in reading order, so the first names the first problem", 
     ),
     ["name is missing", "license is missing"],
   );
+});
+
+// --- commands ---------------------------------------------------------------------------
+//
+// A command that reads a channel has to declare it. `/jira-doctor` did not, so it verified the
+// MCP server by running `claude mcp list` in a sibling process — which does not share the
+// session's connection state, reported a server pending approval to a session that was using it,
+// and stopped six of fourteen behavioural runs on a channel that was in fact connected. The
+// declaration is the whole difference between probing the session and interrogating a stranger,
+// and nothing would have noticed it missing.
+
+const COMMAND = `---
+description: "Jira environment health check. Run before any Jira skill."
+allowed-tools: mcp__atlassian Bash(claude:*) Read
+---
+
+Call a read-only tool from the server: \`mcp__atlassian__atlassianUserInfo\`.
+`;
+
+test("a command that calls an MCP server's tool and declares it passes", () => {
+  assert.deepEqual(validateCommand("jira-doctor.md", COMMAND), []);
+});
+
+test("a command calling an MCP tool it does not declare is caught", () => {
+  const undeclared = COMMAND.replace(
+    "allowed-tools: mcp__atlassian ",
+    "allowed-tools: ",
+  );
+  assert.deepEqual(validateCommand("jira-doctor.md", undeclared), [
+    'body calls mcp__atlassian__* but allowed-tools does not declare "mcp__atlassian"',
+  ]);
+});
+
+test("a server called many times is named once", () => {
+  const repeated = COMMAND.replace(
+    "allowed-tools: mcp__atlassian ",
+    "allowed-tools: ",
+  ).replace(
+    "`mcp__atlassian__atlassianUserInfo`.",
+    "`mcp__atlassian__atlassianUserInfo`, or `mcp__atlassian__getJiraIssue`.",
+  );
+  assert.equal(validateCommand("jira-doctor.md", repeated).length, 1);
+});
+
+test("declaring a server the body never calls is not an error", () => {
+  const unused = COMMAND.replace(
+    "Call a read-only tool from the server: `mcp__atlassian__atlassianUserInfo`.",
+    "This command reads no channel.",
+  );
+  assert.deepEqual(validateCommand("jira-doctor.md", unused), []);
+});
+
+test("a command with no frontmatter is reported as such, not parsed", () => {
+  assert.deepEqual(validateCommand("x.md", "# x\n"), [
+    "has no YAML frontmatter",
+  ]);
+});
+
+test("a command missing allowed-tools is reported before its body is scanned", () => {
+  const bare = COMMAND.replace(
+    "allowed-tools: mcp__atlassian Bash(claude:*) Read\n",
+    "",
+  );
+  assert.deepEqual(validateCommand("jira-doctor.md", bare), [
+    "allowed-tools is missing",
+  ]);
 });

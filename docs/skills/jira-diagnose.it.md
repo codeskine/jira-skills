@@ -40,15 +40,24 @@ _«Continua a dare problemi»_ sta bene in tutte e due le descrizioni, quindi la
 presto se oggi qualcosa fallisce davvero; se non fallisce niente, lo dice e si ferma invece di
 archiviare come difetto quello che è un rischio.
 
-Anche il confine con [`jira-capture`](jira-capture.it.md) lo decide il materiale. Un guasto
-riportato di seconda mano che porta i passi e l'ambiente è la segnalazione di un difetto e sta
-qui, chiunque l'abbia inoltrato. Uno che non porta niente su cui qualcuno possa agire per vederlo
-accadere è intake: nessuno dei presenti può rispondere a quello che questa skill sta per chiedere,
-e capture lo registra con le parole con cui è arrivato. Quella soglia non è una checklist — una
-email che nomina il programma in cui si è rotto e la versione che usano, senza passi e senza
-l'errore, resta intake — e non è nemmeno una
-prova di completezza: il materiale parziale sta qui, e i suoi buchi sono quello per cui esistono
-le domande più sotto.
+Anche il confine con [`jira-capture`](jira-capture.it.md) lo decide il materiale, e lo decide
+**dentro questa skill** invece che prima. Un guasto riportato di seconda mano che porta i passi o
+l'errore è la segnalazione di un difetto e sta qui, chiunque l'abbia inoltrato. Uno che non porta
+niente su cui qualcuno possa agire per vederlo accadere è intake: nessuno dei presenti può
+rispondere a quello che questa skill sta per chiedere. Quindi `jira-diagnose` può benissimo essere
+la skill che parte — e il suo terzo passo legge quello che è arrivato, dice cosa manca e passa la
+richiesta a `jira-capture` prima di rivolgere una sola domanda a chi l'ha inoltrata.
+
+È voluto, ed è una correzione. La soglia era enunciata come un rifiuto, dando per scontato che una
+skill che declina una richiesta basti a instradarla altrove. Non basta: il meccanismo che sceglie
+una skill confronta le tue parole con ogni descrizione presa per sé, e non ne pesa una contro la
+vicina. Una soglia che funziona solo se due descrizioni vengono lette affiancate deve quindi vivere
+dove la skill può applicarla — dopo che è scattata.
+
+Quella soglia non è una checklist: una email che nomina il programma in cui si è rotto e la
+versione che usano, senza passi e senza l'errore, resta intake. E non è nemmeno una prova di
+completezza — il materiale parziale sta qui, e i suoi buchi sono quello per cui esistono le domande
+più sotto.
 
 ## Come si usa
 
@@ -60,24 +69,32 @@ ferma e ti dice di eseguire `jira-init`: non tira a indovinare. Cosa contiene il
 — il file che registra l'esito della discovery, cioè la lettura della configurazione reale del
 progetto — sta nel [processo di sviluppo](../development-process.it.md).
 
-**2 · Fa quattro domande, una alla volta.** Cosa hai fatto, cosa ti aspettavi, cosa è successo
+**2 · Se il guasto è riportato di seconda mano, controlla il materiale prima di chiederti
+qualsiasi cosa.** Hai inoltrato una email; il guasto non l'hai visto tu. Quindi legge quello che è
+arrivato invece di farti domande a riguardo. Se ci sono i passi, o un errore copiato esattamente,
+prosegue qui. Se non c'è né l'uno né l'altro, dice cosa manca e passa la richiesta a
+[`jira-capture`](jira-capture.it.md) — ed è il senso del controllo: farsi chiedere passi di
+riproduzione che non hai mai avuto è un giro a vuoto attraverso qualcuno che non è nella stanza.
+Riportato in prima persona non si applica: del materiale puoi rispondere tu.
+
+**3 · Fa quattro domande, una alla volta.** Cosa hai fatto, cosa ti aspettavi, cosa è successo
 invece, e dove. Sono separate apposta: se le ricevono tutte insieme, le persone rispondono a
 quelle interessanti e saltano le altre.
 
-**3 · Vuole l'errore verbatim.** Copiato, non ribattuto e non ricordato. Una parafrasi non si può
+**4 · Vuole l'errore verbatim.** Copiato, non ribattuto e non ricordato. Una parafrasi non si può
 cercare, e cercarla è la prima cosa che farà chi prende in carico il lavoro. Se non è stato
 catturato niente, la segnalazione dice che non è stato catturato niente: non ricostruisce mai
 quello che il messaggio probabilmente diceva.
 
-**4 · Chiede chi è colpito e con che frequenza.** Sono le due cose che decidono l'urgenza, e
+**5 · Chiede chi è colpito e con che frequenza.** Sono le due cose che decidono l'urgenza, e
 chiederle adesso evita che il triage diventi una seconda conversazione.
 
-**5 · Sceglie un work type fra quelli del tuo progetto**, non da un elenco che si porta dietro.
+**6 · Sceglie un work type fra quelli del tuo progetto**, non da un elenco che si porta dietro.
 Aspettati che un work type per i difetti non ci sia: un progetto creato dallo schema predefinito
 attuale non ne ha. In quel caso la skill lo archivia sotto un altro work type e l'artefatto dice
 di quale intento si tratta, così la distinzione non si perde.
 
-**6 · Poi il draft gate**, il cancello che precede ogni scrittura su Jira. La segnalazione
+**7 · Poi il draft gate**, il cancello che precede ogni scrittura su Jira. La segnalazione
 completa compare in chat con le decisioni che porta con sé — titolo, work type, parent, e ogni
 campo che il progetto marca obbligatorio e che la bozza ha lasciato vuoto. Approvi, oppure chiedi
 modifiche e la rivedi. Questa skill aggiunge una cosa al gate: se i passi non sono stati

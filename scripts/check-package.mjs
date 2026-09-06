@@ -5,9 +5,10 @@
 // everything that must hold before publishing is asserted here.
 
 import { readFileSync, readdirSync, existsSync } from "node:fs";
+import { execFileSync } from "node:child_process";
 
 import { validateManifestSkills } from "./plugin-manifest.mjs";
-import { validateSkill } from "./skill-frontmatter.mjs";
+import { validateCommand, validateSkill } from "./skill-frontmatter.mjs";
 
 const read = (p) => JSON.parse(readFileSync(p, "utf8"));
 const errors = [];
@@ -57,6 +58,37 @@ for (const name of present) {
   if (!existsSync(path)) continue;
   for (const error of validateSkill(name, readFileSync(path, "utf8")))
     errors.push(`${path}: ${error}`);
+}
+
+// Commands ship alongside the skills and carry frontmatter of their own. Nothing validated it
+// until a command was found reading a channel it had never declared.
+const commands = existsSync("commands")
+  ? readdirSync("commands")
+      .filter((file) => file.endsWith(".md"))
+      .sort()
+  : [];
+
+for (const file of commands) {
+  const path = `commands/${file}`;
+  for (const error of validateCommand(file, readFileSync(path, "utf8")))
+    errors.push(`${path}: ${error}`);
+}
+
+// What the plugin ships is what the repository tracks, and a `.mcp.json` at the plugin root is
+// installed with it — registered as `plugin:<plugin>:<server>`, an id no skill declares and none
+// can reach, offering to be authenticated for nothing. Contributors keep an untracked one; this
+// catches it being committed again, which `.gitignore` alone would not survive a forced add.
+try {
+  const tracked = execFileSync("git", ["ls-files", "--", ".mcp.json"], {
+    encoding: "utf8",
+    stdio: ["ignore", "pipe", "ignore"],
+  }).trim();
+  if (tracked !== "")
+    errors.push(
+      ".mcp.json is tracked; it ships with the plugin under an id no skill can reach",
+    );
+} catch {
+  // No git here — a packed tarball, most likely. The question cannot be asked, so it is not.
 }
 
 const grouped = existsSync("skills.sh.json")

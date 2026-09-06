@@ -24,13 +24,14 @@
     },
     {
       "id": "sel-capture-3",
-      "category": "selection",
+      "category": "handover",
       "prompt": "A customer emailed: the invoice export has been breaking for two weeks and Excel opens the CSV mangled. Put it on Jira.",
-      "expect_skill": "jira-capture",
-      "expect_not": [
-        "jira-diagnose"
+      "expect_sequence": [
+        "jira-diagnose",
+        "jira-capture"
       ],
-      "why": "Content is a fault and provenance is intake; both fit entirely. The email names a product and carries a symptom, and neither steps nor the error itself, so it does not carry what a defect report asks for and capture takes precedence. Naming Excel does not clear the floor: the floor names what clears it, and where it ran is not on that list. This is the hardest of the family — three replay rounds routed it here and each called it the weakest call in the set, because \"Excel opens the CSV mangled\" is an actual result that can be read as a gesture at a reproduction path. What the floor does not fix is the minimum that counts as steps. Paired with sel-diagnose-3, the same fault reported first-hand; with sel-diagnose-4, the same fault relayed but arriving complete; and with sel-capture-6, the same fault relayed with the environment named properly and still nothing to work from."
+      "expect": "What must hold is the outcome, not the route: what reaches Jira is a raw intake record, and nobody is asked for steps the person relaying this does not have. jira-capture firing first and alone satisfies it. So does jira-diagnose firing and establishing at its third step that the material cannot answer for itself, then handing over. Asking the QA questions of the person who forwarded the email is the failure, whichever skill does it.",
+      "why": "Was a selection fixture asserting expect_not jira-diagnose, and both ends of its pair failed that way in the run of 2026-09-06 — an exclusion written as plainly as prose gets, disregarded by the live mechanism. #83 settled that the floor cannot live in a description the router never weighs against its neighbour, and moved it inside the skill. That makes jira-diagnose firing legitimate and the old assertion wrong. Content is a fault and provenance is intake; the email names a product and carries a symptom, and neither steps nor the error itself. The hardest of the family: \"Excel opens the CSV mangled\" is an actual result readable as a gesture at a reproduction path, which is #81 and still open. Paired with sel-diagnose-4, the same fault relayed but arriving complete."
     },
     {
       "id": "sel-capture-4",
@@ -54,13 +55,14 @@
     },
     {
       "id": "sel-capture-6",
-      "category": "selection",
+      "category": "handover",
       "prompt": "A customer emailed: invoicing has been mangling the CSV for a fortnight. They're on 4.9, in the production tenant. Put it on Jira.",
-      "expect_skill": "jira-capture",
-      "expect_not": [
-        "jira-diagnose"
+      "expect_sequence": [
+        "jira-diagnose",
+        "jira-capture"
       ],
-      "why": "sel-capture-3 with one variable moved: the environment is named properly — what they run and where — and there are still no steps and nothing that would let anyone else see the fault happen. It is intake, which is what pins the floor's enumeration as illustration rather than a list of fields to tick. Read as a conjunction requiring both halves to fail, this one would have to be a defect report."
+      "expect": "As sel-capture-3: a raw intake record reaches Jira and nobody is interrogated for steps they never had, whether jira-capture fires alone or jira-diagnose hands over. Naming the version and the tenant must not be read as clearing the floor — the environment given precisely is still not something anyone can act on to see the fault happen.",
+      "why": "sel-capture-3 with one variable moved: the environment is named properly, what they run and where, and there are still no steps and nothing that would let anyone else see it. It pins the floor's enumeration as illustration rather than fields to tick. In the run of 2026-09-06 jira-diagnose fired and then asked the user for the steps the floor says are absent, which is the half that is still a failure under #83's resolution and the half this fixture now names."
     },
     {
       "id": "sel-propose-1",
@@ -163,7 +165,7 @@
       "expect_not": [
         "jira-capture"
       ],
-      "why": "Relayed from outside like sel-capture-3, but the material arrives carrying the steps, the environment and the actual result. Precedence turns on what the material lacks, never on who typed it, so a complete fault report routes as one. Guards the reading where capture claims everything that came in by email."
+      "why": "Relayed from outside like sel-capture-3, but the material arrives carrying the steps, the environment and the actual result. Precedence turns on what the material lacks, never on who typed it, so a complete fault report routes as one and no handover is owed. Since #83 moved the intake floor inside jira-diagnose, this fixture carries a second job and it is the sharper one: it is the guard on the new step. A skill that handed over whenever material arrived second-hand would satisfy sel-capture-3 and sel-capture-6 and fail here, which is what hand-4 does for the handover contract. Its expect_not on jira-capture is the assertion that matters now."
     },
     {
       "id": "sel-assess-1",
@@ -614,6 +616,86 @@
       ],
       "expect": "Refinement runs and stops. No sprint is mentioned, no successor is announced, and no second gate appears.",
       "why": "The guard against the contract firing on its own. A rule that makes every skill look for a successor invents a second gate nobody asked for, and fixtures that pinned only the composite cases would pass against exactly that. hand-1 with one variable removed."
+    },
+    {
+      "id": "order-14",
+      "category": "ordering",
+      "prompt": "/jira-doctor",
+      "setup": "The atlassian MCP server is live in this session: its tools are available and answer. `claude mcp list`, which runs as a separate process, would report the same server pending approval.",
+      "expect": "Step 1 reports the server reachable on the strength of a read-only call from that server coming back, and never consults the configuration listing. The listing's disagreement does not reach the report, because it was never read.",
+      "why": "The defect this replaces. The listing was the probe, it contradicted the session it ran in, and six of fourteen behavioural runs died on a channel that was in fact connected. Nothing static can assert which of the two was asked first."
+    },
+    {
+      "id": "order-15",
+      "category": "ordering",
+      "prompt": "/jira-doctor",
+      "setup": "No tool from the atlassian server answers in this session, and `claude mcp list` shows a row named exactly `atlassian`, connected.",
+      "expect": "The MCP check is reported as indeterminate rather than failed: both observations named, no cause asserted, and the cheapest thing to try offered as a suggestion. Steps 2 and 3 still run, and the report carries all three checks.",
+      "why": "A health check that halts on a state it cannot resolve costs the user the work it could have reported alongside. Step 2 already carried this discipline and Step 1 did not, which is why the halt was invisible."
+    },
+    {
+      "id": "sel-release-4",
+      "category": "selection",
+      "prompt": "Which fix versions does this project have?",
+      "expect_skill": "jira-release",
+      "expect_not": [
+        "jira-inspect"
+      ],
+      "why": "The bare listing, asked of nothing inside a fix version. jira-inspect's exclusion enumerated assigning to one and whether one has been released or archived, and forgot the list — so only its broad phrase reached this, which is the axis covering for a member somebody left out rather than catching a synonym. The enumeration now names it. jira-init is deliberately absent from expect_not: it claims the same question through discovery and neither description disclaims the other, which is #84 and undecided. Asserting it here would settle by fixture what nobody has settled by text."
+    },
+    {
+      "id": "order-16",
+      "category": "ordering",
+      "prompt": "Take ST-1 out of 2.4.",
+      "setup": "The profile lists a sprint named 2.4 and a fix version named 2.4. Nothing in the request says which.",
+      "expect": "Whichever skill fired asks which 2.4 was meant, naming both and what each removal would do, and writes nothing until it is told. It does not resolve the ambiguity toward the container it happens to own, and it does not pick the more common reading.",
+      "why": "Routing chose a skill before any profile was read, so it could not have known which kind 2.4 is. The skill can: it holds the profile by its first step. The failure this guards is a skill answering in its own favour, which looks like confidence and is a coin toss."
+    },
+    {
+      "id": "order-17",
+      "category": "ordering",
+      "prompt": "Take ST-1 off the board entirely.",
+      "setup": "A profile exists and lists the project's boards.",
+      "expect": "The skill says a board is a filter over work items and that neither channel exposes taking one off it — a declared gap, stated as such. It does not substitute the nearest possible operation: not a sprint removal, not a backlog placement, not a transition.",
+      "why": "The container named falls outside the set any skill owns. A keyword matcher sends this to jira-plan on the word board with false confidence, and the harm is not the routing but what happens next: a plausible neighbouring write, performed on a request nobody made. Pairs with order-16, which moves the other variable — there the kind is ambiguous, here it is clear and unowned."
+    },
+    {
+      "id": "order-18",
+      "category": "ordering",
+      "prompt": "Which fix versions does this project have?",
+      "setup": "A profile exists. jira-init fired rather than jira-release — neither description disclaims the other, so either is a plausible match.",
+      "expect": "The question is answered from the profile and nothing else happens. No whole-project sweep runs, and the profile is not rewritten. Where the answer belongs to fix versions as a subject rather than to the project's shape, the skill says so and hands over.",
+      "why": "The two skills reach the same question and neither disclaims the other, which the replay decided four times on a tiebreak it named as its own. #83 established that a boundary the router cannot see belongs inside the skill, so the fix is not a new exclusion: jira-init establishes the size of the question before sweeping. What made this worth fixing is asymmetric harm — jira-release answering a setup request is a missing profile, jira-init answering a one-line question is a versioned file the team shares, written by nobody's request."
+    },
+    {
+      "id": "order-19",
+      "category": "ordering",
+      "prompt": "I've just installed this on the repo — set it up against our Jira project.",
+      "setup": "No .jira/project-profile.md exists.",
+      "expect": "Discovery runs in full and the profile is presented for approval before it is written. The scope check does not fire: this request is the setup itself.",
+      "why": "The guard on order-18. A skill that answered narrowly whenever a fix version was mentioned would pass that fixture and fail this one, which is the same relationship sel-diagnose-4 has to the intake floor and hand-4 to the handover contract. Every step added to keep a skill from overreaching needs the twin that keeps it from underreaching."
+    },
+    {
+      "id": "hand-5",
+      "category": "handover",
+      "prompt": "What's in 1.0 so far? Anything not started, take it out of the current sprint.",
+      "expect_sequence": [
+        "jira-inspect",
+        "jira-plan"
+      ],
+      "expect": "The fix version is read and answered first — by the skill that owns reading what a fix version holds, not by the one that owns the version itself. The sprint removal is named at that gate as the intent this answer does not satisfy, and jira-plan is entered for it with a gate of its own. Reading the fix version and then emptying the sprint in one approval is the failure.",
+      "why": "A read of one container and a change to another. Both jira-plan and jira-release carry a formula making a read-then-change of the same container one operation, and read loosely those formulas collide head-on with no tiebreak. The anaphora is explicit — \"that same sprint\", \"that same fix version\" — so a cross falls through to the ordinary multi-intent rule, which already ordered a read before the write it conditions. The first element is jira-inspect and not jira-release because jira-release disclaims exactly this read: \"what one holds ... read without changing anything\". Its mirror is hand-6, which had it right while this one did not."
+    },
+    {
+      "id": "hand-6",
+      "category": "handover",
+      "prompt": "What's in the current sprint? Put it all in 1.0.",
+      "expect_sequence": [
+        "jira-inspect",
+        "jira-release"
+      ],
+      "expect": "The sprint is read and answered first, then the fix version assignment is named at the gate and jira-release is entered for it. The direction is the only thing that differs from hand-5, and it must not change the shape of the answer.",
+      "why": "hand-5's mirror, which the issue noted nobody had ever hit. A rule that held in one direction and not the other would be a coincidence of wording rather than a rule, and only the pair can tell those apart. The sprint read belongs to jira-inspect since #71, so this also pins that the cross does not drag the read back into jira-plan."
     }
   ]
 }

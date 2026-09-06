@@ -2,12 +2,12 @@
 
 <!-- skill-header:start -->
 
-|                |                                                          |
-| -------------- | -------------------------------------------------------- |
-| **Name**       | `/jira-doctor`                                           |
-| **Kind**       | command                                                  |
-| **Invocation** | `/jira-doctor`                                           |
-| **Tools**      | `Bash(claude:*)` `Bash(jira:*)` `Bash(command:*)` `Read` |
+|                |                                                                           |
+| -------------- | ------------------------------------------------------------------------- |
+| **Name**       | `/jira-doctor`                                                            |
+| **Kind**       | command                                                                   |
+| **Invocation** | `/jira-doctor`                                                            |
+| **Tools**      | `mcp__atlassian` `Bash(claude:*)` `Bash(jira:*)` `Bash(command:*)` `Read` |
 
 <!-- skill-header:end -->
 
@@ -44,7 +44,18 @@ is configured, and it needs the answer to the first question to already be yes.
 
 Type it, read the three lines. There is nothing to approve and nothing to undo.
 
-**1 · It looks for a server named exactly `atlassian`.** The id is fixed by convention, not by
+**1 · It asks the session, not the configuration.** The question is whether _this_ session can
+reach Jira, and only a call made inside it answers that. `/jira-doctor` calls a read-only tool from
+the `atlassian` server — the cheapest identity call it offers, no arguments and no project named —
+and an answer coming back is the whole check: the skills declare `mcp__atlassian` and reach the
+same server under the same name. Only when that call fails does it read `claude mcp list`, and then
+to classify the failure rather than to establish anything. The listing runs in a separate process
+and does not share this session's connection state, so the two can disagree — a session with the
+channel live and every Atlassian tool working has been told by its own listing that the server was
+pending approval. Where they disagree the session is right, because the session is where the skills
+run.
+
+**2 · It looks for a server named exactly `atlassian`.** The id is fixed by convention, not by
 preference: skills declare `mcp__atlassian` in static frontmatter, and frontmatter cannot read a
 file. A server connected under any other name — `Atlassian`, `mcp-atlassian`, `jira` — serves no
 skill in this plugin however healthy it looks, and that is the failure that looks like nothing
@@ -56,7 +67,7 @@ claude mcp remove <the id you found>
 claude mcp add --transport <its transport> atlassian <its URL>
 ```
 
-**2 · An Atlassian connector added through claude.ai settings is the same failure wearing a
+**3 · An Atlassian connector added through claude.ai settings is the same failure wearing a
 different face.** Its row reads `claude.ai Atlassian`, it reports itself connected, and it still
 serves no skill here: a connector exposes its tools under an identifier the connector mechanism
 assigns, not under the name the row displays, so `mcp__atlassian` cannot match it on any machine.
@@ -82,7 +93,13 @@ carries: a server added, approved or authenticated **during** a session may not 
 session. When the row says connected and no Atlassian tool is available, the environment is right
 and the session is stale — start a new one and run the check again.
 
-**3 · The CLI check tells two different failures apart.** The `jira` CLI is needed only for the
+**4 · A server declared by an installed plugin cannot serve one either.** A `.mcp.json` at a
+plugin's root travels with the plugin and is registered under a namespaced id —
+`plugin:<name>:atlassian` — while every skill declares the bare `mcp__atlassian`. The row reports
+that it needs authentication, and that is the misleading part: authenticating it changes nothing,
+because the id is what no skill can reach. Leave it alone and declare `atlassian` yourself.
+
+**5 · The CLI check tells two different failures apart.** The `jira` CLI is needed only for the
 Agile domain — boards, sprints, the fix version listing — so an absent one is a partial
 degradation, not a dead
 environment, and the check carries on to the end regardless. If it is installed but does not
@@ -125,13 +142,13 @@ authenticates while it runs, so on a missing token it answers `401 Unauthorized`
 nothing. Prescribed for a missing credential it costs you a round trip and tells you your
 configuration is broken when it is not.
 
-**4 · It reads the project profile rather than testing for it.** `.jira/project-profile.md` is
+**6 · It reads the project profile rather than testing for it.** `.jira/project-profile.md` is
 what every skill reads as its first step; without it they stop before doing anything. Reading the
 file keeps this step inside what the command declares, and an absent file comes back as an
 ordinary "not found" instead of a non-zero exit that reads like a failure. The remedy is the
 [`jira-init`](../skills/jira-init.md) skill, which discovers the project and writes the profile.
 
-**5 · It reports the three together, never just the first failure.** Knowing that the MCP server
+**7 · It reports the three together, never just the first failure.** Knowing that the MCP server
 is missing **and** that the CLI is dark saves you a second round trip. The four states it
 distinguishes: all three pass and you are ready; MCP fine and CLI missing means usable, with
 sprint and board operations unavailable; MCP missing means not usable, because every authoring
@@ -194,7 +211,8 @@ The report as it arrives in chat. Nothing is written: not to Jira, not to your m
 
 ```text
 MCP server       ❌  connected, and unusable by these skills
-     found       a row named "claude.ai Atlassian"
+     found       atlassianUserInfo did not come back; the listing then showed a row
+                 named "claude.ai Atlassian"
      why         a connector exposes its tools under an identifier the connector mechanism
                  assigns, not under the name the row displays, so mcp__atlassian cannot
                  match it on any machine
@@ -243,7 +261,7 @@ a static `mcp__atlassian`.
 When all three pass, the same report is four lines:
 
 ```text
-MCP server       ✅  atlassian — connected
+MCP server       ✅  reachable from this session
 Jira CLI         ✅  authenticated
 Project profile  ✅  .jira/project-profile.md
 
@@ -258,15 +276,19 @@ Ready.
   `.jira/project-profile.md`. One of those is your own dotfile, and the last one belongs to
   [`jira-init`](../skills/jira-init.md).
 - **Print your credential.** The probes report presence or absence and never a value.
-- **Stop at the first failure.** All three checks run, and an absent CLI does not end the check
-  before the profile is looked at.
+- **Stop at the first failure.** All three checks run. Neither an unreachable MCP server nor an
+  absent CLI ends the check before the profile is looked at.
 - **Rename or remove a claude.ai connector.** Neither is offered by Claude Code for such a row,
   and renaming would not change the identifier its tools arrive under.
 - **Invent an endpoint.** For a server under the wrong id it reuses the transport and URL of the
   row already there; where the row shows none, it asks you rather than guessing one.
-- **Report a stale session as a configuration failure.** A server that `claude mcp list` shows
-  connected while no Atlassian tool is available in the session means start a new session, not fix
-  your setup.
+- **Take a configuration listing's word over the session's.** `claude mcp list` runs in a separate
+  process and can be wrong about this one: it has reported a server pending approval to a session
+  that was using it. A live call decides, in both directions — a server the listing shows connected
+  while no Atlassian tool answers here means start a new session, not fix your setup.
+- **Assert a cause it cannot see.** Where the call fails and the configuration looks right, it says
+  so and names the cheapest thing to try. It does not choose between a stale session, a lapsed
+  authentication and a network that is not reaching Atlassian, because from here they look the same.
 - **Discover your project.** Work types, statuses, boards and fix versions are not its business.
 
 ## See also

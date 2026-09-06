@@ -59,7 +59,7 @@ second was never named at the first gate has failed it, however right the final 
 
 ## What to run, and why these
 
-Eighteen of the sixty-four. The `selection` category has thirty-eight fixtures and thirty-six of
+Eighteen of the sixty-seven. The `selection` category has thirty-seven fixtures and nearly all of
 them touch a description that changed, so "only the ones at risk" saves nothing — the list below is
 chosen by what each fixture **decides**, and every entry brings its matched pair.
 
@@ -74,21 +74,35 @@ intent removed, and it fails if the plugin has learned to announce a successor e
 | `hand-3` | a split, which leaves its successor's subject undetermined  |
 | `hand-4` | the single-intent twin, which must produce **no** successor |
 
-**Fourteen `selection` fixtures**, in seven pairs that each move one variable:
+Two more joined the category with #83, and they are the reason it now carries the intake floor.
+`sel-capture-3` and `sel-capture-6` were `selection` fixtures asserting that `jira-diagnose` must
+**not** fire; both failed that way in the run of 2026-09-06, on an exclusion written as plainly as
+prose gets. The floor moved inside the skill, so `jira-diagnose` firing is legitimate and the
+handover is what must hold.
 
-| Pair                               | The variable                                         |
-| ---------------------------------- | ---------------------------------------------------- |
-| `sel-inspect-4` · `sel-release-1`  | whether the request changes anything                 |
-| `sel-release-2` · `sel-release-3`  | the way onto a fix version against the way off       |
-| `sel-inspect-3` · `sel-plan-3`     | reading a sprint against taking work out of one      |
-| `sel-capture-3` · `sel-capture-6`  | how much environment a relayed fault names           |
-| `sel-capture-6` · `sel-diagnose-4` | whether the relayed material carries steps           |
-| `sel-capture-4` · `sel-propose-6`  | whether any figure is present at all                 |
-| `sel-propose-2` · `sel-plan-4`     | "on the backlog" meaning create against meaning move |
-| `sel-propose-3` · `sel-propose-6`  | first-hand against relayed, both carrying a datum    |
+| Fixture         | What it pins                                                      |
+| --------------- | ----------------------------------------------------------------- |
+| `sel-capture-3` | a relayed fault whose symptom reads as a gesture at reproduction  |
+| `sel-capture-6` | the same, with the environment named precisely and still no steps |
 
-`sel-capture-6` and `sel-propose-6` appear twice on purpose: each is one end of two different
-pairs, and a fixture that only ever moves one variable in one direction proves less than it looks.
+**Twelve `selection` fixtures**, in six pairs that each move one variable:
+
+| Pair                              | The variable                                         |
+| --------------------------------- | ---------------------------------------------------- |
+| `sel-inspect-4` · `sel-release-1` | whether the request changes anything                 |
+| `sel-release-2` · `sel-release-3` | the way onto a fix version against the way off       |
+| `sel-inspect-3` · `sel-plan-3`    | reading a sprint against taking work out of one      |
+| `sel-capture-4` · `sel-propose-6` | whether any figure is present at all                 |
+| `sel-propose-2` · `sel-plan-4`    | "on the backlog" meaning create against meaning move |
+| `sel-propose-3` · `sel-propose-6` | first-hand against relayed, both carrying a datum    |
+
+`sel-propose-6` appears twice on purpose: it is one end of two different pairs, and a fixture that
+only ever moves one variable in one direction proves less than it looks.
+
+`sel-diagnose-4` keeps its place among the `selection` fixtures and changes role. It is the same
+fault relayed, arriving complete, and it is now the guard on the new step: a skill that handed over
+whenever material came in by email would pass every fixture above and fail this one. It is to the
+intake floor what `hand-4` is to the handover contract.
 
 ## Recording it
 

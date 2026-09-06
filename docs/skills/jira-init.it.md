@@ -56,7 +56,15 @@ che su Jira non c'è qualcosa che il project profile le prometteva.
 Di' che il lavoro di questo repository è tracciato su Jira, e rispondi alle domande. Non viene
 scritto niente — nemmeno in locale — finché non approvi quello che hai letto.
 
-**1 · Controlla prima i due channel, che falliscono in modo indipendente.** Il server MCP di
+**1 · Controlla che la discovery sia quello che volevi.** Questa skill scandaglia l'intero
+progetto e scrive un file che il tuo team condivide, il che è una risposta grossa a una domanda
+piccola. Chiedile quali fix version hai, o quali board, e ti risponde e si ferma — nessuna
+scansione, e nessun project profile riscritto dietro a una domanda che non intendevi come un passo
+di setup. Se la domanda verte davvero sulle fix version e non sulla forma del tuo progetto,
+[`jira-release`](jira-release.it.md) è la skill che le possiede e le passa la mano. Se invece stai
+configurando, o una skill ti ha detto che il project profile manca o è vecchio, prosegue.
+
+**2 · Controlla prima i due channel, che falliscono in modo indipendente.** Il server MCP di
 Atlassian è una precondizione: nient'altro risponde per work type, status e campi, quindi se non è
 raggiungibile sotto l'id `atlassian` la skill si ferma e ti manda a `/jira-doctor`. La Jira CLI non
 è una precondizione. Senza di lei la discovery gira su tutto quello che il server MCP raggiunge, e
@@ -66,13 +74,13 @@ _non raggiungibile_ perché portano in due posti diversi: uno a ripristinare un 
 creare una board. Quali operazioni appartengono a quale channel sta nel
 [processo di sviluppo](../development-process.it.md).
 
-**2 · Chiede quale progetto.** Se `.jira/project-profile.md` c'è già, ti dice quale progetto
+**3 · Chiede quale progetto.** Se `.jira/project-profile.md` c'è già, ti dice quale progetto
 descrive e quando è stato scoperto, poi ti chiede se aggiornarlo o puntare a un altro progetto.
 Altrimenti elenca i progetti che il tuo account vede e ti chiede di scegliere: il progetto non lo
 deduce mai dal nome del repository. Un repository tiene un solo project profile — rifare la
 discovery lo sostituisce, e prima di sostituirlo la skill dice cosa se ne va con lui.
 
-**3 · Legge sei soggetti, in un ordine solo.**
+**4 · Legge sei soggetti, in un ordine solo.**
 
 | Cosa legge                                             | Perché servirà a una skill                                            |
 | ------------------------------------------------------ | --------------------------------------------------------------------- |
@@ -83,21 +91,21 @@ discovery lo sostituisce, e prima di sostituirlo la skill dice cosa se ne va con
 | le fix version, con il loro stato                      | così niente viene assegnato a una che non esiste                      |
 | lo stile del progetto — team-managed o company-managed | perché cambia quali campi esistono                                    |
 
-**4 · Un'assenza è un rilievo, non un errore.** Un progetto senza board, una gerarchia di un solo
+**5 · Un'assenza è un rilievo, non un errore.** Un progetto senza board, una gerarchia di un solo
 livello, nessun work type per un difetto: sono tutti esiti validi, scritti nel file e detti a voce
 alta. Gli status sono il caso da aspettarsi, perché si leggono dai work item che li occupano — un
 progetto che non ne contiene nessuno non ne espone nessuno, ed è lo stato di ogni progetto il
 giorno in cui nasce. Il project profile allora dice che non erano ancora osservabili e che il
 primo work item li renderà leggibili, e la discovery prosegue con il soggetto successivo.
 
-**5 · Risolve ogni operazione nel tool che la serve.** I nomi dei tool MCP cambiano da una versione
+**6 · Risolve ogni operazione nel tool che la serve.** I nomi dei tool MCP cambiano da una versione
 all'altra del server, quindi nessuna skill se ne porta dietro uno: questa skill enumera quello che
 il server configurato espone davvero e registra la corrispondenza. Tutto ciò che nessun tool
 disponibile copre finisce in _Operazioni non supportate_ con il percorso manuale che prenderai al
 suo posto — comprese le quattro operazioni che non hanno strada su nessuno dei due channel: creare
 uno sprint, avviarlo, creare una fix version, rilasciarla o archiviarla.
 
-**6 · Poi il gate, e il file.** Scrivere il project profile non è una scrittura su Jira, ma è una
+**7 · Poi il gate, e il file.** Scrivere il project profile non è una scrittura su Jira, ma è una
 modifica a un artefatto che tutto il team condivide, quindi passa dallo stesso draft gate — il
 cancello che precede ogni scrittura su Jira — descritto nel
 [processo di sviluppo](../development-process.it.md): il project profile completo in chat, il
