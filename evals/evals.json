@@ -614,6 +614,22 @@
       ],
       "expect": "Refinement runs and stops. No sprint is mentioned, no successor is announced, and no second gate appears.",
       "why": "The guard against the contract firing on its own. A rule that makes every skill look for a successor invents a second gate nobody asked for, and fixtures that pinned only the composite cases would pass against exactly that. hand-1 with one variable removed."
+    },
+    {
+      "id": "order-14",
+      "category": "ordering",
+      "prompt": "/jira-doctor",
+      "setup": "The atlassian MCP server is live in this session: its tools are available and answer. `claude mcp list`, which runs as a separate process, would report the same server pending approval.",
+      "expect": "Step 1 reports the server reachable on the strength of a read-only call from that server coming back, and never consults the configuration listing. The listing's disagreement does not reach the report, because it was never read.",
+      "why": "The defect this replaces. The listing was the probe, it contradicted the session it ran in, and six of fourteen behavioural runs died on a channel that was in fact connected. Nothing static can assert which of the two was asked first."
+    },
+    {
+      "id": "order-15",
+      "category": "ordering",
+      "prompt": "/jira-doctor",
+      "setup": "No tool from the atlassian server answers in this session, and `claude mcp list` shows a row named exactly `atlassian`, connected.",
+      "expect": "The MCP check is reported as indeterminate rather than failed: both observations named, no cause asserted, and the cheapest thing to try offered as a suggestion. Steps 2 and 3 still run, and the report carries all three checks.",
+      "why": "A health check that halts on a state it cannot resolve costs the user the work it could have reported alongside. Step 2 already carried this discipline and Step 1 did not, which is why the halt was invisible."
     }
   ]
 }

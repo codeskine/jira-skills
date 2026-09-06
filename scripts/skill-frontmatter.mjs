@@ -181,3 +181,50 @@ export function validateSkill(directory, text) {
 
   return errors;
 }
+
+// A command's body may instruct a call to an MCP server's tool. `allowed-tools` is what makes
+// that call possible, so a body naming `mcp__<server>__<tool>` while the frontmatter does not
+// declare `mcp__<server>` is a command that cannot do what it says — and it fails silently,
+// because a tool that was never granted is simply absent rather than refused.
+//
+// This is the shape `/jira-doctor` was in: it read the MCP server's state from a sibling process
+// because it had been given no way of its own to reach the channel it was checking.
+const MCP_TOOL_CALL = /\bmcp__([a-z0-9-]+)__/gi;
+
+/**
+ * @param file the command's filename, for the message.
+ * @param text the full contents of the command's Markdown.
+ * @returns every problem found, in reading order. Never stops at the first.
+ */
+export function validateCommand(file, text) {
+  const frontmatter = parseFrontmatter(text);
+  if (frontmatter === null) return ["has no YAML frontmatter"];
+
+  const errors = [];
+  const { description } = frontmatter;
+  const allowedTools = frontmatter["allowed-tools"];
+
+  if (typeof description !== "string" || description === "")
+    errors.push("description is missing");
+
+  if (typeof allowedTools !== "string" || allowedTools === "") {
+    errors.push("allowed-tools is missing");
+    return errors;
+  }
+
+  const declared = new Set(allowedTools.split(/\s+/).filter((t) => t !== ""));
+
+  // Reported in reading order and without duplicates, so a body calling one server ten times
+  // names it once.
+  const called = new Set(
+    [...text.matchAll(MCP_TOOL_CALL)].map(([, server]) => server.toLowerCase()),
+  );
+
+  for (const server of called)
+    if (!declared.has(`mcp__${server}`))
+      errors.push(
+        `body calls mcp__${server}__* but allowed-tools does not declare "mcp__${server}"`,
+      );
+
+  return errors;
+}

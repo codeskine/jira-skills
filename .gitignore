@@ -26,6 +26,12 @@ docs/*
 !docs/development-process.it.md
 !docs/termbase.md
 
+# MCP server declaration — configuration for a repository that USES this plugin, and an artifact
+# in the one that builds it: a .mcp.json at the plugin root is installed with the plugin and
+# registered as `plugin:jira-skills:atlassian`, an id no skill declares and none can reach. Keep
+# your own locally; /jira-doctor prints the file to write.
+.mcp.json
+
 # jira project profile — versioned in a repository that USES this plugin, scratch in the one
 # that builds it: what discovery writes here describes a test sandbox, not this project's work
 .jira/
