@@ -54,7 +54,15 @@ profile is not in Jira.
 Say that this repository's work is tracked on Jira, and answer the questions. Nothing is written —
 not even locally — until you approve what you have read.
 
-**1 · It checks both channels first, and they fail independently.** The Atlassian MCP server is a
+**1 · It checks that discovery is what you wanted.** This skill sweeps your whole project and
+writes a file your team shares, which is a large answer to a small question. Ask it which fix
+versions you have, or which boards, and it answers that and stops — no sweep, and no profile
+rewritten behind a question you did not mean as a setup step. Where the question is really about
+fix versions rather than about your project's shape,
+[`jira-release`](jira-release.md) is the skill that owns them and it hands over. Where you are
+setting up, or a skill told you the profile is missing or stale, it carries on.
+
+**2 · It checks both channels first, and they fail independently.** The Atlassian MCP server is a
 precondition: nothing else answers for work types, statuses or fields, so if it is not reachable
 under the id `atlassian` the skill stops and points you at `/jira-doctor`. The `jira` CLI is not a
 precondition. Without it, discovery runs on everything the MCP server reaches, and the Agile
@@ -63,13 +71,13 @@ than as missing from the tooling. The profile keeps _read_ and _not reachable_ a
 send you to different places: one to restore a channel, the other to create a board. See
 [the development process](../development-process.md) for which operations each channel owns.
 
-**2 · It asks which project.** If `.jira/project-profile.md` is already there, it tells you which
+**3 · It asks which project.** If `.jira/project-profile.md` is already there, it tells you which
 project it describes and when it was discovered, then asks whether to refresh it or to target a
 different one. Otherwise it lists the projects your account can see and asks you to choose — it
 never infers the project from the repository name. One repository holds one profile: discovering
 again replaces it, and before replacing it the skill says what goes with it.
 
-**3 · It reads six subjects, in one order.**
+**4 · It reads six subjects, in one order.**
 
 | What it reads                                   | Why a skill will need it                                 |
 | ----------------------------------------------- | -------------------------------------------------------- |
@@ -80,21 +88,21 @@ again replaces it, and before replacing it the skill says what goes with it.
 | fix versions, with their state                  | so nothing is assigned to one that does not exist        |
 | project style — team-managed or company-managed | because it changes which fields exist                    |
 
-**4 · An absence is a finding, not a failure.** A project with no board, a hierarchy one level
+**5 · An absence is a finding, not a failure.** A project with no board, a hierarchy one level
 deep, no work type for a defect: each is a valid outcome, written down and said out loud. Statuses
 are the case worth expecting, because they are read from the work items that occupy them — a
 project holding none exposes none, which is the state of every project on the day it is created.
 The profile then says they were not observable yet and that the first work item will make them
 readable, and discovery carries on to the next subject.
 
-**5 · It resolves every operation to the tool that serves it.** MCP tool names change between
+**6 · It resolves every operation to the tool that serves it.** MCP tool names change between
 server versions, so no skill hard-codes one: this skill enumerates what the configured server
 actually exposes and records the mapping. Whatever no available tool covers goes to _Unsupported
 operations_ with the manual path you will take instead — including the four the tooling has no
 route to on either channel: creating a sprint, starting one, creating a fix version, releasing or
 archiving one.
 
-**6 · Then the gate, and the file.** Writing the profile is not a write to Jira, but it is a change
+**7 · Then the gate, and the file.** Writing the profile is not a write to Jira, but it is a change
 to an artifact your whole team shares, so it passes
 [the same gate](../development-process.md): the complete profile in chat, the project it
 describes, how much of each subject was found, and every unsupported operation — that last one

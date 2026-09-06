@@ -658,6 +658,22 @@
       "setup": "A profile exists and lists the project's boards.",
       "expect": "The skill says a board is a filter over work items and that neither channel exposes taking one off it — a declared gap, stated as such. It does not substitute the nearest possible operation: not a sprint removal, not a backlog placement, not a transition.",
       "why": "The container named falls outside the set any skill owns. A keyword matcher sends this to jira-plan on the word board with false confidence, and the harm is not the routing but what happens next: a plausible neighbouring write, performed on a request nobody made. Pairs with order-16, which moves the other variable — there the kind is ambiguous, here it is clear and unowned."
+    },
+    {
+      "id": "order-18",
+      "category": "ordering",
+      "prompt": "Which fix versions does this project have?",
+      "setup": "A profile exists. jira-init fired rather than jira-release — neither description disclaims the other, so either is a plausible match.",
+      "expect": "The question is answered from the profile and nothing else happens. No whole-project sweep runs, and the profile is not rewritten. Where the answer belongs to fix versions as a subject rather than to the project's shape, the skill says so and hands over.",
+      "why": "The two skills reach the same question and neither disclaims the other, which the replay decided four times on a tiebreak it named as its own. #83 established that a boundary the router cannot see belongs inside the skill, so the fix is not a new exclusion: jira-init establishes the size of the question before sweeping. What made this worth fixing is asymmetric harm — jira-release answering a setup request is a missing profile, jira-init answering a one-line question is a versioned file the team shares, written by nobody's request."
+    },
+    {
+      "id": "order-19",
+      "category": "ordering",
+      "prompt": "I've just installed this on the repo — set it up against our Jira project.",
+      "setup": "No .jira/project-profile.md exists.",
+      "expect": "Discovery runs in full and the profile is presented for approval before it is written. The scope check does not fire: this request is the setup itself.",
+      "why": "The guard on order-18. A skill that answered narrowly whenever a fix version was mentioned would pass that fixture and fail this one, which is the same relationship sel-diagnose-4 has to the intake floor and hand-4 to the handover contract. Every step added to keep a skill from overreaching needs the twin that keeps it from underreaching."
     }
   ]
 }
