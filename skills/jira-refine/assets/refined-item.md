@@ -22,8 +22,9 @@ item is not ready when it now is.
 
 ## Dependencies
 
-<Each dependency as a link to the work item concerned, with one line on what it blocks or is
-blocked by. A dependency described but not linked is one nobody can follow.>
+<Each dependency as a **Jira issue link** to the work item concerned — the link, not a URL written
+into this text — with one line on what it blocks or is blocked by. A dependency described here and
+not linked in Jira is one nobody can follow and nothing can query.>
 
 ## Out of scope
 

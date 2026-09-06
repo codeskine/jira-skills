@@ -56,6 +56,13 @@ notice if one stopped running.
 
 - State the contract in three or four lines and link the shared procedure. Never inline a
   procedure that the shared layer already owns; never restate a quality criterion.
+- **A rule that must fire at a step belongs in that step.** A link to a shared reference is read;
+  it is not reliably obeyed. `jira-plan` carries "say what cannot be done here" as a numbered step
+  and has never been seen skipping it, while four skills that only linked the same rule skipped it
+  every time. Measured on 2026-09-06: moving the unsupported-operation rule from the preamble into
+  step 1 — the step that opens the profile — is what made it fire, and the identical sentence three
+  paragraphs higher did not. Name the section the rule is about, too: a skill that reads the profile
+  reads the table it came for.
 - Persona only where it orients a real judgement. `jira-init` and `jira-advance` have none by
   decision. A persona that carries no information is a defect.
 - Never hard-code an MCP tool name: they change between server versions and are resolved into

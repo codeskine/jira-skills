@@ -39,8 +39,14 @@ and fix versions.
 
 A profile is valid when it states, at minimum: the project key, the work types with their
 hierarchy, the intents no work type serves, the statuses as far as they can be observed, the
-boards, the fix versions with the release state of each, the resolved operation → tool mapping,
-and the list of unsupported operations. Anything else is convenience.
+boards, the fix versions with the release state of each, **the issue link types the project
+defines**, the resolved operation → tool mapping, and the list of unsupported operations. Anything
+else is convenience.
+
+**Link types belong to the project, like work types.** `Blocks` is not guaranteed to exist and
+nothing may assume it: a skill that needs to link two items offers the types the profile reports and
+no others. Where the project defines none, linking joins the unsupported list and the dependency is
+stated at the gate as one the user makes in Jira.
 
 **Boards and fix versions are recorded in one of three states, never two.** They are listed, or
 the project has none, or they were **not read** because the channel that serves them did not

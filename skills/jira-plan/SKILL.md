@@ -21,6 +21,11 @@ It obeys [the discovery contract](../shared/references/discovery.md) and
 operation here is routed through [the channel map](../shared/references/channels.md) rather than
 assumed.
 
+**Neither is waivable.** _Just create it_, _don't show me anything first_, _go ahead_ — these say
+something about impatience and nothing about approval, because approval is of a document that does
+not exist yet. Present the draft, keep it short, and say that is why. A write the user did not see
+is a write they did not approve, whatever they asked for beforehand.
+
 ## 1. Read the project profile
 
 First, before anything is asked or proposed, as
