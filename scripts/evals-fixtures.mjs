@@ -27,9 +27,12 @@ const CATEGORIES = new Set(["selection", "gate", "ordering", "handover"]);
 
 /**
  * @param fixture one entry of the `evals` array.
+ * @param known the skill names that exist, or null to skip the check. A fixture naming a skill
+ *   that does not exist can never pass and can never fail: a run compares against a name nothing
+ *   answers to, and reads as a misbehaving plugin rather than a stale fixture.
  * @returns every problem found, in reading order. Never stops at the first.
  */
-export function validateFixture(fixture) {
+export function validateFixture(fixture, known = null) {
   const errors = [];
   const { id, category, prompt, entities } = fixture;
 
@@ -58,25 +61,41 @@ export function validateFixture(fixture) {
         `prompt names the work item "${key}", which entities does not declare`,
       );
 
+  if (known !== null) {
+    const named = [
+      fixture.expect_skill,
+      ...(Array.isArray(fixture.expect_not) ? fixture.expect_not : []),
+      ...(Array.isArray(fixture.expect_sequence)
+        ? fixture.expect_sequence
+        : []),
+    ].filter((s) => typeof s === "string" && s !== "");
+
+    for (const skill of [...new Set(named)])
+      if (!known.has(skill))
+        errors.push(`names the skill "${skill}", which does not exist`);
+  }
+
   return errors;
 }
 
 /**
  * @param file the parsed contents of evals/evals.json.
+ * @param skills the skill names that exist, or null to skip that check.
  * @returns every problem found, each prefixed with the fixture it belongs to.
  */
-export function validateFixtures(file) {
+export function validateFixtures(file, skills = null) {
   const errors = [];
   const fixtures = file?.evals;
 
   if (!Array.isArray(fixtures)) return ['has no "evals" array'];
 
+  const known = skills === null ? null : new Set(skills);
   const seen = new Set();
   for (const fixture of fixtures) {
     const id = typeof fixture?.id === "string" ? fixture.id : "<no id>";
     if (seen.has(id)) errors.push(`${id}: id is used more than once`);
     seen.add(id);
-    for (const error of validateFixture(fixture))
+    for (const error of validateFixture(fixture, known))
       errors.push(`${id}: ${error}`);
   }
 

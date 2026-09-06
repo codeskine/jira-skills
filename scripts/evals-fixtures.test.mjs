@@ -129,3 +129,65 @@ test("errors carry the fixture they belong to", () => {
 test("a file with no evals array is one error", () => {
   assert.deepEqual(validateFixtures({}), ['has no "evals" array']);
 });
+
+// --- the skills a fixture names have to exist -------------------------------------------------
+//
+// A fixture naming a skill that does not exist can never pass and can never fail: a run compares
+// what fired against a name nothing answers to, and the result reads as a misbehaving plugin
+// rather than a stale fixture. A rename is the ordinary way in.
+
+const KNOWN = new Set([
+  "jira-release",
+  "jira-plan",
+  "jira-inspect",
+  "jira-capture",
+]);
+
+test("a fixture naming only skills that exist passes", () => {
+  assert.deepEqual(validateFixture(VALID, KNOWN), []);
+});
+
+test("expect_skill naming a skill that does not exist is caught", () => {
+  assert.deepEqual(
+    validateFixture(swapping({ expect_skill: "jira-releases" }), KNOWN),
+    ['names the skill "jira-releases", which does not exist'],
+  );
+});
+
+test("expect_not is checked too, since a stale exclusion silently asserts nothing", () => {
+  assert.deepEqual(
+    validateFixture(
+      swapping({ expect_not: ["jira-plan", "jira-gone"] }),
+      KNOWN,
+    ),
+    ['names the skill "jira-gone", which does not exist'],
+  );
+});
+
+test("every element of expect_sequence is checked", () => {
+  const errors = validateFixture(
+    swapping({
+      expect_skill: undefined,
+      expect_sequence: ["jira-gone", "jira-plan", "jira-also-gone"],
+    }),
+    KNOWN,
+  );
+  assert.equal(errors.length, 2, JSON.stringify(errors));
+  assert.match(errors[0], /jira-gone/);
+  assert.match(errors[1], /jira-also-gone/);
+});
+
+test("a skill named in two places is reported once", () => {
+  const errors = validateFixture(
+    swapping({ expect_skill: "jira-gone", expect_not: ["jira-gone"] }),
+    KNOWN,
+  );
+  assert.equal(errors.length, 1, JSON.stringify(errors));
+});
+
+test("without a skill list the check is skipped rather than guessed", () => {
+  assert.deepEqual(
+    validateFixture(swapping({ expect_skill: "jira-gone" })),
+    [],
+  );
+});

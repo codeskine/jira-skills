@@ -506,6 +506,7 @@
       "prompt": "KAN-12 is too big to finish in one go, and it needs to be in the current sprint.",
       "entities": ["KAN-12"],
       "expect_sequence": ["jira-refine", "jira-plan"],
+      "precondition": "An active sprint on the board. It cannot be created from either channel — `jira sprint` has add, close and list, and the MCP server exposes none — so it is opened through Jira itself before the run.",
       "expect": "Refinement runs first, because the sprint holds what the split produces. Its gate names the sprint as the intent this artifact does not satisfy. After the split is written, planning is entered rather than the request ending at the keys. Two gates, and the first does not approve the second.",
       "why": "The plain composite. Each description hands the other half away — refine says \"not for deciding when the work is tackled\", plan says \"not for making an item ready\" — and before this contract a skill that fired on the first intent had nothing telling it to continue."
     },
@@ -515,6 +516,7 @@
       "prompt": "How is KAN-4 doing? And if it's ready, put it in the sprint.",
       "entities": ["KAN-4"],
       "expect_sequence": ["jira-inspect", "jira-plan"],
+      "precondition": "An active sprint on the board, for the branch where the stated condition decides in favour of planning. Where it decides against, the fixture completes without one.",
       "expect": "The question is answered first, from a search. The condition the user stated then decides, and the answer says which way it fell. Planning regardless of what the read found is a failure; so is planning without ever answering the question asked first.",
       "why": "The harder shape: the read is a precondition on the write, not a separate task. jira-inspect never writes and must not offer to, but naming what is outstanding and handing over is not an offer — the skill that owns it brings its own gate."
     },
@@ -524,6 +526,7 @@
       "prompt": "PROJ-88 is way too large — break it up and get it into next sprint.",
       "entities": ["PROJ-88"],
       "expect_sequence": ["jira-refine", "jira-plan"],
+      "precondition": "An active sprint on the board, and a work item large enough that splitting it is the sensible answer.",
       "expect": "After the split, \"it\" no longer names one item. The second gate asks which of the parent and the children are to be planned, and takes the answer from the hierarchy the profile records rather than from a default.",
       "why": "The consequence the issue raised and nobody had addressed: decomposition changes the subject of the sentence that follows it. Distinct from hand-1, where the user named the item before it had children."
     },
@@ -600,6 +603,7 @@
       "prompt": "What's in 1.0 so far? Anything not started, take it out of the current sprint.",
       "entities": ["1.0"],
       "expect_sequence": ["jira-inspect", "jira-plan"],
+      "precondition": "An active sprint on the board holding at least one item that has not been started, and a fix version holding it too.",
       "expect": "The fix version is read and answered first — by the skill that owns reading what a fix version holds, not by the one that owns the version itself. The sprint removal is named at that gate as the intent this answer does not satisfy, and jira-plan is entered for it with a gate of its own. Reading the fix version and then emptying the sprint in one approval is the failure.",
       "why": "A read of one container and a change to another. Both jira-plan and jira-release carry a formula making a read-then-change of the same container one operation, and read loosely those formulas collide head-on with no tiebreak. The anaphora is explicit — \"that same sprint\", \"that same fix version\" — so a cross falls through to the ordinary multi-intent rule, which already ordered a read before the write it conditions. The first element is jira-inspect and not jira-release because jira-release disclaims exactly this read: \"what one holds ... read without changing anything\". Its mirror is hand-6, which had it right while this one did not."
     },
@@ -609,6 +613,7 @@
       "prompt": "What's in the current sprint? Put it all in 1.0.",
       "entities": ["1.0"],
       "expect_sequence": ["jira-inspect", "jira-release"],
+      "precondition": "An active sprint on the board holding at least one item, and a fix version to assign it to.",
       "expect": "The sprint is read and answered first, then the fix version assignment is named at the gate and jira-release is entered for it. The direction is the only thing that differs from hand-5, and it must not change the shape of the answer.",
       "why": "hand-5's mirror, which the issue noted nobody had ever hit. A rule that held in one direction and not the other would be a coincidence of wording rather than a rule, and only the pair can tell those apart. The sprint read belongs to jira-inspect since #71, so this also pins that the cross does not drag the read back into jira-plan."
     }

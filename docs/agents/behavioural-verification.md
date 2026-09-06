@@ -57,6 +57,39 @@ For each fixture in the list below:
 A `handover` fixture asserts an **order**, not a choice. A run where both skills fired but the
 second was never named at the first gate has failed it, however right the final state looks.
 
+### What a `handover` result means, and under which run
+
+The second skill of a sequence runs only after the first one's draft gate is approved, so **how the
+run is driven decides what the category can say**. Both modes are legitimate; they verify different
+amounts and a result has to say which was used.
+
+| Driven                        | What it verifies                                                    |
+| ----------------------------- | ------------------------------------------------------------------- |
+| **Interactively**, as above   | the whole sequence, if the fixture's `precondition` is met          |
+| **`claude -p`**, one per case | the first element, and what the first gate names — never the second |
+
+That is not a shortcoming of the plugin. The gate ends the turn and a `-p` invocation has nobody to
+approve it, which is invariant 3 working. But a run of 2026-09-06 reported `handover` **4/4** on the
+`-p` route, and three of those four assert a second element it could not have seen. The number was
+true of what it measured and misleading about what it meant. **A `-p` run reports at most "the first
+element and the announcement", and says which it is.**
+
+`hand-4` is the exception and the reason it exists: its sequence has one element and asserts that
+**nothing** follows, so `-p` verifies it whole. It is also the only handover fixture a `-p` run can
+fully decide, which is worth knowing before reading a green line.
+
+### The precondition a sequence needs
+
+A second element that plans work needs somewhere to plan it into. Where a fixture needs one, it says
+so in `precondition`, and the shape of it matters: **an active sprint cannot be created from either
+channel.** `jira sprint` offers add, close and list; the MCP server exposes no sprint operation at
+all. So it is opened through Jira itself, before the session starts, and no amount of driving the
+plugin will produce one.
+
+Read the `precondition` of every fixture on the list before opening the first session. A sequence
+whose precondition is unmet does not fail — it is **unrun**, and recording it as a failure blames
+the plugin for the sandbox.
+
 ### Substituting what your project does not have
 
 "Paste it verbatim" and "the entity has to exist" pull against each other, and the fixtures were
@@ -90,16 +123,20 @@ Eighteen of the sixty-seven. The `selection` category has thirty-seven fixtures 
 them touch a description that changed, so "only the ones at risk" saves nothing — the list below is
 chosen by what each fixture **decides**, and every entry brings its matched pair.
 
-**The `handover` category — all four.** Added by #76 and never run at all, which makes them the
-oldest untested thing in the suite. `hand-4` is the one to watch: it is `hand-1` with the second
-intent removed, and it fails if the plugin has learned to announce a successor every time.
+**The `handover` category — all of it.** Added by #76 and run once, on the `-p` route, which saw
+the first element of each sequence and none of the seconds. `hand-4` is the one to watch: it is
+`hand-1` with the second intent removed, it fails if the plugin has learned to announce a successor
+every time, and it is the only one a `-p` run decides whole. Five of the eight carry a
+`precondition` a `-p` run cannot satisfy at all.
 
-| Fixture  | What it pins                                                |
-| -------- | ----------------------------------------------------------- |
-| `hand-1` | the plain composite — refine, then plan                     |
-| `hand-2` | the conditional read, where a stated condition decides      |
-| `hand-3` | a split, which leaves its successor's subject undetermined  |
-| `hand-4` | the single-intent twin, which must produce **no** successor |
+| Fixture  | What it pins                                                | Precondition |
+| -------- | ----------------------------------------------------------- | ------------ |
+| `hand-1` | the plain composite — refine, then plan                     | sprint       |
+| `hand-2` | the conditional read, where a stated condition decides      | sprint       |
+| `hand-3` | a split, which leaves its successor's subject undetermined  | sprint       |
+| `hand-4` | the single-intent twin, which must produce **no** successor | none         |
+| `hand-5` | a fix version read, a sprint changed                        | sprint       |
+| `hand-6` | its mirror — a sprint read, a fix version changed           | sprint       |
 
 Two more joined the category with #83, and they are the reason it now carries the intake floor.
 `sel-capture-3` and `sel-capture-6` were `selection` fixtures asserting that `jira-diagnose` must
@@ -107,10 +144,12 @@ Two more joined the category with #83, and they are the reason it now carries th
 prose gets. The floor moved inside the skill, so `jira-diagnose` firing is legitimate and the
 handover is what must hold.
 
-| Fixture         | What it pins                                                      |
-| --------------- | ----------------------------------------------------------------- |
-| `sel-capture-3` | a relayed fault whose symptom reads as a gesture at reproduction  |
-| `sel-capture-6` | the same, with the environment named precisely and still no steps |
+| Fixture         | What it pins                                                      | Precondition |
+| --------------- | ----------------------------------------------------------------- | ------------ |
+| `sel-capture-3` | a relayed fault whose symptom reads as a gesture at reproduction  | none         |
+| `sel-capture-6` | the same, with the environment named precisely and still no steps | none         |
+
+Those two need nothing beyond a profile: intake writes a work item and plans nothing.
 
 **Twelve `selection` fixtures**, in six pairs that each move one variable:
 

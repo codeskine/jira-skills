@@ -78,7 +78,7 @@ for (const file of commands) {
 // The fixtures do not ship, but a run graded against a malformed one reports a result nobody can
 // reproduce, which is worse than a failing check.
 if (existsSync("evals/evals.json")) {
-  for (const error of validateFixtures(read("evals/evals.json")))
+  for (const error of validateFixtures(read("evals/evals.json"), declared))
     errors.push(`evals/evals.json: ${error}`);
 }
 
