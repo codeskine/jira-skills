@@ -63,6 +63,10 @@ project from the repository name.
 
 ## 4. Discover
 
+Six subjects and one more: with the work types, hierarchy, statuses, boards and fix versions, read
+**the issue link types this project defines**. They are a project's own vocabulary — `Blocks` is not
+guaranteed — and a skill that links two items has nothing to offer without them.
+
 Gather, in this order. Report anything that fails rather than working around it — but two things
 are **not** failures to stop on: a subject the unreachable channel of step 2 owns, and a subject
 that has nothing to observe yet. Record either as not read, say which of the two it was, and carry

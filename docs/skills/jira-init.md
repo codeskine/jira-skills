@@ -77,7 +77,7 @@ different one. Otherwise it lists the projects your account can see and asks you
 never infers the project from the repository name. One repository holds one profile: discovering
 again replaces it, and before replacing it the skill says what goes with it.
 
-**4 · It reads six subjects, in one order.**
+**4 · It reads seven subjects, in one order.**
 
 | What it reads                                   | Why a skill will need it                                 |
 | ----------------------------------------------- | -------------------------------------------------------- |
@@ -87,6 +87,7 @@ again replaces it, and before replacing it the skill says what goes with it.
 | boards, and the active sprint of each           | so sprint planning happens against reality               |
 | fix versions, with their state                  | so nothing is assigned to one that does not exist        |
 | project style — team-managed or company-managed | because it changes which fields exist                    |
+| the issue link types the project defines        | so a dependency becomes a real link, not a sentence      |
 
 **5 · An absence is a finding, not a failure.** A project with no board, a hierarchy one level
 deep, no work type for a defect: each is a valid outcome, written down and said out loud. Statuses

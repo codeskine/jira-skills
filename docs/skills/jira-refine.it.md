@@ -67,8 +67,11 @@ quello che è stato chiesto e quello che è stato concordato sono due fatti dive
 primo rende il secondo inoppugnabile.
 
 **3 · Fa tre domande.** Quando è fatto — i criteri di accettazione, come esiti osservabili e non
-come passi o come progetto della soluzione. Da cosa dipende — nominato come link ai work item
-interessati, perché una dipendenza descritta a parole è una dipendenza che nessuno può seguire.
+come passi o come progetto della soluzione. Da cosa dipende — registrato come **issue link di
+Jira** fra i work item interessati, non come frase e non come URL incollato nel testo. La relazione
+è di Jira, quindi qualunque altra cosa ne è una copia che niente può interrogare: `jira-inspect`
+riporta cosa è bloccato leggendo i link veri, e non trova nulla di ciò che sta in una descrizione.
+Il tipo di link viene fra quelli che il tuo progetto definisce — `Blocks` non si dà per esistente.
 Cosa è deliberatamente escluso — il confine fa parte dell'accordo.
 
 **4 · Poi chiede se il work item si può finire nel tuo orizzonte di pianificazione.** È il bivio, ed

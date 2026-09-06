@@ -645,6 +645,24 @@
       "expect_sequence": ["jira-assess", "jira-capture"],
       "expect": "What must hold is the outcome: what reaches Jira is a raw intake record, and nobody is asked to price a debt they did not weigh. jira-capture firing first and alone satisfies it. So does jira-assess firing and establishing at its third step that the material says nothing about what deferring costs, then handing over.",
       "why": "The twin of sel-capture-3 on the debt axis, and the answer to whether jira-assess's floor had the same hole. It did: the floor lived in the description and the body had no step that applied it, which is exactly the state jira-diagnose was in before the floor moved inside. Naming the module, the library and the elapsed time says what the debt is; none of it says what leaving it costs. Its guard is sel-assess-3, which already existed — the same relay arriving with the toll, which must not hand over."
+    },
+    {
+      "id": "gate-10",
+      "category": "gate",
+      "prompt": "ST-3 is too big — the team can't finish it in one go. Break it up: they need the detection working before anything can report on it.",
+      "entities": ["ST-3"],
+      "setup": "A profile exists and reports at least one issue link type.",
+      "expect": "The gate names every link the split will create, each as its two items and the link type, alongside the children and their acceptance criteria. A link that appears only inside a child's Dependencies section, and not in the block of decisions, fails this: it is a write the user was not asked about.",
+      "why": "A dependency between siblings is the ordinary result of a split, not an exotic one, and until this fixture existed nothing asserted that a stated dependency reached Jira in any form. The gate is where it has to appear, because approving children is not approving the relations between them."
+    },
+    {
+      "id": "order-22",
+      "category": "ordering",
+      "prompt": "ST-3 is too big — the team can't finish it in one go. Break it up: they need the detection working before anything can report on it.",
+      "entities": ["ST-3"],
+      "setup": "A profile exists and lists linking two work items among its unsupported operations, or reports no issue link type at all.",
+      "expect": "The dependency is stated at the gate as one the user makes in Jira, with the manual path, and the split still happens. The children are not created with the dependency written into a description instead, and no Markdown link stands in for the issue link.",
+      "why": "gate-10's guard, and the one that keeps the fix honest. Jira owns the issue link, so a dependency put into a description is a surrogate — the thing ADR-0003 exists to prevent, and the thing a skill reaches for when the real operation is unavailable. jira-inspect reports what is blocked by reading native links and finds nothing a description holds."
     }
   ]
 }

@@ -80,7 +80,7 @@ Altrimenti elenca i progetti che il tuo account vede e ti chiede di scegliere: i
 deduce mai dal nome del repository. Un repository tiene un solo project profile — rifare la
 discovery lo sostituisce, e prima di sostituirlo la skill dice cosa se ne va con lui.
 
-**4 · Legge sei soggetti, in un ordine solo.**
+**4 · Legge sette soggetti, in un ordine solo.**
 
 | Cosa legge                                             | Perché servirà a una skill                                            |
 | ------------------------------------------------------ | --------------------------------------------------------------------- |
@@ -90,6 +90,7 @@ discovery lo sostituisce, e prima di sostituirlo la skill dice cosa se ne va con
 | le board, e lo sprint attivo di ciascuna               | così la pianificazione degli sprint parla della realtà                |
 | le fix version, con il loro stato                      | così niente viene assegnato a una che non esiste                      |
 | lo stile del progetto — team-managed o company-managed | perché cambia quali campi esistono                                    |
+| i tipi di issue link definiti dal progetto             | perché una dipendenza diventi un link vero, non una frase             |
 
 **5 · Un'assenza è un rilievo, non un errore.** Un progetto senza board, una gerarchia di un solo
 livello, nessun work type per un difetto: sono tutti esiti validi, scritti nel file e detti a voce

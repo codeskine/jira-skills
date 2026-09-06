@@ -119,10 +119,21 @@ The block of decisions names the acceptance criteria of every item involved, the
 They are what is being agreed; a draft that lost them is otherwise approvable without anyone
 noticing.
 
+**And it names every link the split will create**, each as its two items and the link type — a
+dependency between siblings is the ordinary case, not an exotic one, and each is a write the user is
+approving. A link that appears only in a child's Dependencies section is a link nobody approved.
+
 ## 8. Write
 
-Through the tools the profile resolves for creating a work item and setting a parent; see
-[the channel map](../shared/references/channels.md).
+Through the tools the profile resolves for creating a work item, setting a parent **and linking two
+work items**; see [the channel map](../shared/references/channels.md).
+
+**A dependency is a Jira issue link, and nothing else.** Jira owns the relation, so a dependency
+written into a description as prose or as a Markdown link is a surrogate for one, and this plugin
+does not create surrogates — `jira-inspect` reports what is blocked by reading native links, and it
+finds nothing a description holds. Use a link type the profile reports; never assume `Blocks`
+exists. Where the profile lists linking as unsupported, or the project defines no type, say so at
+the gate and leave the dependency for the user to make in Jira.
 
 Whichever branch was taken, **retire the statement that the item is raw and awaiting
 refinement**, where intake wrote one. It is what allowed an incomplete item to exist; leaving it
@@ -137,8 +148,9 @@ Where the claim sits inside a section carrying other content, or under a heading
 itself, remove the claim and leave the rest: what is retired is the statement, never a heading
 matched by name.
 
-Where the item was split: create the children, attach them, then update the item they came from
-so that its own text no longer claims what its children now carry. Never by listing them: the
+Where the item was split: create the children, attach them, **link the dependencies between them**,
+then update the item they came from so that its own text no longer claims what its children now
+carry. The links come after the children exist, because a link needs both ends. Never by listing them: the
 hierarchy is queryable on Jira, and a list maintained by hand is a second answer that will
 disagree with the first.
 
