@@ -22,10 +22,19 @@ It obeys [the discovery contract](../shared/references/discovery.md),
 [the quality standard](../shared/references/quality-standard.md), whose criteria for capturing
 a request apply here in full.
 
+**Neither is waivable.** _Just create it_, _don't show me anything first_, _go ahead_ — these say
+something about impatience and nothing about approval, because approval is of a document that does
+not exist yet. Present the draft, keep it short, and say that is why. A write the user did not see
+is a write they did not approve, whatever they asked for beforehand.
+
 ## 1. Read the project profile
 
 First, before anything is asked or proposed, as
 [discovery](../shared/references/discovery.md) requires. Nothing here overrides it.
+
+**Read its Unsupported operations table before anything else.** If an operation this skill needs is
+listed there, say so now — naming the operation and the manual path the profile records — and do not
+open the questions. Discovering it at the write costs the user every answer they gave first.
 
 ## 2. Take the request whole
 
