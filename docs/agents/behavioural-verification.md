@@ -57,6 +57,33 @@ For each fixture in the list below:
 A `handover` fixture asserts an **order**, not a choice. A run where both skills fired but the
 second was never named at the first gate has failed it, however right the final state looks.
 
+### Substituting what your project does not have
+
+"Paste it verbatim" and "the entity has to exist" pull against each other, and the fixtures were
+written against neither sandbox anyone runs. Twenty-eight of them name an item key or a fix version;
+the sandbox holds `ST`/`KST` and one version. Item keys cannot be manufactured — `PROJ-388` needs
+three hundred and eighty-eight issues before that key exists — so substitution is unavoidable and
+the only question is whether two runners do it the same way.
+
+**Substitute what the fixture declares in `entities`, and nothing else.** That field lists the
+tokens naming a Jira entity a runner has to line up. Swap each for one your project holds, keeping
+one opaque key for another opaque key: the wording is what is under test, and an item key carries no
+routing signal.
+
+**Everything not declared is pasted as written, however entity-shaped it looks.** `sel-capture-6`
+says _"They're on 4.9, in the production tenant"_ — that is a product a customer runs, inside their
+own sentence, and the fixture exists to assert that naming it does not clear the intake floor.
+Substituting it for a fix version would quietly test something else. This is why `entities` is
+declared per fixture and not derived: no pattern tells a product version from a fix version.
+
+`check-package.mjs` catches the omission a work item key makes visible — a prompt naming one and no
+declaration fails the check. A version-shaped token is left to whoever writes the fixture, for the
+reason above.
+
+**A run that substituted records what it substituted.** One table in the run record, fixture by
+fixture, or the run is not comparable to the next one. This is the whole point of the rule: not that
+substitution is avoided, but that it stops being invisible.
+
 ## What to run, and why these
 
 Eighteen of the sixty-seven. The `selection` category has thirty-seven fixtures and nearly all of

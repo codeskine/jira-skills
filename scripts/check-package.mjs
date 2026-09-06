@@ -7,6 +7,7 @@
 import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 
+import { validateFixtures } from "./evals-fixtures.mjs";
 import { validateManifestSkills } from "./plugin-manifest.mjs";
 import { validateCommand, validateSkill } from "./skill-frontmatter.mjs";
 
@@ -72,6 +73,13 @@ for (const file of commands) {
   const path = `commands/${file}`;
   for (const error of validateCommand(file, readFileSync(path, "utf8")))
     errors.push(`${path}: ${error}`);
+}
+
+// The fixtures do not ship, but a run graded against a malformed one reports a result nobody can
+// reproduce, which is worse than a failing check.
+if (existsSync("evals/evals.json")) {
+  for (const error of validateFixtures(read("evals/evals.json")))
+    errors.push(`evals/evals.json: ${error}`);
 }
 
 // What the plugin ships is what the repository tracks, and a `.mcp.json` at the plugin root is
