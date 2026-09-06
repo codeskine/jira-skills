@@ -50,7 +50,11 @@ const summariseItalian = (path) => {
     errors.push(`${path} has no "## Cosa fa" section to summarise`);
     return "";
   }
-  const paragraph = section.trim().split(/\n\s*\n/)[0].replace(/\s+/g, " ").trim();
+  const paragraph = section
+    .trim()
+    .split(/\n\s*\n/)[0]
+    .replace(/\s+/g, " ")
+    .trim();
   // One sentence, unless it is short enough that the next one still fits a table cell. A cell
   // longer than the English column's two-sentence summary stops being an index entry.
   const [first, second] = paragraph.split(/(?<=\.)\s+/);
@@ -64,7 +68,8 @@ const summariseItalian = (path) => {
  */
 const channels = (allowedTools) => {
   const reached = [];
-  if (allowedTools.includes("mcp__atlassian")) reached.push("Atlassian MCP server");
+  if (allowedTools.includes("mcp__atlassian"))
+    reached.push("Atlassian MCP server");
   if (allowedTools.includes("Bash(jira:*)")) reached.push("Jira CLI");
   return reached.length ? reached.join(" · ") : "—";
 };
@@ -88,7 +93,9 @@ const emit = async (path, updated) => {
   });
   if (formatted === original) return;
   if (process.argv.includes("--check")) {
-    errors.push(`${path} is out of date. Run: node scripts/generate-readme-table.mjs`);
+    errors.push(
+      `${path} is out of date. Run: node scripts/generate-readme-table.mjs`,
+    );
     return;
   }
   writeFileSync(path, formatted);
@@ -99,7 +106,10 @@ const emit = async (path, updated) => {
 
 const groupings = JSON.parse(readFileSync("skills.sh.json", "utf8")).groupings;
 const italian = new Map(
-  JSON.parse(readFileSync("skills.sh.it.json", "utf8")).groupings.map((g) => [g.title, g]),
+  JSON.parse(readFileSync("skills.sh.it.json", "utf8")).groupings.map((g) => [
+    g.title,
+    g,
+  ]),
 );
 
 const skillTable = (lang) => {
@@ -114,7 +124,9 @@ const skillTable = (lang) => {
     const description = lang === "it" ? it.descriptionIt : group.description;
     rows.push(`**${title}** — ${description}`, "");
     rows.push(
-      lang === "it" ? "| Skill | Cosa fa | Pagina |" : "| Skill | What it does | Page |",
+      lang === "it"
+        ? "| Skill | Cosa fa | Pagina |"
+        : "| Skill | What it does | Page |",
       "| ----- | ------------ | ---- |",
     );
     for (const name of group.skills) {
@@ -128,10 +140,13 @@ const skillTable = (lang) => {
         errors.push(`${path} has no frontmatter`);
         continue;
       }
-      const page = lang === "it" ? `docs/skills/${name}.it.md` : `docs/skills/${name}.md`;
+      const page =
+        lang === "it" ? `docs/skills/${name}.it.md` : `docs/skills/${name}.md`;
       const link = lang === "it" ? "leggi" : "read";
       const what =
-        lang === "it" ? summariseItalian(page) : summarise(frontmatter.description);
+        lang === "it"
+          ? summariseItalian(page)
+          : summarise(frontmatter.description);
       rows.push(`| \`${frontmatter.name}\` | ${what} | [${link}](${page}) |`);
     }
     rows.push("");
@@ -147,12 +162,20 @@ for (const [path, lang] of [
     errors.push(`${path} does not exist`);
     continue;
   }
-  await emit(path, replaceBlock(readFileSync(path, "utf8"), TABLE, skillTable(lang), path));
+  await emit(
+    path,
+    replaceBlock(readFileSync(path, "utf8"), TABLE, skillTable(lang), path),
+  );
 }
 
 // ------------------------------------------------------------------ the document header blocks
 
-const table = (rows) => ["|  |  |", "| --- | --- |", ...rows.map(([k, v]) => `| **${k}** | ${v} |`)].join("\n");
+const table = (rows) =>
+  [
+    "|  |  |",
+    "| --- | --- |",
+    ...rows.map(([k, v]) => `| **${k}** | ${v} |`),
+  ].join("\n");
 
 for (const name of readdirSync("skills", { withFileTypes: true })
   .filter((entry) => entry.isDirectory() && entry.name !== "shared")
@@ -191,15 +214,22 @@ for (const name of readdirSync("skills", { withFileTypes: true })
       errors.push(`${path} does not exist — every skill needs both documents`);
       continue;
     }
-    await emit(path, replaceBlock(readFileSync(path, "utf8"), HEADER, block, path));
+    await emit(
+      path,
+      replaceBlock(readFileSync(path, "utf8"), HEADER, block, path),
+    );
   }
 }
 
 // A command declares neither a name nor a version: its frontmatter carries a description and
 // allowed-tools, and nothing else. Its header block says so rather than printing empty rows.
-for (const file of readdirSync("commands").filter((f) => f.endsWith(".md")).sort()) {
+for (const file of readdirSync("commands")
+  .filter((f) => f.endsWith(".md"))
+  .sort()) {
   const name = file.replace(/\.md$/, "");
-  const frontmatter = parseFrontmatter(readFileSync(`commands/${file}`, "utf8"));
+  const frontmatter = parseFrontmatter(
+    readFileSync(`commands/${file}`, "utf8"),
+  );
   if (frontmatter === null) {
     errors.push(`commands/${file} has no frontmatter`);
     continue;
@@ -227,10 +257,15 @@ for (const file of readdirSync("commands").filter((f) => f.endsWith(".md")).sort
 
   for (const [path, block] of Object.entries(blocks)) {
     if (!existsSync(path)) {
-      errors.push(`${path} does not exist — every command needs both documents`);
+      errors.push(
+        `${path} does not exist — every command needs both documents`,
+      );
       continue;
     }
-    await emit(path, replaceBlock(readFileSync(path, "utf8"), HEADER, block, path));
+    await emit(
+      path,
+      replaceBlock(readFileSync(path, "utf8"), HEADER, block, path),
+    );
   }
 }
 
