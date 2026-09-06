@@ -27,10 +27,23 @@ One `claude -p` per fixture from a scratch repository outside this tree: a genui
 the real installed plugin, real `Skill` triggering. Which skill fired is read from the `Skill` tool
 calls in `--output-format stream-json`, not from the prose.
 
-The session's posture is the one a careful user has: **reads approved, writes to Jira absent from
-the allowlist entirely** rather than listed as denied, so a skill that tried to write would be
-stopped by the harness rather than by its own gate. That is what makes this safe to point at a real
-project.
+The session's posture was meant to be the one a careful user has: reads approved, writes to Jira
+absent from the allowlist.
+
+> **This paragraph made a claim that is false, and it is corrected rather than deleted because the
+> run above was performed under it.** It said a skill that tried to write would be stopped by the
+> harness rather than by its own gate, and that this is what made the run safe to point at a real
+> project. **Omitting a tool from `--allowedTools` does not deny it.** `gate-1`, run later the same
+> day, called `mcp__atlassian__createJiraIssue` — absent from that allowlist — and it succeeded,
+> creating `ST-7`.
+>
+> Nothing in the run recorded above wrote anything, which is a fact about what those twenty-one
+> fixtures attempted and not about the harness. The only thing protecting the project was the
+> skills' own draft gates.
+>
+> `--disallowedTools` does deny, and it wins over `--allowedTools` — proved with a tool named in
+> both, on a harmless read rather than on a write. Later runs use both lists. See
+> `gate-and-ordering.md` in this directory.
 
 The sandbox is `ST` (scrum-test-space), with an active sprint opened for this run — `ST Sprint 2`,
 holding `ST-2`. The project profile was produced by running `jira-init`, not written by hand: the
