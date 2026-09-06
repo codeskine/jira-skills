@@ -119,14 +119,14 @@ substitution is avoided, but that it stops being invisible.
 
 ## What to run, and why these
 
-Eighteen of the sixty-seven. The `selection` category has thirty-seven fixtures and nearly all of
+Twenty-one of the seventy-six. The `selection` category has thirty-seven fixtures and nearly all of
 them touch a description that changed, so "only the ones at risk" saves nothing — the list below is
 chosen by what each fixture **decides**, and every entry brings its matched pair.
 
 **The `handover` category — all of it.** Added by #76 and run once, on the `-p` route, which saw
 the first element of each sequence and none of the seconds. `hand-4` is the one to watch: it is
 `hand-1` with the second intent removed, it fails if the plugin has learned to announce a successor
-every time, and it is the only one a `-p` run decides whole. Five of the eight carry a
+every time, and it is the only one a `-p` run decides whole. Five of the nine carry a
 `precondition` a `-p` run cannot satisfy at all.
 
 | Fixture  | What it pins                                                | Precondition |
@@ -137,6 +137,7 @@ every time, and it is the only one a `-p` run decides whole. Five of the eight c
 | `hand-4` | the single-intent twin, which must produce **no** successor | none         |
 | `hand-5` | a fix version read, a sprint changed                        | sprint       |
 | `hand-6` | its mirror — a sprint read, a fix version changed           | sprint       |
+| `hand-7` | the intake floor on the debt axis                           | none         |
 
 Two more joined the category with #83, and they are the reason it now carries the intake floor.
 `sel-capture-3` and `sel-capture-6` were `selection` fixtures asserting that `jira-diagnose` must
@@ -149,7 +150,10 @@ handover is what must hold.
 | `sel-capture-3` | a relayed fault whose symptom reads as a gesture at reproduction  | none         |
 | `sel-capture-6` | the same, with the environment named precisely and still no steps | none         |
 
-Those two need nothing beyond a profile: intake writes a work item and plans nothing.
+Those two need nothing beyond a profile: intake writes a work item and plans nothing, and `hand-7`
+is the same shape on the debt axis. Four of the nine are therefore runnable without a sprint —
+`hand-4`, `hand-7`, `sel-capture-3` and `sel-capture-6` — which is worth knowing when a sandbox has
+no active sprint and one cannot be made.
 
 **Twelve `selection` fixtures**, in six pairs that each move one variable:
 

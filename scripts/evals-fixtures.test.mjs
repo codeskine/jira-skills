@@ -8,7 +8,11 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 
-import { validateFixture, validateFixtures } from "./evals-fixtures.mjs";
+import {
+  validateFixture,
+  validateFixtures,
+  validateProcedureLists,
+} from "./evals-fixtures.mjs";
 
 /** A fixture that passes every rule. Each case breaks exactly one thing in it. */
 const VALID = {
@@ -190,4 +194,60 @@ test("without a skill list the check is skipped rather than guessed", () => {
     validateFixture(swapping({ expect_skill: "jira-gone" })),
     [],
   );
+});
+
+// --- the procedure has to name every handover fixture -----------------------------------------
+//
+// The category is small enough that the procedure lists its members by name, and a runner works
+// from that list rather than from the file. A fixture in one and not the other is invisible: the
+// suite says it exists, the procedure never asks for it, and a run reports a clean sweep of a set
+// that was short by one. That is exactly how hand-7 was added and not run.
+
+const HANDOVER = (id) => ({
+  id,
+  category: "handover",
+  prompt: "Something.",
+  expect_sequence: ["jira-refine", "jira-plan"],
+});
+
+test("a handover fixture the procedure names passes", () => {
+  assert.deepEqual(
+    validateProcedureLists(
+      [HANDOVER("hand-1")],
+      "… | `hand-1` | the plain composite |",
+    ),
+    [],
+  );
+});
+
+test("a handover fixture the procedure never names is caught", () => {
+  assert.deepEqual(
+    validateProcedureLists([HANDOVER("hand-9")], "no list here"),
+    [
+      'handover fixture "hand-9" is in no list the verification procedure gives a runner',
+    ],
+  );
+});
+
+test("every missing one is reported, not only the first", () => {
+  const errors = validateProcedureLists(
+    [HANDOVER("hand-8"), HANDOVER("hand-9")],
+    "no list here",
+  );
+  assert.equal(errors.length, 2, JSON.stringify(errors));
+});
+
+test("fixtures of other categories are not required to appear", () => {
+  // selection and ordering are chosen by pairs and by what each decides, not enumerated whole,
+  // so requiring every id would fail on a list that is deliberately partial.
+  const other = {
+    id: "sel-plan-9",
+    category: "selection",
+    prompt: "Something.",
+  };
+  assert.deepEqual(validateProcedureLists([other], "no list here"), []);
+});
+
+test("a procedure that cannot be read is skipped rather than failed", () => {
+  assert.deepEqual(validateProcedureLists([HANDOVER("hand-9")], null), []);
 });
