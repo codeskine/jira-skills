@@ -674,6 +674,28 @@
       "setup": "No .jira/project-profile.md exists.",
       "expect": "Discovery runs in full and the profile is presented for approval before it is written. The scope check does not fire: this request is the setup itself.",
       "why": "The guard on order-18. A skill that answered narrowly whenever a fix version was mentioned would pass that fixture and fail this one, which is the same relationship sel-diagnose-4 has to the intake floor and hand-4 to the handover contract. Every step added to keep a skill from overreaching needs the twin that keeps it from underreaching."
+    },
+    {
+      "id": "hand-5",
+      "category": "handover",
+      "prompt": "What's in 1.0 so far? Anything not started, take it out of the current sprint.",
+      "expect_sequence": [
+        "jira-inspect",
+        "jira-plan"
+      ],
+      "expect": "The fix version is read and answered first — by the skill that owns reading what a fix version holds, not by the one that owns the version itself. The sprint removal is named at that gate as the intent this answer does not satisfy, and jira-plan is entered for it with a gate of its own. Reading the fix version and then emptying the sprint in one approval is the failure.",
+      "why": "A read of one container and a change to another. Both jira-plan and jira-release carry a formula making a read-then-change of the same container one operation, and read loosely those formulas collide head-on with no tiebreak. The anaphora is explicit — \"that same sprint\", \"that same fix version\" — so a cross falls through to the ordinary multi-intent rule, which already ordered a read before the write it conditions. The first element is jira-inspect and not jira-release because jira-release disclaims exactly this read: \"what one holds ... read without changing anything\". Its mirror is hand-6, which had it right while this one did not."
+    },
+    {
+      "id": "hand-6",
+      "category": "handover",
+      "prompt": "What's in the current sprint? Put it all in 1.0.",
+      "expect_sequence": [
+        "jira-inspect",
+        "jira-release"
+      ],
+      "expect": "The sprint is read and answered first, then the fix version assignment is named at the gate and jira-release is entered for it. The direction is the only thing that differs from hand-5, and it must not change the shape of the answer.",
+      "why": "hand-5's mirror, which the issue noted nobody had ever hit. A rule that held in one direction and not the other would be a coincidence of wording rather than a rule, and only the pair can tell those apart. The sprint read belongs to jira-inspect since #71, so this also pins that the cross does not drag the read back into jira-plan."
     }
   ]
 }
