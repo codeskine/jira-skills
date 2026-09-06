@@ -26,6 +26,10 @@ First, before anything is asked or proposed, as
 [discovery](../shared/references/discovery.md) requires. It records the fix versions this
 project has and their state.
 
+Where the user's words leave which question they asked open — "is 4.10 done?", "what is
+the state of it?" — resolve that before answering, as
+[discovery](../shared/references/discovery.md) § Resolving which question was asked requires.
+
 Where the user named a container — `2.4`, `To Do`, `Backlog` — resolve it against the profile
 before doing anything with it, as [discovery](../shared/references/discovery.md) § Resolving a
 container the user named requires. A name is not a kind, and routing settled which skill fires

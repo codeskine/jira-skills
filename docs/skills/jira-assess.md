@@ -55,24 +55,33 @@ if nothing is done. Debt is what works and costs, and the distinction has to sur
 only ever sees the finished work item, so it is settled before the other questions rather than
 implied by them.
 
-**3 · It asks three questions.** What deferring it costs — whose time, how often, and what it
+**3 · Where the debt was relayed, it checks the material before it asks you anything.** You
+forwarded an email; you did not weigh the debt. So it reads what arrived rather than putting
+questions to you about it. Anything about what deferring costs — a consequence, a date past which
+something stops working, a count of the hours or the people — and it carries on here. Nothing at
+all, and it says what is missing and hands the request to [`jira-capture`](jira-capture.md).
+Naming the module, the library or who took the shortcut says what the debt **is**; the question
+this skill exists to answer is what leaving it does, and being asked to price something you did
+not weigh produces a number with no owner.
+
+**4 · It asks three questions.** What deferring it costs — whose time, how often, and what it
 makes slower or riskier; not the phrase "technical debt" but the toll being paid. What the
 options are, including doing nothing and including the cheap partial one, because options make
 this a decision where a single proposal makes it a demand. And what the technical impact is: what
 this touches, and what it constrains for as long as it stands.
 
-**4 · It measures what it claims.** Size, slowness, frequency and risk arrive with the number and
+**5 · It measures what it claims.** Size, slowness, frequency and risk arrive with the number and
 how it was obtained. "Slow", "fragile" and "a lot" are the adjectives that lose the argument.
 Where a claim cannot be measured, the record says what would have to be measured to settle it —
 naming the missing number is useful on its own, and it is often a smaller piece of work than the
 debt.
 
-**5 · It chooses a work type from your project, not from a list it carries.** Expect there to be
+**6 · It chooses a work type from your project, not from a list it carries.** Expect there to be
 no work type for debt at all: a project that separates debt from other work by work type is the
 exception. When that is the case the skill files the record under another type and the artifact
 itself says which intent it serves, so the distinction is not lost.
 
-**6 · Then the draft gate.** The complete record appears in chat with the decisions it carries —
+**7 · Then the draft gate.** The complete record appears in chat with the decisions it carries —
 title, work type, parent, anything the project marks required and the draft left empty. You
 approve, or you ask for changes and see it again. This skill adds one thing to the gate: it
 states which option the record recommends, if any, and that recommending is not deciding.

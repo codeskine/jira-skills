@@ -111,6 +111,22 @@ And if you name a container no skill owns — a board, usually — it says so. A
 over work items; nothing either channel offers takes a work item off one. You get that as a plain
 answer rather than the nearest operation that happens to be possible.
 
+### And a word does not always say which question you asked
+
+The same thing one level up. _"Is 4.10 done?"_ asks either whether the version has gone out, or
+whether the work in it is finished — two questions, two different skills, and the word "done"
+belongs to neither list.
+
+No wording fixes this, and it is worth saying why rather than promising a better description next
+time: naming the category a word belongs to does not add the word to it. A description that says it
+owns _the fix version itself rather than the work inside it_ is still mute on "done", because a
+request fails to route when its words match no member, and nobody can anticipate every synonym.
+
+So you get asked. The skill names both readings and says what each would answer, and it does not
+pick the more common one — the two answers belong to different skills, and choosing your own is
+guessing with the appearance of knowing. Being asked costs you a line. Being answered the other
+question costs you believing something you were never told.
+
 <!-- shot:SHOT-01 pending -->
 
 > **SHOT-01** · screenshot to capture — `jira-init` presenting what it discovered, immediately

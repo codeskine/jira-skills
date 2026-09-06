@@ -115,6 +115,23 @@ board è un filtro sui work item; niente di quello che i due channel offrono tog
 una board. Lo ottieni come risposta netta invece che come l'operazione più vicina fra quelle
 possibili.
 
+### E una parola non sempre dice quale domanda hai fatto
+
+La stessa cosa un livello più su. _«La 1.0 è finita?»_ chiede o se la version è uscita, o se il
+lavoro dentro è concluso — due domande, due skill diverse, e la parola «finita» non sta in nessuno
+dei due elenchi.
+
+Nessuna formulazione lo risolve, e vale la pena dire perché invece di promettere una descrizione
+migliore la prossima volta: nominare la categoria a cui una parola appartiene non aggiunge la
+parola alla categoria. Una descrizione che dice di possedere _la fix version stessa e non il lavoro
+dentro_ resta muta su «finita», perché una richiesta non instrada quando le sue parole non
+combaciano con nessun membro, e nessuno può prevedere ogni sinonimo.
+
+Quindi te lo chiede. La skill nomina entrambe le letture e dice cosa risponderebbe ciascuna, e non
+sceglie la più comune — le due risposte appartengono a skill diverse, e scegliere la propria è
+tirare a indovinare con l'aria di sapere. Farti la domanda ti costa una riga. Risponderti all'altra
+domanda ti costa credere una cosa che non ti è mai stata detta.
+
 <!-- shot:SHOT-01 pending -->
 
 > **SHOT-01** · screenshot da catturare — `jira-init` che presenta quello che ha scoperto, subito

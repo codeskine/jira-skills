@@ -43,7 +43,9 @@ const pending = [];
 // Written but never tracked is the failure this project has already had once: docs/* is ignored
 // by default, so `git add -A` skips a new page in silence and the commit looks fine.
 const tracked = new Set(
-  execFileSync("git", ["ls-files", "docs", "README.md", "README.it.md"], { encoding: "utf8" })
+  execFileSync("git", ["ls-files", "docs", "README.md", "README.it.md"], {
+    encoding: "utf8",
+  })
     .split("\n")
     .filter(Boolean),
 );
@@ -72,23 +74,31 @@ const extras = [
 
 for (const [path, lang] of [...units, ...extras]) {
   if (!existsSync(path)) {
-    errors.push(`${path} is missing — every skill and every command needs both documents`);
+    errors.push(
+      `${path} is missing — every skill and every command needs both documents`,
+    );
     continue;
   }
   if (!tracked.has(path)) {
-    errors.push(`${path} exists but git does not track it — check .gitignore before committing`);
+    errors.push(
+      `${path} exists but git does not track it — check .gitignore before committing`,
+    );
   }
 
   const text = readFileSync(path, "utf8");
   const lines = text.split("\n");
 
-  if (!lines[0].startsWith("# ")) errors.push(`${path} does not open with an H1 title`);
+  if (!lines[0].startsWith("# "))
+    errors.push(`${path} does not open with an H1 title`);
 
   if (lang !== "prose") {
     for (const heading of SECTIONS[lang]) {
-      if (!lines.includes(heading)) errors.push(`${path} has no "${heading}" section`);
+      if (!lines.includes(heading))
+        errors.push(`${path} has no "${heading}" section`);
     }
-    const order = SECTIONS[lang].map((h) => lines.indexOf(h)).filter((i) => i !== -1);
+    const order = SECTIONS[lang]
+      .map((h) => lines.indexOf(h))
+      .filter((i) => i !== -1);
     if (order.some((value, i) => i > 0 && value < order[i - 1])) {
       errors.push(`${path} has its sections out of the contract's order`);
     }
@@ -99,7 +109,8 @@ for (const [path, lang] of [...units, ...extras]) {
 
   // A fence opens and closes with the same run of backticks; an odd count means one is open.
   const fences = lines.filter((line) => /^`{3,}/.test(line)).length;
-  if (fences % 2 !== 0) errors.push(`${path} leaves a code fence open (${fences} fence lines)`);
+  if (fences % 2 !== 0)
+    errors.push(`${path} leaves a code fence open (${fences} fence lines)`);
 
   for (const shot of text.matchAll(/<!--\s*shot:(\S+)\s+pending\s*-->/g)) {
     pending.push(`${path}: ${shot[1]}`);
@@ -108,7 +119,8 @@ for (const [path, lang] of [...units, ...extras]) {
   for (const link of text.matchAll(/]\((?!https?:|mailto:|#)([^)\s]+)\)/g)) {
     const target = normalize(join(dirname(path), link[1].split("#")[0]));
     if (!target || target.startsWith("..")) continue;
-    if (!existsSync(target)) errors.push(`${path} links to ${link[1]}, which does not exist`);
+    if (!existsSync(target))
+      errors.push(`${path} links to ${link[1]}, which does not exist`);
     else if (statSync(target).isDirectory() && !link[1].endsWith("/")) {
       errors.push(`${path} links to ${link[1]}, which is a directory`);
     }
@@ -123,10 +135,14 @@ if (errors.length) {
 
 const strict = process.argv.includes("--strict");
 if (pending.length) {
-  const label = strict ? "Screenshots still pending" : "Screenshots pending (not a failure)";
+  const label = strict
+    ? "Screenshots still pending"
+    : "Screenshots pending (not a failure)";
   console[strict ? "error" : "log"](`${label}:`);
   for (const shot of pending) console[strict ? "error" : "log"](`  - ${shot}`);
   if (strict) process.exit(1);
 }
 
-console.log(`Documentation check passed: ${units.length / 2} units, ${units.length + extras.length} files.`);
+console.log(
+  `Documentation check passed: ${units.length / 2} units, ${units.length + extras.length} files.`,
+);
