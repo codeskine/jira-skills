@@ -39,13 +39,23 @@ keeps flaking"_ fits either description, so the skill establishes early that som
 fails today; if nothing does, it says so and stops rather than filing a defect that is really a
 risk.
 
-The boundary with [`jira-capture`](jira-capture.md) is decided by the material too. A fault
-relayed second-hand that carries the steps and the environment is a defect report and belongs
-here, whoever forwarded it. One that carries nothing anyone could act on to see it happen is
-intake: nobody present can answer what this skill is about to ask, and capture records it in the
-words it arrived in. That bar is not a checklist — an email naming the program it broke in and the
-version they run, with no steps and no error, is still intake — and it is not a completeness test either: partial material belongs here,
-and its gaps are what the questions below are for.
+The boundary with [`jira-capture`](jira-capture.md) is decided by the material too, and it is
+decided **inside this skill** rather than before it. A fault relayed second-hand that carries the
+steps or the error is a defect report and belongs here, whoever forwarded it. One that carries
+nothing anyone could act on to see it happen is intake: nobody present can answer what this skill
+is about to ask. So `jira-diagnose` may well be the skill that starts — and its third step reads
+what arrived, says what is missing, and hands the request to `jira-capture` before putting a single
+question to the person who forwarded it.
+
+That is deliberate, and it is a correction. The bar used to be stated as a refusal, on the
+assumption that a skill declining a request is enough to route it elsewhere. It is not: the
+mechanism that chooses a skill matches your words against each description on its own, and does not
+weigh one against its neighbour. A bar that only works when two descriptions are read side by side
+therefore has to live where the skill can apply it — after it fires.
+
+The bar is not a checklist: an email naming the program it broke in and the version they run, with
+no steps and no error, is still intake. It is not a completeness test either — partial material
+belongs here, and its gaps are what the questions below are for.
 
 ## How to use it
 
@@ -57,24 +67,32 @@ questions.
 stops and tells you to run `jira-init` — it does not guess. See
 [the development process](../development-process.md) for what the profile holds and why.
 
-**2 · It asks four questions, one at a time.** What you did, what you expected, what happened
+**2 · Where the fault was relayed, it checks the material before it asks you anything.** You
+forwarded an email; you did not see the fault. So it reads what arrived rather than putting
+questions to you about it. Steps, or an error copied exactly, and it carries on here. Neither, and
+it says what is missing and hands the request to [`jira-capture`](jira-capture.md) — which is the
+point of the check: being asked for reproduction steps you never had is a round trip through
+somebody who is not in the room. Reported first-hand, this does not apply; you can answer for the
+material yourself.
+
+**3 · It asks four questions, one at a time.** What you did, what you expected, what happened
 instead, and where. They are asked separately on purpose: answered all at once, people answer
 the interesting ones and skip the rest.
 
-**3 · It wants the error verbatim.** Copied, not retyped and not remembered. A paraphrase cannot
+**4 · It wants the error verbatim.** Copied, not retyped and not remembered. A paraphrase cannot
 be searched for, and searching for it is the first thing whoever picks this up will do. Where
 nothing was captured, the report says nothing was captured — it never reconstructs what the
 message probably said.
 
-**4 · It asks who is affected and how often.** These two decide urgency, and asking now means
+**5 · It asks who is affected and how often.** These two decide urgency, and asking now means
 triage is not a second conversation.
 
-**5 · It chooses a work type from your project, not from a list it carries.** Expect there to be
+**6 · It chooses a work type from your project, not from a list it carries.** Expect there to be
 no defect type at all: a project created from the current default scheme has none. When that is
 the case the skill files the report under another type and the artifact itself says which intent
 it serves, so the distinction is not lost.
 
-**6 · Then the draft gate.** The complete report appears in chat with the decisions it carries —
+**7 · Then the draft gate.** The complete report appears in chat with the decisions it carries —
 title, work type, parent, anything the project marks required and the draft left empty. You
 approve, or you ask for changes and see it again. This skill adds one thing to the gate: if the
 steps have not been walked through once as written, it says so, because steps that were

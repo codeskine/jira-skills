@@ -24,13 +24,14 @@
     },
     {
       "id": "sel-capture-3",
-      "category": "selection",
+      "category": "handover",
       "prompt": "A customer emailed: the invoice export has been breaking for two weeks and Excel opens the CSV mangled. Put it on Jira.",
-      "expect_skill": "jira-capture",
-      "expect_not": [
-        "jira-diagnose"
+      "expect_sequence": [
+        "jira-diagnose",
+        "jira-capture"
       ],
-      "why": "Content is a fault and provenance is intake; both fit entirely. The email names a product and carries a symptom, and neither steps nor the error itself, so it does not carry what a defect report asks for and capture takes precedence. Naming Excel does not clear the floor: the floor names what clears it, and where it ran is not on that list. This is the hardest of the family — three replay rounds routed it here and each called it the weakest call in the set, because \"Excel opens the CSV mangled\" is an actual result that can be read as a gesture at a reproduction path. What the floor does not fix is the minimum that counts as steps. Paired with sel-diagnose-3, the same fault reported first-hand; with sel-diagnose-4, the same fault relayed but arriving complete; and with sel-capture-6, the same fault relayed with the environment named properly and still nothing to work from."
+      "expect": "What must hold is the outcome, not the route: what reaches Jira is a raw intake record, and nobody is asked for steps the person relaying this does not have. jira-capture firing first and alone satisfies it. So does jira-diagnose firing and establishing at its third step that the material cannot answer for itself, then handing over. Asking the QA questions of the person who forwarded the email is the failure, whichever skill does it.",
+      "why": "Was a selection fixture asserting expect_not jira-diagnose, and both ends of its pair failed that way in the run of 2026-09-06 — an exclusion written as plainly as prose gets, disregarded by the live mechanism. #83 settled that the floor cannot live in a description the router never weighs against its neighbour, and moved it inside the skill. That makes jira-diagnose firing legitimate and the old assertion wrong. Content is a fault and provenance is intake; the email names a product and carries a symptom, and neither steps nor the error itself. The hardest of the family: \"Excel opens the CSV mangled\" is an actual result readable as a gesture at a reproduction path, which is #81 and still open. Paired with sel-diagnose-4, the same fault relayed but arriving complete."
     },
     {
       "id": "sel-capture-4",
@@ -54,13 +55,14 @@
     },
     {
       "id": "sel-capture-6",
-      "category": "selection",
+      "category": "handover",
       "prompt": "A customer emailed: invoicing has been mangling the CSV for a fortnight. They're on 4.9, in the production tenant. Put it on Jira.",
-      "expect_skill": "jira-capture",
-      "expect_not": [
-        "jira-diagnose"
+      "expect_sequence": [
+        "jira-diagnose",
+        "jira-capture"
       ],
-      "why": "sel-capture-3 with one variable moved: the environment is named properly — what they run and where — and there are still no steps and nothing that would let anyone else see the fault happen. It is intake, which is what pins the floor's enumeration as illustration rather than a list of fields to tick. Read as a conjunction requiring both halves to fail, this one would have to be a defect report."
+      "expect": "As sel-capture-3: a raw intake record reaches Jira and nobody is interrogated for steps they never had, whether jira-capture fires alone or jira-diagnose hands over. Naming the version and the tenant must not be read as clearing the floor — the environment given precisely is still not something anyone can act on to see the fault happen.",
+      "why": "sel-capture-3 with one variable moved: the environment is named properly, what they run and where, and there are still no steps and nothing that would let anyone else see it. It pins the floor's enumeration as illustration rather than fields to tick. In the run of 2026-09-06 jira-diagnose fired and then asked the user for the steps the floor says are absent, which is the half that is still a failure under #83's resolution and the half this fixture now names."
     },
     {
       "id": "sel-propose-1",
@@ -163,7 +165,7 @@
       "expect_not": [
         "jira-capture"
       ],
-      "why": "Relayed from outside like sel-capture-3, but the material arrives carrying the steps, the environment and the actual result. Precedence turns on what the material lacks, never on who typed it, so a complete fault report routes as one. Guards the reading where capture claims everything that came in by email."
+      "why": "Relayed from outside like sel-capture-3, but the material arrives carrying the steps, the environment and the actual result. Precedence turns on what the material lacks, never on who typed it, so a complete fault report routes as one and no handover is owed. Since #83 moved the intake floor inside jira-diagnose, this fixture carries a second job and it is the sharper one: it is the guard on the new step. A skill that handed over whenever material arrived second-hand would satisfy sel-capture-3 and sel-capture-6 and fail here, which is what hand-4 does for the handover contract. Its expect_not on jira-capture is the assertion that matters now."
     },
     {
       "id": "sel-assess-1",

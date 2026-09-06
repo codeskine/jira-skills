@@ -1,6 +1,6 @@
 ---
 name: jira-diagnose
-description: "Jira defect author. Use when the user reports that something is broken, behaves unexpectedly, or fails — and it has to reach Jira in a form someone who was not there can reproduce. Asks for the steps, the expected and the actual result, the environment, and carries the error or log verbatim. Not for something that works but will cost the team later (→ See codeskine/jira-skills@jira-assess), for something that works but serves its users poorly today (→ See codeskine/jira-skills@jira-propose), or for a fault relayed second-hand that carries nothing anyone could act on to see it happen — steps or a verbatim error clear that floor, naming the product or where it ran does not (→ See codeskine/jira-skills@jira-capture)."
+description: "Jira defect author. Use when the user reports that something is broken, behaves unexpectedly, or fails — and it has to reach Jira in a form someone who was not there can reproduce. Asks for the steps, the expected and the actual result, the environment, and carries the error or log verbatim. A fault relayed second-hand that carries neither steps nor an error copied exactly is intake — naming the product or where it ran does not clear that floor: this skill establishes it before asking anything, and hands it over rather than questioning somebody who was not there (→ See codeskine/jira-skills@jira-capture). Not for something that works but will cost the team later (→ See codeskine/jira-skills@jira-assess), or for something that works but serves its users poorly today (→ See codeskine/jira-skills@jira-propose)."
 user-invocable: true
 license: MIT
 compatibility: Designed for Claude Code. Requires the Atlassian MCP server configured as "atlassian".
@@ -34,7 +34,24 @@ team later — this is not a defect and belongs to `jira-assess`. Say so and sto
 The two intents are guarded from both sides on purpose: "this keeps flaking" fits either
 description, and a wrong turn caught here is cheaper than a backlog where the two are mixed.
 
-## 3. Ask what a QA Engineer asks
+## 3. Establish that the material can answer for itself
+
+Only where the fault was relayed — an email, a chat message, a ticket forwarded on. The person
+in front of you did not see it happen, so read what arrived before asking them anything.
+
+**Steps, or an error copied exactly, mean it can be reported here.** A product name, a version,
+where it ran, a symptom on its own: none of those let anyone else see the fault happen, however
+precisely they are given.
+
+Where neither is present this is intake, and it belongs to `jira-capture`. Name what is missing
+and hand over. **Do not put the questions in step 4 to the person relaying it** — they do not
+have the answers, and asking turns a record that costs a minute into a round trip through
+somebody who is not in the room.
+
+Reported first-hand, this step does not apply: the person can answer for the material, which is
+what step 4 is for.
+
+## 4. Ask what a QA Engineer asks
 
 - **What did you do?** The steps, in order, starting from a state someone else can reach. "Log
   in and it breaks" is one step short of useful at every point.
@@ -47,7 +64,7 @@ description, and a wrong turn caught here is cheaper than a backlog where the tw
 Ask each separately. A user answering all four at once answers the interesting ones and skips
 the rest.
 
-## 4. Take the error verbatim
+## 5. Take the error verbatim
 
 The exact error, log line or message, copied and not retyped. A paraphrase cannot be searched
 for, and searching for it is the first thing the person picking this up will do.
@@ -56,7 +73,7 @@ Where nothing was captured, say so as a gap rather than reconstructing what it p
 An invented error message is worse than none: it sends someone looking for a string that does
 not exist.
 
-## 5. Ask about impact and frequency
+## 6. Ask about impact and frequency
 
 - **Who is affected, and what can they not do?**
 - **How often?** Every time, sometimes, once. If it is intermittent, what was different when it
@@ -64,7 +81,7 @@ not exist.
 
 These two decide urgency, and asking now means triage is not a second conversation.
 
-## 6. Choose the work type
+## 7. Choose the work type
 
 Follow [choosing a work type](../shared/references/discovery.md). Defect types are the ones
 projects most often burden with required fields — severity, component, affected fix version.
@@ -74,17 +91,17 @@ them here rather than discovering them at the gate.
 Expect there to be no defect type. A project created from the current default scheme has none,
 so step 4 of the shared procedure is the common path here, not the exception.
 
-## 7. Assemble the artifact
+## 8. Assemble the artifact
 
 Fill [the template](assets/defect-report.md).
 
-## 8. Present and confirm
+## 9. Present and confirm
 
 Follow [the draft gate](../shared/references/draft-gate.md) in its **artifact** form. What this intent adds: if the steps
 have not been walked through once as written, say so at the gate. Steps that were
 remembered rather than replayed are the most common reason a defect cannot be reproduced.
 
-## 9. Write
+## 10. Write
 
 Through the tool the profile resolves for creating a work item; see
 [the channel map](../shared/references/channels.md).
