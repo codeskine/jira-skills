@@ -94,6 +94,49 @@ Read the `precondition` of every fixture on the list before opening the first se
 whose precondition is unmet does not fail — it is **unrun**, and recording it as a failure blames
 the plugin for the sandbox.
 
+### Fabricating a profile the sandbox cannot produce
+
+Nine `ordering` and `gate` fixtures assert what a skill does when the profile says something
+awkward — no board, statuses that were not observable at discovery, an operation with no tool, work
+types that cannot hold a split. **No `jira-init` writes any of those against a healthy project**, and
+the single-writer rule says only `jira-init` writes the profile.
+
+**A fixture may be given a hand-written profile.** The single-writer rule governs the plugin, not a
+test: it exists so that no skill silently repairs a profile another skill will read, and a fixture
+setting up a degraded state is not a skill. Without this, those nine cannot run at all, which is a
+worse outcome than a profile nobody's discovery produced.
+
+Five conditions, because a fabricated profile is a test double and behaves like one. The last two
+were learned by getting them wrong on the run that established this rule:
+
+1. **Start from a real one and change the least that makes the setup true.** Run `jira-init` against
+   the sandbox once, keep the result, and edit a copy. A profile invented whole tests the skill
+   against a document it will never meet.
+2. **Change only what the fixture's `setup` names.** A profile that also happens to lack a fix
+   version is a second variable nobody asked for, and a fixture that moves two variables says
+   nothing about either.
+3. **Keep the fabricated profile internally consistent.** Changing one section and leaving another
+   contradicting it produces a document no discovery would write, and a skill reading it has to
+   choose which half to believe. `order-13`'s first fabrication said the hierarchy was flat while
+   the work types table still listed parents; the run flagged the contradiction and picked a side,
+   which is graceful behaviour covering for a broken setup.
+4. **The project is a variable too, and it is the one that gets forgotten.** A profile saying an
+   operation is unsupported, run against a project where that operation was impossible anyway, moves
+   two variables and decides nothing. `order-9` declared setting a parent unsupported and ran
+   against a project holding no parent to set; the skill named the second reason, and the fixture
+   could not be graded either way.
+5. **Record the diff in the run record**, as the substitution table records substitutions. What was
+   changed is the setup, and a reader who cannot see it cannot tell a result from a coincidence.
+
+And the limit worth knowing before starting: **a profile cannot fabricate Jira.** `order-12` needs
+the profile to say statuses were unobservable _and_ Jira to refuse a transition; `order-6` needs the
+profile to record the Agile channel unreachable _and_ the channel to actually be down. Fabricating
+the profile half of those leaves a world the skill correctly reports as inconsistent — which is the
+skill working and the fixture unrun.
+
+Put the fabricated copy in the scratch repository the run uses and leave the real one alone. It is
+the profile the skill reads, so it is the whole of the setup — nothing else has to be arranged.
+
 ### Substituting what your project does not have
 
 "Paste it verbatim" and "the entity has to exist" pull against each other, and the fixtures were

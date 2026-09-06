@@ -402,18 +402,18 @@
     {
       "id": "order-2",
       "category": "ordering",
-      "prompt": "Create a work item for this request.",
+      "prompt": "Create a work item for this request: the monthly export comes back empty whenever the range crosses a month.",
       "setup": "A profile exists and lists creating a work item among its unsupported operations.",
       "expect": "The unsupported operation is announced before any question is asked, with the manual path the profile records.",
-      "why": "Discovery requires the gap to be announced first, not discovered at the write."
+      "why": "Discovery requires the gap to be announced first, not discovered at the write. The prompt carried a dangling deictic until the run of 2026-09-06, when both sessions asked what \"this\" referred to and no skill fired. A referent was added: the variable this fixture moves is in its setup, and a prompt that cannot fire tests nothing."
     },
     {
       "id": "order-3",
       "category": "ordering",
-      "prompt": "Put this on the backlog as a story.",
+      "prompt": "Put this on the backlog as a story: customers should be able to save a basket and come back to it.",
       "setup": "A profile exists whose work types do not include one named story.",
       "expect": "Only the types the profile reports are offered. A type the project does not have is not created, not substituted silently, and not assumed to exist under another name without saying so.",
-      "why": "The user naming a work type does not make it exist."
+      "why": "The user naming a work type does not make it exist. The prompt carried a dangling deictic until the run of 2026-09-06, when both sessions asked what \"this\" referred to and no skill fired. A referent was added: the variable this fixture moves is in its setup, and a prompt that cannot fire tests nothing."
     },
     {
       "id": "order-4",
