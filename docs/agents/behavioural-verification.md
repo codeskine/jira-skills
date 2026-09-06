@@ -59,24 +59,28 @@ second was never named at the first gate has failed it, however right the final 
 
 ### What a `handover` result means, and under which run
 
-The second skill of a sequence runs only after the first one's draft gate is approved, so **how the
-run is driven decides what the category can say**. Both modes are legitimate; they verify different
-amounts and a result has to say which was used.
+What a result covers is decided by **whether the first element reaches a gate**, which is a property
+of the fixture rather than of how the run is driven. Established by observation on 2026-09-06, and
+recorded here because an earlier reading of this section claimed a `-p` run could never see a second
+element at all:
 
-| Driven                        | What it verifies                                                    |
-| ----------------------------- | ------------------------------------------------------------------- |
-| **Interactively**, as above   | the whole sequence, if the fixture's `precondition` is met          |
-| **`claude -p`**, one per case | the first element, and what the first gate names — never the second |
+| The first element                           | The second, under `-p`      | Fixtures                               |
+| ------------------------------------------- | --------------------------- | -------------------------------------- |
+| writes, so its draft gate ends the turn     | never reached               | `hand-1`, `hand-3`                     |
+| never writes, or hands over before its gate | **entered, and observable** | `hand-2`, `hand-5`, `hand-6`, `hand-7` |
 
-That is not a shortcoming of the plugin. The gate ends the turn and a `-p` invocation has nobody to
-approve it, which is invariant 3 working. But a run of 2026-09-06 reported `handover` **4/4** on the
-`-p` route, and three of those four assert a second element it could not have seen. The number was
-true of what it measured and misleading about what it meant. **A `-p` run reports at most "the first
-element and the announcement", and says which it is.**
+`jira-inspect` never writes, so there is no gate to stop at: it answers and the successor is
+entered. `jira-assess` hands over at its third step, before the questions and long before its gate.
+`jira-refine` writes, so the turn ends there — invariant 3 working, not failing.
 
-`hand-4` is the exception and the reason it exists: its sequence has one element and asserts that
-**nothing** follows, so `-p` verifies it whole. It is also the only handover fixture a `-p` run can
-fully decide, which is worth knowing before reading a green line.
+What a `-p` run still cannot see is the **write** at the end of a sequence, which needs an approval
+it has nobody to ask for. Driven interactively, that is observable too wherever the fixture's
+`precondition` is met.
+
+`hand-4` is the one fixture whose whole claim `-p` decides by construction: its sequence has one
+element and asserts that **nothing** follows. Worth knowing before reading a green line — an earlier
+run reported `handover` **4/4** on this route while three of those four asserted a second element it
+had not observed, a number true of what it measured and misleading about what it meant.
 
 ### The precondition a sequence needs
 
@@ -119,14 +123,14 @@ substitution is avoided, but that it stops being invisible.
 
 ## What to run, and why these
 
-Eighteen of the sixty-seven. The `selection` category has thirty-seven fixtures and nearly all of
+Twenty-one of the seventy-six. The `selection` category has thirty-seven fixtures and nearly all of
 them touch a description that changed, so "only the ones at risk" saves nothing — the list below is
 chosen by what each fixture **decides**, and every entry brings its matched pair.
 
 **The `handover` category — all of it.** Added by #76 and run once, on the `-p` route, which saw
 the first element of each sequence and none of the seconds. `hand-4` is the one to watch: it is
 `hand-1` with the second intent removed, it fails if the plugin has learned to announce a successor
-every time, and it is the only one a `-p` run decides whole. Five of the eight carry a
+every time, and it is the only one a `-p` run decides whole. Five of the nine carry a
 `precondition` a `-p` run cannot satisfy at all.
 
 | Fixture  | What it pins                                                | Precondition |
@@ -137,6 +141,7 @@ every time, and it is the only one a `-p` run decides whole. Five of the eight c
 | `hand-4` | the single-intent twin, which must produce **no** successor | none         |
 | `hand-5` | a fix version read, a sprint changed                        | sprint       |
 | `hand-6` | its mirror — a sprint read, a fix version changed           | sprint       |
+| `hand-7` | the intake floor on the debt axis                           | none         |
 
 Two more joined the category with #83, and they are the reason it now carries the intake floor.
 `sel-capture-3` and `sel-capture-6` were `selection` fixtures asserting that `jira-diagnose` must
@@ -149,7 +154,10 @@ handover is what must hold.
 | `sel-capture-3` | a relayed fault whose symptom reads as a gesture at reproduction  | none         |
 | `sel-capture-6` | the same, with the environment named precisely and still no steps | none         |
 
-Those two need nothing beyond a profile: intake writes a work item and plans nothing.
+Those two need nothing beyond a profile: intake writes a work item and plans nothing, and `hand-7`
+is the same shape on the debt axis. Four of the nine are therefore runnable without a sprint —
+`hand-4`, `hand-7`, `sel-capture-3` and `sel-capture-6` — which is worth knowing when a sandbox has
+no active sprint and one cannot be made.
 
 **Twelve `selection` fixtures**, in six pairs that each move one variable:
 

@@ -79,6 +79,28 @@ export function validateFixture(fixture, known = null) {
 }
 
 /**
+ * The `handover` category is small enough that the procedure lists every member by name, and a
+ * runner works from that list rather than from the file. A fixture added to one and not the other
+ * is invisible: the suite says it exists, the procedure never asks for it, and a run reports a
+ * clean sweep of a set that was short by one. That is how `hand-7` was added and not run.
+ *
+ * @param fixtures the parsed `evals` array.
+ * @param procedure the text of docs/agents/behavioural-verification.md.
+ * @returns every handover fixture the procedure does not name.
+ */
+export function validateProcedureLists(fixtures, procedure) {
+  if (!Array.isArray(fixtures) || typeof procedure !== "string") return [];
+
+  return fixtures
+    .filter((f) => f?.category === "handover" && typeof f.id === "string")
+    .filter((f) => !procedure.includes(f.id))
+    .map(
+      (f) =>
+        `handover fixture "${f.id}" is in no list the verification procedure gives a runner`,
+    );
+}
+
+/**
  * @param file the parsed contents of evals/evals.json.
  * @param skills the skill names that exist, or null to skip that check.
  * @returns every problem found, each prefixed with the fixture it belongs to.

@@ -7,7 +7,7 @@
 import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 
-import { validateFixtures } from "./evals-fixtures.mjs";
+import { validateFixtures, validateProcedureLists } from "./evals-fixtures.mjs";
 import { validateManifestSkills } from "./plugin-manifest.mjs";
 import { validateCommand, validateSkill } from "./skill-frontmatter.mjs";
 
@@ -77,9 +77,18 @@ for (const file of commands) {
 
 // The fixtures do not ship, but a run graded against a malformed one reports a result nobody can
 // reproduce, which is worse than a failing check.
+const PROCEDURE = "docs/agents/behavioural-verification.md";
 if (existsSync("evals/evals.json")) {
-  for (const error of validateFixtures(read("evals/evals.json"), declared))
+  const file = read("evals/evals.json");
+  for (const error of validateFixtures(file, declared))
     errors.push(`evals/evals.json: ${error}`);
+
+  if (existsSync(PROCEDURE))
+    for (const error of validateProcedureLists(
+      file.evals,
+      readFileSync(PROCEDURE, "utf8"),
+    ))
+      errors.push(`${PROCEDURE}: ${error}`);
 }
 
 // What the plugin ships is what the repository tracks, and a `.mcp.json` at the plugin root is
