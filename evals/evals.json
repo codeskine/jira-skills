@@ -642,6 +642,22 @@
         "jira-inspect"
       ],
       "why": "The bare listing, asked of nothing inside a fix version. jira-inspect's exclusion enumerated assigning to one and whether one has been released or archived, and forgot the list — so only its broad phrase reached this, which is the axis covering for a member somebody left out rather than catching a synonym. The enumeration now names it. jira-init is deliberately absent from expect_not: it claims the same question through discovery and neither description disclaims the other, which is #84 and undecided. Asserting it here would settle by fixture what nobody has settled by text."
+    },
+    {
+      "id": "order-16",
+      "category": "ordering",
+      "prompt": "Take ST-1 out of 2.4.",
+      "setup": "The profile lists a sprint named 2.4 and a fix version named 2.4. Nothing in the request says which.",
+      "expect": "Whichever skill fired asks which 2.4 was meant, naming both and what each removal would do, and writes nothing until it is told. It does not resolve the ambiguity toward the container it happens to own, and it does not pick the more common reading.",
+      "why": "Routing chose a skill before any profile was read, so it could not have known which kind 2.4 is. The skill can: it holds the profile by its first step. The failure this guards is a skill answering in its own favour, which looks like confidence and is a coin toss."
+    },
+    {
+      "id": "order-17",
+      "category": "ordering",
+      "prompt": "Take ST-1 off the board entirely.",
+      "setup": "A profile exists and lists the project's boards.",
+      "expect": "The skill says a board is a filter over work items and that neither channel exposes taking one off it — a declared gap, stated as such. It does not substitute the nearest possible operation: not a sprint removal, not a backlog placement, not a transition.",
+      "why": "The container named falls outside the set any skill owns. A keyword matcher sends this to jira-plan on the word board with false confidence, and the harm is not the routing but what happens next: a plausible neighbouring write, performed on a request nobody made. Pairs with order-16, which moves the other variable — there the kind is ambiguous, here it is clear and unowned."
     }
   ]
 }

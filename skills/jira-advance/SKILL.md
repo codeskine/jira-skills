@@ -20,6 +20,11 @@ It obeys [the discovery contract](../shared/references/discovery.md) and
 
 First, as [discovery](../shared/references/discovery.md) requires.
 
+Where the user named a container — `2.4`, `To Do`, `Backlog` — resolve it against the profile
+before doing anything with it, as [discovery](../shared/references/discovery.md) § Resolving a
+container the user named requires. A name is not a kind, and routing settled which skill fires
+without knowing which kind was meant.
+
 The profile records the shape of the Jira Workflow. It is **not** the source of truth for what
 this item can do right now, and this skill never proposes a transition from it.
 

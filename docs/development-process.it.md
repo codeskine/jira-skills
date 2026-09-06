@@ -95,6 +95,26 @@ L'invalidazione è esplicita, mai a tempo. Riesegui `jira-init` quando lo schema
 viene aggiunto uno status o una transition, o quando compare una board o una fix version che il
 project profile non elenca.
 
+### Un nome non è un genere
+
+Sprint, fix version e status sono tutti soltanto nomi, e un nome non dice di che genere sia. `2.4`
+è plausibile come sprint quanto come fix version. `To Do` è uno status nel tuo progetto e una
+colonna di board in quello di qualcun altro. `Backlog` è una collocazione, e in certi schemi anche
+uno status.
+
+Niente nelle parole che usi può deciderlo, e il plugin non finge il contrario. La skill che scatta
+legge prima il tuo profile, e solo allora sa cos'è `2.4` nel **tuo** progetto. Se combacia un
+genere solo, prosegue e la domanda non la vedi nemmeno. Se ne combaciano due, ti chiede quale
+intendevi e dice cosa farebbe ciascuna — non risolve l'ambiguità a favore del genere che possiede,
+il che sembrerebbe sicurezza e sarebbe un lancio di moneta. Se non ne combacia nessuno, ti dice
+cosa il tuo progetto ha davvero, perché un nome che non c'è è più spesso un refuso o un profile
+vecchio che una cosa da andare a creare.
+
+E se nomini un contenitore che nessuna skill possiede — una board, di solito — te lo dice. Una
+board è un filtro sui work item; niente di quello che i due channel offrono toglie un work item da
+una board. Lo ottieni come risposta netta invece che come l'operazione più vicina fra quelle
+possibili.
+
 <!-- shot:SHOT-01 pending -->
 
 > **SHOT-01** · screenshot da catturare — `jira-init` che presenta quello che ha scoperto, subito
