@@ -313,15 +313,9 @@ The hierarchy is the clearest case. A parent and its children are queryable on J
 writes a list of children into a description: a list maintained by hand is a second answer that
 will eventually disagree with the first.
 
-<!-- shot:SHOT-03 pending -->
+![The work item as Jira shows it: the work type, the parent and the sprint are Jira's own fields, and the plugin invented none of them.](assets/shot-03-work-item.png)
 
-> **SHOT-03** · screenshot to capture — the resulting work item in Jira after a write: the work
-> type, the parent, and the sprint as Jira itself shows them, with no field the plugin invented.
-
-<!-- shot:SHOT-04 pending -->
-
-> **SHOT-04** · screenshot to capture — a parent with its children in Jira's own hierarchy view,
-> after a decomposition by `jira-refine`, showing that nothing maintains that list by hand.
+![A parent and its children in Jira's own hierarchy view, after a decomposition: nothing maintains that list by hand.](assets/shot-04-hierarchy.png)
 
 ---
 
