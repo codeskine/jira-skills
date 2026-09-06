@@ -630,6 +630,16 @@
       "setup": "No tool from the atlassian server answers in this session, and `claude mcp list` shows a row named exactly `atlassian`, connected.",
       "expect": "The MCP check is reported as indeterminate rather than failed: both observations named, no cause asserted, and the cheapest thing to try offered as a suggestion. Steps 2 and 3 still run, and the report carries all three checks.",
       "why": "A health check that halts on a state it cannot resolve costs the user the work it could have reported alongside. Step 2 already carried this discipline and Step 1 did not, which is why the halt was invisible."
+    },
+    {
+      "id": "sel-release-4",
+      "category": "selection",
+      "prompt": "Which fix versions does this project have?",
+      "expect_skill": "jira-release",
+      "expect_not": [
+        "jira-inspect"
+      ],
+      "why": "The bare listing, asked of nothing inside a fix version. jira-inspect's exclusion enumerated assigning to one and whether one has been released or archived, and forgot the list — so only its broad phrase reached this, which is the axis covering for a member somebody left out rather than catching a synonym. The enumeration now names it. jira-init is deliberately absent from expect_not: it claims the same question through discovery and neither description disclaims the other, which is #84 and undecided. Asserting it here would settle by fixture what nobody has settled by text."
     }
   ]
 }

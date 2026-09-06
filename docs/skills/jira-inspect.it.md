@@ -35,6 +35,7 @@ Si attiva quando vuoi una risposta, non un cambiamento.
 | «cosa manca prima di poter rilasciare la 2.4?» | `jira-inspect`                       |
 | «assegna questi alla 2.4»                      | [`jira-release`](jira-release.it.md) |
 | «cosa c'è nella 2.4? mettici anche questi due» | [`jira-release`](jira-release.it.md) |
+| «quali fix version ha questo progetto?»        | [`jira-release`](jira-release.it.md) |
 
 Le fix version erano l'unica vera sovrapposizione, e non lo sono più. Il confine è su cosa verte la
 domanda: il lavoro **dentro** una fix version — cosa contiene, quanto di quello è ancora aperto — è

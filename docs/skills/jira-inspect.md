@@ -34,6 +34,7 @@ It fires when you want an answer, not a change.
 | "what still has to land before we ship 2.4?" | `jira-inspect`                    |
 | "assign these to 2.4"                        | [`jira-release`](jira-release.md) |
 | "what's in 2.4? add these two as well"       | [`jira-release`](jira-release.md) |
+| "which fix versions does this project have?" | [`jira-release`](jira-release.md) |
 
 Fix versions used to be the one genuine overlap, and they are not any more. The line is what the
 question is _about_: the work **inside** a fix version — what it holds, how much of it is still
