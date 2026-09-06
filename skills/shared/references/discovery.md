@@ -109,6 +109,32 @@ first step, with the profile already in hand.
 Resolve before acting, never after. "Which 2.4 did you mean" is cheap before a write and expensive
 once one has happened.
 
+## Resolving which question was asked
+
+The same problem one level up. A container's name does not say its kind; a question's words do not
+always say its subject.
+
+_"Is 4.10 done?"_ asks either whether the fix version has been released, or whether the work
+assigned to it is finished. _"What is the state of 4.10?"_ and _"where is 4.10 up to?"_ are the
+same sentence twice. Two skills own the two answers, each names its own side, and a user who says
+"done" has used a word on neither list.
+
+Naming the axis does not fix it. A description can say it owns _the fix version itself rather than
+the work inside it_ and still be mute on "done", because **naming the set a member belongs to does
+not add a member to the set.** A request fails to route when its words match no member, and there
+is no wording that anticipates every synonym a user has.
+
+So the answer is the same as for a container, and it is deliberately not a wording:
+
+1. **The skill that fired asks which was meant**, naming both readings and what each would answer.
+2. **It does not pick the more common one.** The two readings belong to different skills, and a
+   skill resolving toward its own is guessing with the appearance of knowing.
+3. **Where the answer is the other skill's, hand over** rather than answering approximately.
+
+Being asked "which did you mean" costs one line. Being answered the other question costs a reader
+who believes they were told something they were not, and a plugin whose every write is gated can
+afford the question.
+
 ## Choosing a work type
 
 Every authoring skill reaches this point and does the same thing with it.

@@ -39,9 +39,18 @@ description, and a wrong turn caught here is cheaper than a backlog where the tw
 Only where the fault was relayed — an email, a chat message, a ticket forwarded on. The person
 in front of you did not see it happen, so read what arrived before asking them anything.
 
-**Steps, or an error copied exactly, mean it can be reported here.** A product name, a version,
-where it ran, a symptom on its own: none of those let anyone else see the fault happen, however
-precisely they are given.
+**Steps, or an error copied exactly, mean it can be reported here.**
+
+Steps means an action, its result, **and a starting point someone else can reach**. All three, or
+it is not a reproduction path: _"it comes out wrong"_ is a result with no action, and _"Excel opens
+the CSV mangled"_ is an action and a result with no way to obtain the CSV. The third is the one
+that gets skipped, and it is the one that decides whether a stranger can make the fault happen.
+
+An error copied exactly is a string a reader could paste into a search. Length is not the test and
+a bare identifier can pass it; a paraphrase cannot, however long.
+
+A product name, a version, where it ran, a symptom on its own: none of those let anyone else see
+the fault happen, however precisely they are given.
 
 Where neither is present this is intake, and it belongs to `jira-capture`. Name what is missing
 and hand over. **Do not put the questions in step 4 to the person relaying it** — they do not

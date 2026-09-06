@@ -151,7 +151,7 @@
       "prompt": "The architect mentioned in standup that the retry logic round the payment gateway is hand-rolled in four services and every new endpoint copies it again — it costs two of us a day each time. Log it before I forget.",
       "expect_skill": "jira-assess",
       "expect_not": ["jira-capture", "jira-diagnose"],
-      "why": "Relayed second-hand like sel-capture-5, but arriving with the toll — whose time, how often — which is what a debt record asks for and the one thing a relayer either carries or does not. Precedence does not claim it. The mirror of sel-diagnose-4 and sel-propose-4 on the debt axis. Nothing fails, which is what keeps diagnose out."
+      "why": "Relayed second-hand like sel-capture-5, but arriving with the toll — whose time, how often — which is what a debt record asks for and the one thing a relayer either carries or does not. Precedence does not claim it. The mirror of sel-diagnose-4 and sel-propose-4 on the debt axis. Nothing fails, which is what keeps diagnose out. Since the floor moved into jira-assess's third step it carries a second job: it is the guard on that step, and a skill that handed over whenever debt arrived second-hand would satisfy hand-7 and fail here."
     },
     {
       "id": "sel-refine-1",
@@ -616,6 +616,32 @@
       "precondition": "An active sprint on the board holding at least one item, and a fix version to assign it to.",
       "expect": "The sprint is read and answered first, then the fix version assignment is named at the gate and jira-release is entered for it. The direction is the only thing that differs from hand-5, and it must not change the shape of the answer.",
       "why": "hand-5's mirror, which the issue noted nobody had ever hit. A rule that held in one direction and not the other would be a coincidence of wording rather than a rule, and only the pair can tell those apart. The sprint read belongs to jira-inspect since #71, so this also pins that the cross does not drag the read back into jira-plan."
+    },
+    {
+      "id": "order-20",
+      "category": "ordering",
+      "prompt": "Is 1.0 done?",
+      "entities": ["1.0"],
+      "setup": "The profile lists a fix version 1.0 which has not been released, and work assigned to it of which some is unfinished.",
+      "expect": "The skill asks which was meant — whether the fix version has been released, or whether the work assigned to it is finished — naming both and what each would answer. It answers neither on the assumption that the user meant the one this skill owns.",
+      "why": "\"Done\" is the negation of unfinished and a synonym of released, so it names both sides of the boundary jira-release and jira-inspect are separated on and belongs to neither. Naming the axis in both descriptions did not rescue it, because naming the set a member belongs to does not add a member to the set. The answer is the container rule one level up: the skill asks."
+    },
+    {
+      "id": "order-21",
+      "category": "ordering",
+      "prompt": "What's in 1.0, and is any of it still open?",
+      "entities": ["1.0"],
+      "setup": "As order-20.",
+      "expect": "Answered directly, with no question about which sense was meant. The request names the work inside the version twice over and leaves nothing open.",
+      "why": "order-20's guard. A skill that asked which was meant whenever a fix version was named would pass order-20 and fail this one, turning a rule against guessing into a rule against answering. Every step added to stop a skill overreaching wants the twin that stops it underreaching."
+    },
+    {
+      "id": "hand-7",
+      "category": "handover",
+      "prompt": "The architect emailed: the payments module still talks to the old gateway library and nobody has touched it in two years. Get it on the board.",
+      "expect_sequence": ["jira-assess", "jira-capture"],
+      "expect": "What must hold is the outcome: what reaches Jira is a raw intake record, and nobody is asked to price a debt they did not weigh. jira-capture firing first and alone satisfies it. So does jira-assess firing and establishing at its third step that the material says nothing about what deferring costs, then handing over.",
+      "why": "The twin of sel-capture-3 on the debt axis, and the answer to whether jira-assess's floor had the same hole. It did: the floor lived in the description and the body had no step that applied it, which is exactly the state jira-diagnose was in before the floor moved inside. Naming the module, the library and the elapsed time says what the debt is; none of it says what leaving it costs. Its guard is sel-assess-3, which already existed — the same relay arriving with the toll, which must not hand over."
     }
   ]
 }

@@ -56,24 +56,33 @@ fa niente. Il debito è ciò che funziona e costa, e la distinzione deve reggere
 vedrà solo il work item finito: si chiude prima delle altre domande invece di restare implicita
 in quelle che vengono dopo.
 
-**3 · Fa tre domande.** Quanto costa rimandare: il tempo di chi, con che frequenza, e cosa rende
+**3 · Se il debito è riportato di seconda mano, controlla il materiale prima di chiederti
+qualsiasi cosa.** Hai inoltrato una email; il debito non l'hai soppesato tu. Quindi legge quello
+che è arrivato invece di farti domande a riguardo. Se c'è qualcosa su quanto costa rimandare — una
+conseguenza, una data oltre la quale qualcosa smette di funzionare, un conto delle ore o delle
+persone — prosegue qui. Se non c'è nulla, dice cosa manca e passa la richiesta a
+[`jira-capture`](jira-capture.it.md). Nominare il modulo, la libreria o chi ha preso la
+scorciatoia dice cosa il debito **è**; la domanda a cui questa skill serve a rispondere è cosa fa
+lasciarlo lì, e farti quotare qualcosa che non hai soppesato produce un numero senza padrone.
+
+**4 · Fa tre domande.** Quanto costa rimandare: il tempo di chi, con che frequenza, e cosa rende
 più lento o più rischioso — non la formula «debito tecnico», ma il pedaggio che si sta pagando.
 Quali sono le opzioni, compreso il non fare niente e compresa quella parziale ed economica,
 perché le opzioni fanno di questa cosa una decisione mentre un'unica proposta la trasforma in una
 pretesa. E qual è l'impatto tecnico: cosa tocca, e cosa vincola finché resta in piedi.
 
-**4 · Misura quello che afferma.** Dimensione, lentezza, frequenza e rischio arrivano con il
+**5 · Misura quello che afferma.** Dimensione, lentezza, frequenza e rischio arrivano con il
 numero e con il modo in cui è stato ottenuto. «Lento», «fragile» e «tanto» sono gli aggettivi che
 perdono la discussione. Dove un'affermazione non è misurabile, il testo dice cosa bisognerebbe
 misurare per chiuderla: nominare il numero mancante serve già di per sé, ed è spesso un lavoro
 più piccolo del debito stesso.
 
-**5 · Sceglie un work type fra quelli del tuo progetto**, non da un elenco che si porta dietro.
+**6 · Sceglie un work type fra quelli del tuo progetto**, non da un elenco che si porta dietro.
 Aspettati che un work type per il debito non ci sia: un progetto che separa il debito dal resto
 del lavoro per work type è l'eccezione. In quel caso la skill lo archivia sotto un altro work
 type e l'artefatto dice di quale intento si tratta, così la distinzione non si perde.
 
-**6 · Poi il draft gate**, il cancello che precede ogni scrittura su Jira. Il testo completo
+**7 · Poi il draft gate**, il cancello che precede ogni scrittura su Jira. Il testo completo
 compare in chat con le decisioni che porta con sé — titolo, work type, parent, e ogni campo che
 il progetto marca obbligatorio e che la bozza ha lasciato vuoto. Approvi, oppure chiedi modifiche
 e lo rivedi. Questa skill aggiunge una cosa al gate: dichiara quale opzione il testo raccomanda,

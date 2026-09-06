@@ -38,6 +38,10 @@ none can reach a command that closes one.
 First, as [discovery](../shared/references/discovery.md) requires. It supplies the project key,
 the statuses and their categories, the boards and the fix versions the questions refer to.
 
+Where the user's words leave which question they asked open — "is 4.10 done?", "what is
+the state of it?" — resolve that before answering, as
+[discovery](../shared/references/discovery.md) § Resolving which question was asked requires.
+
 ## 2. Answer by searching
 
 Build the question as a search and report what comes back. Four shapes cover most of what is
