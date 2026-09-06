@@ -303,6 +303,44 @@ Before starting any task, propose a branch name and ask the developer to confirm
 `git worktree list` first — if an existing worktree covers the same skill or topic, suggest
 reusing it.
 
+### One commit, one complete change
+
+A commit carries the whole of one change — the fix, its test, its documentation pair — and nothing
+belonging to another. Two consequences that are easy to get wrong:
+
+- **A fix and its test are one commit.** Neither is complete alone, and a branch where the test
+  arrives afterwards has a commit in it that ships a defect.
+- **No commit may introduce something a later commit repairs.** When a test run catches a regression
+  in an earlier commit of the same branch, fold the correction into that commit. Nothing is pushed
+  until the pull request opens, so rewriting is free: `git reset --soft` to the base and re-commit in
+  groups. Interactive rebase is not available here.
+
+**What a test run finds gets closed, not filed as prose.** The run record says what was found; the
+branch says what was done about it. A finding left only in a record reads as accepted. Where closing
+it needs a decision that has not been made, open an issue and say in the record that this is why —
+never leave it as an unactioned paragraph.
+
+### Every fix carries a test
+
+A fix is not finished until something would fail if the defect came back. Before opening a pull
+request, name the seam that would have caught it and add the case there.
+
+| The fix turns on                                                     | The seam                                                                                                               |
+| -------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| a static, decidable fact — a declaration, a manifest, a tracked file | a rule in `scripts/skill-frontmatter.mjs` or `scripts/check-package.mjs`, **plus** a case in the matching `*.test.mjs` |
+| behaviour — which skill fires, in what order, whether a step halts   | a fixture in `evals/evals.json`, in the category that decides it                                                       |
+
+The rule and its case are one unit, never one without the other: the real skills and commands all
+pass, so nothing notices a rule that stopped running. That is ADR-0005's argument, and it applies to
+every rule added since.
+
+Prove the assertion fires. A test that passes against the fixed tree says nothing until you have
+watched it fail against the defect — break the input, run the check, restore. Where the input is a
+real file, break a copy of the real file rather than a synthetic one.
+
+Where a fix is genuinely unassertable by any seam, say so in the pull request and say why. Silence
+reads as coverage.
+
 ### Adding a new skill
 
 1. Create `skills/<name>/SKILL.md` with all project-required frontmatter fields.
