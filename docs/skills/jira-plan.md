@@ -57,8 +57,15 @@ means record this, which is a proposal and not a placement: [`jira-propose`](jir
 the thing is recorded yet, not the word.
 
 Reading a sprint without changing it belongs to [`jira-inspect`](jira-inspect.md). But a request
-that reads a sprint **and then changes it** — "show me what is left and drop the blocked ones" —
-is one operation, not two, and it is this skill's from the start.
+that reads a sprint **and then changes that same sprint** — "show me what is left and drop the
+blocked ones" — is one operation, not two, and it is this skill's from the start.
+
+The words "that same" are doing work. Read one container and change a **different** one — "what is
+in 4.10 so far? anything not started, take it out of the current sprint" — and it is two intents
+again, not one: you get the fix version answered first, the sprint change named alongside the
+answer, and a separate approval for it. See
+[the development process](../development-process.md) on what happens when one sentence asks for
+two things.
 
 `jira-inspect` also sends you here for a question that needs the board itself — which boards exist,
 or a sprint the profile does not name. It does not hold the Jira CLI, and this skill does.

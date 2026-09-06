@@ -26,8 +26,7 @@ che possa perdere onestamente — o vincere.
 
 ## Quando si attiva · quando no
 
-Si attiva quando non sta fallendo niente, il costo è di quelli che si porterà dietro il team, e vuoi
-comunque metterlo agli atti.
+Si attiva quando non sta fallendo niente e vuoi comunque che il costo sia agli atti.
 
 | Se dici qualcosa come                                       | La skill è                             |
 | ----------------------------------------------------------- | -------------------------------------- |
@@ -41,22 +40,6 @@ _«Continua a dare problemi»_ sta bene in tutte e due le descrizioni, quindi qu
 è cosa succede oggi se non si fa niente. Se la risposta è che qualcosa già fallisce, si comporta
 male o produce il risultato sbagliato, questa skill lo dice e si ferma, invece di registrare un
 difetto con parole più morbide.
-
-Quello che prende in carico, una volta che non fallisce niente, è più stretto di «funziona male», e
-la linea è **chi paga, e quando**. Questa skill è disegnata sul costo che si porterà dietro il team:
-la scorciatoia, la dipendenza che invecchia, il design che non calza più. Qualcosa che funziona e
-serve male chi lo usa proprio adesso costa ai suoi utenti oggi — non c'è nessun pedaggio da
-dichiarare, nessuna opzione da confrontare e niente che venga rimandato, quindi le tre domande qui
-sotto tornerebbero tutte vuote. Quel caso è di [`jira-propose`](jira-propose.it.md), e lì quello che
-ne esce è un risultato che qualcuno vuole, non un costo che qualcuno sta pagando.
-
-Il debito arriva a questa skill riportato di seconda mano tanto quanto viene sollevato in prima
-persona — una frase detta allo standup, girata prima che qualcuno se la dimentichi — e a decidere
-allora è il materiale, non chi l'ha detta. Qui la soglia è **il pedaggio**: il tempo di chi, con che
-frequenza. Se la frase lo porta è la registrazione di un debito e sta qui, per quanto evidentemente
-sia stata riportata; se porta solo un aggettivo è di [`jira-capture`](jira-capture.it.md), perché
-nessuno dei presenti può fornire quello che manca. Le opzioni e l'impatto tecnico non fanno parte di
-quella soglia: sono quello che questa skill ricava dopo essersi attivata.
 
 ## Come si usa
 
@@ -73,36 +56,37 @@ fa niente. Il debito è ciò che funziona e costa, e la distinzione deve reggere
 vedrà solo il work item finito: si chiude prima delle altre domande invece di restare implicita
 in quelle che vengono dopo.
 
-**3 · Fa tre domande.** Quanto costa rimandare: il tempo di chi, con che frequenza, e cosa rende
+**3 · Se il debito è riportato di seconda mano, controlla il materiale prima di chiederti
+qualsiasi cosa.** Hai inoltrato una email; il debito non l'hai soppesato tu. Quindi legge quello
+che è arrivato invece di farti domande a riguardo. Se c'è qualcosa su quanto costa rimandare — una
+conseguenza, una data oltre la quale qualcosa smette di funzionare, un conto delle ore o delle
+persone — prosegue qui. Se non c'è nulla, dice cosa manca e passa la richiesta a
+[`jira-capture`](jira-capture.it.md). Nominare il modulo, la libreria o chi ha preso la
+scorciatoia dice cosa il debito **è**; la domanda a cui questa skill serve a rispondere è cosa fa
+lasciarlo lì, e farti quotare qualcosa che non hai soppesato produce un numero senza padrone.
+
+**4 · Fa tre domande.** Quanto costa rimandare: il tempo di chi, con che frequenza, e cosa rende
 più lento o più rischioso — non la formula «debito tecnico», ma il pedaggio che si sta pagando.
 Quali sono le opzioni, compreso il non fare niente e compresa quella parziale ed economica,
 perché le opzioni fanno di questa cosa una decisione mentre un'unica proposta la trasforma in una
 pretesa. E qual è l'impatto tecnico: cosa tocca, e cosa vincola finché resta in piedi.
 
-**4 · Misura quello che afferma.** Dimensione, lentezza, frequenza e rischio arrivano con il
+**5 · Misura quello che afferma.** Dimensione, lentezza, frequenza e rischio arrivano con il
 numero e con il modo in cui è stato ottenuto. «Lento», «fragile» e «tanto» sono gli aggettivi che
 perdono la discussione. Dove un'affermazione non è misurabile, il testo dice cosa bisognerebbe
 misurare per chiuderla: nominare il numero mancante serve già di per sé, ed è spesso un lavoro
 più piccolo del debito stesso.
 
-**5 · Sceglie un work type fra quelli del tuo progetto**, non da un elenco che si porta dietro.
+**6 · Sceglie un work type fra quelli del tuo progetto**, non da un elenco che si porta dietro.
 Aspettati che un work type per il debito non ci sia: un progetto che separa il debito dal resto
 del lavoro per work type è l'eccezione. In quel caso la skill lo archivia sotto un altro work
 type e l'artefatto dice di quale intento si tratta, così la distinzione non si perde.
 
-**6 · Poi il draft gate** — il cancello che precede ogni scrittura su Jira — **e qui è un artifact
-gate**, la forma del gate che mostra il contenuto di un work item. Quello che approvi è quel
-contenuto per intero, sezione per sezione. L'altra forma, l'operation gate, mostra un cambiamento a
-ciò che esiste già — uno sprint riempito, del lavoro assegnato a una fix version, un work item
-portato allo status successivo — e quando si scrive ex novo non si presenta mai. Il testo completo
-compare in chat con le decisioni che porta con sé — titolo, work type, parent, ogni campo che il
-progetto marca obbligatorio e che la bozza ha lasciato vuoto, e, se la tua richiesta portava un
-secondo intento che questo testo non soddisfa, quell'intento e la skill che se ne occupa, che
-subentra a scrittura fatta e ha un gate suo. Approvi, oppure chiedi modifiche e lo rivedi. Oppure
-dici di no, e lì si chiude: non viene scritto niente, ti viene detto cosa vale adesso, non ti viene
-proposta una versione più piccola sperando che passi quella, e un messaggio successivo su altro non
-viene preso per un ripensamento. Questa skill aggiunge una cosa al gate: dichiara quale opzione il
-testo raccomanda, se ne raccomanda una, e che raccomandare non è decidere.
+**7 · Poi il draft gate**, il cancello che precede ogni scrittura su Jira. Il testo completo
+compare in chat con le decisioni che porta con sé — titolo, work type, parent, e ogni campo che
+il progetto marca obbligatorio e che la bozza ha lasciato vuoto. Approvi, oppure chiedi modifiche
+e lo rivedi. Questa skill aggiunge una cosa al gate: dichiara quale opzione il testo raccomanda,
+se ne raccomanda una, e che raccomandare non è decidere.
 
 ## Scambio di esempio
 
@@ -259,9 +243,6 @@ progetto.
 - **Registrare qualcosa che oggi fallisce.** Se già si rompe, si comporta male o produce il
   risultato sbagliato è un difetto, il caso è di [`jira-diagnose`](jira-diagnose.it.md), e questa
   skill lo dice e si ferma invece di scrivere la stessa cosa con parole più morbide.
-- **Registrare un costo che ricade sugli utenti invece che sul team.** Qualcosa che funziona e
-  serve male chi lo usa non ha nessun pedaggio sul team da dichiarare e nessuna opzione da
-  confrontare. Quelle persone vogliono un risultato, ed è di [`jira-propose`](jira-propose.it.md).
 - **Raccomandare per omissione.** Un'opzione lasciata fuori è un'opzione rifiutata, e rifiutarla
   in silenzio è il modo in cui una preferenza tecnica diventa una decisione che nessuno ha
   rivisto.
@@ -282,7 +263,5 @@ progetto.
 - [`jira-diagnose`](jira-diagnose.it.md) — per qualcosa che oggi fallisce.
 - [`jira-refine`](jira-refine.it.md) — per trasformare questa registrazione in lavoro che un team
   può prendere in carico, con un perimetro e dei criteri di accettazione.
-- [`jira-propose`](jira-propose.it.md) — per un risultato che qualcuno desidera invece di un costo
-  che il team sta già pagando, e per tutto ciò che funziona ma oggi serve male chi lo usa.
-- [`jira-capture`](jira-capture.it.md) — per un debito riportato di seconda mano che non dice
-  niente su quanto costa rimandarlo.
+- [`jira-propose`](jira-propose.it.md) — per un risultato che qualcuno desidera, invece di un
+  costo che il team sta già pagando.

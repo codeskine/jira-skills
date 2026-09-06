@@ -16,9 +16,23 @@ does not report; those are other intents.
 It obeys [the discovery contract](../shared/references/discovery.md) and
 [the draft gate](../shared/references/draft-gate.md).
 
+**Neither is waivable.** _Just create it_, _don't show me anything first_, _go ahead_ — these say
+something about impatience and nothing about approval, because approval is of a document that does
+not exist yet. Present the draft, keep it short, and say that is why. A write the user did not see
+is a write they did not approve, whatever they asked for beforehand.
+
 ## 1. Read the project profile
 
 First, as [discovery](../shared/references/discovery.md) requires.
+
+**Read its Unsupported operations table before anything else.** If an operation this skill needs is
+listed there, say so now — naming the operation and the manual path the profile records — and do not
+open the questions. Discovering it at the write costs the user every answer they gave first.
+
+Where the user named a container — `2.4`, `To Do`, `Backlog` — resolve it against the profile
+before doing anything with it, as [discovery](../shared/references/discovery.md) § Resolving a
+container the user named requires. A name is not a kind, and routing settled which skill fires
+without knowing which kind was meant.
 
 The profile records the shape of the Jira Workflow. It is **not** the source of truth for what
 this item can do right now, and this skill never proposes a transition from it.

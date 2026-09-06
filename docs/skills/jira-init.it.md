@@ -17,8 +17,7 @@
 Legge com'è configurato davvero il tuo progetto Jira e scrive quello che ha trovato in
 `.jira/project-profile.md`, il file che ogni altra skill legge come primo passo. Guarda i work type
 e come si annidano, gli status, i campi obbligatori alla creazione, le board con il loro sprint
-attivo, le fix version con lo stato di ciascuna — non rilasciata, rilasciata o archiviata. Su Jira
-non crea niente e non cambia niente.
+attivo, le fix version. Su Jira non crea niente e non cambia niente.
 
 Questa lettura è la discovery, cioè la lettura della configurazione reale del progetto, e il file
 che ne registra l'esito è il project profile. È la prima cosa che esegui in un repository, dopo
@@ -57,7 +56,15 @@ che su Jira non c'è qualcosa che il project profile le prometteva.
 Di' che il lavoro di questo repository è tracciato su Jira, e rispondi alle domande. Non viene
 scritto niente — nemmeno in locale — finché non approvi quello che hai letto.
 
-**1 · Controlla prima i due channel, che falliscono in modo indipendente.** Il server MCP di
+**1 · Controlla che la discovery sia quello che volevi.** Questa skill scandaglia l'intero
+progetto e scrive un file che il tuo team condivide, il che è una risposta grossa a una domanda
+piccola. Chiedile quali fix version hai, o quali board, e ti risponde e si ferma — nessuna
+scansione, e nessun project profile riscritto dietro a una domanda che non intendevi come un passo
+di setup. Se la domanda verte davvero sulle fix version e non sulla forma del tuo progetto,
+[`jira-release`](jira-release.it.md) è la skill che le possiede e le passa la mano. Se invece stai
+configurando, o una skill ti ha detto che il project profile manca o è vecchio, prosegue.
+
+**2 · Controlla prima i due channel, che falliscono in modo indipendente.** Il server MCP di
 Atlassian è una precondizione: nient'altro risponde per work type, status e campi, quindi se non è
 raggiungibile sotto l'id `atlassian` la skill si ferma e ti manda a `/jira-doctor`. La Jira CLI non
 è una precondizione. Senza di lei la discovery gira su tutto quello che il server MCP raggiunge, e
@@ -67,87 +74,51 @@ _non raggiungibile_ perché portano in due posti diversi: uno a ripristinare un 
 creare una board. Quali operazioni appartengono a quale channel sta nel
 [processo di sviluppo](../development-process.it.md).
 
-La riga **Channel** nell'intestazione qui sopra non descrive quello che la skill fa: è letta da
-quello che la skill può davvero chiamare. Una skill raggiunge un channel solo se porta nei suoi
-`allowed-tools` la stringa esatta di quel channel — `mcp__atlassian` oppure `Bash(jira:*)` — e la
-stringa viene confrontata, mai interpretata: una skill che non la porta quel channel non lo usa, per
-quanto chiaramente i suoi passi lo descrivano. Questa le porta entrambe. Tutto il resto che dichiara
-— leggere file, scriverne uno, farti una domanda — è una capacità dell'agente, non una via verso
-Jira.
-
-**2 · Chiede quale progetto.** Se `.jira/project-profile.md` c'è già, ti dice quale progetto
+**3 · Chiede quale progetto.** Se `.jira/project-profile.md` c'è già, ti dice quale progetto
 descrive e quando è stato scoperto, poi ti chiede se aggiornarlo o puntare a un altro progetto.
 Altrimenti elenca i progetti che il tuo account vede e ti chiede di scegliere: il progetto non lo
 deduce mai dal nome del repository. Un repository tiene un solo project profile — rifare la
 discovery lo sostituisce, e prima di sostituirlo la skill dice cosa se ne va con lui.
 
-**3 · Legge sei soggetti, in un ordine solo.**
+**4 · Legge sette soggetti, in un ordine solo.**
 
-| Cosa legge                                              | Perché servirà a una skill                                            |
-| ------------------------------------------------------- | --------------------------------------------------------------------- |
-| i work type, e come si annidano                         | così una skill propone work type che esistono, a livelli che esistono |
-| gli status, e la forma del Jira Workflow                | così si può spiegare una transition che ti aspettavi e non hai avuto  |
-| i campi obbligatori alla creazione, per work type       | così una bozza approvata non viene rifiutata in scrittura             |
-| le board, e lo sprint attivo di ciascuna                | così la pianificazione degli sprint parla della realtà                |
-| le fix version, e se ciascuna è rilasciata o archiviata | così una skill sa cosa esiste e cosa può ancora essere rilasciato     |
-| lo stile del progetto — team-managed o company-managed  | perché cambia quali campi esistono                                    |
+| Cosa legge                                             | Perché servirà a una skill                                            |
+| ------------------------------------------------------ | --------------------------------------------------------------------- |
+| i work type, e come si annidano                        | così una skill propone work type che esistono, a livelli che esistono |
+| gli status, e la forma del Jira Workflow               | così chi legge sa quali posizioni ha questo progetto                  |
+| i campi obbligatori alla creazione, per work type      | così una bozza approvata non viene rifiutata in scrittura             |
+| le board, e lo sprint attivo di ciascuna               | così la pianificazione degli sprint parla della realtà                |
+| le fix version, con il loro stato                      | così niente viene assegnato a una che non esiste                      |
+| lo stile del progetto — team-managed o company-managed | perché cambia quali campi esistono                                    |
+| i tipi di issue link definiti dal progetto             | perché una dipendenza diventi un link vero, non una frase             |
 
-**4 · Un'assenza è un rilievo, non un errore.** Un progetto senza board, una gerarchia di un solo
+**5 · Un'assenza è un rilievo, non un errore.** Un progetto senza board, una gerarchia di un solo
 livello, nessun work type per un difetto: sono tutti esiti validi, scritti nel file e detti a voce
-alta. I cinque intenti che questo plugin scrive vengono controllati tutti, ogni volta, e quelli che
-nessun work type serve vengono nominati: due esecuzioni sullo stesso progetto non possono tornare
-con assenze diverse. Gli status sono il caso da aspettarsi, perché si leggono dai work item che li
-occupano — un progetto che non ne contiene nessuno non ne espone nessuno, ed è lo stato di ogni
-progetto il giorno in cui nasce. Il project profile allora dice che non erano ancora osservabili e
-che il primo work item li renderà leggibili, e la discovery prosegue con il soggetto successivo.
+alta. Gli status sono il caso da aspettarsi, perché si leggono dai work item che li occupano — un
+progetto che non ne contiene nessuno non ne espone nessuno, ed è lo stato di ogni progetto il
+giorno in cui nasce. Il project profile allora dice che non erano ancora osservabili e che il
+primo work item li renderà leggibili, e la discovery prosegue con il soggetto successivo.
 
-La tabella degli status serve per la **forma**: quale status è raggiungibile da quale. Nessuno
-propone una transition a partire da lì — la si chiede a Jira per quel work item nel momento in cui
-la si tenta, perché nessuna tabella conosce la condizione che la rifiuterà. È la forma che rende
-spiegabile, e non solo assente, una transition che ti aspettavi e non hai avuto, ed è per questo che
-vale la pena registrarla.
-
-Board e fix version hanno tre esiti possibili invece di due, e il project profile segna quale: sono
-elencate, il progetto non ne ha, oppure **non sono state lette** perché il channel che le serve non
-ha risposto. Le skill si diramano su quel marcatore, ed è per questo che fa parte di quello che un
-project profile deve dichiarare e non è un dettaglio di come il file è scritto: una skill che legge
-_nessuna board_ dove il project profile intende _nessuno ha chiesto_ ti manda a creare una board
-invece che a ripristinare un channel.
-
-**5 · Risolve ogni operazione nel tool che la serve.** I nomi dei tool MCP cambiano da una versione
+**6 · Risolve ogni operazione nel tool che la serve.** I nomi dei tool MCP cambiano da una versione
 all'altra del server, quindi nessuna skill se ne porta dietro uno: questa skill enumera quello che
-il server configurato espone davvero e registra quale tool serve ciascuna delle diciotto operazioni
-che la mappa dei channel assegna. Quello che non riesce a risolvere finisce in _Operazioni non
-supportate_, con il percorso manuale che prenderai al suo posto.
+il server configurato espone davvero e registra la corrispondenza. Tutto ciò che nessun tool
+disponibile copre finisce in _Operazioni non supportate_ con il percorso manuale che prenderai al
+suo posto — comprese le quattro operazioni che non hanno strada su nessuno dei due channel: creare
+uno sprint, avviarlo, creare una fix version, rilasciarla o archiviarla.
 
-Quella lista descrive la tua installazione, non gli strumenti. Un'operazione ci finisce per uno di
-quattro motivi — nessun tool risolto, il channel che la serve non ha risposto, il tuo account non è
-autorizzato, oppure il concetto è assente da questo progetto — quindi qualunque operazione può
-comparirci, comprese quelle che funzionano sulla macchina accanto alla tua. Cinque sono di un'altra
-natura: creare uno sprint, avviarlo, creare una fix version, rilasciarla o archiviarla, e togliere
-un work item da uno sprint sono gap dichiarati — operazioni che non esistono su nessuno dei due
-channel, da nessuna parte — e finiscono nella stessa lista perché tu incontri tutti i limiti in un
-posto solo. Il project profile registra quale motivo vale per ciascuna, perché solo alcuni tornano.
-
-**6 · Poi il gate, e il file.** Scrivere il project profile non è una scrittura su Jira, ma è una
+**7 · Poi il gate, e il file.** Scrivere il project profile non è una scrittura su Jira, ma è una
 modifica a un artefatto che tutto il team condivide, quindi passa dallo stesso draft gate — il
 cancello che precede ogni scrittura su Jira — descritto nel
-[processo di sviluppo](../development-process.it.md). Quel gate ha due forme, decise da quello che
-la scrittura produce e non da quale skill sta girando: l'**artifact gate**, la forma che mostra il
-contenuto che esisterà — per le skill che scrivono, quello di un work item; qui il project profile
-stesso — e l'**operation gate**, la forma che mostra un cambiamento a ciò che esiste già. Questa è
-un artifact gate, quindi quello che vedi è il file completo in chat, il progetto che descrive,
-quanto è stato trovato di ogni soggetto, e ogni operazione non supportata, quest'ultima perché è
-quello che sorprende dopo. Approvi, chiedi modifiche e lo rivedi, oppure dici di no.
+[processo di sviluppo](../development-process.it.md): il project profile completo in chat, il
+progetto che descrive, quanto è stato trovato di ogni soggetto, e ogni operazione non supportata,
+quest'ultima perché è quello che sorprende dopo. Approvi, chiedi modifiche e lo rivedi, oppure dici
+di no.
 
-Dire di no merita un paragrafo a parte qui, perché questa è l'unica skill in cui un rifiuto non
-resta locale alla cosa rifiutata. Un rifiuto deve dire cosa vale da quel momento e nominare chi
-aspettava quella scrittura, e qui entrambe le risposte sono grandi: non viene scritto niente,
-quindi il project profile non c'è — ed è la prima cosa che leggono le altre nove skill.
-`jira-capture`, `jira-propose`, `jira-diagnose`, `jira-assess`, `jira-refine`, `jira-advance`,
-`jira-plan`, `jira-release` e `jira-inspect` si fermano dove iniziano e ti rimandano qui. Te lo
-dice quando rifiuti, invece di lasciartelo incontrare tre passi dopo, e quello che ha trovato resta
-nella conversazione invece di finire in un file in un posto più tranquillo.
+Dire di no merita una frase a parte qui, perché questa è l'unica skill in cui un rifiuto non resta
+locale alla cosa rifiutata. Non viene scritto niente, il che vuol dire che ogni altra skill del
+plugin si fermerà al proprio primo passo rimandandoti qui — quindi te lo dice quando rifiuti,
+invece di lasciartelo incontrare tre passi dopo, e lascia quello che ha trovato nella conversazione
+invece di mettere il file in un posto più tranquillo.
 
 All'approvazione scrive `.jira/project-profile.md`, creando la directory se serve e sovrascrivendo
 il project profile che ci fosse già: di quel file è l'unica scrittrice, quindi non c'è niente da
@@ -202,7 +173,7 @@ fondere. Poi ti dice di committarlo, e perché.
 > | Status             | 4, osservati sui 37 work item che il progetto contiene |
 > | Board e sprint     | non letti — il channel della CLI non ha risposto       |
 > | Fix version        | non lette — lo stesso channel                          |
-> | Operazioni risolte | 13 delle 18 della mappa dei channel                    |
+> | Operazioni risolte | 13 delle 18 che questo plugin usa                      |
 >
 > Due cose che incontrerai dopo, quindi te le dico adesso. Lo schema di questo progetto **non ha
 > un work type per un difetto, per una richiesta grezza in attesa di refinement o per il debito
@@ -210,7 +181,7 @@ fondere. Poi ti dice di committarlo, e perché.
 > serve. E **dieci operazioni qui non sono supportate**: cinque perché il channel della CLI non ha
 > risposto, e tornano quando torna lui; cinque perché nessun tool le copre su nessuno dei due
 > channel — creare uno sprint, avviarlo, creare una fix version, rilasciarla o archiviarla, e
-> togliere un work item da uno sprint.
+> riportare un work item fuori da uno sprint.
 >
 > Ecco il project profile completo. Approvalo e scrivo `.jira/project-profile.md`, oppure dimmi
 > cosa cambiare.
@@ -304,29 +275,27 @@ risposta torna quando torna il channel.
 
 ## Fix version
 
-**Non lette**, per lo stesso motivo e con lo stesso rimedio. Quando il channel risponderà, ogni fix
-version arriverà qui con il suo stato: non rilasciata, rilasciata o archiviata.
+**Non lette**, per lo stesso motivo e con lo stesso rimedio.
 
 ## Risoluzione delle operazioni
 
 Quale tool serve ogni operazione, risolto a partire dai tool che il server MCP configurato espone
 davvero. Le skill leggono questa tabella invece di portarsi dietro un nome di tool.
 
-| Operazione                                                     | Channel | Tool o comando                            |
-| -------------------------------------------------------------- | ------- | ----------------------------------------- |
-| elencare i progetti e i loro metadati                          | MCP     | `getVisibleJiraProjects`                  |
-| leggere i work type di un progetto                             | MCP     | `getJiraProjectIssueTypesMetadata`        |
-| leggere gli status e le transition disponibili di un work item | MCP     | `getTransitionsForJiraIssue`              |
-| creare un work item                                            | MCP     | `createJiraIssue`                         |
-| leggere un work item                                           | MCP     | `getJiraIssue`                            |
-| modificare un work item                                        | MCP     | `editJiraIssue`                           |
-| commentare un work item                                        | MCP     | `addCommentToJiraIssue`                   |
-| eseguire una transition su un work item                        | MCP     | `transitionJiraIssue`                     |
-| collegare due work item                                        | MCP     | `createIssueLink`                         |
-| impostare il parent di un work item                            | MCP     | `editJiraIssue`, campo parent             |
-| cercare work item con JQL                                      | MCP     | `searchJiraIssuesUsingJql`                |
-| assegnare un work item a una fix version                       | MCP     | `editJiraIssue`, campo fix version        |
-| togliere un work item da una fix version                       | MCP     | `editJiraIssue`, lo stesso campo svuotato |
+| Operazione                                                     | Channel | Tool o comando                     |
+| -------------------------------------------------------------- | ------- | ---------------------------------- |
+| elencare i progetti e i loro metadati                          | MCP     | `getVisibleJiraProjects`           |
+| leggere i work type di un progetto                             | MCP     | `getJiraProjectIssueTypesMetadata` |
+| leggere gli status e le transition disponibili di un work item | MCP     | `getTransitionsForJiraIssue`       |
+| creare un work item                                            | MCP     | `createJiraIssue`                  |
+| leggere un work item                                           | MCP     | `getJiraIssue`                     |
+| modificare un work item                                        | MCP     | `editJiraIssue`                    |
+| commentare un work item                                        | MCP     | `addCommentToJiraIssue`            |
+| eseguire una transition su un work item                        | MCP     | `transitionJiraIssue`              |
+| collegare due work item                                        | MCP     | `createIssueLink`                  |
+| impostare il parent di un work item                            | MCP     | `editJiraIssue`, campo parent      |
+| cercare work item con JQL                                      | MCP     | `searchJiraIssuesUsingJql`         |
+| assegnare un work item a una fix version                       | MCP     | `editJiraIssue`, campo fix version |
 
 ## Operazioni non supportate
 
@@ -344,23 +313,19 @@ annuncia il vuoto e passa il passo all'utente; non lo simula mai.
 | avviare uno sprint                      | nessun tool esposto       | Avviarlo dalla board                                         |
 | creare una fix version                  | nessun tool esposto       | Crearla su Jira, poi rieseguire `jira-init`                  |
 | rilasciare o archiviare una fix version | nessun tool esposto       | Rilasciarla o archiviarla su Jira                            |
-| togliere un work item da uno sprint     | nessun tool esposto       | Spostarlo dalla board, nel prossimo sprint o nel backlog     |
 
 `channel non raggiungibile` è l'unico motivo qui che riguarda questa macchina e non il progetto:
 l'operazione torna quando torna il channel.
 ```
 
-Quattro cose qui dentro contano dopo. **Board e sprint** dice _non letto_, che è il terzo dei tre
-stati e non il secondo: _non letto_ manda qualcuno a ripristinare un channel, _nessuna_ a creare
-una board, e sbagliare costa un pomeriggio. **Intenti che nessun work type serve** è dichiarato
-invece che lasciato dedurre dalla tabella sopra, perché una skill che legge questo file agisce su
-quello che c'è scritto e non va a controllare una tabella per capire cosa manca. **Status e
-transition** è una forma e non un menu: nessuno propone una transition a partire da lì — la si
-chiede a Jira, per un work item, nel momento in cui la si tenta — ma è la forma che rende
-spiegabile, e non solo assente, una transition che qualcuno si aspettava e non ha avuto. E la
-tabella di **risoluzione delle operazioni** è il motivo per cui nessuna skill contiene un nome di
-tool: quando la CLI tornerà a rispondere, o quando un server futuro esporrà uno dei cinque gap
-dichiarati, rieseguire `jira-init` lo chiude senza cambiare una riga in nessuna skill.
+Tre cose qui dentro contano dopo, e due sono assenze. **Board e sprint** dice _non letto_ e non
+_nessuna_: la prima manda qualcuno a ripristinare un channel, la seconda a creare una board, e
+sbagliare costa un pomeriggio. **Intenti che nessun work type serve** è dichiarato invece che
+lasciato dedurre dalla tabella sopra, perché una skill che legge questo file agisce su quello che
+c'è scritto e non va a controllare una tabella per capire cosa manca. E la tabella di **risoluzione
+delle operazioni** è il motivo per cui nessuna skill contiene un nome di tool: quando la CLI
+tornerà a rispondere, o quando un server futuro esporrà una delle quattro operazioni mancanti,
+rieseguire `jira-init` chiude il vuoto senza cambiare una riga in nessuna skill.
 
 ## Cosa non fa
 
@@ -372,14 +337,8 @@ dichiarati, rieseguire `jira-init` lo chiude senza cambiare una riga in nessuna 
 - **Tenere due progetti.** Un repository, un project profile: il lavoro che si estende su due
   progetti Jira dallo stesso repository non è supportato, perché ogni skill agirebbe sul progetto
   scoperto per ultimo.
-- **Scrivere «nessuna board» quando intende «non letto».** Board e fix version sono registrate in
-  uno di tre stati — elencate, il progetto non ne ha, oppure non lette perché il channel non ha
-  risposto — e gli ultimi due non vengono mai confusi in uno solo. Un channel che non ha risposto
-  non dice niente sul tuo progetto.
-- **Chiamare un limite di qui un limite di ovunque.** Quello che il project profile elenca come
-  non supportato è un fatto su questo progetto su questa macchina: un channel che non ha risposto,
-  un account senza il permesso, un concetto che il tuo progetto non ha. Registra quale di questi
-  motivi vale per ogni operazione, perché solo i cinque gap dichiarati sono permanenti.
+- **Scrivere «nessuna board» quando intende «non letto».** Un channel che non ha risposto non dice
+  niente sul progetto, e il project profile tiene i due fatti separati.
 - **Lasciare che un'altra skill ripari il project profile.** Ogni altra skill è una lettrice. Se
   una trova il project profile in disaccordo con Jira lo segnala e nomina questa skill; non
   corregge il file di nascosto, perché un project profile modificato da una skill che nessuno ha

@@ -6,10 +6,7 @@
       "category": "selection",
       "prompt": "Someone from finance emailed asking for the monthly figures to include last year alongside. Can you get this into Jira before I lose it?",
       "expect_skill": "jira-capture",
-      "expect_not": [
-        "jira-propose",
-        "jira-refine"
-      ],
+      "expect_not": ["jira-propose", "jira-refine"],
       "why": "Arrives from outside, nobody has examined it. The mention of a benefit tempts propose."
     },
     {
@@ -17,29 +14,23 @@
       "category": "selection",
       "prompt": "Chat message from the ops lead: \"the export thing is confusing people again\". Put it somewhere so it doesn't get lost.",
       "expect_skill": "jira-capture",
-      "expect_not": [
-        "jira-diagnose"
-      ],
+      "expect_not": ["jira-diagnose"],
       "why": "\"Confusing people\" sounds like a fault but nothing is reported as failing. Capture, not diagnose."
     },
     {
       "id": "sel-capture-3",
-      "category": "selection",
+      "category": "handover",
       "prompt": "A customer emailed: the invoice export has been breaking for two weeks and Excel opens the CSV mangled. Put it on Jira.",
-      "expect_skill": "jira-capture",
-      "expect_not": [
-        "jira-diagnose"
-      ],
-      "why": "Content is a fault and provenance is intake; both fit entirely. The email names a product and carries a symptom, and neither steps nor the error itself, so it does not carry what a defect report asks for and capture takes precedence. Naming Excel does not clear the floor: the floor names what clears it, and where it ran is not on that list. This is the hardest of the family — three replay rounds routed it here and each called it the weakest call in the set, because \"Excel opens the CSV mangled\" is an actual result that can be read as a gesture at a reproduction path. What the floor does not fix is the minimum that counts as steps. Paired with sel-diagnose-3, the same fault reported first-hand; with sel-diagnose-4, the same fault relayed but arriving complete; and with sel-capture-6, the same fault relayed with the environment named properly and still nothing to work from."
+      "expect_sequence": ["jira-diagnose", "jira-capture"],
+      "expect": "What must hold is the outcome, not the route: what reaches Jira is a raw intake record, and nobody is asked for steps the person relaying this does not have. jira-capture firing first and alone satisfies it. So does jira-diagnose firing and establishing at its third step that the material cannot answer for itself, then handing over. Asking the QA questions of the person who forwarded the email is the failure, whichever skill does it.",
+      "why": "Was a selection fixture asserting expect_not jira-diagnose, and both ends of its pair failed that way in the run of 2026-09-06 — an exclusion written as plainly as prose gets, disregarded by the live mechanism. #83 settled that the floor cannot live in a description the router never weighs against its neighbour, and moved it inside the skill. That makes jira-diagnose firing legitimate and the old assertion wrong. Content is a fault and provenance is intake; the email names a product and carries a symptom, and neither steps nor the error itself. The hardest of the family: \"Excel opens the CSV mangled\" is an actual result readable as a gesture at a reproduction path, which is #81 and still open. Paired with sel-diagnose-4, the same fault relayed but arriving complete."
     },
     {
       "id": "sel-capture-4",
       "category": "selection",
       "prompt": "Record this: the boss wants the portal to load faster.",
       "expect_skill": "jira-capture",
-      "expect_not": [
-        "jira-propose"
-      ],
+      "expect_not": ["jira-propose"],
       "why": "A desired outcome, relayed, with no datum behind it at all: nothing says who benefits or what faster would have to mean. Precedence sends it to intake rather than to a proposal that would have to invent its own measure. Paired with sel-propose-3, the same wish owned by the person stating it, and with sel-propose-6, the same wish relayed but carrying a figure."
     },
     {
@@ -47,30 +38,23 @@
       "category": "selection",
       "prompt": "The architect mentioned in standup that the retry logic round the payment gateway is a mess. Log it before I forget.",
       "expect_skill": "jira-capture",
-      "expect_not": [
-        "jira-assess"
-      ],
+      "expect_not": ["jira-assess"],
       "why": "Debt relayed second-hand, arriving as an adjective and nothing else: nothing says whose time it costs or how often, which is the floor jira-assess names in its own exclusion. The precedence test turns on what the material carries, whatever intent it is about, so it belongs to intake first. The architect is on the team, so this also holds intake to material arriving second-hand rather than to where it came from: a routing test cannot ask a reader to judge an organisation the request text does not describe. Paired with sel-assess-3, the same remark carrying its toll."
     },
     {
       "id": "sel-capture-6",
-      "category": "selection",
+      "category": "handover",
       "prompt": "A customer emailed: invoicing has been mangling the CSV for a fortnight. They're on 4.9, in the production tenant. Put it on Jira.",
-      "expect_skill": "jira-capture",
-      "expect_not": [
-        "jira-diagnose"
-      ],
-      "why": "sel-capture-3 with one variable moved: the environment is named properly — what they run and where — and there are still no steps and nothing that would let anyone else see the fault happen. It is intake, which is what pins the floor's enumeration as illustration rather than a list of fields to tick. Read as a conjunction requiring both halves to fail, this one would have to be a defect report."
+      "expect_sequence": ["jira-diagnose", "jira-capture"],
+      "expect": "As sel-capture-3: a raw intake record reaches Jira and nobody is interrogated for steps they never had, whether jira-capture fires alone or jira-diagnose hands over. Naming the version and the tenant must not be read as clearing the floor — the environment given precisely is still not something anyone can act on to see the fault happen.",
+      "why": "sel-capture-3 with one variable moved: the environment is named properly, what they run and where, and there are still no steps and nothing that would let anyone else see it. It pins the floor's enumeration as illustration rather than fields to tick. In the run of 2026-09-06 jira-diagnose fired and then asked the user for the steps the floor says are absent, which is the half that is still a failure under #83's resolution and the half this fixture now names."
     },
     {
       "id": "sel-propose-1",
       "category": "selection",
       "prompt": "I want people to be able to see what delivery costs before they type an address. It should cut the drop-off at that step.",
       "expect_skill": "jira-propose",
-      "expect_not": [
-        "jira-capture",
-        "jira-refine"
-      ],
+      "expect_not": ["jira-capture", "jira-refine"],
       "why": "An outcome with a measure behind it, stated by someone who owns it."
     },
     {
@@ -78,9 +62,7 @@
       "category": "selection",
       "prompt": "We should let customers save a basket and come back to it. Can you put that on the backlog properly?",
       "expect_skill": "jira-propose",
-      "expect_not": [
-        "jira-capture"
-      ],
+      "expect_not": ["jira-capture"],
       "why": "\"Properly\" is the signal: this is a proposition, not an unexamined request."
     },
     {
@@ -88,9 +70,7 @@
       "category": "selection",
       "prompt": "I want the portal to load faster — it sits at eleven seconds on 4G and half the sessions from a phone end on that screen. Get it on the backlog.",
       "expect_skill": "jira-propose",
-      "expect_not": [
-        "jira-capture"
-      ],
+      "expect_not": ["jira-capture"],
       "why": "The wish of sel-capture-4, this time owned by the speaker and carrying its measure. Nothing is relayed and the datum is present, so precedence does not apply and the intent decides."
     },
     {
@@ -98,9 +78,7 @@
       "category": "selection",
       "prompt": "Passing on what the CFO wrote: \"checkout sits at eleven seconds on 4G and we lose half the sessions from a phone on that screen — I want it under three.\" Get it on the backlog.",
       "expect_skill": "jira-propose",
-      "expect_not": [
-        "jira-capture"
-      ],
+      "expect_not": ["jira-capture"],
       "why": "Relayed second-hand like sel-capture-4, but arriving with its datum and its target, so it carries what a value proposal asks for and precedence does not claim it. The mirror of sel-diagnose-4 on the value axis. It exists because sel-capture-4 and sel-propose-3 move provenance and datum at the same time, and a pair that flips two variables cannot show which one routed."
     },
     {
@@ -108,10 +86,7 @@
       "category": "selection",
       "prompt": "Half the people who reach the delivery-options step ring us before they finish it — about forty calls last month. It works, it just doesn't make sense to anyone. Get it on the backlog.",
       "expect_skill": "jira-propose",
-      "expect_not": [
-        "jira-assess",
-        "jira-diagnose"
-      ],
+      "expect_not": ["jira-assess", "jira-diagnose"],
       "why": "Something that works and costs, like sel-assess-1, with one variable moved: the cost falls on the people it serves now rather than on the team later. This is the case jira-diagnose used to hand to jira-assess, which has no technical impact to ask about here and would have to record the toll as one."
     },
     {
@@ -119,9 +94,7 @@
       "category": "selection",
       "prompt": "Passing on what support wrote: \"about forty calls last month from people stuck on the delivery-options step — they can't tell what it will cost them until the end.\" Get it on the backlog.",
       "expect_skill": "jira-propose",
-      "expect_not": [
-        "jira-capture"
-      ],
+      "expect_not": ["jira-capture"],
       "why": "Relayed like sel-capture-4 and carrying a figure, but a count of the symptom and no target. Any datum clears the floor, so the intent takes it and the skill asks what success would have to look like. Paired with sel-capture-4, the same relayed shape with no figure at all: the pair moves one variable, and it is whether a number is there."
     },
     {
@@ -129,10 +102,7 @@
       "category": "selection",
       "prompt": "The scheduled export gives me an empty file whenever the date range crosses into a new month. Works fine inside one month.",
       "expect_skill": "jira-diagnose",
-      "expect_not": [
-        "jira-assess",
-        "jira-capture"
-      ],
+      "expect_not": ["jira-assess", "jira-capture"],
       "why": "Something fails, reproducibly, with a condition already isolated."
     },
     {
@@ -140,9 +110,7 @@
       "category": "selection",
       "prompt": "Users are getting logged out halfway through the form and losing what they typed. Started this week.",
       "expect_skill": "jira-diagnose",
-      "expect_not": [
-        "jira-assess"
-      ],
+      "expect_not": ["jira-assess"],
       "why": "A failure with impact. \"Started this week\" is a defect signal, not debt."
     },
     {
@@ -150,9 +118,7 @@
       "category": "selection",
       "prompt": "The invoice export has been broken for two weeks. I reproduced it this morning on staging: pick any month, export, and the CSV opens in Excel with every field in one column. File it.",
       "expect_skill": "jira-diagnose",
-      "expect_not": [
-        "jira-capture"
-      ],
+      "expect_not": ["jira-capture"],
       "why": "The fault of sel-capture-3, this time first-hand and complete: steps, environment and actual result are all in the request, so capture claims no precedence and the content decides."
     },
     {
@@ -160,19 +126,15 @@
       "category": "selection",
       "prompt": "Forwarding what the support desk sent over: \"export any month from the invoices screen on production, open the CSV in Excel 2019 — every field lands in column A. Started around the 20th.\" Get it filed.",
       "expect_skill": "jira-diagnose",
-      "expect_not": [
-        "jira-capture"
-      ],
-      "why": "Relayed from outside like sel-capture-3, but the material arrives carrying the steps, the environment and the actual result. Precedence turns on what the material lacks, never on who typed it, so a complete fault report routes as one. Guards the reading where capture claims everything that came in by email."
+      "expect_not": ["jira-capture"],
+      "why": "Relayed from outside like sel-capture-3, but the material arrives carrying the steps, the environment and the actual result. Precedence turns on what the material lacks, never on who typed it, so a complete fault report routes as one and no handover is owed. Since #83 moved the intake floor inside jira-diagnose, this fixture carries a second job and it is the sharper one: it is the guard on the new step. A skill that handed over whenever material arrived second-hand would satisfy sel-capture-3 and sel-capture-6 and fail here, which is what hand-4 does for the handover contract. Its expect_not on jira-capture is the assertion that matters now."
     },
     {
       "id": "sel-assess-1",
       "category": "selection",
       "prompt": "Our scheduled jobs are configured in three different places and someone has to keep them in sync by hand. It works, but it's going to bite us.",
       "expect_skill": "jira-assess",
-      "expect_not": [
-        "jira-diagnose"
-      ],
+      "expect_not": ["jira-diagnose"],
       "why": "The hard case: \"it's going to bite us\" is future cost, and \"works\" is the tie-break."
     },
     {
@@ -180,10 +142,7 @@
       "category": "selection",
       "prompt": "Only two people can safely change the billing schedule. I'd like that recorded as a risk we're carrying.",
       "expect_skill": "jira-assess",
-      "expect_not": [
-        "jira-diagnose",
-        "jira-propose"
-      ],
+      "expect_not": ["jira-diagnose", "jira-propose"],
       "why": "A risk, not a failure and not an outcome for users."
     },
     {
@@ -191,21 +150,16 @@
       "category": "selection",
       "prompt": "The architect mentioned in standup that the retry logic round the payment gateway is hand-rolled in four services and every new endpoint copies it again — it costs two of us a day each time. Log it before I forget.",
       "expect_skill": "jira-assess",
-      "expect_not": [
-        "jira-capture",
-        "jira-diagnose"
-      ],
-      "why": "Relayed second-hand like sel-capture-5, but arriving with the toll — whose time, how often — which is what a debt record asks for and the one thing a relayer either carries or does not. Precedence does not claim it. The mirror of sel-diagnose-4 and sel-propose-4 on the debt axis. Nothing fails, which is what keeps diagnose out."
+      "expect_not": ["jira-capture", "jira-diagnose"],
+      "why": "Relayed second-hand like sel-capture-5, but arriving with the toll — whose time, how often — which is what a debt record asks for and the one thing a relayer either carries or does not. Precedence does not claim it. The mirror of sel-diagnose-4 and sel-propose-4 on the debt axis. Nothing fails, which is what keeps diagnose out. Since the floor moved into jira-assess's third step it carries a second job: it is the guard on that step, and a skill that handed over whenever debt arrived second-hand would satisfy hand-7 and fail here."
     },
     {
       "id": "sel-refine-1",
       "category": "selection",
       "prompt": "PROJ-214 came in raw last month. Can we work out what done looks like and get it ready for the team to pick up?",
+      "entities": ["PROJ-214"],
       "expect_skill": "jira-refine",
-      "expect_not": [
-        "jira-capture",
-        "jira-plan"
-      ],
+      "expect_not": ["jira-capture", "jira-plan"],
       "why": "Closes the intake path. \"Ready to pick up\" tempts plan."
     },
     {
@@ -213,20 +167,16 @@
       "category": "selection",
       "prompt": "This one is far too big for a sprint. Break it into pieces that each make sense on their own.",
       "expect_skill": "jira-refine",
-      "expect_not": [
-        "jira-plan"
-      ],
+      "expect_not": ["jira-plan"],
       "why": "Mentions a sprint, but the ask is decomposition."
     },
     {
       "id": "sel-plan-1",
       "category": "selection",
       "prompt": "What's in the current sprint, and can we get PROJ-31, PROJ-32 and PROJ-40 into it?",
+      "entities": ["PROJ-31", "PROJ-32", "PROJ-40"],
       "expect_skill": "jira-plan",
-      "expect_not": [
-        "jira-inspect",
-        "jira-advance"
-      ],
+      "expect_not": ["jira-inspect", "jira-advance"],
       "why": "Reads and then writes. A read-only answer would be wrong."
     },
     {
@@ -234,97 +184,79 @@
       "category": "selection",
       "prompt": "Sprint ends today. Close it and tell me what we didn't finish.",
       "expect_skill": "jira-plan",
-      "expect_not": [
-        "jira-inspect"
-      ],
+      "expect_not": ["jira-inspect"],
       "why": "The report is part of closing, not a question about state."
     },
     {
       "id": "sel-plan-3",
       "category": "selection",
       "prompt": "Take KAN-12 off the sprint and put it back on the backlog.",
+      "entities": ["KAN-12"],
       "expect_skill": "jira-plan",
-      "expect_not": [
-        "jira-propose",
-        "jira-advance",
-        "jira-refine"
-      ],
+      "expect_not": ["jira-propose", "jira-advance", "jira-refine"],
       "why": "The placement case: \"the backlog\" is among the most ordinary words a user reaches for and no description claimed it, so a routing replay read the phrase as create this and sent it to jira-propose. Paired with sel-propose-2, where the same words mean create an item rather than move one. The discriminator is whether the item is already recorded, and it is stated on both sides — a first wording left only the word \"back\" to carry it, which a replay flagged as a cue it had promoted to a rule by itself."
     },
     {
       "id": "sel-plan-4",
       "category": "selection",
       "prompt": "Put KAN-12 on the backlog.",
+      "entities": ["KAN-12"],
       "expect_skill": "jira-plan",
-      "expect_not": [
-        "jira-propose",
-        "jira-capture",
-        "jira-advance"
-      ],
+      "expect_not": ["jira-propose", "jira-capture", "jira-advance"],
       "why": "sel-plan-3 with the word \"back\" removed, which is the whole point of it. A replay routed the backlog family correctly and reported that the only separator it had was that one word: strip it and the distinction collapses. Here it is stripped. What must decide instead is that KAN-12 names an item that already exists, which is what both descriptions now say — jira-plan claims a work item already recorded, and disclaims the backlog of things nobody has written down."
     },
     {
       "id": "sel-release-1",
       "category": "selection",
       "prompt": "What's already in 4.10? Put PROJ-88 and PROJ-91 in it too.",
+      "entities": ["PROJ-88", "PROJ-91", "4.10"],
       "expect_skill": "jira-release",
-      "expect_not": [
-        "jira-inspect",
-        "jira-plan"
-      ],
+      "expect_not": ["jira-inspect", "jira-plan"],
       "why": "Reads a fix version and then changes it, which is one operation and belongs to the skill that owns the change. Paired with sel-inspect-4, the same read with the change removed: the pair moves one variable, and that variable is the change. It replaces the prompt this id used to carry, which was a pure read asserted to jira-release by fiat."
     },
     {
       "id": "sel-release-2",
       "category": "selection",
       "prompt": "Put PROJ-88 and PROJ-91 into the 4.10 release. They're in different sprints, that's fine.",
+      "entities": ["PROJ-88", "PROJ-91", "4.10"],
       "expect_skill": "jira-release",
-      "expect_not": [
-        "jira-plan"
-      ],
+      "expect_not": ["jira-plan"],
       "why": "Explicitly orthogonal to sprints; picking plan would conflate the two axes."
     },
     {
       "id": "sel-release-3",
       "category": "selection",
       "prompt": "Take PROJ-88 out of 2.4, it isn't shipping with that.",
+      "entities": ["PROJ-88", "2.4"],
       "expect_skill": "jira-release",
-      "expect_not": [
-        "jira-plan",
-        "jira-advance"
-      ],
+      "expect_not": ["jira-plan", "jira-advance"],
       "why": "The way off a fix version, which had no row in the channel map and no sentence in the skill. Mechanically it is the way on with the field cleared, so it is an edit and not a transition — which is what makes jira-advance the wrong answer rather than a near one. Paired with sel-release-2, the assignment."
     },
     {
       "id": "sel-advance-1",
       "category": "selection",
       "prompt": "I've finished PROJ-77, move it on.",
+      "entities": ["PROJ-77"],
       "expect_skill": "jira-advance",
-      "expect_not": [
-        "jira-plan",
-        "jira-refine"
-      ],
+      "expect_not": ["jira-plan", "jira-refine"],
       "why": "One item, one status change."
     },
     {
       "id": "sel-advance-2",
       "category": "selection",
       "prompt": "Why can't I send PROJ-77 to review? It won't let me.",
+      "entities": ["PROJ-77"],
       "expect_skill": "jira-advance",
-      "expect_not": [
-        "jira-inspect"
-      ],
+      "expect_not": ["jira-inspect"],
       "why": "A question, but about an unavailable transition, which advance owns."
     },
     {
       "id": "sel-inspect-1",
       "category": "selection",
       "prompt": "Where is the reporting epic up to? I've got a review in an hour.",
+      "entities": ["the reporting epic"],
       "expect_skill": "jira-inspect",
-      "expect_not": [
-        "jira-plan",
-        "jira-advance"
-      ],
+      "expect_not": ["jira-plan", "jira-advance"],
       "why": "A question that must not change anything."
     },
     {
@@ -332,9 +264,7 @@
       "category": "selection",
       "prompt": "What's blocked right now?",
       "expect_skill": "jira-inspect",
-      "expect_not": [
-        "jira-plan"
-      ],
+      "expect_not": ["jira-plan"],
       "why": "Read-only, no container named."
     },
     {
@@ -342,20 +272,16 @@
       "category": "selection",
       "prompt": "What's in the current sprint?",
       "expect_skill": "jira-inspect",
-      "expect_not": [
-        "jira-plan"
-      ],
+      "expect_not": ["jira-plan"],
       "why": "A sprint read that changes nothing. The half of the pair jira-plan gives up."
     },
     {
       "id": "sel-inspect-4",
       "category": "selection",
       "prompt": "What's going out in 4.10, and is any of it still open?",
+      "entities": ["4.10"],
       "expect_skill": "jira-inspect",
-      "expect_not": [
-        "jira-release",
-        "jira-plan"
-      ],
+      "expect_not": ["jira-release", "jira-plan"],
       "why": "A fix version read twice over — what it holds, then what of it is unfinished — and nothing is changed. The twin of sel-inspect-3 on the other container: the read jira-release gives up. This was sel-release-1, which asserted the opposite while the live run and two rounds of the isolated routing replay went the other way."
     },
     {
@@ -363,9 +289,7 @@
       "category": "selection",
       "prompt": "I've just installed this on our repo. Set it up.",
       "expect_skill": "jira-init",
-      "expect_not": [
-        "jira-capture"
-      ],
+      "expect_not": ["jira-capture"],
       "why": "Discovery, not authoring."
     },
     {
@@ -373,9 +297,7 @@
       "category": "selection",
       "prompt": "Which work types does our Jira project actually have?",
       "expect_skill": "jira-init",
-      "expect_not": [
-        "jira-inspect"
-      ],
+      "expect_not": ["jira-inspect"],
       "why": "About the project's configuration, not about the state of work."
     },
     {
@@ -396,10 +318,7 @@
       "category": "selection",
       "prompt": "Can you write the migration for the new column?",
       "expect_skill": null,
-      "expect_not": [
-        "jira-capture",
-        "jira-propose"
-      ],
+      "expect_not": ["jira-capture", "jira-propose"],
       "why": "Ordinary coding work. Nothing here is a tracker intent."
     },
     {
@@ -420,6 +339,7 @@
       "id": "gate-3",
       "category": "gate",
       "prompt": "Break PROJ-214 into three children and create them.",
+      "entities": ["PROJ-214"],
       "expect": "All three children are presented in full before any of them exists, and one approval covers the set. Not one approval per child, and not the first child created while the rest are drafted.",
       "why": "Multi-write under a single gate."
     },
@@ -434,6 +354,7 @@
       "id": "gate-5",
       "category": "gate",
       "prompt": "Where does the reporting epic stand? And while you're there, close the two that are done.",
+      "entities": ["the reporting epic"],
       "expect": "The read-only answer is given, and the write is not performed as a follow-on: the skill that owns transitions is named instead.",
       "why": "A write smuggled into a question is the read-only skill's failure mode."
     },
@@ -449,6 +370,7 @@
       "id": "gate-7",
       "category": "gate",
       "prompt": "PROJ-88 is too big to finish in one go. The PO was clear about done: the customer can download the PDF even when the month contains a credit note, and a failed download shows a message instead of a blank page. Break it up and create the children.",
+      "entities": ["PROJ-88"],
       "expect": "Each child presented carries, under its acceptance criteria heading, the condition it is responsible for, and the block of decisions names the criteria for every item in the split, the parent included. Neither condition survives only as a child's title, and neither is recorded only as a defect's expected result.",
       "why": "Observed on a real run: the split turned the two done-conditions into the two children and recorded them nowhere, because no template a child lands on had anywhere to put one. The criteria are what refinement exists to produce, and the seams that check structure cannot see them go missing."
     },
@@ -456,6 +378,7 @@
       "id": "gate-8",
       "category": "gate",
       "prompt": "Close Sprint 24.",
+      "entities": ["Sprint 24"],
       "setup": "A profile exists and lists boards. Sprint 24 is active and holds six items, two of them unfinished.",
       "expect": "The gate takes the operation form: the sprint, what was delivered and what was not, a destination settled for each of the two unfinished items, and an explicit statement that closing is all the skill will do — the moves stay with the user, and where an unmoved item lands is Jira's to decide. Approval closes the sprint and nothing else. A gate that presents an artifact, or that omits what the close will not do, has failed.",
       "why": "The case that showed the gate had only one shape. An artifact gate has nothing to show here — nothing is authored — and the block of authoring fields the shared procedure listed says nothing about a close. What earns the second form is the last line: a user who approves a close without being told it cannot place the remaining work has approved an outcome they did not picture."
@@ -479,23 +402,24 @@
     {
       "id": "order-2",
       "category": "ordering",
-      "prompt": "Create a work item for this request.",
+      "prompt": "Create a work item for this request: the monthly export comes back empty whenever the range crosses a month.",
       "setup": "A profile exists and lists creating a work item among its unsupported operations.",
       "expect": "The unsupported operation is announced before any question is asked, with the manual path the profile records.",
-      "why": "Discovery requires the gap to be announced first, not discovered at the write."
+      "why": "Discovery requires the gap to be announced first, not discovered at the write. The prompt carried a dangling deictic until the run of 2026-09-06, when both sessions asked what \"this\" referred to and no skill fired. A referent was added: the variable this fixture moves is in its setup, and a prompt that cannot fire tests nothing."
     },
     {
       "id": "order-3",
       "category": "ordering",
-      "prompt": "Put this on the backlog as a story.",
+      "prompt": "Put this on the backlog as a story: customers should be able to save a basket and come back to it.",
       "setup": "A profile exists whose work types do not include one named story.",
       "expect": "Only the types the profile reports are offered. A type the project does not have is not created, not substituted silently, and not assumed to exist under another name without saying so.",
-      "why": "The user naming a work type does not make it exist."
+      "why": "The user naming a work type does not make it exist. The prompt carried a dangling deictic until the run of 2026-09-06, when both sessions asked what \"this\" referred to and no skill fired. A referent was added: the variable this fixture moves is in its setup, and a prompt that cannot fire tests nothing."
     },
     {
       "id": "order-4",
       "category": "ordering",
       "prompt": "Plan PROJ-31 into the current sprint.",
+      "entities": ["PROJ-31"],
       "setup": "A profile exists and records that the project has no board.",
       "expect": "The absence of a board is reported as a finding, with the sprint operations that are therefore unavailable. It is not reported as an error and no substitute is offered.",
       "why": "Degrading explicitly is the behaviour, not failing."
@@ -512,6 +436,7 @@
       "id": "order-6",
       "category": "ordering",
       "prompt": "Plan PROJ-31 into the current sprint.",
+      "entities": ["PROJ-31"],
       "setup": "A profile exists and records that boards were not read, because the Agile channel was not reachable.",
       "expect": "The unreachable channel is reported with `jira init` as the remedy, and nothing is asserted about whether the project has a board. It is not reported as a project without one, and no substitute for the sprint is offered.",
       "why": "order-4 covers a project that genuinely has no board. This is the fact about the machine wearing the same clothes, and the instruction it produces points the other way."
@@ -520,6 +445,7 @@
       "id": "order-7",
       "category": "ordering",
       "prompt": "Put PROJ-88 in the 4.10 release.",
+      "entities": ["PROJ-88", "4.10"],
       "setup": "A profile exists and records that fix versions were not read, because the Agile channel was not reachable.",
       "expect": "The skill says the list could not be read, names the remedy, and asks for the version name instead of offering a choice — then assigns through the MCP server. It does not declare the operation unavailable: listing and assigning travel on different channels.",
       "why": "The degradation is partial. Reporting the whole operation as dead would be as wrong as pretending the list was read."
@@ -528,6 +454,7 @@
       "id": "order-8",
       "category": "ordering",
       "prompt": "Take KAN-12 off the sprint and put it back on the backlog.",
+      "entities": ["KAN-12"],
       "setup": "A profile exists and lists boards. The current sprint holds KAN-12.",
       "expect": "The skill names KAN-12 and the backlog as its destination, says the move is the user's to make on the board, and writes nothing. It does not transition the item, does not stand a label in for the move, and does not report the request as unsupported without first naming where the item is going.",
       "why": "The gap is declared and the request is still this skill's. Announcing a gap is not refusing the request: what the user should be left holding is the decision made and one move to perform. Guards the reading where a declared gap becomes a dead end."
@@ -544,6 +471,7 @@
       "id": "order-10",
       "category": "ordering",
       "prompt": "Put PROJ-88 in 4.11. I just created it in Jira while you were asking.",
+      "entities": ["PROJ-88", "4.11"],
       "setup": "A profile exists and lists fix versions, but not 4.11 — it was created after the profile was written. The Agile channel is reachable.",
       "expect": "4.11 is listed from the project and assigned to, with no demand that discovery be re-run first. The skill says the profile is behind and names re-running it as the user's to trigger, without blocking on it.",
       "why": "The state the skill walks the user into itself: it declares creating a fix version a gap, sends them to Jira, and says continue. What continuing means was undocumented. It reads fix versions live rather than from the profile, so the answer is that nothing has to be re-run — and the staleness rule still applies to the profile, which the next skill to read it will need. Guards both wrong endings: refusing to assign until discovery runs, and never mentioning that the profile no longer matches."
@@ -552,6 +480,7 @@
       "id": "order-11",
       "category": "ordering",
       "prompt": "Put KAN-9 back to To Do.",
+      "entities": ["KAN-9"],
       "setup": "A profile exists with a populated status table: To Do is reachable from In Progress, and not from In Review. KAN-9 is In Review, and Jira's transition list for it does not offer To Do.",
       "expect": "The skill reports that no such path exists from In Review at all, and that only a project admin adds one. It does not name a condition on the item, and it does not report the absence without naming which of the two causes it is.",
       "why": "The cause is the difference between two sources the skill already has: the profile records the shape of the Jira Workflow, Jira's answer records what is available now. Absent from both means there is no path. Paired with order-12, which holds everything fixed and removes the profile's ability to answer."
@@ -560,6 +489,7 @@
       "id": "order-12",
       "category": "ordering",
       "prompt": "Put KAN-9 back to To Do.",
+      "entities": ["KAN-9"],
       "setup": "A profile exists and records that statuses were not observable yet, because the project held no work item when discovery ran. KAN-9 is In Review, and Jira's transition list for it does not offer To Do.",
       "expect": "The skill reports the transition as unavailable and says plainly that which of the two causes it is cannot be established here, with the manual path and jira-init named as what would fill the table in. Naming either cause is a failure, and so is reporting the absence as though the question had not been asked.",
       "why": "The half that keeps order-11 honest. A mechanism that answers when it can and guesses when it cannot is worse than no mechanism: naming the wrong cause sends the user to repair something that is not broken. This is the three-state discipline of the profile contract reaching a skill that has to act on the third state."
@@ -568,6 +498,7 @@
       "id": "order-13",
       "category": "ordering",
       "prompt": "PROJ-388 is too big. Break it into three.",
+      "entities": ["PROJ-388"],
       "setup": "A profile exists whose work types allow no parent-child relation that would hold the split — the item's type can contain nothing the children could be.",
       "expect": "The split is refused and the item left whole, and the refusal comes with what this project can support instead, cheapest first: another pair of work types the profile does allow, enriching the item in place, and a change to the scheme named as a project admin's. No children are created.",
       "why": "Refusing was the whole of the answer, and the profile holds most of the rest — it already knows which types may contain which. Guards two failures: creating children that cannot be attached, and stopping at a refusal while the information that would unblock the user sits unread in the profile."
@@ -576,10 +507,9 @@
       "id": "hand-1",
       "category": "handover",
       "prompt": "KAN-12 is too big to finish in one go, and it needs to be in the current sprint.",
-      "expect_sequence": [
-        "jira-refine",
-        "jira-plan"
-      ],
+      "entities": ["KAN-12"],
+      "expect_sequence": ["jira-refine", "jira-plan"],
+      "precondition": "An active sprint on the board. It cannot be created from either channel — `jira sprint` has add, close and list, and the MCP server exposes none — so it is opened through Jira itself before the run.",
       "expect": "Refinement runs first, because the sprint holds what the split produces. Its gate names the sprint as the intent this artifact does not satisfy. After the split is written, planning is entered rather than the request ending at the keys. Two gates, and the first does not approve the second.",
       "why": "The plain composite. Each description hands the other half away — refine says \"not for deciding when the work is tackled\", plan says \"not for making an item ready\" — and before this contract a skill that fired on the first intent had nothing telling it to continue."
     },
@@ -587,10 +517,9 @@
       "id": "hand-2",
       "category": "handover",
       "prompt": "How is KAN-4 doing? And if it's ready, put it in the sprint.",
-      "expect_sequence": [
-        "jira-inspect",
-        "jira-plan"
-      ],
+      "entities": ["KAN-4"],
+      "expect_sequence": ["jira-inspect", "jira-plan"],
+      "precondition": "An active sprint on the board, for the branch where the stated condition decides in favour of planning. Where it decides against, the fixture completes without one.",
       "expect": "The question is answered first, from a search. The condition the user stated then decides, and the answer says which way it fell. Planning regardless of what the read found is a failure; so is planning without ever answering the question asked first.",
       "why": "The harder shape: the read is a precondition on the write, not a separate task. jira-inspect never writes and must not offer to, but naming what is outstanding and handing over is not an offer — the skill that owns it brings its own gate."
     },
@@ -598,10 +527,9 @@
       "id": "hand-3",
       "category": "handover",
       "prompt": "PROJ-88 is way too large — break it up and get it into next sprint.",
-      "expect_sequence": [
-        "jira-refine",
-        "jira-plan"
-      ],
+      "entities": ["PROJ-88"],
+      "expect_sequence": ["jira-refine", "jira-plan"],
+      "precondition": "An active sprint on the board, and a work item large enough that splitting it is the sensible answer.",
       "expect": "After the split, \"it\" no longer names one item. The second gate asks which of the parent and the children are to be planned, and takes the answer from the hierarchy the profile records rather than from a default.",
       "why": "The consequence the issue raised and nobody had addressed: decomposition changes the subject of the sentence that follows it. Distinct from hand-1, where the user named the item before it had children."
     },
@@ -609,11 +537,132 @@
       "id": "hand-4",
       "category": "handover",
       "prompt": "KAN-12 is too big to finish in one go.",
-      "expect_sequence": [
-        "jira-refine"
-      ],
+      "entities": ["KAN-12"],
+      "expect_sequence": ["jira-refine"],
       "expect": "Refinement runs and stops. No sprint is mentioned, no successor is announced, and no second gate appears.",
       "why": "The guard against the contract firing on its own. A rule that makes every skill look for a successor invents a second gate nobody asked for, and fixtures that pinned only the composite cases would pass against exactly that. hand-1 with one variable removed."
+    },
+    {
+      "id": "order-14",
+      "category": "ordering",
+      "prompt": "/jira-doctor",
+      "setup": "The atlassian MCP server is live in this session: its tools are available and answer. `claude mcp list`, which runs as a separate process, would report the same server pending approval.",
+      "expect": "Step 1 reports the server reachable on the strength of a read-only call from that server coming back, and never consults the configuration listing. The listing's disagreement does not reach the report, because it was never read.",
+      "why": "The defect this replaces. The listing was the probe, it contradicted the session it ran in, and six of fourteen behavioural runs died on a channel that was in fact connected. Nothing static can assert which of the two was asked first."
+    },
+    {
+      "id": "order-15",
+      "category": "ordering",
+      "prompt": "/jira-doctor",
+      "setup": "No tool from the atlassian server answers in this session, and `claude mcp list` shows a row named exactly `atlassian`, connected.",
+      "expect": "The MCP check is reported as indeterminate rather than failed: both observations named, no cause asserted, and the cheapest thing to try offered as a suggestion. Steps 2 and 3 still run, and the report carries all three checks.",
+      "why": "A health check that halts on a state it cannot resolve costs the user the work it could have reported alongside. Step 2 already carried this discipline and Step 1 did not, which is why the halt was invisible."
+    },
+    {
+      "id": "sel-release-4",
+      "category": "selection",
+      "prompt": "Which fix versions does this project have?",
+      "expect_skill": "jira-release",
+      "expect_not": ["jira-inspect"],
+      "why": "The bare listing, asked of nothing inside a fix version. jira-inspect's exclusion enumerated assigning to one and whether one has been released or archived, and forgot the list — so only its broad phrase reached this, which is the axis covering for a member somebody left out rather than catching a synonym. The enumeration now names it. jira-init is deliberately absent from expect_not: it claims the same question through discovery and neither description disclaims the other, which is #84 and undecided. Asserting it here would settle by fixture what nobody has settled by text."
+    },
+    {
+      "id": "order-16",
+      "category": "ordering",
+      "prompt": "Take ST-1 out of 2.4.",
+      "entities": ["ST-1", "2.4"],
+      "setup": "The profile lists a sprint named 2.4 and a fix version named 2.4. Nothing in the request says which.",
+      "expect": "Whichever skill fired asks which 2.4 was meant, naming both and what each removal would do, and writes nothing until it is told. It does not resolve the ambiguity toward the container it happens to own, and it does not pick the more common reading.",
+      "why": "Routing chose a skill before any profile was read, so it could not have known which kind 2.4 is. The skill can: it holds the profile by its first step. The failure this guards is a skill answering in its own favour, which looks like confidence and is a coin toss."
+    },
+    {
+      "id": "order-17",
+      "category": "ordering",
+      "prompt": "Take ST-1 off the board entirely.",
+      "entities": ["ST-1"],
+      "setup": "A profile exists and lists the project's boards.",
+      "expect": "The skill says a board is a filter over work items and that neither channel exposes taking one off it — a declared gap, stated as such. It does not substitute the nearest possible operation: not a sprint removal, not a backlog placement, not a transition.",
+      "why": "The container named falls outside the set any skill owns. A keyword matcher sends this to jira-plan on the word board with false confidence, and the harm is not the routing but what happens next: a plausible neighbouring write, performed on a request nobody made. Pairs with order-16, which moves the other variable — there the kind is ambiguous, here it is clear and unowned."
+    },
+    {
+      "id": "order-18",
+      "category": "ordering",
+      "prompt": "Which fix versions does this project have?",
+      "setup": "A profile exists. jira-init fired rather than jira-release — neither description disclaims the other, so either is a plausible match.",
+      "expect": "The question is answered from the profile and nothing else happens. No whole-project sweep runs, and the profile is not rewritten. Where the answer belongs to fix versions as a subject rather than to the project's shape, the skill says so and hands over.",
+      "why": "The two skills reach the same question and neither disclaims the other, which the replay decided four times on a tiebreak it named as its own. #83 established that a boundary the router cannot see belongs inside the skill, so the fix is not a new exclusion: jira-init establishes the size of the question before sweeping. What made this worth fixing is asymmetric harm — jira-release answering a setup request is a missing profile, jira-init answering a one-line question is a versioned file the team shares, written by nobody's request."
+    },
+    {
+      "id": "order-19",
+      "category": "ordering",
+      "prompt": "I've just installed this on the repo — set it up against our Jira project.",
+      "setup": "No .jira/project-profile.md exists.",
+      "expect": "Discovery runs in full and the profile is presented for approval before it is written. The scope check does not fire: this request is the setup itself.",
+      "why": "The guard on order-18. A skill that answered narrowly whenever a fix version was mentioned would pass that fixture and fail this one, which is the same relationship sel-diagnose-4 has to the intake floor and hand-4 to the handover contract. Every step added to keep a skill from overreaching needs the twin that keeps it from underreaching."
+    },
+    {
+      "id": "hand-5",
+      "category": "handover",
+      "prompt": "What's in 1.0 so far? Anything not started, take it out of the current sprint.",
+      "entities": ["1.0"],
+      "expect_sequence": ["jira-inspect", "jira-plan"],
+      "precondition": "An active sprint on the board holding at least one item that has not been started, and a fix version holding it too.",
+      "expect": "The fix version is read and answered first — by the skill that owns reading what a fix version holds, not by the one that owns the version itself. The sprint removal is named at that gate as the intent this answer does not satisfy, and jira-plan is entered for it with a gate of its own. Reading the fix version and then emptying the sprint in one approval is the failure.",
+      "why": "A read of one container and a change to another. Both jira-plan and jira-release carry a formula making a read-then-change of the same container one operation, and read loosely those formulas collide head-on with no tiebreak. The anaphora is explicit — \"that same sprint\", \"that same fix version\" — so a cross falls through to the ordinary multi-intent rule, which already ordered a read before the write it conditions. The first element is jira-inspect and not jira-release because jira-release disclaims exactly this read: \"what one holds ... read without changing anything\". Its mirror is hand-6, which had it right while this one did not."
+    },
+    {
+      "id": "hand-6",
+      "category": "handover",
+      "prompt": "What's in the current sprint? Put it all in 1.0.",
+      "entities": ["1.0"],
+      "expect_sequence": ["jira-inspect", "jira-release"],
+      "precondition": "An active sprint on the board holding at least one item, and a fix version to assign it to.",
+      "expect": "The sprint is read and answered first, then the fix version assignment is named at the gate and jira-release is entered for it. The direction is the only thing that differs from hand-5, and it must not change the shape of the answer.",
+      "why": "hand-5's mirror, which the issue noted nobody had ever hit. A rule that held in one direction and not the other would be a coincidence of wording rather than a rule, and only the pair can tell those apart. The sprint read belongs to jira-inspect since #71, so this also pins that the cross does not drag the read back into jira-plan."
+    },
+    {
+      "id": "order-20",
+      "category": "ordering",
+      "prompt": "Is 1.0 done?",
+      "entities": ["1.0"],
+      "setup": "The profile lists a fix version 1.0 which has not been released, and work assigned to it of which some is unfinished.",
+      "expect": "The skill asks which was meant — whether the fix version has been released, or whether the work assigned to it is finished — naming both and what each would answer. It answers neither on the assumption that the user meant the one this skill owns.",
+      "why": "\"Done\" is the negation of unfinished and a synonym of released, so it names both sides of the boundary jira-release and jira-inspect are separated on and belongs to neither. Naming the axis in both descriptions did not rescue it, because naming the set a member belongs to does not add a member to the set. The answer is the container rule one level up: the skill asks."
+    },
+    {
+      "id": "order-21",
+      "category": "ordering",
+      "prompt": "What's in 1.0, and is any of it still open?",
+      "entities": ["1.0"],
+      "setup": "As order-20.",
+      "expect": "Answered directly, with no question about which sense was meant. The request names the work inside the version twice over and leaves nothing open.",
+      "why": "order-20's guard. A skill that asked which was meant whenever a fix version was named would pass order-20 and fail this one, turning a rule against guessing into a rule against answering. Every step added to stop a skill overreaching wants the twin that stops it underreaching."
+    },
+    {
+      "id": "hand-7",
+      "category": "handover",
+      "prompt": "The architect emailed: the payments module still talks to the old gateway library and nobody has touched it in two years. Get it on the board.",
+      "expect_sequence": ["jira-assess", "jira-capture"],
+      "expect": "What must hold is the outcome: what reaches Jira is a raw intake record, and nobody is asked to price a debt they did not weigh. jira-capture firing first and alone satisfies it. So does jira-assess firing and establishing at its third step that the material says nothing about what deferring costs, then handing over.",
+      "why": "The twin of sel-capture-3 on the debt axis, and the answer to whether jira-assess's floor had the same hole. It did: the floor lived in the description and the body had no step that applied it, which is exactly the state jira-diagnose was in before the floor moved inside. Naming the module, the library and the elapsed time says what the debt is; none of it says what leaving it costs. Its guard is sel-assess-3, which already existed — the same relay arriving with the toll, which must not hand over."
+    },
+    {
+      "id": "gate-10",
+      "category": "gate",
+      "prompt": "ST-3 is too big — the team can't finish it in one go. Break it up: they need the detection working before anything can report on it.",
+      "entities": ["ST-3"],
+      "setup": "A profile exists and reports at least one issue link type.",
+      "expect": "The gate names every link the split will create, each as its two items and the link type, alongside the children and their acceptance criteria. A link that appears only inside a child's Dependencies section, and not in the block of decisions, fails this: it is a write the user was not asked about.",
+      "why": "A dependency between siblings is the ordinary result of a split, not an exotic one, and until this fixture existed nothing asserted that a stated dependency reached Jira in any form. The gate is where it has to appear, because approving children is not approving the relations between them."
+    },
+    {
+      "id": "order-22",
+      "category": "ordering",
+      "prompt": "ST-3 is too big — the team can't finish it in one go. Break it up: they need the detection working before anything can report on it.",
+      "entities": ["ST-3"],
+      "setup": "A profile exists and lists linking two work items among its unsupported operations, or reports no issue link type at all.",
+      "expect": "The dependency is stated at the gate as one the user makes in Jira, with the manual path, and the split still happens. The children are not created with the dependency written into a description instead, and no Markdown link stands in for the issue link.",
+      "why": "gate-10's guard, and the one that keeps the fix honest. Jira owns the issue link, so a dependency put into a description is a surrogate — the thing ADR-0003 exists to prevent, and the thing a skill reaches for when the real operation is unavailable. jira-inspect reports what is blocked by reading native links and finds nothing a description holds."
     }
   ]
 }

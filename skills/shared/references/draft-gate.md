@@ -104,3 +104,11 @@ fired owns one of them.
   profile is what says so. Ask; never resolve it by default.
 - **A condition the user stated is a condition.** "Plan it if it is ready" is not satisfied by
   planning it.
+- **A read of one container and a change to another is two intents, not one.** Two skills carry a
+  formula making a read and a change to **the same** container one operation — a sprint read then
+  changed, a fix version read then changed. It says "that same", and it means it. _"What is in 4.10
+  so far? Anything not started, take it out of the current sprint"_ reads a fix version and changes
+  a sprint, so the exception does not apply and the ordinary rule above does: the read is answered
+  first, the change is named at the gate, and the skill that owns the container being changed is
+  entered for it. The mirror — a sprint read, a fix version written — is the same request with the
+  containers swapped and takes the same path.

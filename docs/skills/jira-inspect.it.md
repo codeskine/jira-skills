@@ -37,6 +37,7 @@ Si attiva quando vuoi una risposta, non un cambiamento.
 | «quali fix version ha questo progetto?»        | [`jira-release`](jira-release.it.md) |
 | «assegna questi alla 2.4»                      | [`jira-release`](jira-release.it.md) |
 | «cosa c'è nella 2.4? mettici anche questi due» | [`jira-release`](jira-release.it.md) |
+| «quali fix version ha questo progetto?»        | [`jira-release`](jira-release.it.md) |
 
 La fix version è il confine che vale la pena dire apertamente, e l'asse è su cosa verte la
 domanda. Il lavoro **dentro** una fix version — cosa contiene, quanto di quello è ancora aperto —

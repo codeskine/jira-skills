@@ -1,6 +1,6 @@
 ---
 name: jira-inspect
-description: "Jira read-only reporter. Use when the user asks where something stands on Jira — how a parent and its children are progressing, what a sprint contains and what it has left, what is blocked, what a fix version holds and what of it is unfinished — and expects an answer rather than a change. Never writes anything. Not for transitioning an item (→ See codeskine/jira-skills@jira-advance), for planning a sprint (→ See codeskine/jira-skills@jira-plan), or for the fix version itself rather than the work inside it — assigning to one, or whether one has been released or archived (→ See codeskine/jira-skills@jira-release)."
+description: "Jira read-only reporter. Use when the user asks where something stands on Jira — how a parent and its children are progressing, what a sprint contains and what it has left, what is blocked, what a fix version holds and what of it is unfinished — and expects an answer rather than a change. Never writes anything, and a change asked for alongside does not send the reading elsewhere: a request that reads one container and then changes a different one — a fix version read and a sprint changed, or the reverse — is answered here first, and the skill that owns the change is entered for it afterwards, with a gate of its own. Not for transitioning an item (→ See codeskine/jira-skills@jira-advance), for planning a sprint (→ See codeskine/jira-skills@jira-plan), or for the fix version itself rather than the work inside it — assigning to one, the list of them, or whether one has been released or archived (→ See codeskine/jira-skills@jira-release)."
 user-invocable: true
 license: MIT
 compatibility: Designed for Claude Code. Requires the Atlassian MCP server configured as "atlassian".
@@ -37,6 +37,10 @@ none can reach a command that closes one.
 
 First, as [discovery](../shared/references/discovery.md) requires. It supplies the project key,
 the statuses and their categories, the boards and the fix versions the questions refer to.
+
+Where the user's words leave which question they asked open — "is 4.10 done?", "what is
+the state of it?" — resolve that before answering, as
+[discovery](../shared/references/discovery.md) § Resolving which question was asked requires.
 
 ## 2. Answer by searching
 

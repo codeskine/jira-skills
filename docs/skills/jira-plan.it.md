@@ -59,8 +59,15 @@ vuol dire registrala: è una proposta, non il collocamento di qualcosa che esist
 qualcun altro. A separarli è se la cosa è già registrata, non la parola.
 
 Leggere uno sprint senza cambiarlo è di [`jira-inspect`](jira-inspect.it.md). Ma una richiesta che
-legge uno sprint **e poi lo cambia** — «fammi vedere cosa resta e togli i bloccati» — è una sola
-operazione, non due, ed è di questa skill fin dall'inizio.
+legge uno sprint **e poi cambia quello stesso sprint** — «fammi vedere cosa resta e togli i
+bloccati» — è una sola operazione, non due, ed è di questa skill fin dall'inizio.
+
+«Quello stesso» non è un riempitivo. Se leggi un contenitore e ne cambi uno **diverso** — «cosa c'è
+nella 4.10 finora? quello non ancora iniziato toglilo dallo sprint corrente» — torna a essere due
+intenti e non uno: la fix version ti viene risposta per prima, il cambio sullo sprint ti viene
+nominato accanto alla risposta, e per quello c'è un'approvazione a sé. Vedi
+[il processo di sviluppo](../development-process.it.md) su cosa succede quando una frase chiede due
+cose.
 
 [`jira-inspect`](jira-inspect.it.md) ti manda qui anche per una domanda che ha bisogno della board
 stessa — quali board esistono, o uno sprint che il project profile non nomina. La Jira CLI non ce

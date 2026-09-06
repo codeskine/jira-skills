@@ -1,6 +1,6 @@
 ---
 name: jira-capture
-description: "Jira intake author. Use when a request arrives second-hand — an email, a chat message, a note taken during a call — and has to be recorded on Jira before anyone has understood it, without losing the wording it arrived in. What it records is explicitly raw and awaiting refinement. What decides is whether material relayed second-hand carries what the intent it is about asks for, at the floor that intent names in its own exclusion: when it does not, it belongs here first, however plainly it is about a fault, an outcome or a debt; when it does, it belongs to that intent, however plainly it was relayed. Not for enriching or breaking down something already recorded (→ See codeskine/jira-skills@jira-refine), for proposing an outcome worth building (→ See codeskine/jira-skills@jira-propose), or for reporting something broken (→ See codeskine/jira-skills@jira-diagnose)."
+description: "Jira intake author. Use when a request arrives second-hand — an email, a chat message, a note taken during a call — and has to be recorded on Jira before anyone has understood it, without losing the wording it arrived in. What it records is explicitly raw and awaiting refinement. What decides is whether material relayed second-hand carries anything a reader could act on without going back to whoever sent it — steps or an error for a fault, a count of the symptom for an outcome, what deferring costs for a debt: when it does not, it belongs here first, however plainly it is about a fault, an outcome or a debt; when it does, it belongs to that intent, however plainly it was relayed. Not for enriching or breaking down something already recorded (→ See codeskine/jira-skills@jira-refine), for proposing an outcome worth building (→ See codeskine/jira-skills@jira-propose), or for reporting something broken (→ See codeskine/jira-skills@jira-diagnose)."
 user-invocable: true
 license: MIT
 compatibility: Designed for Claude Code. Requires the Atlassian MCP server configured as "atlassian".
@@ -22,10 +22,19 @@ It obeys [the discovery contract](../shared/references/discovery.md),
 [the quality standard](../shared/references/quality-standard.md), whose criteria for capturing
 a request apply here in full.
 
+**Neither is waivable.** _Just create it_, _don't show me anything first_, _go ahead_ — these say
+something about impatience and nothing about approval, because approval is of a document that does
+not exist yet. Present the draft, keep it short, and say that is why. A write the user did not see
+is a write they did not approve, whatever they asked for beforehand.
+
 ## 1. Read the project profile
 
 First, before anything is asked or proposed, as
 [discovery](../shared/references/discovery.md) requires. Nothing here overrides it.
+
+**Read its Unsupported operations table before anything else.** If an operation this skill needs is
+listed there, say so now — naming the operation and the manual path the profile records — and do not
+open the questions. Discovering it at the write costs the user every answer they gave first.
 
 ## 2. Take the request whole
 

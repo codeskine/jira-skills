@@ -2,12 +2,12 @@
 
 <!-- skill-header:start -->
 
-|                 |                                                          |
-| --------------- | -------------------------------------------------------- |
-| **Nome**        | `/jira-doctor`                                           |
-| **Tipo**        | comando                                                  |
-| **Invocazione** | `/jira-doctor`                                           |
-| **Strumenti**   | `Bash(claude:*)` `Bash(jira:*)` `Bash(command:*)` `Read` |
+|                 |                                                                           |
+| --------------- | ------------------------------------------------------------------------- |
+| **Nome**        | `/jira-doctor`                                                            |
+| **Tipo**        | comando                                                                   |
+| **Invocazione** | `/jira-doctor`                                                            |
+| **Strumenti**   | `mcp__atlassian` `Bash(claude:*)` `Bash(jira:*)` `Bash(command:*)` `Read` |
 
 <!-- skill-header:end -->
 
@@ -42,22 +42,32 @@ configurato il tuo progetto, e ha bisogno che la risposta alla prima domanda sia
 
 ## Come si usa
 
-Digitalo e leggi i tre esiti. Non c'è niente da approvare e niente da annullare.
+Digitalo e leggi le tre righe. Non c'è niente da approvare e niente da annullare.
 
-**1 · Cerca un server che si chiami esattamente `atlassian`.** L'id è fissato per convenzione, non
-per preferenza: una skill raggiunge l'MCP server solo portando la stringa `mcp__atlassian` nel suo
-frontmatter statico, dove viene confrontata e mai interpretata, e un frontmatter non può leggere un
-file. Un server connesso con qualsiasi altro nome — `Atlassian`, `mcp-atlassian`, `jira` — non
-serve nessuna skill di questo plugin per quanto sano possa sembrare, ed è il guasto che assomiglia
-al non succedere niente. Il rimedio è ridichiarare lo stesso server con l'id richiesto, prendendo
-il transport e l'URL dalla riga che c'è già:
+**1 · Interroga la sessione, non la configurazione.** La domanda è se _questa_ sessione raggiunge
+Jira, e a quella risponde solo una chiamata fatta al suo interno. `/jira-doctor` chiama un tool di
+sola lettura del server `atlassian` — la chiamata d'identità più economica che offre, nessun
+argomento e nessun progetto nominato — e una risposta che torna è tutto il controllo: le skill
+dichiarano `mcp__atlassian` e raggiungono lo stesso server con lo stesso nome. Solo se
+quella chiamata fallisce legge `claude mcp list`, e allora per classificare il guasto, non per
+stabilire alcunché. L'elenco gira in un processo separato e non condivide lo stato di connessione
+di questa sessione, quindi i due possono contraddirsi — una sessione con il canale vivo e ogni tool
+Atlassian funzionante si è sentita dire dal proprio elenco che il server era in attesa di
+approvazione. Dove si contraddicono ha ragione la sessione, perché è lì che girano le skill.
+
+**2 · Cerca un server che si chiami esattamente `atlassian`.** L'id è fissato per convenzione, non
+per preferenza: le skill dichiarano `mcp__atlassian` in un frontmatter statico, e un frontmatter
+non può leggere un file. Un server connesso con qualsiasi altro nome — `Atlassian`,
+`mcp-atlassian`, `jira` — non serve nessuna skill di questo plugin per quanto sano possa sembrare,
+ed è il guasto che assomiglia al non succedere niente. Il rimedio è ridichiarare lo stesso server
+con l'id richiesto, prendendo il transport e l'URL dalla riga che c'è già:
 
 ```bash
 claude mcp remove <l'id che hai trovato>
 claude mcp add --transport <il suo transport> atlassian <il suo URL>
 ```
 
-**2 · Un connettore Atlassian aggiunto dalle impostazioni di claude.ai è lo stesso guasto con
+**3 · Un connettore Atlassian aggiunto dalle impostazioni di claude.ai è lo stesso guasto con
 un'altra faccia.** La sua riga si legge `claude.ai Atlassian`, si dichiara connesso, e continua a
 non servire nessuna skill: un connettore espone i suoi tool sotto un identificatore che assegna il
 meccanismo dei connettori, non sotto il nome che la riga mostra, quindi `mcp__atlassian` non lo
@@ -85,20 +95,26 @@ una sessione può non essere utilizzabile in quella sessione. Se la riga risulta
 sessione non c'è nessun tool Atlassian, l'ambiente è a posto e la sessione è vecchia: aprine una
 nuova ed esegui di nuovo il controllo.
 
-**3 · Il controllo della CLI distingue due guasti diversi.** La `jira` CLI serve solo per il
+**4 · Nemmeno un server dichiarato da un plugin installato può servirne una.** Un `.mcp.json` alla
+radice di un plugin viaggia con il plugin e viene registrato sotto un id con spazio di nomi —
+`plugin:<nome>:atlassian` — mentre ogni skill dichiara il nudo `mcp__atlassian`. La riga segnala che
+ha bisogno di autenticazione, ed è la parte ingannevole: autenticarlo non cambia nulla, perché è
+l'id a essere irraggiungibile. Lascialo dov'è e dichiara `atlassian` per conto tuo.
+
+**5 · Il controllo della CLI distingue due guasti diversi.** La `jira` CLI serve solo per il
 dominio Agile — board, sprint, l'elenco delle fix version — quindi la sua assenza è una
-degradazione parziale, non un ambiente morto, e il controllo prosegue fino in fondo comunque. Se è
-installata ma non risponde, due cause si somigliano dall'esterno e vogliono rimedi diversi.
-`/jira-doctor` stabilisce quale sia prima di prescrivere qualcosa, verificando separatamente la
-credenziale e il file di configurazione — e le stesse due verifiche segnano il caso in cui non
-manca nessuno dei due. Nessuna delle due stampa il tuo token, e nessuna deve mai essere fatta
+degradazione parziale, non un
+ambiente morto, e il controllo prosegue fino in fondo comunque. Se è installata ma non risponde,
+due cause si somigliano dall'esterno e vogliono rimedi diversi. `/jira-doctor` stabilisce quale
+sia prima di prescrivere qualcosa, verificando separatamente la credenziale e il file di
+configurazione. Nessuna delle due verifiche stampa il tuo token, e nessuna deve mai essere fatta
 stampare.
 
-| Cosa trova                                    | Cosa significa                                        | Cosa fai                                                             |
-| --------------------------------------------- | ----------------------------------------------------- | -------------------------------------------------------------------- |
-| credenziale assente                           | il token non è visibile alla shell che usano le skill | esportalo dove la tua shell lo legge, sotto                          |
-| credenziale presente, configurazione assente  | installata ma mai configurata                         | esegui tu `jira init`, è interattivo                                 |
-| credenziale presente, configurazione presente | configurata, e Jira non risponde                      | un token nuovo, e controlla il sito che la tua configurazione indica |
+| Cosa trova                                    | Cosa significa                                                        | Cosa fai                                    |
+| --------------------------------------------- | --------------------------------------------------------------------- | ------------------------------------------- |
+| credenziale assente                           | il token non è visibile alla shell che usano le skill                 | esportalo dove la tua shell lo legge, sotto |
+| credenziale presente, configurazione assente  | installata ma mai configurata                                         | esegui tu `jira init`, è interattivo        |
+| credenziale presente, configurazione presente | la credenziale è rifiutata — scaduta o revocata, con ogni probabilità | un token nuovo, esportato allo stesso modo  |
 
 La prima riga è quella su cui si inciampa. Le skill raggiungono la CLI attraverso `Bash(jira:*)`,
 una shell **non interattiva**, e quale file di avvio una shell così legga — ammesso che ne legga
@@ -129,15 +145,7 @@ mentre gira, quindi senza token risponde `401 Unauthorized` e non scrive niente.
 una credenziale mancante ti costa un giro a vuoto e ti dice che la configurazione è rotta quando
 non lo è.
 
-La terza riga è quella dove il comando si ferma apposta. Un token è esportato, una configurazione
-esiste, e la chiamata non torna: è questo che le due verifiche stabiliscono, e nient'altro. Il
-**perché** da lì non si vede. Un token scaduto o revocato è il caso comune, ma una configurazione
-che indica un sito che non intendi più, e una rete che non arriva ad Atlassian, si somigliano a
-questa distanza. Quindi riporta lo stato e ti passa le due cose che distinguono un caso dall'altro
-— un token nuovo dallo stesso indirizzo, esportato come prescrive la tabella qui sopra, e il sito
-che la tua configurazione indica, che puoi confrontare con quello che intendi.
-
-**4 · Legge il project profile invece di limitarsi a verificarne l'esistenza.**
+**6 · Legge il project profile invece di limitarsi a verificarne l'esistenza.**
 `.jira/project-profile.md` — il file che registra l'esito della discovery, cioè la lettura della
 configurazione reale del progetto — è quello che ogni skill legge come primo passo; senza, si
 fermano prima di fare qualsiasi cosa. Leggere il file tiene questo passo dentro a quello che il
@@ -145,30 +153,13 @@ comando dichiara, e un file assente torna come un ordinario «non trovato» inve
 un'uscita diversa da zero che si legge come un guasto. Il rimedio è la skill
 [`jira-init`](../skills/jira-init.it.md), che scopre il progetto e scrive il project profile.
 
-Eseguito fuori da un repository, questo passo riporta un'altra cosa. Un project profile vive nel
-repository di cui descrive il lavoro, quindi senza un repository sotto il comando non c'è nessun
-posto in cui possa stare: dice che il controllo è stato eseguito fuori da un repository e che a
-questo passo non si è potuto rispondere, invece di mandarti a scrivere un project profile in una
-directory che non è il tuo progetto. Il passo 1 non cambia, ma il suo rimedio con `.mcp.json` è la
-via a livello di progetto, una delle due: fuori da un repository quella che si applica è
-`claude mcp add`, a livello utente.
-
-**5 · Riporta i tre controlli insieme, mai solo il primo fallito.** Sapere che manca l'MCP server
+**7 · Riporta i tre controlli insieme, mai solo il primo fallito.** Sapere che manca l'MCP server
 **e** che la CLI è al buio ti risparmia un secondo giro. I quattro stati che distingue: passano
 tutti e tre e sei pronto; MCP a posto e CLI assente vuol dire utilizzabile, con le operazioni su
 sprint e board non disponibili; MCP assente vuol dire non utilizzabile, perché ogni skill di
 scrittura passa di lì; project profile assente vuol dire eseguire `jira-init`. Vedi
 [il processo di sviluppo](../development-process.it.md) per i due channel — le vie con cui una
 skill parla a Jira — e per cosa possiede ciascuno.
-
-Anche la forma è fissata, così che due esecuzioni diano report confrontabili. Un blocco per
-controllo, nell'ordine in cui i passi girano, con in testa il soggetto, un ✅ o un ❌ e lo stato;
-`trovato` per quello che è stato osservato, ed è ciò che rende il blocco confrontabile con la tua
-macchina invece che da prendere per buono; `perché` solo dove lo stato è di quelli che altrimenti
-si leggono male; `rimedio` scritto come qualcosa che fai tu, perché qui ogni rimedio è tuo. Un
-blocco che passa porta `trovato` e finisce lì. L'ultima riga nomina una mossa sola, non tre —
-l'MCP server per primo se ha fallito più di un controllo, perché senza di lui non si scrive proprio
-niente.
 
 ## Scambio di esempio
 
@@ -225,7 +216,8 @@ Il report come arriva in chat. Non viene scritto niente: né su Jira, né sulla 
 
 ```text
 MCP server       ❌  connesso, e inutilizzabile da queste skill
-     trovato     una riga di nome "claude.ai Atlassian"
+     trovato     atlassianUserInfo non è tornata; l'elenco ha poi mostrato una riga di
+                 nome "claude.ai Atlassian"
      perché      un connettore espone i suoi tool sotto un identificatore che assegna il
                  meccanismo dei connettori, non sotto il nome che la riga mostra, quindi
                  mcp__atlassian non lo aggancia su nessuna macchina
@@ -264,23 +256,20 @@ CLI presidia solo board, sprint e l'elenco delle fix version; il resto del plugi
 senza.
 ```
 
-Tre cose rendono questo report degno di essere letto invece che rieseguito. I tre controlli sono
+Tre cose rendono questo report degno di essere letto invece che rieseguito. Le tre righe sono
 indipendenti, quindi sistemi tre cose in un passaggio solo invece di scoprirle un guasto alla
-volta. Ogni blocco porta il rimedio della causa che è stata davvero stabilita, ed è il motivo per
-cui il blocco della CLI dice a voce alta _non `jira init`_: è il comando a cui si pensa per primo,
-e qui fallirebbe con `401` senza scrivere niente. E il blocco dell'MCP non ti chiede di rimuovere
+volta. Ogni riga porta il rimedio della causa che è stata davvero stabilita, ed è il motivo per
+cui la riga della CLI dice a voce alta _non `jira init`_: è il comando a cui si pensa per primo, e
+qui fallirebbe con `401` senza scrivere niente. E la riga dell'MCP non ti chiede di rimuovere
 niente: il connettore non è una configurazione sbagliata e non è colpa tua, è semplicemente
 invisibile a un `mcp__atlassian` statico.
 
-Quando passano tutti e tre, la stessa forma non porta né `perché` né `rimedio`:
+Quando passano tutti e tre, lo stesso report sono quattro righe:
 
 ```text
-MCP server       ✅  connesso
-     trovato     una riga di nome "atlassian", connessa
+MCP server       ✅  raggiungibile da questa sessione
 Jira CLI         ✅  autenticata
-     trovato     jira me ha stampato l'account
-Project profile  ✅  project profile presente
-     trovato     .jira/project-profile.md
+Project profile  ✅  .jira/project-profile.md
 
 Pronto.
 ```
@@ -293,22 +282,20 @@ Pronto.
   né `.jira/project-profile.md`. Uno di questi è un tuo dotfile, e l'ultimo è di
   [`jira-init`](../skills/jira-init.it.md).
 - **Stampare la tua credenziale.** Le verifiche riportano presenza o assenza, mai un valore.
-- **Nominare una causa che non può vedere.** Se ci sono sia la credenziale sia la configurazione e
-  la chiamata continua a non tornare, riporta quello stato e ti passa quello che distingue le
-  cause. Non ti dice che il token è scaduto: da lì un token scaduto, una configurazione che indica
-  un sito che non intendi più e una rete che non arriva ad Atlassian si somigliano.
-- **Rispondere sul project profile fuori da un repository.** Senza un repository sotto il comando
-  non c'è nessun posto in cui un project profile possa stare, quindi dice che a quel passo non si è
-  potuto rispondere invece di mandarti a scriverne uno in una directory che non è il tuo progetto.
-- **Fermarsi al primo fallimento.** Tutti e tre i controlli girano, e una CLI assente non chiude
-  il controllo prima che il project profile venga guardato.
+- **Fermarsi al primo fallimento.** Tutti e tre i controlli girano. Né un MCP server irraggiungibile
+  né una CLI assente chiudono il controllo prima che il project profile venga guardato.
 - **Rinominare o rimuovere un connettore claude.ai.** Claude Code non offre nessuna delle due cose
   per una riga così, e rinominarlo non cambierebbe l'identificatore con cui arrivano i suoi tool.
 - **Inventare un endpoint.** Per un server con l'id sbagliato riusa il transport e l'URL della riga
   che c'è già; se la riga non li mostra, te li chiede invece di indovinarli.
-- **Riportare una sessione vecchia come un guasto di configurazione.** Un server che
-  `claude mcp list` mostra connesso mentre nella sessione non c'è nessun tool Atlassian vuol dire
-  aprire una sessione nuova, non sistemare la tua configurazione.
+- **Credere all'elenco della configurazione invece che alla sessione.** `claude mcp list` gira in un
+  processo separato e su questo può sbagliare: ha riportato un server in attesa di approvazione a
+  una sessione che lo stava usando. Decide la chiamata viva, in entrambi i versi — un server che
+  l'elenco mostra connesso mentre qui nessun tool Atlassian risponde vuol dire aprire una sessione
+  nuova, non sistemare la tua configurazione.
+- **Affermare una causa che non può vedere.** Dove la chiamata fallisce e la configurazione sembra
+  giusta, lo dice e nomina la cosa più economica da provare. Non sceglie fra una sessione vecchia,
+  un'autenticazione scaduta e una rete che non arriva ad Atlassian, perché da qui si somigliano.
 - **Fare la discovery del tuo progetto.** Work type, status, board e fix version non sono affari
   suoi.
 
@@ -318,7 +305,6 @@ Pronto.
   possiede ciascuno, e cosa contiene il project profile.
 - [`jira-init`](../skills/jira-init.it.md) — la skill che scopre il progetto e scrive il project
   profile di cui questo comando verifica l'esistenza.
-- `jira-init`, `jira-plan` e `jira-release` sono le tre skill che portano `Bash(jira:*)`, quindi
-  sono quelle di cui parla il controllo della CLI. `jira-plan` e `jira-release` perdono le
-  operazioni Agile che gli servono; `jira-init` gira lo stesso e registra la superficie Agile come
-  non supportata su questa macchina. Tutto il resto continua a funzionare sul solo MCP server.
+- `jira-plan` e `jira-release` sono le due skill che raggiungono il dominio Agile, quindi sono
+  quelle che ammutoliscono quando il controllo della CLI fallisce; tutto il resto continua a
+  funzionare sul solo MCP server.

@@ -37,6 +37,7 @@ It fires when you want an answer, not a change.
 | "which fix versions does this project have?" | [`jira-release`](jira-release.md) |
 | "assign these to 2.4"                        | [`jira-release`](jira-release.md) |
 | "what's in 2.4? add these two as well"       | [`jira-release`](jira-release.md) |
+| "which fix versions does this project have?" | [`jira-release`](jira-release.md) |
 
 The fix version is the boundary worth stating outright, and the axis is what the question is
 _about_. The work **inside** a fix version — what it holds, how much of it is still open — is this

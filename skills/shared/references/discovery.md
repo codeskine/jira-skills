@@ -39,8 +39,14 @@ and fix versions.
 
 A profile is valid when it states, at minimum: the project key, the work types with their
 hierarchy, the intents no work type serves, the statuses as far as they can be observed, the
-boards, the fix versions with the release state of each, the resolved operation → tool mapping,
-and the list of unsupported operations. Anything else is convenience.
+boards, the fix versions with the release state of each, **the issue link types the project
+defines**, the resolved operation → tool mapping, and the list of unsupported operations. Anything
+else is convenience.
+
+**Link types belong to the project, like work types.** `Blocks` is not guaranteed to exist and
+nothing may assume it: a skill that needs to link two items offers the types the profile reports and
+no others. Where the project defines none, linking joins the unsupported list and the dependency is
+stated at the gate as one the user makes in Jira.
 
 **Boards and fix versions are recorded in one of three states, never two.** They are listed, or
 the project has none, or they were **not read** because the channel that serves them did not
@@ -84,6 +90,56 @@ Every skill, as its first step:
    guess, does not fall back to defaults, and does not run discovery itself.
 3. If the operation it needs is listed as unsupported, it says so before asking the user
    anything, and offers the manual path.
+
+## Resolving a container the user named
+
+A sprint, a fix version and a status are all named, and a name on its own does not say which it
+is. `2.4` is as plausible a sprint as a fix version. `To Do` is a status in one project and a
+board's leftmost column in another. `Backlog` is a placement, and in some schemes also a status.
+
+Routing cannot settle this: a description is matched against a request before any profile has been
+read, so no wording can carry knowledge that lives in the profile. The skill settles it, at its
+first step, with the profile already in hand.
+
+1. **Resolve the name against the profile** — its sprints, its fix versions, its statuses.
+2. **One kind matches** → proceed. The ordinary case, and it costs nothing.
+3. **More than one kind matches** → ask which was meant, naming both and what each would do.
+   Never prefer the kind this skill happens to own: a skill resolving an ambiguity in its own
+   favour is the failure this rule exists to prevent.
+4. **No kind matches** → say so and name what the profile does hold. A name the project does not
+   carry is far more often a typo or a stale profile than a thing to go and create.
+5. **A container of a kind no skill owns** — a board, most often → say that plainly. A board is a
+   filter over work items, and nothing either channel exposes takes a work item off one. It is a
+   declared gap, not a request to reinterpret as the nearest thing that is possible.
+
+Resolve before acting, never after. "Which 2.4 did you mean" is cheap before a write and expensive
+once one has happened.
+
+## Resolving which question was asked
+
+The same problem one level up. A container's name does not say its kind; a question's words do not
+always say its subject.
+
+_"Is 4.10 done?"_ asks either whether the fix version has been released, or whether the work
+assigned to it is finished. _"What is the state of 4.10?"_ and _"where is 4.10 up to?"_ are the
+same sentence twice. Two skills own the two answers, each names its own side, and a user who says
+"done" has used a word on neither list.
+
+Naming the axis does not fix it. A description can say it owns _the fix version itself rather than
+the work inside it_ and still be mute on "done", because **naming the set a member belongs to does
+not add a member to the set.** A request fails to route when its words match no member, and there
+is no wording that anticipates every synonym a user has.
+
+So the answer is the same as for a container, and it is deliberately not a wording:
+
+1. **The skill that fired asks which was meant**, naming both readings and what each would answer.
+2. **It does not pick the more common one.** The two readings belong to different skills, and a
+   skill resolving toward its own is guessing with the appearance of knowing.
+3. **Where the answer is the other skill's, hand over** rather than answering approximately.
+
+Being asked "which did you mean" costs one line. Being answered the other question costs a reader
+who believes they were told something they were not, and a plugin whose every write is gated can
+afford the question.
 
 ## Choosing a work type
 

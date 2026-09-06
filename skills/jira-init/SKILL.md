@@ -18,7 +18,25 @@ statuses, Jira Workflows, boards and fix versions belong to the project admin. R
 Present the profile and get approval before writing the file — the profile is versioned and the
 team shares it.
 
-## 1. Check the channels
+## 1. Establish that discovery is what was asked for
+
+This skill sweeps the whole project and **writes a versioned file the team shares**. That is a
+large answer, and some requests that reach it want a small one.
+
+Where the user asked a single question about one facet — which fix versions the project has,
+which boards, what the statuses are — answer it and stop. Do not sweep, and do not write the
+profile: a file the team shares, produced by a question nobody meant as a setup step, is a write
+they did not ask for. Where the profile already exists, the answer is in it. Where it does not,
+read the one thing asked and say that discovery has not been run, so they can choose.
+
+The skill that owns fix versions as a subject is `jira-release`, and handing the question to it is
+the better answer where the request is about them rather than about the project's shape. What
+decides is the size of the question, not which skill saw it first.
+
+Where the request is the setup itself — a new repository, a scheme that changed, another skill
+reporting the profile missing or stale — carry on.
+
+## 2. Check the channels
 
 The two channels fail independently, and only one of them is a precondition.
 
@@ -35,7 +53,7 @@ The two channels fail independently, and only one of them is a precondition.
 Record which channels answered. Read and not reachable are different facts, and the profile
 must keep them apart.
 
-## 2. Identify the project
+## 3. Identify the project
 
 If `.jira/project-profile.md` already exists, read it and tell the user which project it
 describes and when it was discovered. Ask whether to refresh it or to target a different project.
@@ -43,10 +61,14 @@ describes and when it was discovered. Ask whether to refresh it or to target a d
 Otherwise list the projects visible to the account and ask the user to choose. Never infer the
 project from the repository name.
 
-## 3. Discover
+## 4. Discover
+
+Six subjects and one more: with the work types, hierarchy, statuses, boards and fix versions, read
+**the issue link types this project defines**. They are a project's own vocabulary — `Blocks` is not
+guaranteed — and a skill that links two items has nothing to offer without them.
 
 Gather, in this order. Report anything that fails rather than working around it — but two things
-are **not** failures to stop on: a subject the unreachable channel of step 1 owns, and a subject
+are **not** failures to stop on: a subject the unreachable channel of step 2 owns, and a subject
 that has nothing to observe yet. Record either as not read, say which of the two it was, and carry
 on to the next.
 
@@ -68,7 +90,7 @@ on to the next.
 5. **Fix versions**, with their state — the Agile channel, and the same two findings apply.
 6. **Project style** — team-managed or company-managed — because it changes which fields exist.
 
-## 4. Resolve the operations
+## 5. Resolve the operations
 
 Enumerate the tools the MCP server actually exposes and map each operation in the channel map to
 the tool that serves it. Record the mapping in the profile, so no skill ever hard-codes a tool
@@ -84,7 +106,7 @@ the manual path the user will take instead. The channel map already declares the
 the CLI level — creating a sprint, creating or releasing a fix version — carry them across
 unless a resolved MCP tool closes one.
 
-## 5. Present and confirm
+## 6. Present and confirm
 
 Fill [the profile template](assets/project-profile.md) and present it in full, in the language
 the user is working in. State plainly:
@@ -104,7 +126,7 @@ what a refused write leaves waiting. Say so when it happens, name it as the cons
 than leaving it to be met later, and leave the findings in the conversation: a profile the user
 refused is not a file to put somewhere quieter.
 
-## 6. Write
+## 7. Write
 
 Write `.jira/project-profile.md`, creating the directory if needed. Overwrite an existing
 profile — this skill is its only writer, so there is nothing to merge.

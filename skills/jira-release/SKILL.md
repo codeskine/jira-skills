@@ -1,6 +1,6 @@
 ---
 name: jira-release
-description: "Jira fix version manager. Use when the user asks to assign work to a Jira fix version or take it off one, or for the list of fix versions the project has, or whether one of them has been released or archived. Treats what ships together as a separate question from when work is tackled. A request that reads a fix version and then changes it is one operation, and belongs here. Not for what is inside a fix version rather than the version itself — what one holds, or what of it is unfinished — read without changing anything (→ See codeskine/jira-skills@jira-inspect), for planning a sprint (→ See codeskine/jira-skills@jira-plan), or for making an item ready (→ See codeskine/jira-skills@jira-refine)."
+description: "Jira fix version manager. Use when the user asks to assign work to a Jira fix version or take it off one, or for the list of fix versions the project has, or whether one of them has been released or archived. Treats what ships together as a separate question from when work is tackled. A request that reads a fix version and then changes that same fix version is one operation, and belongs here. Not for what is inside a fix version rather than the version itself — what one holds, or what of it is unfinished — read without changing anything (→ See codeskine/jira-skills@jira-inspect), for planning a sprint (→ See codeskine/jira-skills@jira-plan), or for making an item ready (→ See codeskine/jira-skills@jira-refine)."
 user-invocable: true
 license: MIT
 compatibility: Designed for Claude Code. Requires the Atlassian MCP server configured as "atlassian". Listing fix versions needs the jira CLI authenticated; assigning work to one does not.
@@ -20,11 +20,25 @@ It obeys [the discovery contract](../shared/references/discovery.md) and
 [the draft gate](../shared/references/draft-gate.md), and routes every operation through
 [the channel map](../shared/references/channels.md).
 
+**Neither is waivable.** _Just create it_, _don't show me anything first_, _go ahead_ — these say
+something about impatience and nothing about approval, because approval is of a document that does
+not exist yet. Present the draft, keep it short, and say that is why. A write the user did not see
+is a write they did not approve, whatever they asked for beforehand.
+
 ## 1. Read the project profile
 
 First, before anything is asked or proposed, as
 [discovery](../shared/references/discovery.md) requires. It records the fix versions this
 project has and their state.
+
+Where the user's words leave which question they asked open — "is 4.10 done?", "what is
+the state of it?" — resolve that before answering, as
+[discovery](../shared/references/discovery.md) § Resolving which question was asked requires.
+
+Where the user named a container — `2.4`, `To Do`, `Backlog` — resolve it against the profile
+before doing anything with it, as [discovery](../shared/references/discovery.md) § Resolving a
+container the user named requires. A name is not a kind, and routing settled which skill fires
+without knowing which kind was meant.
 
 ## 2. Say what cannot be done here
 

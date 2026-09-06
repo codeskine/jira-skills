@@ -60,8 +60,11 @@ place. The original wording is never discarded while enriching: what was asked a
 are two different facts, and losing the first makes the second unarguable.
 
 **3 · It asks three questions.** When is this done — the acceptance criteria, as observable
-outcomes rather than steps or a design. What does this depend on — named as links to the work
-items concerned, because a dependency described in prose is one nobody can follow. What is
+outcomes rather than steps or a design. What does this depend on — recorded as **Jira issue
+links** between the items concerned, not as a sentence and not as a URL pasted into the text. Jira
+owns the relation, so anything else is a copy of it that nothing can query: `jira-inspect` reports
+what is blocked by reading real links, and finds nothing a description holds. The link type comes
+from the ones your project defines — `Blocks` is not assumed to exist. What is
 deliberately not included — the boundary is part of the agreement.
 
 **4 · Then it asks whether the item can be finished in your planning horizon.** This is the fork,

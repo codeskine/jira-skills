@@ -27,15 +27,49 @@ own, and a test that needs a tenant is not a test a contributor can run.
 
 ## Running them
 
-There is no runner. A fixture is a prompt and an expectation, and judging whether the
-expectation was met is the work.
+**There is a runner, and it is not available here.** `claude plugin eval` exists in the CLI —
+it takes a path, a plugin name or a `plugin@marketplace` id, isolates each case, runs it a
+configurable number of times and scores it, with an ablation arm that reports the delta against no
+plugin at all. Its `--help` documents the whole thing. Every actual invocation, on the account this
+was checked from, prints `plugin eval is currently in early access` and exits 0 having done
+nothing.
 
-1. Install the plugin in a scratch repository, or point Claude Code at this one.
+**Do not re-check it with `--help`.** That is the obvious test and it gives a false positive: the
+help printed in full while `eval .`, `eval <name>` and `eval init --bare` all still returned the
+early-access line. The test that answers is running it.
+
+So until it opens, judging whether the expectation was met is the work, and the procedure below is
+how. What the runner would change when it does open — whether these fixtures become `case.yaml`
+plus graders, and what a `selection` fixture maps onto — is a decision worth taking then rather
+than guessing at now. Two of its features look built for this suite: a plugin target that resolves
+a **directory**, which removes the stale-install trap the procedure below has to work around, and
+a `tool_used: Skill` grader, which is what a `selection` fixture asserts.
+
+1. **Install the plugin, and prove the copy is current.** The cache is keyed on the version, and
+   the version is frozen at `1.0.0` until this plugin ships — so `claude plugin update` reports
+   "already at the latest" and propagates nothing, however far `main` has moved, and
+   `claude plugin marketplace update` refreshes the marketplace without touching the plugin cache.
+   Only `uninstall` followed by `install` refreshes it.
+
+   Then verify rather than assume: grep the installed `SKILL.md` for wording that exists only in
+   the commit under test. A run against a stale install grades descriptions nobody is shipping and
+   reports green. Every replay round this repository has run reported, unprompted, that the
+   installed copy differed from the one it was given — which is what that failure looks like from
+   the inside.
+
+   Check for more than one cached copy while you are there. Four have accumulated on one machine,
+   from marketplaces added under different names, and the enabled one was the oldest.
+
 2. For an `ordering` fixture, arrange the state its `setup` field describes — most of them turn
    on a profile that is absent, incomplete, or describes a project that cannot do the thing.
 3. Paste the `prompt` into a **fresh session**. This matters: a session that has already loaded
    a skill will keep choosing it, and selection is exactly what is under test.
-4. Compare what happened against `expect_skill` and `expect_not`, against `expect_sequence`, or
+4. **Record which skills fired, before comparing anything.** An empty list fails the fixture
+   whatever else matched: `expect_not` is satisfied by a request that entered no skill at all, so a
+   run graded on "did a forbidden skill fire" reads the worst outcome as clean. The draft gate lives
+   inside the skills, so where none fires there is no gate. `jira-doctor` opening a run does not
+   count towards the list — that is its own description working.
+5. Compare what happened against `expect_skill` and `expect_not`, against `expect_sequence`, or
    against `expect`.
 
 A `handover` fixture asserts an **order**, not a single choice: `expect_sequence` lists the skills
@@ -45,6 +79,9 @@ never announced at the first gate has failed the fixture, however right the fina
 
 For a change to the descriptions, running the `selection` category alone is the useful signal,
 and it is the one to run before merging any description edit.
+
+The full procedure — the preconditions that are silent when unmet, and which fixtures are worth a
+session — is `docs/agents/behavioural-verification.md`.
 
 ## Recording a run
 

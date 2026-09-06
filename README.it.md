@@ -181,9 +181,12 @@ obbligatori e i confini fra le skill. `CONTEXT.md` è il glossario, ed elenca le
 progetto rifiuta oltre a quelle che usa. `docs/termbase.md` estende quel glossario all'italiano,
 per la documentazione.
 
-Questo repository porta il proprio `.mcp.json`, che dichiara il server Atlassian con l'id che le
-skill richiedono — lo stesso file descritto sotto [Requisiti](#requisiti), qui perché provare il
-plugin non significhi mai riconfigurare l'ambiente in cui lavori.
+Scriviti un `.mcp.json` alla radice del tuo clone, che dichiari il server Atlassian con l'id che le
+skill richiedono — il file è quello sotto [Requisiti](#requisiti), e fa sì che provare il plugin sia
+qualcosa di diverso dal riconfigurare l'ambiente in cui lavori. Non è versionato di proposito: un
+`.mcp.json` alla radice del plugin viaggia con il plugin quando viene installato e finisce
+registrato come `plugin:jira-skills:atlassian`, un id che nessuna skill dichiara e nessuna può
+raggiungere — spedirlo darebbe a ogni utente un server che invita ad autenticarsi e non serve nulla.
 
 Prima di aprire una modifica:
 

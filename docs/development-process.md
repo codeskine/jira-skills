@@ -93,6 +93,40 @@ Invalidation is explicit, never time-based. Re-run `jira-init` when the scheme c
 status or transition is added, or when a board or fix version appears that the profile does not
 list.
 
+### A name is not a kind
+
+Sprints, fix versions and statuses are all just names, and a name does not say which it is. `2.4`
+is as plausible a sprint as a fix version. `To Do` is a status in your project and a board column
+in somebody else's. `Backlog` is a placement, and in some schemes also a status.
+
+Nothing about the words you use can settle that, and the plugin does not pretend otherwise. The
+skill that fires reads your profile first, and only then does it know what `2.4` is in **your**
+project. If one kind matches, it carries on and you never see the question. If two do, it asks
+which you meant and says what each would do — it will not resolve the ambiguity toward the kind it
+happens to own, which would look like confidence and be a coin toss. If none match, it tells you
+what your project does have, because a name that is not there is more often a typo or a stale
+profile than something to go and create.
+
+And if you name a container no skill owns — a board, usually — it says so. A board is a filter
+over work items; nothing either channel offers takes a work item off one. You get that as a plain
+answer rather than the nearest operation that happens to be possible.
+
+### And a word does not always say which question you asked
+
+The same thing one level up. _"Is 4.10 done?"_ asks either whether the version has gone out, or
+whether the work in it is finished — two questions, two different skills, and the word "done"
+belongs to neither list.
+
+No wording fixes this, and it is worth saying why rather than promising a better description next
+time: naming the category a word belongs to does not add the word to it. A description that says it
+owns _the fix version itself rather than the work inside it_ is still mute on "done", because a
+request fails to route when its words match no member, and nobody can anticipate every synonym.
+
+So you get asked. The skill names both readings and says what each would answer, and it does not
+pick the more common one — the two answers belong to different skills, and choosing your own is
+guessing with the appearance of knowing. Being asked costs you a line. Being answered the other
+question costs you believing something you were never told.
+
 <!-- shot:SHOT-01 pending -->
 
 > **SHOT-01** · screenshot to capture — `jira-init` presenting what it discovered, immediately

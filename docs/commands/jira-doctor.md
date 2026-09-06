@@ -2,12 +2,12 @@
 
 <!-- skill-header:start -->
 
-|                |                                                          |
-| -------------- | -------------------------------------------------------- |
-| **Name**       | `/jira-doctor`                                           |
-| **Kind**       | command                                                  |
-| **Invocation** | `/jira-doctor`                                           |
-| **Tools**      | `Bash(claude:*)` `Bash(jira:*)` `Bash(command:*)` `Read` |
+|                |                                                                           |
+| -------------- | ------------------------------------------------------------------------- |
+| **Name**       | `/jira-doctor`                                                            |
+| **Kind**       | command                                                                   |
+| **Invocation** | `/jira-doctor`                                                            |
+| **Tools**      | `mcp__atlassian` `Bash(claude:*)` `Bash(jira:*)` `Bash(command:*)` `Read` |
 
 <!-- skill-header:end -->
 
@@ -42,22 +42,32 @@ is configured, and it needs the answer to the first question to already be yes.
 
 ## How to use it
 
-Type it and read the three results. There is nothing to approve and nothing to undo.
+Type it, read the three lines. There is nothing to approve and nothing to undo.
 
-**1 · It looks for a server named exactly `atlassian`.** The id is fixed by convention, not by
-preference: a skill reaches the MCP server only by carrying the string `mcp__atlassian` in its
-static frontmatter, where it is matched and never interpreted, and frontmatter cannot read a file.
-A server connected under any other name — `Atlassian`, `mcp-atlassian`, `jira` — serves no skill
-in this plugin however healthy it looks, and that is the failure that looks like nothing happening.
-The remedy is to re-add the same server under the required id, taking the transport and the URL
-from the row that is already there:
+**1 · It asks the session, not the configuration.** The question is whether _this_ session can
+reach Jira, and only a call made inside it answers that. `/jira-doctor` calls a read-only tool from
+the `atlassian` server — the cheapest identity call it offers, no arguments and no project named —
+and an answer coming back is the whole check: the skills declare `mcp__atlassian` and reach the
+same server under the same name. Only when that call fails does it read `claude mcp list`, and then
+to classify the failure rather than to establish anything. The listing runs in a separate process
+and does not share this session's connection state, so the two can disagree — a session with the
+channel live and every Atlassian tool working has been told by its own listing that the server was
+pending approval. Where they disagree the session is right, because the session is where the skills
+run.
+
+**2 · It looks for a server named exactly `atlassian`.** The id is fixed by convention, not by
+preference: skills declare `mcp__atlassian` in static frontmatter, and frontmatter cannot read a
+file. A server connected under any other name — `Atlassian`, `mcp-atlassian`, `jira` — serves no
+skill in this plugin however healthy it looks, and that is the failure that looks like nothing
+happening. The remedy is to re-add the same server under the required id, taking the transport and
+the URL from the row that is already there:
 
 ```bash
 claude mcp remove <the id you found>
 claude mcp add --transport <its transport> atlassian <its URL>
 ```
 
-**2 · An Atlassian connector added through claude.ai settings is the same failure wearing a
+**3 · An Atlassian connector added through claude.ai settings is the same failure wearing a
 different face.** Its row reads `claude.ai Atlassian`, it reports itself connected, and it still
 serves no skill here: a connector exposes its tools under an identifier the connector mechanism
 assigns, not under the name the row displays, so `mcp__atlassian` cannot match it on any machine.
@@ -83,19 +93,25 @@ carries: a server added, approved or authenticated **during** a session may not 
 session. When the row says connected and no Atlassian tool is available, the environment is right
 and the session is stale — start a new one and run the check again.
 
-**3 · The CLI check tells two different failures apart.** The `jira` CLI is needed only for the
-Agile domain — boards, sprints, the fix version listing — so an absent one is a partial
-degradation, not a dead environment, and the check carries on to the end regardless. If it is
-installed but does not answer, two causes look identical from the outside and take different
-remedies. `/jira-doctor` establishes which before prescribing anything, by testing for the
-credential and for the configuration file separately — and the same two tests mark the case where
-neither of them is missing. Neither test prints your token, and neither must ever be made to.
+**4 · A server declared by an installed plugin cannot serve one either.** A `.mcp.json` at a
+plugin's root travels with the plugin and is registered under a namespaced id —
+`plugin:<name>:atlassian` — while every skill declares the bare `mcp__atlassian`. The row reports
+that it needs authentication, and that is the misleading part: authenticating it changes nothing,
+because the id is what no skill can reach. Leave it alone and declare `atlassian` yourself.
 
-| What it finds                             | What it means                                        | What you do                                                |
-| ----------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------------- |
-| credential absent                         | the token is not visible to the shell the skills use | export it where your shell reads it, below                 |
-| credential present, configuration absent  | installed but never configured                       | run `jira init` yourself, it is interactive                |
-| credential present, configuration present | configured, and Jira is not answering                | a fresh token, and check the site your configuration names |
+**5 · The CLI check tells two different failures apart.** The `jira` CLI is needed only for the
+Agile domain — boards, sprints, the fix version listing — so an absent one is a partial
+degradation, not a dead
+environment, and the check carries on to the end regardless. If it is installed but does not
+answer, two causes look identical from the outside and take different remedies. `/jira-doctor`
+establishes which before prescribing anything, by testing for the credential and for the
+configuration file separately. Neither test prints your token, and neither must ever be made to.
+
+| What it finds                             | What it means                                               | What you do                                 |
+| ----------------------------------------- | ----------------------------------------------------------- | ------------------------------------------- |
+| credential absent                         | the token is not visible to the shell the skills use        | export it where your shell reads it, below  |
+| credential present, configuration absent  | installed but never configured                              | run `jira init` yourself, it is interactive |
+| credential present, configuration present | the credential is refused — expired or revoked, most likely | a new token, exported the same way          |
 
 The first row is the one that catches people. Skills reach the CLI through `Bash(jira:*)`, a
 **non-interactive** shell, and which startup file such a shell reads — if any — depends on the
@@ -126,41 +142,18 @@ authenticates while it runs, so on a missing token it answers `401 Unauthorized`
 nothing. Prescribed for a missing credential it costs you a round trip and tells you your
 configuration is broken when it is not.
 
-The third row is where the command stops short on purpose. A token is exported, a configuration
-exists, and the call does not come back: that is what the two tests establish, and no more. **Why**
-is not visible from there. An expired or revoked token is the common case, but a configuration
-naming a site you no longer mean, and a network that does not reach Atlassian, look identical at
-that distance. So it reports the state and hands you the two things that tell them apart — a fresh
-token from the same address, exported the way the table above prescribes, and the site your
-configuration names, which you can compare against the one you mean.
-
-**4 · It reads the project profile rather than testing for it.** `.jira/project-profile.md` is
+**6 · It reads the project profile rather than testing for it.** `.jira/project-profile.md` is
 what every skill reads as its first step; without it they stop before doing anything. Reading the
 file keeps this step inside what the command declares, and an absent file comes back as an
 ordinary "not found" instead of a non-zero exit that reads like a failure. The remedy is the
 [`jira-init`](../skills/jira-init.md) skill, which discovers the project and writes the profile.
 
-Run outside a repository, this step reports something else. A profile lives in the repository whose
-work it describes, so with no repository under the command there is nowhere for one to be: it says
-the check ran outside a repository and that this step could not be answered, rather than sending
-you to write a profile into a directory that is not your project. Step 1 is unaffected, though its
-`.mcp.json` remedy is the project-scoped route of two — outside a repository the user-scoped
-`claude mcp add` is the one that applies.
-
-**5 · It reports the three together, never just the first failure.** Knowing that the MCP server
+**7 · It reports the three together, never just the first failure.** Knowing that the MCP server
 is missing **and** that the CLI is dark saves you a second round trip. The four states it
 distinguishes: all three pass and you are ready; MCP fine and CLI missing means usable, with
 sprint and board operations unavailable; MCP missing means not usable, because every authoring
 skill goes through it; profile missing means run `jira-init`. See
 [the development process](../development-process.md) for the two channels and what each one owns.
-
-The shape is fixed too, so that two runs produce reports you can compare. One block per check, in
-the order the steps ran, headed by the subject, a ✅ or a ❌ and the state; `found` for what was
-observed, which is what makes the block checkable against your machine rather than believed; `why`
-only where the state is one you would otherwise misread; `remedy` written as yours to perform,
-because every fix here is. A block that passes carries `found` and stops. The closing line names
-one next move, not three — the MCP server first where more than one check failed, since without it
-nothing authors at all.
 
 ## Worked exchange
 
@@ -218,7 +211,8 @@ The report as it arrives in chat. Nothing is written: not to Jira, not to your m
 
 ```text
 MCP server       ❌  connected, and unusable by these skills
-     found       a row named "claude.ai Atlassian"
+     found       atlassianUserInfo did not come back; the listing then showed a row
+                 named "claude.ai Atlassian"
      why         a connector exposes its tools under an identifier the connector mechanism
                  assigns, not under the name the row displays, so mcp__atlassian cannot
                  match it on any machine
@@ -256,23 +250,20 @@ Not usable yet. Every authoring skill goes through the MCP server, so start ther
 gates only boards, sprints and the fix version listing; the rest of the plugin works without it.
 ```
 
-Three things make this report worth reading rather than worth re-running. The three checks are
+Three things make this report worth reading rather than worth re-running. The three lines are
 independent, so you fix three things in one pass instead of discovering them one failure at a
-time. Each block carries the remedy for the cause that was actually established, which is why the
-CLI block says _not `jira init`_ out loud: that is the command a reader reaches for, and here it
-would fail with `401` and write nothing. And the MCP block does not ask you to remove anything —
+time. Each line carries the remedy for the cause that was actually established, which is why the
+CLI line says _not `jira init`_ out loud: that is the command a reader reaches for, and here it
+would fail with `401` and write nothing. And the MCP line does not ask you to remove anything —
 the connector is not a misconfiguration and not something you did wrong, it is simply invisible to
 a static `mcp__atlassian`.
 
-When all three pass, the same shape carries no `why` and no `remedy`:
+When all three pass, the same report is four lines:
 
 ```text
-MCP server       ✅  connected
-     found       a row named "atlassian", connected
+MCP server       ✅  reachable from this session
 Jira CLI         ✅  authenticated
-     found       jira me printed the account
-Project profile  ✅  project profile present
-     found       .jira/project-profile.md
+Project profile  ✅  .jira/project-profile.md
 
 Ready.
 ```
@@ -285,22 +276,19 @@ Ready.
   `.jira/project-profile.md`. One of those is your own dotfile, and the last one belongs to
   [`jira-init`](../skills/jira-init.md).
 - **Print your credential.** The probes report presence or absence and never a value.
-- **Name a cause it cannot see.** Where the credential and the configuration are both there and
-  the call still fails, it reports that state and hands you what tells the causes apart. It does
-  not tell you your token expired: from there an expired token, a configuration naming a site you
-  no longer mean and a network that does not reach Atlassian look the same.
-- **Answer the profile question outside a repository.** With no repository under the command there
-  is nowhere for a profile to be, so it says the step could not be answered instead of sending you
-  to write one into a directory that is not your project.
-- **Stop at the first failure.** All three checks run, and an absent CLI does not end the check
-  before the profile is looked at.
+- **Stop at the first failure.** All three checks run. Neither an unreachable MCP server nor an
+  absent CLI ends the check before the profile is looked at.
 - **Rename or remove a claude.ai connector.** Neither is offered by Claude Code for such a row,
   and renaming would not change the identifier its tools arrive under.
 - **Invent an endpoint.** For a server under the wrong id it reuses the transport and URL of the
   row already there; where the row shows none, it asks you rather than guessing one.
-- **Report a stale session as a configuration failure.** A server that `claude mcp list` shows
-  connected while no Atlassian tool is available in the session means start a new session, not fix
-  your setup.
+- **Take a configuration listing's word over the session's.** `claude mcp list` runs in a separate
+  process and can be wrong about this one: it has reported a server pending approval to a session
+  that was using it. A live call decides, in both directions — a server the listing shows connected
+  while no Atlassian tool answers here means start a new session, not fix your setup.
+- **Assert a cause it cannot see.** Where the call fails and the configuration looks right, it says
+  so and names the cheapest thing to try. It does not choose between a stale session, a lapsed
+  authentication and a network that is not reaching Atlassian, because from here they look the same.
 - **Discover your project.** Work types, statuses, boards and fix versions are not its business.
 
 ## See also
@@ -309,7 +297,6 @@ Ready.
   one owns, and what the project profile holds.
 - [`jira-init`](../skills/jira-init.md) — the skill that discovers the project and writes the
   profile this command checks for.
-- `jira-init`, `jira-plan` and `jira-release` are the three skills that carry `Bash(jira:*)`, so
-  they are the ones the CLI check speaks for. `jira-plan` and `jira-release` lose the Agile
-  operations they need; `jira-init` still runs and records the Agile surface as unsupported on
-  this machine. Everything else keeps working on the MCP server alone.
+- `jira-plan` and `jira-release` are the two skills that reach the Agile domain, so they are the
+  ones that go quiet when the CLI check fails; everything else keeps working on the MCP server
+  alone.

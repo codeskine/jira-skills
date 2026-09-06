@@ -1,6 +1,6 @@
 ---
 name: jira-plan
-description: "Jira sprint planner. Use when the user asks to fill a sprint on a Jira board, to move a work item already recorded out of a sprint or onto the backlog, or to close one and account for what was delivered and what was not. Reads the open sprints from the board rather than assuming them, moves a set of items in one approved operation, and flags work that is not ready before it is planned. A request that reads a sprint and then changes it is one operation, and belongs here. Not for putting on the backlog something nobody has recorded yet — that is a proposal, not a placement (→ See codeskine/jira-skills@jira-propose), for reading what a sprint holds without changing it (→ See codeskine/jira-skills@jira-inspect), for deciding what ships together (→ See codeskine/jira-skills@jira-release), for making an item ready (→ See codeskine/jira-skills@jira-refine), or for transitioning a single item (→ See codeskine/jira-skills@jira-advance)."
+description: "Jira sprint planner. Use when the user asks to fill a sprint on a Jira board, to move a work item already recorded out of a sprint or onto the backlog, or to close one and account for what was delivered and what was not. Reads the open sprints from the board rather than assuming them, moves a set of items in one approved operation, and flags work that is not ready before it is planned. A request that reads a sprint and then changes that same sprint is one operation, and belongs here. Not for putting on the backlog something nobody has recorded yet — that is a proposal, not a placement (→ See codeskine/jira-skills@jira-propose), for reading what a sprint holds without changing it (→ See codeskine/jira-skills@jira-inspect), for deciding what ships together (→ See codeskine/jira-skills@jira-release), for making an item ready (→ See codeskine/jira-skills@jira-refine), or for transitioning a single item (→ See codeskine/jira-skills@jira-advance)."
 user-invocable: true
 license: MIT
 compatibility: Designed for Claude Code. Requires the Atlassian MCP server configured as "atlassian" and the jira CLI authenticated.
@@ -21,10 +21,20 @@ It obeys [the discovery contract](../shared/references/discovery.md) and
 operation here is routed through [the channel map](../shared/references/channels.md) rather than
 assumed.
 
+**Neither is waivable.** _Just create it_, _don't show me anything first_, _go ahead_ — these say
+something about impatience and nothing about approval, because approval is of a document that does
+not exist yet. Present the draft, keep it short, and say that is why. A write the user did not see
+is a write they did not approve, whatever they asked for beforehand.
+
 ## 1. Read the project profile
 
 First, before anything is asked or proposed, as
 [discovery](../shared/references/discovery.md) requires.
+
+Where the user named a container — `2.4`, `To Do`, `Backlog` — resolve it against the profile
+before doing anything with it, as [discovery](../shared/references/discovery.md) § Resolving a
+container the user named requires. A name is not a kind, and routing settled which skill fires
+without knowing which kind was meant.
 
 The profile says one of three things about boards, and they are not interchangeable:
 
