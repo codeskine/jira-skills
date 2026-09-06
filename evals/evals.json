@@ -254,6 +254,7 @@
       "id": "sel-inspect-1",
       "category": "selection",
       "prompt": "Where is the reporting epic up to? I've got a review in an hour.",
+      "entities": ["the reporting epic"],
       "expect_skill": "jira-inspect",
       "expect_not": ["jira-plan", "jira-advance"],
       "why": "A question that must not change anything."
@@ -353,6 +354,7 @@
       "id": "gate-5",
       "category": "gate",
       "prompt": "Where does the reporting epic stand? And while you're there, close the two that are done.",
+      "entities": ["the reporting epic"],
       "expect": "The read-only answer is given, and the write is not performed as a follow-on: the skill that owns transitions is named instead.",
       "why": "A write smuggled into a question is the read-only skill's failure mode."
     },
@@ -376,6 +378,7 @@
       "id": "gate-8",
       "category": "gate",
       "prompt": "Close Sprint 24.",
+      "entities": ["Sprint 24"],
       "setup": "A profile exists and lists boards. Sprint 24 is active and holds six items, two of them unfinished.",
       "expect": "The gate takes the operation form: the sprint, what was delivered and what was not, a destination settled for each of the two unfinished items, and an explicit statement that closing is all the skill will do — the moves stay with the user, and where an unmoved item lands is Jira's to decide. Approval closes the sprint and nothing else. A gate that presents an artifact, or that omits what the close will not do, has failed.",
       "why": "The case that showed the gate had only one shape. An artifact gate has nothing to show here — nothing is authored — and the block of authoring fields the shared procedure listed says nothing about a close. What earns the second form is the last line: a user who approves a close without being told it cannot place the remaining work has approved an outcome they did not picture."

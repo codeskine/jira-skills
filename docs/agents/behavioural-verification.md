@@ -114,8 +114,14 @@ Substituting it for a fix version would quietly test something else. This is why
 declared per fixture and not derived: no pattern tells a product version from a fix version.
 
 `check-package.mjs` catches the omission a work item key makes visible — a prompt naming one and no
-declaration fails the check. A version-shaped token is left to whoever writes the fixture, for the
-reason above.
+declaration fails the check. **Everything else is on the author, and the gap is wider than a
+version.** A fixture can name an entity in prose: `gate-8` says _"Close Sprint 24"_, `gate-5` and
+`sel-inspect-1` say _"the reporting epic"_. Those are entities a project has to hold, and no pattern
+distinguishes them from ordinary words — all three were undeclared until a survey for the gate and
+ordering run went looking.
+
+A deictic reference is the exception and needs no declaration: _"the current sprint"_ resolves to
+whatever is current wherever the fixture runs, which is the point of writing it that way.
 
 **A run that substituted records what it substituted.** One table in the run record, fixture by
 fixture, or the run is not comparable to the next one. This is the whole point of the rule: not that
