@@ -25,19 +25,25 @@ Sulla prima puoi intervenire tu, la seconda la cambia solo un amministratore del
 report che dice «non disponibile» senza dire quale delle due ti manda a parlare con la persona
 sbagliata.
 
+Una transition è una scrittura piccola, e piccola non è un motivo per eseguirla senza fartela
+vedere. Qualunque cosa tu abbia detto prima — _spostalo e basta_, _vai_ — l'operazione te la trovi
+davanti lo stesso: il work item, lo status in cui si trova, lo status a cui arriverà. Approvi
+qualcosa che hai visto, e mostrare una transition è breve.
+
 ## Quando si attiva · quando no
 
 Si attiva quando un singolo work item deve arrivare a uno status diverso: farlo partire, affidarlo
 a qualcun altro, rimandarlo indietro, chiuderlo.
 
-| Se dici qualcosa come                      | La skill è                           |
-| ------------------------------------------ | ------------------------------------ |
-| «PROJ-118 è uscito dalla review, chiudilo» | `jira-advance`                       |
-| «a che punto è PROJ-118?»                  | [`jira-inspect`](jira-inspect.it.md) |
-| «metti questi quattro nello sprint»        | [`jira-plan`](jira-plan.it.md)       |
-| «togli PROJ-118 dallo sprint»              | [`jira-plan`](jira-plan.it.md)       |
-| «chiudi lo sprint, abbiamo finito»         | [`jira-plan`](jira-plan.it.md)       |
-| «c'è ancora qualcosa di bloccato?»         | [`jira-inspect`](jira-inspect.it.md) |
+| Se dici qualcosa come                      | La skill è                                                          |
+| ------------------------------------------ | ------------------------------------------------------------------- |
+| «PROJ-118 è uscito dalla review, chiudilo» | `jira-advance`                                                      |
+| «rimetti PROJ-118 nel backlog»             | `jira-advance` oppure [`jira-plan`](jira-plan.it.md) — te lo chiede |
+| «a che punto è PROJ-118?»                  | [`jira-inspect`](jira-inspect.it.md)                                |
+| «metti questi quattro nello sprint»        | [`jira-plan`](jira-plan.it.md)                                      |
+| «togli PROJ-118 dallo sprint»              | [`jira-plan`](jira-plan.it.md)                                      |
+| «chiudi lo sprint, abbiamo finito»         | [`jira-plan`](jira-plan.it.md)                                      |
+| «c'è ancora qualcosa di bloccato?»         | [`jira-inspect`](jira-inspect.it.md)                                |
 
 Due confini, e una parola sta su tutti e due. **Chiudere** è una transition quando a essere chiuso
 è un work item, e questa skill la esegue; è tutt'altra cosa quando a essere chiuso è uno sprint, e
@@ -47,6 +53,14 @@ sprint. Mettere un work item in uno sprint o toglierlo da uno è di
 [`jira-plan`](jira-plan.it.md), che sia un work item o venti. Chiedere a che punto sono le cose non
 cambia niente ed è di [`jira-inspect`](jira-inspect.it.md).
 
+**E un nome non dice di che genere sia.** `Backlog` in certi Jira Workflow è uno status, ed è
+anche il nome del posto in cui un work item sta quando non è in nessuno sprint. Il primo è una
+transition ed è di questa skill; il secondo è un collocazione, è di [`jira-plan`](jira-plan.it.md)
+ed è una delle mosse che quella skill ti restituisce. Questa non lo decide preferendo il genere che
+possiede: legge il tuo project profile e, se combaciano tutti e due, ti chiede quale intendevi. La
+regola, e lo stesso problema per `2.4` e `To Do`, è nel
+[processo di sviluppo](../development-process.it.md).
+
 ## Come si usa
 
 Nomina il work item e di' dove vuoi che arrivi. Non devi sapere quali transition esistono: è la
@@ -55,11 +69,29 @@ domanda che la skill fa a Jira.
 **1 · Legge prima il project profile**, il file che registra l'esito della discovery, cioè la
 lettura della configurazione reale del progetto. `.jira/project-profile.md` le dà la chiave del
 progetto e lo strumento che esegue una transition, risolto dal project profile invece che scritto
-dentro la skill. Se il project profile manca, si ferma e ti dice di eseguire `jira-init`; se il
-project profile registra l'esecuzione di una transition fra le operazioni che questa installazione
-non può fare, te lo dice prima di chiederti qualsiasi cosa e ti dà la via manuale, invece di
-rivolgersi all'altro channel, la via con cui una skill parla a Jira. Vedi
+dentro la skill. Se il project profile manca, si ferma e ti dice di eseguire `jira-init`. Vedi
 [il processo di sviluppo](../development-process.it.md).
+
+**La prima cosa che apre in quel file è _Operazioni non supportate_.** Se eseguire una transition è
+elencata lì — nessun tool risolto in questa configurazione, l'account non abilitato, oppure il
+channel che la serve, cioè la via con cui una skill parla a Jira, che non ha risposto quando è
+stata fatta la discovery — te lo senti dire subito, con l'operazione nominata e il percorso manuale
+che il project profile registra, e non ti viene chiesto altro. Arrivare a quel limite al momento
+della scrittura butterebbe via tutto lo scambio che ci ha portato, e non è nemmeno un motivo per
+rivolgersi all'altro channel: un'operazione ha un channel solo e nessun ripiego.
+
+**Poi risolve il nome che hai usato, prima di farci qualsiasi cosa.** Dici `Backlog`, o `To Do`, o
+`2.4`, e un nome non dice di che genere sia; l'instradamento che ha scelto questa skill è avvenuto
+prima che qualcuno leggesse un project profile. Con il project profile in mano lo può stabilire. Se
+combacia un genere solo, la domanda non la vedi nemmeno. Se ne combaciano due, ti chiede quale,
+dicendo cosa farebbe ciascuno — e non risolve verso uno status per il fatto che gli status sono
+quello che sposta. Se non ne combacia nessuno, ti dice cosa il tuo progetto ha davvero, perché un
+nome che non c'è è più spesso un refuso o un project profile vecchio che una cosa da andare a
+creare.
+
+Se nomini una board la risposta è ancora più netta. Una board è un filtro sui work item, e niente
+di quello che i due channel offrono toglie un work item da una board: te lo dice così, come un gap
+dichiarato, invece di darti la transition possibile più vicina.
 
 Il project profile registra anche la forma del Jira Workflow, e da lì **non viene mai offerta
 nessuna transition**. Quella tabella non è la fonte di quello che un work item può fare oggi: può
@@ -94,17 +126,25 @@ mai niente a quello che Jira ha restituito.
 
 Dove il profilo non può rispondere — status non ancora osservabili perché il progetto non contiene
 work item, o una tabella che registra come non letta — dice che la causa qui non è stabilibile, ti
-dà la via manuale, e nomina `jira-init` se una nuova discovery riempirebbe la tabella. Nominare una
-causa a indovinare ti manderebbe a riparare qualcosa che non è rotto, ed è peggio che non nominarla.
+dà il percorso manuale, e nomina `jira-init` se una nuova discovery riempirebbe la tabella.
+Nominare una causa a indovinare ti manderebbe a riparare qualcosa che non è rotto, ed è peggio che
+non nominarla.
 
-**5 · Poi il draft gate**, il cancello che precede ogni scrittura su Jira, nella forma che prende
-quando la scrittura cambia qualcosa che esiste già. Qui non viene scritto niente ex novo — il work
-item c'è prima che tu cominci — quindi non c'è nessun artefatto da mostrare, e il cancello mostra
-il cambiamento stesso: il work item, lo status in cui si trova, lo status che la transition
-dichiara di raggiungere, e cosa eseguirla **non** farà là dove potresti ragionevolmente
-aspettartelo. Se il work item è in mano a qualcun altro, il gate lo dice invece di eseguire la
-transition in silenzio. Approvi, oppure chiedi altro e rivedi la scelta. Le due forme del cancello
-sono nel [processo di sviluppo](../development-process.it.md).
+**5 · Poi il draft gate**, il cancello che precede ogni scrittura su Jira, e qui un **operation
+gate**, la forma che mostra un cambiamento a ciò che esiste già. Non si redige niente: il work item
+c'è prima che tu cominci, quindi non c'è nessun documento da mostrarti e quello che approvi è il
+cambiamento stesso. Il work item, lo status in cui si trova, lo status che la transition dichiara
+di raggiungere, cosa eseguirla **non** farà là dove potresti ragionevolmente aspettartelo e — se la
+tua frase chiedeva due cose — la metà che questa non fa e la skill che se ne occupa. Se il work
+item è in mano a qualcun altro, il gate lo dice invece di eseguire la transition in silenzio.
+Approvi, oppure chiedi altro e rivedi la scelta. Le due forme del cancello sono nel
+[processo di sviluppo](../development-process.it.md).
+
+**Chiedere di saltare il gate non lo salta.** _Spostalo e basta_, _vai_, _non mostrarmi niente_: è
+impazienza, e l'impazienza non approva niente, perché quello che approveresti è una cosa che non
+hai visto. Quindi l'operazione ti viene mostrata lo stesso, tenuta più corta che si può, e la
+skill dice perché. Qui capita più che altrove, perché una transition sembra troppo piccola per
+meritare un cancello: è una scrittura come le altre, e dopo la verità è Jira.
 
 Se dici di no non viene scritto niente. Ti viene detto cosa vale adesso — il work item è nello
 status in cui era già — e non ti viene proposta una transition più piccola sperando che passi
@@ -123,10 +163,13 @@ nomina, il report dice dov'è davvero.
 
 **Tu**
 
-> PROJ-118 è uscito dalla review. Chiudilo.
+> PROJ-118 è uscito dalla review. Chiudilo — non serve che mi mostri niente, spostalo e basta.
 
 **`jira-advance`**
 
+> La mossa te la mostro comunque prima di eseguirla. Quella parte resta: è breve, e in un
+> cambiamento che non hai visto non c'è niente da approvare.
+>
 > Ho chiesto a Jira cosa può fare PROJ-118 adesso. È in **In Review**, e tornano due transition:
 >
 > | Transition       | Status dichiarato |
@@ -152,13 +195,26 @@ nomina, il report dice dov'è davvero.
 
 **Tu**
 
-> Allora rimettilo in To Do e lo ripianifichiamo.
+> Allora rimettilo nel backlog e lo ripianifichiamo.
 
 **`jira-advance`**
 
-> Quello è l'altro caso: questo Jira Workflow non ha nessuna transition da In Review a To Do, per
-> nessuno. Non è una condizione che puoi soddisfare — una strada che non c'è la aggiunge solo un
-> amministratore del progetto. Da In Review esistono le due qui sopra.
+> In questo progetto quel nome lo portano due cose diverse, e non prendo io quella che mi
+> appartiene. **Backlog** è uno status del tuo Jira Workflow, e lì ci arriverei con una transition.
+> Il backlog è anche il posto in cui un work item sta quando non è in nessuno sprint, e metterci
+> PROJ-118 vuol dire toglierlo dallo sprint che lo contiene: quello è un collocazione, è di
+> [`jira-plan`](jira-plan.it.md), ed è una mossa che quella skill ti restituisce, perché togliere
+> lavoro da uno sprint non è disponibile su nessuno dei due channel. Quale dei due intendevi?
+
+**Tu**
+
+> Lo status.
+
+**`jira-advance`**
+
+> Allora è l'altro tipo di assenza: questo Jira Workflow non ha nessuna transition da In Review a
+> Backlog, per nessuno. Non è una condizione che puoi soddisfare — una strada che non c'è la
+> aggiunge solo un amministratore del progetto. Da In Review esistono le due qui sopra.
 
 **Tu**
 
@@ -171,17 +227,17 @@ nomina, il report dice dov'è davvero.
 > In Review → **Request changes**, che dichiara In Progress. Il work item è assegnato a un'altra
 > persona. Quello che questo non fa è chiudere PROJ-118, né avvicinarlo a Done: Done resta
 > rifiutata finché PROJ-90 è aperto, e la condizione non la rimuovo io per farci passare la
-> transition. La eseguo?
+> transition. Questo è il passo che mi avevi chiesto di saltare, ed è tutto qui. La eseguo?
 
 **Tu**
 
-> Vai.
+> Sì, eseguila.
 
 **`jira-advance`**
 
 > Eseguita. Rileggo lo status invece di darlo per scontato: PROJ-118 è in **Rework**, non in In
 > Progress — la transition dichiara In Progress e questo Jira Workflow l'ha portato oltre. Done e
-> To Do restano dov'erano: la prima aspetta PROJ-90, la seconda una strada che il Jira Workflow
+> Backlog restano dov'erano: la prima aspetta PROJ-90, la seconda una strada che il Jira Workflow
 > non ha.
 
 ## Il risultato
@@ -199,8 +255,8 @@ https://<tuo-sito>.atlassian.net/browse/PROJ-118
   Status adesso         Rework             riletto da Jira dopo la scrittura
 
   Non offerte da In Review, e perché
-    Done     il work item       condizione non soddisfatta — bloccato da PROJ-90 (In Progress)
-    To Do    il Jira Workflow   da In Review quella transition non esiste, per nessuno
+    Done      il work item       condizione non soddisfatta — bloccato da PROJ-90 (In Progress)
+    Backlog   il Jira Workflow   da In Review quella transition non esiste, per nessuno
 ```
 
 La riga che conta meno è quella che dice che la transition è stata eseguita. **Status adesso** è
@@ -218,6 +274,14 @@ il pomeriggio nei due posti sbagliati.
   un'assenza. Non risponde mai alla domanda su cosa questo work item può fare adesso.
 - **Offrire una transition che Jira non ha restituito**, per quanto ragionevole suoni — compresa
   quella che hai appena chiesto per nome.
+- **Saltare il gate perché glielo hai chiesto.** _Spostalo e basta_ dice quanto vuoi che ci metta,
+  non che approvi. L'operazione ti viene mostrata, in breve, e poi eseguita.
+- **Decidere al posto tuo di che genere è il nome che hai usato.** Se nel tuo progetto `Backlog` o
+  `To Do` combaciano sia con uno status sia con qualcos'altro, te lo chiede. Risolvere verso lo
+  status perché gli status sono quello che sposta sembrerebbe sapere e sarebbe un lancio di moneta.
+- **Togliere un work item da una board.** Non è disponibile su nessuno dei due channel e nessuna
+  transition è la stessa mossa, quindi te lo dice netto invece di darti la cosa possibile più
+  vicina.
 - **Riempire un campo obbligatorio per far passare una transition rifiutata.** Dice qual è la
   condizione non soddisfatta e si ferma lì. La condizione è del progetto, e uno strumento che la
   soddisfa da sé la svuota di significato.

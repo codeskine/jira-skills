@@ -54,7 +54,7 @@ cui il «quando» diventa in silenzio il «cosa». E un work item che non è pro
 backlog_ — nomina il posto in cui un work item sta quando non è in nessuno sprint. Lì non si scrive
 niente: l'operazione intera è tirarlo fuori dallo sprint, ed è una delle tre mosse che questa skill
 ti restituisce. Detto di un'idea che nessuno ha ancora scritto — _mettilo nel backlog per bene_ —
-vuol dire registrala: è una proposta, non il collocamento di qualcosa che esiste già, ed è
+vuol dire registrala: è una proposta, non il collocazione di qualcosa che esiste già, ed è
 [`jira-propose`](jira-propose.it.md), o [`jira-capture`](jira-capture.it.md) se è arrivata da
 qualcun altro. A separarli è se la cosa è già registrata, non la parola.
 

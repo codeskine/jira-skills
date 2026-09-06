@@ -47,14 +47,15 @@ adds at that point is a decision nobody made.
 
 Everything else that reaches you second-hand is decided by **the material, not who sent it**. The
 message is plainly about something — a fault, an outcome someone wants, a piece of debt — and the
-intent that owns that names a **floor** in its own boundary. Relayed material comes here when it
-does not clear that floor: when it carries nothing anyone could work from at all.
+intent that owns that names a **floor** in its own boundary. One question decides it: does the
+material carry anything a reader could act on without going back to whoever sent it? Where it does
+not, it comes here first.
 
-| Relayed material about   | The floor it has to clear                               | The intent that then owns it        |
-| ------------------------ | ------------------------------------------------------- | ----------------------------------- |
-| a fault                  | steps, or the error itself verbatim                     | [`jira-diagnose`](jira-diagnose.md) |
-| an outcome someone wants | a count of the symptom — _about forty calls last month_ | [`jira-propose`](jira-propose.md)   |
-| debt                     | anything that says what deferring it costs              | [`jira-assess`](jira-assess.md)     |
+| Relayed material about   | The floor it has to clear                                                | The intent that then owns it        |
+| ------------------------ | ------------------------------------------------------------------------ | ----------------------------------- |
+| a fault                  | steps someone else could follow, or the error copied exactly             | [`jira-diagnose`](jira-diagnose.md) |
+| an outcome someone wants | a count of the symptom — _about forty calls last month_                  | [`jira-propose`](jira-propose.md)   |
+| debt                     | anything saying what deferring it costs — a consequence, a date, a count | [`jira-assess`](jira-assess.md)     |
 
 Below the floor it is intake, however plainly the message is about a fault, an outcome or a debt:
 nobody here can supply what the sender did not send, and recording the complaint in their words is
@@ -62,12 +63,22 @@ the honest version. Clear it and the material belongs to that intent, however pl
 relayed.
 
 **A floor is a threshold, not a checklist.** It is read against the whole message, and no single
-item decides it in either direction: naming the program a fault broke in, or the version they run,
-is neither steps nor an error and clears nothing, while a proposal needs no target — the count is
-the floor, and what success would have to look like is the first thing
-[`jira-propose`](jira-propose.md) goes on to ask. Nor is a floor a test of completeness. Material
-that clears one and then leaves half of what its intent will ask for still goes to that intent,
-which asks.
+item decides it in either direction. Steps means an action, its result and a starting point someone
+else can reach; naming the program a fault broke in, or the version they run, is neither steps nor
+an error and clears nothing. A proposal needs no target — the count is the floor, and what success
+would have to look like is the first thing [`jira-propose`](jira-propose.md) goes on to ask. Naming
+the shortcut, the library or who took the decision says what a debt **is** rather than what leaving
+it costs, and clears nothing either, while a cost that is stated need not be precise to count. Nor
+is a floor a test of completeness. Material that clears one and then leaves half of what its intent
+will ask for still goes to that intent, which asks.
+
+**Each of the three applies its own floor after it fires, so the skill that starts may well be the
+sibling rather than this one.** A description is matched against your words on its own, before any
+profile has been read and without being weighed against its neighbour, so a bar that only works
+when two descriptions are read side by side has to live where a skill can apply it.
+[`jira-diagnose`](jira-diagnose.md) reads what arrived at its third step, says what is missing, and
+hands the request here before putting a single question to whoever forwarded it;
+[`jira-assess`](jira-assess.md) does the same with what deferring costs.
 
 The test is deliberately written on the text of the request and not on the people around it.
 Whether someone, once asked, would know the answer is a fact about the conversation's future, and
@@ -81,6 +92,14 @@ You do not need to name the skill. Say that something came in and paste it.
 `.jira/project-profile.md` to learn how your project is configured. If that file is missing it
 stops and tells you to run `jira-init` — it does not guess. See
 [the development process](../development-process.md) for what the profile holds and why.
+
+**And it reads the profile's Unsupported operations table before anything else.** If what this
+skill needs is listed there — creating a work item, for this intent — you are told straight away,
+with the operation named and the manual path the profile records, and the three questions below
+are never opened. Discovering it at the write instead would cost you every answer you had already
+given. What lands in that table is what discovery could not resolve **on this installation**: no
+tool for the operation, a channel that did not answer, an account without the permission, or a
+concept this project does not have.
 
 **2 · It takes the request whole, and keeps it verbatim.** No corrected spelling, no translation,
 no tightened phrasing, no summary standing in for the original. The wording is evidence of what
@@ -115,6 +134,12 @@ arrived in — you are not shown a shorter record in the hope that one passes, a
 about something else is not read as a change of mind. This skill adds one thing to the gate: the
 statement that the item is raw has to be visible in the draft itself, not merely intended, and the
 gate says plainly that what will be created is a raw record rather than planned work.
+
+**And the gate does not lift because you ask it to.** _Just create it_, _don't show me anything
+first_, _go ahead_ — each of those says something about impatience and nothing about approval,
+because what approval is of is a document that does not exist yet. The record is presented anyway,
+kept short, and the skill says that is why. A write you did not see is a write you did not approve,
+whatever you asked for beforehand.
 
 **7 · Then it writes, and hands over what it could not do.** The write goes through the tool your
 project profile resolved for creating a work item, and the key and the URL come back. Intake is
@@ -286,6 +311,8 @@ gone there are two moments, not two templates disagreeing.
   no longer evidence of what was asked.
 - **Fill a silence with a plausible answer.** What the requester did not say is recorded as not
   stated, and stays that way until someone asks them.
+- **Write anything you have not seen.** _Just create it_ is not approval of a record that does not
+  exist yet, so it does not waive the gate — it makes the draft shorter, not absent.
 
 ## See also
 

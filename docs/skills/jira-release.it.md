@@ -27,16 +27,18 @@ rilasciare prima di rilasciare è il lavoro; scoprirlo dopo ha un nome, e non è
 
 Si attiva quando la domanda è cosa viene rilasciato insieme.
 
-| Se dici qualcosa come                              | La skill è                           |
-| -------------------------------------------------- | ------------------------------------ |
-| «assegna questi due alla 2.4»                      | `jira-release`                       |
-| «togli PROJ-88 dalla 2.4»                          | `jira-release`                       |
-| «quali fix version ha questo progetto?»            | `jira-release`                       |
-| «cosa c'è nella 2.4? mettici anche questi due»     | `jira-release`                       |
-| «cosa c'è davvero nella 2.4?»                      | [`jira-inspect`](jira-inspect.it.md) |
-| «metti questi due nello sprint»                    | [`jira-plan`](jira-plan.it.md)       |
-| «questo è troppo grosso perché qualcuno lo prenda» | [`jira-refine`](jira-refine.it.md)   |
-| «a che punto è lo sprint?»                         | [`jira-inspect`](jira-inspect.it.md) |
+| Se dici qualcosa come                                         | La skill è                                                               |
+| ------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| «assegna questi due alla 2.4»                                 | `jira-release`                                                           |
+| «togli PROJ-88 dalla 2.4»                                     | `jira-release`                                                           |
+| «quali fix version ha questo progetto?»                       | `jira-release`                                                           |
+| «cosa c'è nella 2.4? mettici anche questi due»                | `jira-release`                                                           |
+| «cosa c'è davvero nella 2.4?»                                 | [`jira-inspect`](jira-inspect.it.md)                                     |
+| «cosa c'è nello sprint? mettili tutti nella 2.4»              | [`jira-inspect`](jira-inspect.it.md), poi `jira-release`                 |
+| «cosa c'è nella 2.4? quello non partito toglilo dallo sprint» | [`jira-inspect`](jira-inspect.it.md), poi [`jira-plan`](jira-plan.it.md) |
+| «metti questi due nello sprint»                               | [`jira-plan`](jira-plan.it.md)                                           |
+| «questo è troppo grosso perché qualcuno lo prenda»            | [`jira-refine`](jira-refine.it.md)                                       |
+| «a che punto è lo sprint?»                                    | [`jira-inspect`](jira-inspect.it.md)                                     |
 
 Due confini vanno detti apertamente.
 
@@ -52,6 +54,16 @@ un'assegnazione che hai approvato: se chiedi il contenuto e il cambiamento nello
 qui, non là. Sull'asse dello sprint il confine corre allo stesso modo, così la regola da imparare è
 una e non due.
 
+**«Quella stessa fix version» va presa alla lettera.** Se leggi una fix version e cambi un
+contenitore **diverso**, gli intenti tornano a essere due. _«Cosa c'è nella 2.4 finora? Quello che
+non è partito toglilo dallo sprint»_ legge una fix version e cambia uno sprint: la lettura ti viene
+risposta per prima da chi la possiede — cosa contiene una fix version è di
+[`jira-inspect`](jira-inspect.it.md) — e il cambiamento sullo sprint viene nominato accanto a
+quella risposta, poi approvato a parte da [`jira-plan`](jira-plan.it.md). Scambia i due contenitori
+e la forma regge, con questa skill nella seconda metà: _«cosa c'è nello sprint? mettili tutti nella
+2.4»_ si legge là e si assegna qui, con un'approvazione tutta sua. Vedi
+[il processo di sviluppo](../development-process.it.md) su una frase che chiede due cose.
+
 **Con [`jira-plan`](jira-plan.it.md).** «Esce con la 2.4» e «è nello Sprint 25» sono due fatti
 indipendenti sullo stesso work item. La fix version dice con cosa viene rilasciato, lo sprint dice
 quando viene affrontato, e nessuna delle due skill deduce l'uno dall'altro. È il malinteso da cui
@@ -66,12 +78,31 @@ lettura della configurazione reale del progetto. `.jira/project-profile.md` regi
 version che questo progetto ha e il loro stato. Se manca, si ferma e ti dice di eseguire
 `jira-init`: non tira a indovinare. Vedi [il processo di sviluppo](../development-process.it.md).
 
+**Lì si risolvono due cose prima di agire.** Un nome non dice di che genere sia, e questa è la
+skill in cui la collisione è più probabile: `2.4` è plausibile come sprint esattamente
+quanto come fix version, quindi il nome che hai usato viene risolto sul project profile prima di
+tutto. E le parole di una domanda non sempre dicono quale domanda hai fatto: _«la 2.4 è finita?»_
+chiede o se la fix version è uscita, o se il lavoro che le è assegnato è concluso. Dove combacia
+più di un genere o più di una lettura, ti viene chiesto quale intendevi. Né l'uno né l'altra
+vengono mai risolti verso il genere o la risposta che questa skill possiede: è proprio la cosa che
+le due regole esistono per impedire. Stanno tutte e due nel
+[processo di sviluppo](../development-process.it.md).
+
 **2 · Dice cosa non può fare prima che tu glielo chieda.** Creare una fix version, e rilasciarla o
 archiviarla, non sono disponibili su nessuno dei due channel — le due vie con cui una skill parla
 a Jira — nelle versioni di server e CLI a cui questo plugin punta. È un gap degli strumenti, non
 un limite di ambizione della skill, e viene annunciato all'inizio invece che scoperto alla fine:
 quelle due le fai tu su Jira, e la skill prosegue con il resto. Non approssima mai il rilasciare
 con una transition o con una label.
+
+Nella stessa lettura c'è la tabella **Operazioni non supportate** del project profile, che risponde
+a un'altra domanda: un gap dichiarato vale su ogni macchina, quella tabella parla della tua —
+un'operazione per cui la discovery non ha risolto nessun tool, un channel che non ha risposto, un
+account senza il permesso. La voce che decide di questo intento è _assegnare un work item a una fix
+version_: la modifica di un campo, un'operazione MCP come le altre. Quello che è elencato lì ti
+viene detto prima che ti venga chiesto qualsiasi cosa, con accanto il percorso manuale che il
+project profile registra, invece di saltar fuori alla scrittura quando le tue risposte sono già
+spese.
 
 **3 · Elenca le fix version come le tiene il progetto**, con il loro stato, non come qualcuno
 ricorda di averle pianificate. Una fix version rilasciata la settimana scorsa e una che non è mai
@@ -82,7 +113,7 @@ version è un campo sul work item e i campi passano dall'MCP server. Quindi, qua
 profile registra le fix version come _non lette_ — il channel Agile non era raggiungibile quando è
 stata fatta la discovery, che non è la stessa cosa che il progetto non ne abbia — la skill dice
 che l'elenco non è stato letto, dà il rimedio che corrisponde alla causa (una credenziale che la
-shell non interattiva non vede e una configurazione mai generata sono due guasti diversi, e
+shell non interattiva non vede e una configurazione mai generata sono due cause diverse, e
 `jira init` è il rimedio solo per il secondo; stanno tutti e due nel
 [processo di sviluppo](../development-process.it.md)), e ti chiede il nome della fix version
 invece di offrirti una scelta che non è in grado di compilare. Un'assegnazione a un nome che non
@@ -111,11 +142,27 @@ sarà dopo — oppure, dove il work item viene tolto da una, che resterà senza.
 in blocco è una sola azione approvata su più scritture — se una parte fallisce ti viene detto
 quale è riuscita e quale no, e niente viene annullato di iniziativa della skill.
 
+**Il gate non ha un interruttore.** _Scrivili e basta_, _non mostrarmi niente prima_: sono frasi
+che dicono qualcosa sull'impazienza e niente sull'approvazione, perché quello che approveresti non
+esiste finché non ti viene messo davanti. Quindi te lo mette davanti lo stesso, corto quanto
+l'operazione permette, e in una riga ti dice perché.
+
 ## Scambio di esempio
 
 **Tu**
 
-> Giovedì prossimo dovremmo rilasciare la 2.4. Cosa c'è dentro davvero?
+> Giovedì prossimo dovremmo rilasciare la 2.4. È finita?
+
+**`jira-release`**
+
+> «Finita» nasconde due domande con due risposte diverse, e non scelgo io quella che mi compete.
+> Intendi la 2.4 in sé — se è stata rilasciata o archiviata — oppure il lavoro che le è assegnato,
+> e quanto ne è ancora aperto? Alla prima rispondo io; la seconda la riporta
+> [`jira-inspect`](jira-inspect.it.md).
+
+**Tu**
+
+> La prima. Poi ho altri due da metterci dentro.
 
 **`jira-release`**
 
@@ -123,13 +170,17 @@ quale è riuscita e quale no, e niente viene annullato di iniziativa della skill
 >
 > Due cose subito, così giovedì non sono una sorpresa: questo plugin non può creare una fix
 > version, e non può rilasciarla né archiviarla. Nessuno dei due channel espone quelle operazioni,
-> quindi rilasciare la 2.4 tocca a te su Jira. Tutto il resto lo faccio io.
+> quindi rilasciare la 2.4 tocca a te su Jira. Nella tabella Operazioni non supportate del tuo
+> project profile non c'è niente che tocchi il resto, quindi l'assegnazione si può fare.
 >
 > | Fix version | Stato          | Assegnati |
 > | ----------- | -------------- | --------- |
 > | 2.3         | rilasciata     | 14        |
 > | 2.4         | non rilasciata | 9         |
 > | 2.5         | non rilasciata | 2         |
+>
+> La 2.4 è **non rilasciata**: è la risposta alla domanda che hai fatto. E visto che ce ne entrano
+> altri due, ecco cosa contiene oggi.
 >
 > **2.4 — 9 work item assegnati, 6 in Done.** I tre che non lo sono, uno per uno:
 >
@@ -151,11 +202,11 @@ quale è riuscita e quale no, e niente viene annullato di iniziativa della skill
 
 **Tu**
 
-> Sì, tutti e due.
+> Sì, tutti e due. Scrivili e basta, non serve che mi mostri niente prima.
 
 **`jira-release`**
 
-> Allora scrivo questo:
+> L'elenco è quello che c'è da approvare, quindi viene prima: sono due righe.
 >
 > | Work item | Fix version adesso | Dopo |
 > | --------- | ------------------ | ---- |
@@ -174,6 +225,18 @@ quale è riuscita e quale no, e niente viene annullato di iniziativa della skill
 
 > Scritti tutti e due. PROJ-131 e PROJ-132 adesso portano la fix version 2.4, che arriva così a 11
 > work item assegnati e 5 ancora aperti.
+
+**Tu**
+
+> E quello che nello Sprint 25 non è partito, toglilo dallo sprint.
+
+**`jira-release`**
+
+> Quello è un contenitore diverso. Hai letto una fix version e adesso stai cambiando uno sprint:
+> è un secondo intento e non il seguito di questo, quindi non viaggia sull'approvazione che mi hai
+> appena dato. Lo sprint è di [`jira-plan`](jira-plan.it.md), che ti nomina i work item e te lo
+> chiede a parte. Una cosa da aspettarsi là: togliere lavoro da uno sprint non è disponibile su
+> nessuno dei due channel, quindi quello che ottieni è l'elenco e la mossa da fare sulla board.
 
 **Tu**
 
@@ -207,12 +270,16 @@ Ancora aperti, uno per uno:
   PROJ-132   In Progress   Migrazione delle definizioni dei report salvate
 
 Scritti in questa operazione:  PROJ-131, PROJ-132 → fix version 2.4  (riusciti entrambi)
+Intento non soddisfatto:       svuotare lo Sprint 25 di quello che non è partito — uno sprint
+                               non è una fix version → jira-plan, con un'approvazione a sé
 Non disponibile qui:           rilasciare la 2.4 — si fa su Jira
 ```
 
-Sono due dettagli a reggere questo report. Il lavoro ancora aperto è elencato per chiave, status e
-titolo invece che contato, perché «ne restano cinque» è un numero con cui si convive e cinque
-titoli no. E l'ultima riga c'è anche se non è fallito niente: l'operazione di cui questa
+Sono tre i dettagli a reggere questo report. Il lavoro ancora aperto è elencato per chiave, status
+e titolo invece che contato, perché «ne restano cinque» è un numero con cui si convive e cinque
+titoli no. La riga di mezzo è la metà della richiesta che questa skill non possiede, scritta invece
+che portata avanti in silenzio: la fix version è stata letta qui e lo sprint cambia altrove, con
+un'approvazione sua. E l'ultima riga c'è anche se non è fallito niente: l'operazione di cui questa
 conversazione parlava davvero è quella che il plugin non può eseguire, e un report che si fermasse
 alle scritture riuscite si leggerebbe come se giovedì fosse a posto.
 
@@ -231,6 +298,15 @@ alle scritture riuscite si leggerebbe come se giovedì fosse a posto.
 - **Dare per finito** il lavoro ancora aperto prima che tu rilasci, o toglierlo dall'elenco
   contando su quello.
 - **Rispondere con un conteggio** dove la risposta è l'elenco.
+- **Prendere per approvazione una richiesta di saltare il gate.** _Scrivili e basta_ è impazienza;
+  si approva qualcosa che hai visto. L'operazione ti viene mostrata lo stesso, corta, e con il
+  perché.
+- **Risolvere un'ambiguità a proprio favore.** Dove `2.4` potrebbe essere uno sprint, o _«la 2.4 è
+  finita?»_ potrebbe essere l'una o l'altra domanda, ti chiede quale. Rispondere con la lettura che
+  possiede sarebbe tirare a indovinare con l'aria di rispondere.
+- **Portare su questa approvazione il cambiamento di un altro contenitore.** Una fix version letta
+  qui e uno sprint cambiato lì accanto sono due intenti: il secondo viene nominato e consegnato a
+  [`jira-plan`](jira-plan.it.md), che se lo fa approvare per conto suo.
 
 ## Vedi anche
 

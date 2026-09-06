@@ -36,12 +36,13 @@ how to reach it.
 | "this works but it will bite us in six months"     | [`jira-assess`](jira-assess.md)     |
 
 The line against [`jira-capture`](jira-capture.md) is **the datum**. Relaying someone else's wish
-with nothing checkable behind it at all is intake — capture records it in the words it arrived in
-and says so — and it stays intake however clearly the outcome is described. That bar is read against
-the whole of what was relayed, never as a list of answers to tick, and it is lower than it sounds:
-any figure saying the problem is real clears it, and a target is not required. _About forty calls
-last month_ is enough, and the skill then asks what success would have to look like. What it will
-not do is manufacture the outcome, the audience or the measure by asking harder.
+with no datum behind it at all is intake — capture records it in the words it arrived in and says
+so — and it stays intake however clearly the outcome is described. That bar is read against the
+whole of what was relayed, never as a list of answers to tick, and it is lower than it sounds: **a
+count of the symptom clears it, and a target is not required.** _About forty calls last month_ is
+enough, and the skill then asks what success would have to look like — the measure is what this
+skill goes on to establish, not what you have to bring to it. What it will not do is manufacture
+the outcome, the audience or the measure by asking harder.
 
 The line downstream is [`jira-refine`](jira-refine.md). Proposing states the value and stops.
 Acceptance criteria, a scope small enough to finish, and the children the proposal implies are
@@ -54,12 +55,13 @@ You do not need to name the skill. Say what you want to be true, and answer the 
 **1 · It reads the project profile first.** Before anything is asked, `.jira/project-profile.md`
 tells it which work types this project has, how they nest, and which fields are required on
 creation. If the profile is missing it stops and tells you to run `jira-init` — it does not guess.
-It also checks one operation in particular: setting a parent. This is the intent that depends on it,
-so if the profile records that operation as unsupported you hear it now, with the manual path,
-rather than after a draft you cannot have. That is not a theoretical branch: what lands in that list
-is what discovery could not resolve **on this installation** — no tool for it, a channel that did
-not answer, an account not permitted — which is a different thing from an operation the tooling has
-no route to anywhere. See [the development process](../development-process.md).
+It reads the profile's **Unsupported operations** table before anything else, and one entry in it
+decides whether this intent can run as written: setting a parent. If the profile records that
+operation as unsupported you hear it now, named, with the manual path, rather than after a draft
+you cannot have. That is not a theoretical branch: what lands in that list is what discovery could
+not resolve **on this installation** — no tool for it, a channel that did not answer, an account
+not permitted — which is a different thing from an operation the tooling has no route to anywhere.
+See [the development process](../development-process.md).
 
 **2 · It asks what a Product Owner asks.** Three questions, and each one is refused a certain
 kind of answer:
@@ -73,11 +75,11 @@ kind of answer:
 A proposal whose author cannot say who benefits is not yet a proposal, and saying so now is
 cheaper than saying it in a prioritisation meeting.
 
-**3 · It asks for the datum, and marks what is missing.** This is the demand that distinguishes
-this skill from the rest of intake: for each claim that could be checked, the measurement or the
-observation behind it, and how it was obtained. Anything left with nothing behind it is not
-dropped and not quietly kept — it is written under **Assumptions** and attributed to whoever
-holds it, so that whoever ranks the proposal can see which half of it is belief.
+**3 · It asks for the datum, and marks what is missing.** This is the demand that separates a
+proposal from intake: for each claim that could be checked, the measurement or the observation
+behind it, and how it was obtained. Anything left with nothing behind it is not dropped and not
+quietly kept — it is written under **Assumptions** and attributed to whoever holds it, so that
+whoever ranks the proposal can see which half of it is belief.
 
 **4 · It chooses a work type from your project, not from a list it carries.** The type is settled
 before the parent, because the type decides which level of the hierarchy the next step looks at.
@@ -102,6 +104,12 @@ own. You approve, or you ask for changes and see it again. Or you say no, and th
 nothing is written, you are told what holds instead, no thinner proposal is offered in the hope that
 one passes, and a later message about something else is not read as a change of mind. This intent
 adds one thing to the gate: when the item will have no parent, the gate says why not.
+
+**And the gate does not lift because you ask it to.** _Just create it_, _don't show me anything
+first_, _go ahead_ — each of those says something about impatience and nothing about approval,
+because what approval is of is a document that does not exist yet. The proposal is presented
+anyway, kept short, and the skill says that is why. A write you did not see is a write you did not
+approve, whatever you asked for beforehand.
 
 **7 · After the write, it reports what did not happen.** If the item is created but the parent
 cannot be set, you are told. A proposal sitting at the wrong level is something you have to see,
@@ -258,13 +266,15 @@ A heading with nothing under it reads as an oversight, so it is removed rather t
   the name of whoever holds it. Nothing is silently promoted for reading well.
 - **Invent a parent to hold it.** Where the project's hierarchy allows none for the chosen type,
   the item is created without one and the gate says why.
+- **Write anything you have not seen.** _Just create it_ is not approval of a proposal that does
+  not exist yet, so it does not waive the gate — it makes the draft shorter, not absent.
 
 ## See also
 
 - [The development process](../development-process.md) — the project profile, the draft gate, the
   two channels, and where proposing value sits in the whole path.
-- [`jira-capture`](jira-capture.md) — for a wish relayed second-hand with no figure behind it at
-  all.
+- [`jira-capture`](jira-capture.md) — for a wish relayed second-hand with no datum behind it at
+  all, not even a count of the symptom.
 - [`jira-diagnose`](jira-diagnose.md) — for something that is broken today.
 - [`jira-assess`](jira-assess.md) — for something that works today and will cost the team later.
 - [`jira-refine`](jira-refine.md) — for turning an approved proposal into something a team can

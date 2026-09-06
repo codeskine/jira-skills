@@ -47,15 +47,15 @@ una decisione che nessuno ha preso.
 
 Tutto il resto che arriva di seconda mano lo decide **il materiale, non chi l'ha mandato**. Il
 messaggio parla evidentemente di qualcosa — un guasto, un risultato che qualcuno vuole, un debito
-tecnico — e l'intento che se ne occupa dichiara una **soglia** nel proprio confine. Il materiale
-riportato arriva qui quando quella soglia non la supera: quando non porta niente da cui qualcuno
-possa partire.
+tecnico — e l'intento che se ne occupa dichiara una **soglia** nel proprio confine. A decidere è una
+domanda sola: il materiale porta qualcosa su cui un lettore possa agire senza tornare da chi l'ha
+mandato? Se non lo porta, arriva prima qui.
 
-| Materiale riportato su          | La soglia da superare                                                  | L'intento che allora se ne occupa      |
-| ------------------------------- | ---------------------------------------------------------------------- | -------------------------------------- |
-| un guasto                       | i passi, o l'errore stesso alla lettera                                | [`jira-diagnose`](jira-diagnose.it.md) |
-| un risultato che qualcuno vuole | un conteggio del sintomo — _una quarantina di chiamate il mese scorso_ | [`jira-propose`](jira-propose.it.md)   |
-| un debito tecnico               | qualsiasi cosa dica cosa costa rimandarlo                              | [`jira-assess`](jira-assess.it.md)     |
+| Materiale riportato su          | La soglia da superare                                                           | L'intento che allora se ne occupa      |
+| ------------------------------- | ------------------------------------------------------------------------------- | -------------------------------------- |
+| un guasto                       | dei passi che qualcun altro può rifare, o l'errore copiato esattamente          | [`jira-diagnose`](jira-diagnose.it.md) |
+| un risultato che qualcuno vuole | un conteggio del sintomo — _una quarantina di chiamate il mese scorso_          | [`jira-propose`](jira-propose.it.md)   |
+| un debito tecnico               | qualsiasi cosa dica cosa costa rimandarlo — una conseguenza, una data, un conto | [`jira-assess`](jira-assess.it.md)     |
 
 Sotto la soglia è intake, per quanto evidentemente il messaggio parli di un guasto, di un
 risultato o di un debito: qui nessuno può fornire quello che chi ha scritto non ha mandato, e
@@ -63,12 +63,24 @@ registrare la richiesta con le sue parole è la versione onesta. Superata la sog
 appartiene a quell'intento, per quanto evidentemente sia stato riportato.
 
 **Una soglia è un minimo da superare, non una checklist.** Si legge su tutto il messaggio, e
-nessun singolo elemento la decide in nessuna delle due direzioni: nominare il programma in cui un
+nessun singolo elemento la decide in nessuna delle due direzioni. Passi vuol dire un'azione, il suo
+risultato e un punto di partenza che qualcun altro può raggiungere; nominare il programma in cui un
 guasto si è rotto, o la versione che usano, non sono i passi e non sono l'errore, e non superano
-niente; e una proposta non ha bisogno di un obiettivo, perché la soglia è la cifra e da cosa si
-capirà che ha funzionato è la prima cosa che [`jira-propose`](jira-propose.it.md) chiede dopo. Una
-soglia non è nemmeno una prova di completezza: il materiale che la supera e poi lascia scoperta
-metà di quello che il suo intento chiederà va comunque a quell'intento, che chiede.
+niente. Una proposta non ha bisogno di un obiettivo, perché la soglia è la cifra e da cosa si
+capirà che ha funzionato è la prima cosa che [`jira-propose`](jira-propose.it.md) chiede dopo.
+Nominare la scorciatoia, la libreria o chi ha preso la decisione dice cosa il debito **è**, non
+cosa costa lasciarlo lì, e nemmeno quello supera niente; un costo dichiarato, però, non deve essere
+preciso per valere. Una soglia non è nemmeno una prova di completezza: il materiale che la supera e
+poi lascia scoperta metà di quello che il suo intento chiederà va comunque a quell'intento, che
+chiede.
+
+**Ognuno dei tre applica la propria soglia dopo essere scattato, quindi la skill che parte può
+benissimo essere la vicina invece di questa.** Le tue parole vengono confrontate con ogni
+descrizione presa per sé, prima che sia stato letto un project profile e senza pesarne una contro
+l'altra: una soglia che funziona solo se due descrizioni vengono lette affiancate deve vivere dove
+una skill può applicarla. [`jira-diagnose`](jira-diagnose.it.md) legge al suo terzo passo quello
+che è arrivato, dice cosa manca e passa la richiesta qui prima di rivolgere una sola domanda a chi
+l'ha inoltrata; [`jira-assess`](jira-assess.it.md) fa lo stesso con quanto costa rimandare.
 
 Il test è scritto apposta sul testo della richiesta e non sulle persone intorno. Se qualcuno, una
 volta interpellato, saprebbe rispondere è un fatto sul futuro della conversazione, e la decisione
@@ -83,6 +95,14 @@ Non serve nominare la skill. Di' che è arrivato qualcosa e incollalo.
 ferma e ti dice di eseguire `jira-init`: non tira a indovinare. Cosa contiene il project profile —
 il file che registra l'esito della discovery, cioè la lettura della configurazione reale del
 progetto — sta nel [processo di sviluppo](../development-process.it.md).
+
+**E prima di ogni altra cosa legge la tabella Operazioni non supportate del project profile.** Se
+lì dentro c'è quello che serve a questa skill — creare un work item, per questo intento — te lo
+dice subito, con l'operazione nominata e il percorso manuale che il project profile registra, e le
+tre domande qui sotto non si aprono nemmeno. Scoprirlo al momento della scrittura ti costerebbe
+tutte le risposte che hai già dato. In quella tabella finisce quello che la discovery non è
+riuscita a risolvere **su questa installazione**: nessun tool per quell'operazione, un channel che
+non ha risposto, un account senza il permesso, o un concetto che questo progetto non ha.
 
 **2 · Prende la richiesta intera e la conserva verbatim.** Nessuna correzione ortografica, nessuna
 traduzione, nessuna riformulazione più stretta, nessun riassunto al posto dell'originale. Il testo
@@ -118,7 +138,13 @@ stanno ancora solo nel messaggio in cui sono arrivate — non ti viene proposto 
 corto sperando che passi quello, e un messaggio successivo su altro non viene preso per un
 ripensamento. Questa skill aggiunge una cosa al gate: la dichiarazione che il work item è grezzo
 deve essere visibile nella bozza, non soltanto intesa, e il gate dice chiaramente che quello che
-verrà creato è un record grezzo e non lavoro pianificato.
+verrà creato è un work item grezzo e non lavoro pianificato.
+
+**E il gate non si apre perché glielo chiedi.** _Crealo e basta_, _non mostrarmi niente prima_,
+_vai pure_ — ognuna di queste frasi dice qualcosa sull'impazienza e niente sull'approvazione,
+perché quello che si approva è un documento che ancora non esiste. La bozza viene presentata lo
+stesso, tenuta corta, e la skill dice che è per questo. Una scrittura che non hai visto è una
+scrittura che non hai approvato, per quanto tu l'abbia chiesta prima.
 
 **7 · Poi scrive, e consegna quello che non ha potuto fare.** La scrittura passa dal tool che il
 project profile ha risolto per creare un work item, e tornano la chiave e la URL. L'intake è il
@@ -293,6 +319,8 @@ sono due momenti, non due template che si contraddicono.
   riformulazione. Una richiesta riscritta non è più l'evidenza di cosa è stato chiesto.
 - **Riempire un silenzio con una risposta plausibile.** Quello che chi ha chiesto non ha detto
   viene registrato come non dichiarato, e resta così finché qualcuno non glielo chiede.
+- **Scrivere qualcosa che non hai visto.** _Crealo e basta_ non è l'approvazione di un documento
+  che ancora non esiste, quindi non salta il gate: rende la bozza più corta, non assente.
 
 ## Vedi anche
 

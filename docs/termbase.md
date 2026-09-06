@@ -186,60 +186,64 @@ than choosing one on its own.
 
 Not domain vocabulary. Fixed here so that eleven documents agree.
 
-| English                    | Italian                        | Note                                                                                                                   |
-| -------------------------- | ------------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
-| skill                      | la skill                       | invariant plural: _le skill_                                                                                           |
-| plugin                     | il plugin                      |                                                                                                                        |
-| command                    | il comando                     | `/jira-doctor` is a command, not a skill                                                                               |
-| Agent Skill                | Agent Skill                    | the specification's own name, unchanged                                                                                |
-| development process        | il processo di sviluppo        | the title of `development-process.md` and its Italian pair                                                             |
-| artifact                   | l'artefatto                    |                                                                                                                        |
-| intent                     | l'intento                      |                                                                                                                        |
-| template                   | il template                    |                                                                                                                        |
-| report                     | il report                      | the reply a read-only skill returns in chat                                                                            |
-| finding                    | il rilievo                     |                                                                                                                        |
-| tool                       | il tool                        | invariant plural: _i tool_                                                                                             |
-| board                      | la board                       | invariant plural: _le board_ — a Jira object, but not one of the seven                                                 |
-| backlog                    | il backlog                     |                                                                                                                        |
-| label                      | la label                       | English, as `CONTEXT.md` names the scoped labels                                                                       |
-| intake                     | l'intake                       | two authors kept it English independently; ratified here                                                               |
-| refinement                 | il refinement                  | the activity and the noun, matching _In attesa di refinement_                                                          |
-| refined                    | rifinito                       | _un work item rifinito_                                                                                                |
-| raw                        | grezzo / grezza                |                                                                                                                        |
-| child / children           | il figlio / i figli            | and _relazione parent-figlio_ for the mixed form                                                                       |
-| split, decomposition       | la scomposizione, scomporre    |                                                                                                                        |
-| orphan                     | l'orfano                       |                                                                                                                        |
-| planning horizon           | orizzonte di pianificazione    |                                                                                                                        |
-| hierarchy                  | la gerarchia                   | ordinary Italian — only _gerarchia simulata_ is refused                                                                |
-| technical debt             | il debito tecnico              | never _debito tecnologico_                                                                                             |
-| risk                       | il rischio                     |                                                                                                                        |
-| project admin              | l'amministratore del progetto  |                                                                                                                        |
-| condition                  | la condizione                  | _condizione non soddisfatta_ for an unmet one                                                                          |
-| blocking link              | il link di blocco              |                                                                                                                        |
-| status category            | la categoria di status         |                                                                                                                        |
-| what ships together        | cosa viene rilasciato insieme  |                                                                                                                        |
-| the state of a fix version | lo stato della fix version     | _rilasciata_ / _non rilasciata_ / _archiviata_. Deliberately **not** _status_, which names the position of a work item |
-| credential                 | la credenziale                 |                                                                                                                        |
-| non-interactive shell      | shell non interattiva          |                                                                                                                        |
-| dotfile                    | il dotfile                     |                                                                                                                        |
-| single writer              | l'unica scrittrice             | of the project profile                                                                                                 |
-| staleness                  | l'invalidazione                | explicit, never time-based                                                                                             |
-| value proposal             | la proposta di valore          |                                                                                                                        |
-| project style              | lo stile del progetto          | values `team-managed` / `company-managed` untranslated                                                                 |
-| floor, threshold           | **la soglia**                  | il minimo che un materiale riportato deve portare perché un intento lo prenda                                          |
-| second-hand, relayed       | **di seconda mano, riportato** | materiale che arriva tramite qualcuno che non è nella conversazione                                                    |
-| handover                   | **la consegna, consegnare**    | il passaggio di una richiesta alla skill che ne possiede il resto                                                      |
-| axis                       | **l'asse**                     | la dimensione su cui corre un confine fra due intenti                                                                  |
-| placement                  | **il collocamento**            | mettere in uno sprint o su una fix version un work item già registrato                                                 |
-| fallback                   | **il ripiego**                 | una seconda via per un'operazione — la mappa dei channel non ne dichiara nessuna                                       |
-| probe                      | **la verifica**                | il comando con cui `/jira-doctor` stabilisce uno stato · evitare _sonda_, che rende _discovery_                        |
-| release state              | **lo stato di rilascio**       | di una fix version: non rilasciata, rilasciata, archiviata · non è lo _status_                                         |
-| capability                 | **una capacità dell'agente**   | una voce di `allowed-tools` che non è un channel                                                                       |
-| installation               | **l'installazione**            | questo progetto su questa macchina, di cui il project profile è il verbale                                             |
-| sub-agent                  | il sub-agent                   | build-time only; never in user documentation                                                                           |
-| shot                       | lo shot                        | an entry in the shot list — build-time only                                                                            |
-| worked exchange            | lo scambio di esempio          | section 5 of every document                                                                                            |
-| the result                 | il risultato                   | section 6 of every document                                                                                            |
+| English                    | Italian                        | Note                                                                                                                                                |
+| -------------------------- | ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| skill                      | la skill                       | invariant plural: _le skill_                                                                                                                        |
+| plugin                     | il plugin                      |                                                                                                                                                     |
+| command                    | il comando                     | `/jira-doctor` is a command, not a skill                                                                                                            |
+| Agent Skill                | Agent Skill                    | the specification's own name, unchanged                                                                                                             |
+| development process        | il processo di sviluppo        | the title of `development-process.md` and its Italian pair                                                                                          |
+| artifact                   | l'artefatto                    |                                                                                                                                                     |
+| intent                     | l'intento                      |                                                                                                                                                     |
+| template                   | il template                    |                                                                                                                                                     |
+| report                     | il report                      | the reply a read-only skill returns in chat                                                                                                         |
+| finding                    | il rilievo                     |                                                                                                                                                     |
+| tool                       | il tool                        | invariant plural: _i tool_                                                                                                                          |
+| board                      | la board                       | invariant plural: _le board_ — a Jira object, but not one of the seven                                                                              |
+| backlog                    | il backlog                     |                                                                                                                                                     |
+| label                      | la label                       | English, as `CONTEXT.md` names the scoped labels                                                                                                    |
+| intake                     | l'intake                       | two authors kept it English independently; ratified here                                                                                            |
+| refinement                 | il refinement                  | the activity and the noun, matching _In attesa di refinement_                                                                                       |
+| refined                    | rifinito                       | _un work item rifinito_                                                                                                                             |
+| raw                        | grezzo / grezza                |                                                                                                                                                     |
+| child / children           | il figlio / i figli            | and _relazione parent-figlio_ for the mixed form                                                                                                    |
+| split, decomposition       | la scomposizione, scomporre    |                                                                                                                                                     |
+| orphan                     | l'orfano                       |                                                                                                                                                     |
+| planning horizon           | orizzonte di pianificazione    |                                                                                                                                                     |
+| hierarchy                  | la gerarchia                   | ordinary Italian — only _gerarchia simulata_ is refused                                                                                             |
+| technical debt             | il debito tecnico              | never _debito tecnologico_                                                                                                                          |
+| risk                       | il rischio                     |                                                                                                                                                     |
+| project admin              | l'amministratore del progetto  |                                                                                                                                                     |
+| condition                  | la condizione                  | _condizione non soddisfatta_ for an unmet one                                                                                                       |
+| blocking link              | il link di blocco              |                                                                                                                                                     |
+| status category            | la categoria di status         |                                                                                                                                                     |
+| what ships together        | cosa viene rilasciato insieme  |                                                                                                                                                     |
+| the state of a fix version | lo stato della fix version     | _rilasciata_ / _non rilasciata_ / _archiviata_. Deliberately **not** _status_, which names the position of a work item                              |
+| credential                 | la credenziale                 |                                                                                                                                                     |
+| non-interactive shell      | shell non interattiva          |                                                                                                                                                     |
+| dotfile                    | il dotfile                     |                                                                                                                                                     |
+| single writer              | l'unica scrittrice             | of the project profile                                                                                                                              |
+| staleness                  | l'invalidazione                | explicit, never time-based                                                                                                                          |
+| value proposal             | la proposta di valore          |                                                                                                                                                     |
+| project style              | lo stile del progetto          | values `team-managed` / `company-managed` untranslated                                                                                              |
+| floor, threshold           | **la soglia**                  | il minimo che un materiale riportato deve portare perché un intento lo prenda                                                                       |
+| second-hand, relayed       | **di seconda mano, riportato** | materiale che arriva tramite qualcuno che non è nella conversazione                                                                                 |
+| handover                   | **la consegna, consegnare**    | il passaggio di una richiesta alla skill che ne possiede il resto                                                                                   |
+| container                  | **il contenitore**             | uno sprint o una fix version: ciò che tiene insieme dei work item · non lasciare _container_ in inglese                                             |
+| kind (of a named thing)    | **il genere**                  | di che genere è un nome: uno sprint, una fix version, uno status · _genere_ è rifiutato come nome di _work type_ e qui regge solo per il test di §4 |
+| routing                    | **l'instradamento**            | quale skill una richiesta raggiunge, deciso prima che un profile sia stato letto                                                                    |
+| to waive                   | **rinunciare**                 | del gate: chiedere di saltarlo. Non si può, e la richiesta non è un'approvazione                                                                    |
+| axis                       | **l'asse**                     | la dimensione su cui corre un confine fra due intenti                                                                                               |
+| placement                  | **la collocazione**            | mettere in uno sprint o su una fix version un work item già registrato · non _collocamento_, che in italiano dice anzitutto collocamento al lavoro  |
+| fallback                   | **il ripiego**                 | una seconda via per un'operazione — la mappa dei channel non ne dichiara nessuna                                                                    |
+| probe                      | **la verifica**                | il comando con cui `/jira-doctor` stabilisce uno stato · evitare _sonda_, che rende _discovery_                                                     |
+| release state              | **lo stato di rilascio**       | di una fix version: non rilasciata, rilasciata, archiviata · non è lo _status_                                                                      |
+| capability                 | **una capacità dell'agente**   | una voce di `allowed-tools` che non è un channel                                                                                                    |
+| installation               | **l'installazione**            | questo progetto su questa macchina, di cui il project profile è il verbale                                                                          |
+| sub-agent                  | il sub-agent                   | build-time only; never in user documentation                                                                                                        |
+| shot                       | lo shot                        | an entry in the shot list — build-time only                                                                                                         |
+| worked exchange            | lo scambio di esempio          | section 5 of every document                                                                                                                         |
+| the result                 | il risultato                   | section 6 of every document                                                                                                                         |
 
 A persona's role name is **not** translated: _QA Engineer_, _Scrum Master_, _Business Analyst_,
 _Delivery Manager_. Neither is a Jira field name or a work type value — _Team_, _Task_,

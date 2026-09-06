@@ -37,13 +37,14 @@ che qualcuno decida come raggiungerlo.
 | «adesso funziona, ma fra sei mesi ci si ritorce contro»     | [`jira-assess`](jira-assess.it.md)     |
 
 Il confine con [`jira-capture`](jira-capture.it.md) è **il dato**. Riportare il desiderio di qualcun
-altro senza proprio niente di verificabile dietro è intake — capture lo registra con le parole con
-cui è arrivato e dichiara che è così — e resta intake per quanto chiaramente il risultato sia
-descritto. Quella soglia si legge su tutto quello che è stato riportato, mai come un elenco di
-risposte da spuntare, ed è più bassa di quanto sembri: la supera qualsiasi cifra che dica che il
-problema è reale, e un obiettivo non serve. _Una quarantina di chiamate il mese scorso_ basta, e la
-skill chiede poi da cosa si capirà che ha funzionato. Quello che non fa è fabbricare il risultato,
-il pubblico o la misura insistendo con le domande.
+altro senza proprio nessun dato dietro è intake — capture lo registra con le parole con cui è
+arrivato e dichiara che è così — e resta intake per quanto chiaramente il risultato sia descritto.
+Quella soglia si legge su tutto quello che è stato riportato, mai come un elenco di risposte da
+spuntare, ed è più bassa di quanto sembri: **la supera un conteggio del sintomo, e un obiettivo non
+serve.** _Una quarantina di chiamate il mese scorso_ basta, e la skill chiede poi da cosa si capirà
+che ha funzionato — la misura è quello che questa skill va a stabilire, non quello che devi portarle
+già pronto. Quello che non fa è fabbricare il risultato, il pubblico o la misura insistendo con le
+domande.
 
 Il confine a valle è [`jira-refine`](jira-refine.it.md). Proporre dichiara il valore e si ferma.
 I criteri di accettazione, un perimetro abbastanza piccolo da poter essere finito e i figli che
@@ -58,13 +59,14 @@ Non serve nominare la skill. Di' cosa vuoi che sia vero, e rispondi alle domande
 — il file che registra l'esito della discovery, cioè la lettura della configurazione reale del
 progetto — le dice quali work type ha questo progetto, come si annidano, e quali campi sono
 obbligatori alla creazione. Se il project profile manca si ferma e ti dice di eseguire `jira-init`:
-non tira a indovinare. Controlla anche un'operazione in particolare, quella che imposta il parent. È
-l'operazione da cui questo intento dipende, quindi se il project profile la registra come non
-supportata te lo senti dire adesso, insieme alla via manuale, e non dopo una bozza che non puoi
-avere. Non è un ramo teorico: in quell'elenco finisce quello che la discovery non è riuscita a
-risolvere **su questa installazione** — nessun tool che la serva, un channel che non ha risposto, un
-account senza il permesso — che è cosa diversa da un'operazione a cui gli strumenti non arrivano da
-nessuna parte. Vedi [il processo di sviluppo](../development-process.it.md).
+non tira a indovinare. Prima di ogni altra cosa legge la tabella **Operazioni non supportate**, e
+una voce lì dentro decide se questo intento può funzionare come è scritto: impostare il parent. Se
+il project profile la registra come non supportata te lo senti dire adesso, con l'operazione
+nominata e il percorso manuale, e non dopo una bozza che non puoi avere. Non è un ramo teorico: in
+quell'elenco finisce quello che la discovery non è riuscita a risolvere **su questa
+installazione** — nessun tool che la serva, un channel che non ha risposto, un account senza il
+permesso — che è cosa diversa da un'operazione a cui gli strumenti non arrivano da nessuna parte.
+Vedi [il processo di sviluppo](../development-process.it.md).
 
 **2 · Fa le domande che fa un Product Owner.** Tre, e ognuna rifiuta un certo tipo di risposta:
 
@@ -77,11 +79,11 @@ nessuna parte. Vedi [il processo di sviluppo](../development-process.it.md).
 Una proposta il cui autore non sa dire chi ne trae beneficio non è ancora una proposta, e dirlo
 adesso costa meno che dirlo in una riunione in cui si stabiliscono le priorità.
 
-**3 · Chiede il dato, e marca quello che manca.** È la richiesta che distingue questa skill dal
-resto dell'intake: per ogni affermazione verificabile, la misura o l'osservazione che ci sta
-sotto, e come è stata ottenuta. Quello che resta senza niente dietro non viene buttato via né
-tenuto di nascosto: finisce sotto **Assunzioni**, attribuito a chi lo sostiene, così che chi
-ordina le proposte veda quale metà di questa è convinzione.
+**3 · Chiede il dato, e marca quello che manca.** È la richiesta che separa una proposta
+dall'intake: per ogni affermazione verificabile, la misura o l'osservazione che ci sta sotto, e
+come è stata ottenuta. Quello che resta senza niente dietro non viene buttato via né tenuto di
+nascosto: finisce sotto **Assunzioni**, attribuito a chi lo sostiene, così che chi ordina le
+proposte veda quale metà di questa è convinzione.
 
 **4 · Sceglie un work type fra quelli del tuo progetto**, non da un elenco che si porta dietro.
 Il work type si decide prima del parent, perché è lui a stabilire a quale livello della gerarchia
@@ -109,6 +111,12 @@ rivedi. Oppure dici di no, ed è una risposta: non viene scritto niente, ti vien
 adesso, non ti viene proposta una versione più magra sperando che passi quella, e un messaggio
 successivo su altro non viene preso per un ripensamento. Questo intento aggiunge una cosa al gate:
 quando il work item resterà senza parent, il gate dice perché.
+
+**E il gate non si apre perché glielo chiedi.** _Crealo e basta_, _non mostrarmi niente prima_,
+_vai pure_ — ognuna di queste frasi dice qualcosa sull'impazienza e niente sull'approvazione,
+perché quello che si approva è un documento che ancora non esiste. La proposta viene presentata lo
+stesso, tenuta corta, e la skill dice che è per questo. Una scrittura che non hai visto è una
+scrittura che non hai approvato, per quanto tu l'abbia chiesta prima.
 
 **7 · Dopo la scrittura, riporta quello che non è riuscito.** Se il work item viene creato ma il
 parent non si riesce a impostare, te lo dice. Una proposta che sta al livello sbagliato è una
@@ -270,13 +278,15 @@ dimenticanza, quindi si rimuove invece di lasciarla vuota.
   bene.
 - **Inventare un parent in cui metterla.** Se la gerarchia del progetto non ne ammette nessuno per
   il work type scelto, il work item viene creato senza parent e il gate dice perché.
+- **Scrivere qualcosa che non hai visto.** _Crealo e basta_ non è l'approvazione di una proposta
+  che ancora non esiste, quindi non salta il gate: rende la bozza più corta, non assente.
 
 ## Vedi anche
 
 - [Il processo di sviluppo](../development-process.it.md) — il project profile, il draft gate, i
   due channel, e dove proporre valore si colloca nel percorso completo.
-- [`jira-capture`](jira-capture.it.md) — per un desiderio riportato di seconda mano senza nessuna
-  cifra dietro.
+- [`jira-capture`](jira-capture.it.md) — per un desiderio riportato di seconda mano senza nessun
+  dato dietro, nemmeno un conteggio del sintomo.
 - [`jira-diagnose`](jira-diagnose.it.md) — per qualcosa che oggi è rotto.
 - [`jira-assess`](jira-assess.it.md) — per qualcosa che oggi funziona e costerà al team più avanti.
 - [`jira-refine`](jira-refine.it.md) — per trasformare una proposta approvata in qualcosa che un

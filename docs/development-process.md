@@ -183,6 +183,10 @@ profile is the case that matters, because every other skill stops at its first s
 
 - **Approval is explicit.** Not silence, not an unrelated message, and not your original request:
   the request is what produced the draft, not what approves it.
+- **And it cannot be waived in advance.** _"Just create it"_, _"don't show me anything first"_,
+  _"go ahead"_ say something about impatience and nothing about approval, because what they would
+  approve does not exist yet. You get the draft anyway, kept short, with that as the reason. A
+  write you did not see is a write you did not approve, whatever you asked for beforehand.
 - **Some skills write several things under one approval** — a decomposition creating children, a
   set of work item moved into a sprint. The gate stays single: all of it is presented, approved
   once, then executed. If part of it fails you are told which parts succeeded, and you decide
@@ -219,6 +223,13 @@ them. What follows:
   The question comes to you rather than being settled by default.
 - **A condition you stated is a condition.** _"Plan it if it is ready"_ is not satisfied by
   planning it.
+- **Reading one container and changing another is two intents, not one.** Two skills carry an
+  exception for reading and changing **the same** container — a sprint, or a fix version. It says
+  _that same_, and it means it. _"What is in 4.10 so far? Anything not started, take it out of the
+  current sprint"_ reads a fix version and changes a sprint, so the exception does not apply: you
+  get the read answered first, the change named at the gate, and a separate approval from the
+  skill that owns the container being changed. Swap the containers and it is the same request
+  taking the same path.
 
 ---
 

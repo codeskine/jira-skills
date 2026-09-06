@@ -190,6 +190,11 @@ primo passo.
 
 - **L'approvazione è esplicita.** Non il silenzio, non un messaggio su altro, e non la tua
   richiesta iniziale: la richiesta è ciò che ha prodotto la bozza, non ciò che la approva.
+- **E non si può rinunciare in anticipo.** _«Crealo e basta»_, _«non mostrarmi niente prima»_,
+  _«vai pure»_ dicono qualcosa sull'impazienza e niente sull'approvazione, perché quello che
+  approverebbero non esiste ancora. La bozza arriva lo stesso, tenuta corta, e con questa come
+  ragione. Una scrittura che non hai visto è una scrittura che non hai approvato, qualunque cosa
+  tu abbia chiesto prima.
 - **Alcune skill scrivono più cose con una sola approvazione** — una scomposizione che crea figli,
   un insieme di work item spostati in uno sprint. Il cancello resta unico: si presenta tutto, si
   approva una volta, poi si esegue. Se una parte fallisce ti viene detto quali sono riuscite, e
@@ -229,6 +234,13 @@ attivata ne possiede una sola. Da qui discende:
   default.
 - **Una condizione che hai posto è una condizione.** _«Se è pronto pianificalo»_ non è soddisfatto
   pianificandolo.
+- **Leggere un contenitore e cambiarne un altro sono due intenti, non uno.** Due skill portano
+  un'eccezione per la lettura e la modifica **dello stesso** contenitore — uno sprint, o una fix
+  version. Dice _quello stesso_, e lo intende. _«Cosa c'è nella 4.10 finora? Quello che non è
+  partito toglilo dallo sprint corrente»_ legge una fix version e cambia uno sprint, quindi
+  l'eccezione non vale: la lettura ti viene risposta per prima, il cambiamento viene nominato al
+  gate, e l'approvazione è a sé, dalla skill che possiede il contenitore che cambia. Scambia i due
+  contenitore e la richiesta prende la stessa strada.
 
 ---
 
