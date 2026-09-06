@@ -64,7 +64,12 @@ a `tool_used: Skill` grader, which is what a `selection` fixture asserts.
    on a profile that is absent, incomplete, or describes a project that cannot do the thing.
 3. Paste the `prompt` into a **fresh session**. This matters: a session that has already loaded
    a skill will keep choosing it, and selection is exactly what is under test.
-4. Compare what happened against `expect_skill` and `expect_not`, against `expect_sequence`, or
+4. **Record which skills fired, before comparing anything.** An empty list fails the fixture
+   whatever else matched: `expect_not` is satisfied by a request that entered no skill at all, so a
+   run graded on "did a forbidden skill fire" reads the worst outcome as clean. The draft gate lives
+   inside the skills, so where none fires there is no gate. `jira-doctor` opening a run does not
+   count towards the list — that is its own description working.
+5. Compare what happened against `expect_skill` and `expect_not`, against `expect_sequence`, or
    against `expect`.
 
 A `handover` fixture asserts an **order**, not a single choice: `expect_sequence` lists the skills

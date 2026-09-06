@@ -57,6 +57,19 @@ For each fixture in the list below:
 A `handover` fixture asserts an **order**, not a choice. A run where both skills fired but the
 second was never named at the first gate has failed it, however right the final state looks.
 
+**No skill firing is a failure, never a pass.** `expect_not` cannot express it: a request that
+reached the channel without entering any skill satisfies every exclusion the fixture names, and a
+run graded on "did a forbidden skill fire" reads it as clean. It is the worst outcome a `selection`
+fixture can have — the draft gate lives inside the skills, so where none fires there is no gate —
+and it is the one that looks most like success.
+
+Three fixtures have gone that way: `sel-release-3` reached `editJiraIssue` directly, `sel-capture-4`
+and `sel-release-3` both fired nothing at all on 2026-09-06. Each was caught by a person reading the
+trace, and none by the assertion. So the assertion is stated here instead: **before comparing
+against `expect_skill` or `expect_not`, record which skills fired, and treat an empty list as a
+failure of the fixture whatever else matched.** `jira-doctor` opening a run does not count — it is
+its own description working, not a routing answer.
+
 ### What a `handover` result means, and under which run
 
 What a result covers is decided by **whether the first element reaches a gate**, which is a property
