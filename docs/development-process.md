@@ -140,13 +140,16 @@ question costs you believing something you were never told.
 ```mermaid
 stateDiagram-v2
     direction LR
-    [*] --> Questions
-    Questions --> Draft : assemble the artifact in full
-    Draft --> Gate : present it in chat, never in a file
-    Gate --> Draft : change it
+    [*] --> Artifact : authoring
+    [*] --> Operation : changing what already exists
+    Artifact --> Gate : the complete content, in chat
+    Operation --> Gate : every item it reaches, named
+    Gate --> Gate : change it, and see it again
+    Gate --> Refused : no
     Gate --> Write : approve, explicitly
+    Refused --> [*] : nothing written, and what now holds is said
     Write --> Jira : one write, through the mapped channel
-    Jira --> [*] : report the key and the URL
+    Jira --> [*] : the key and the URL
 ```
 
 This is the **draft gate**, and it is one gate across every skill that writes. What reaches it
@@ -167,6 +170,11 @@ expect it to. That last one is the point of the shape. Closing a sprint cannot p
 unfinished in it, and being told that at the gate is the difference between approving an outcome
 and discovering it.
 
+Either shape names one more thing when it applies: **the intent your request carried that this
+write does not satisfy, and the skill that owns it.** One sentence can ask for two things, and an
+approval given without that is an approval of half a request. The section after next says what
+happens to the other half.
+
 Then you approve, or you ask for changes and see it again — as many times as you want — or you say
 no. Saying no is an answer and gets treated as one: nothing is written, you are told what now holds
 instead, and you are not shown a smaller version of the same thing in the hope that one passes.
@@ -175,6 +183,10 @@ profile is the case that matters, because every other skill stops at its first s
 
 - **Approval is explicit.** Not silence, not an unrelated message, and not your original request:
   the request is what produced the draft, not what approves it.
+- **And it cannot be waived in advance.** _"Just create it"_, _"don't show me anything first"_,
+  _"go ahead"_ say something about impatience and nothing about approval, because what they would
+  approve does not exist yet. You get the draft anyway, kept short, with that as the reason. A
+  write you did not see is a write you did not approve, whatever you asked for beforehand.
 - **Some skills write several things under one approval** — a decomposition creating children, a
   set of work item moved into a sprint. The gate stays single: all of it is presented, approved
   once, then executed. If part of it fails you are told which parts succeeded, and you decide
@@ -191,16 +203,46 @@ profile is the case that matters, because every other skill stops at its first s
 
 ---
 
+## When one request carries two intents
+
+_"It is too large, and it needs to go in the current sprint."_ _"How is it doing, and plan it if
+it is ready."_ Both halves are real, both have to happen, and the skill that fired owns one of
+them. What follows:
+
+- **The other half is named at the gate**, in the block of decisions. An approval given without it
+  is an approval of half a request you believed you made whole.
+- **Order is not a preference.** The intent whose result the other operates on runs first — a
+  split before the sprint that will hold its children, a read before the write it conditions.
+  Where neither consumes the other, the order you stated stands.
+- **Two gates, never one.** The second thing cannot be assembled before the first is written,
+  because its subject does not exist yet. Approving the first approves nothing of the second.
+- **The write is not the end of the request.** Reporting the key ends the write; the skill then
+  hands over to whichever owns what is outstanding, and says that is what it is doing.
+- **You are asked when the first half changed the subject of the second.** After a split, _"put it
+  in the sprint"_ no longer names one item, and which level a team plans belongs to your project.
+  The question comes to you rather than being settled by default.
+- **A condition you stated is a condition.** _"Plan it if it is ready"_ is not satisfied by
+  planning it.
+- **Reading one container and changing another is two intents, not one.** Two skills carry an
+  exception for reading and changing **the same** container — a sprint, or a fix version. It says
+  _that same_, and it means it. _"What is in 4.10 so far? Anything not started, take it out of the
+  current sprint"_ reads a fix version and changes a sprint, so the exception does not apply: you
+  get the read answered first, the change named at the gate, and a separate approval from the
+  skill that owns the container being changed. Swap the containers and it is the same request
+  taking the same path.
+
+---
+
 ## Two channels, and what happens when one is dark
 
 ```mermaid
 flowchart TB
     S["A skill"] --> M["<b>Atlassian MCP server</b><br/>work item · fields · comments<br/>transitions · search · project metadata"]
-    S --> C["<b>Jira CLI</b><br/>boards · sprints · backlog"]
+    S --> C["<b>Jira CLI</b><br/>boards · sprints · the fix version listing"]
     M --> J[("Jira Cloud")]
     C --> J
 
-    G["<b>Available on neither channel</b><br/>create a sprint · start a sprint<br/>create a fix version · release or archive one"]
+    G["<b>Available on neither channel</b><br/>create a sprint · start a sprint<br/>create a fix version · release or archive one<br/>move a work item back out of a sprint"]
     G -. "handed back to you, never simulated" .-> S
 ```
 
@@ -213,9 +255,11 @@ cannot read a file, so a server reachable under any other name serves no skill h
 healthy it looks. An Atlassian connector added through claude.ai settings is exactly such a name.
 [`/jira-doctor`](commands/jira-doctor.md) checks this and prints the remedy.
 
-**Four operations exist on neither channel** and are handed back to you rather than simulated:
-creating a sprint, starting one, creating a fix version, and releasing or archiving one. The
-skills say so before you ask. These are gaps in the tooling and they hold everywhere.
+**Five operations exist on neither channel** and are handed back to you rather than simulated:
+creating a sprint, starting one, creating a fix version, releasing or archiving one, and moving a
+work item back out of a sprint. The skills say so before you ask, and they name the destination
+they cannot reach — the next sprint, or the backlog — so you can make the move on the board
+yourself. These are gaps in the tooling and they hold everywhere.
 
 **A channel that is merely unreachable on your machine is a different thing** — it is a
 degradation, it returns when the channel does, and it says nothing about your project. Without an

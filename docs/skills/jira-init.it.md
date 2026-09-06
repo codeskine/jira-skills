@@ -173,14 +173,15 @@ fondere. Poi ti dice di committarlo, e perché.
 > | Status             | 4, osservati sui 37 work item che il progetto contiene |
 > | Board e sprint     | non letti — il channel della CLI non ha risposto       |
 > | Fix version        | non lette — lo stesso channel                          |
-> | Operazioni risolte | 12 delle 17 che questo plugin usa                      |
+> | Operazioni risolte | 13 delle 18 che questo plugin usa                      |
 >
 > Due cose che incontrerai dopo, quindi te le dico adesso. Lo schema di questo progetto **non ha
 > un work type per un difetto, per una richiesta grezza in attesa di refinement o per il debito
 > tecnico**: tutti e tre finiranno sotto Task, e l'artefatto che li crea dirà a quale intento
-> serve. E **nove operazioni qui non sono supportate**: cinque perché il channel della CLI non ha
-> risposto, e tornano quando torna lui; quattro perché nessun tool le copre su nessuno dei due
-> channel — creare uno sprint, avviarlo, creare una fix version, rilasciarla o archiviarla.
+> serve. E **dieci operazioni qui non sono supportate**: cinque perché il channel della CLI non ha
+> risposto, e tornano quando torna lui; cinque perché nessun tool le copre su nessuno dei due
+> channel — creare uno sprint, avviarlo, creare una fix version, rilasciarla o archiviarla, e
+> riportare un work item fuori da uno sprint.
 >
 > Ecco il project profile completo. Approvalo e scrivo `.jira/project-profile.md`, oppure dimmi
 > cosa cambiare.

@@ -51,9 +51,11 @@ cui il «quando» diventa in silenzio il «cosa». E un work item che non è pro
 `jira-plan` te lo dice prima di pianificarlo, e non lo rende pronto passando.
 
 **Backlog sono due parole in una.** Detto di un work item che esiste già — _rimetti KAN-12 nel
-backlog_ — è un posto sulla board, e la mossa è di questa skill. Detto di un'idea che nessuno ha
-ancora scritto — _mettilo nel backlog per bene_ — vuol dire registralo, e quello è
-[`jira-propose`](jira-propose.it.md), o [`jira-capture`](jira-capture.it.md) se è arrivato da
+backlog_ — nomina il posto in cui un work item sta quando non è in nessuno sprint. Lì non si scrive
+niente: l'operazione intera è tirarlo fuori dallo sprint, ed è una delle tre mosse che questa skill
+ti restituisce. Detto di un'idea che nessuno ha ancora scritto — _mettilo nel backlog per bene_ —
+vuol dire registrala: è una proposta, non il collocazione di qualcosa che esiste già, ed è
+[`jira-propose`](jira-propose.it.md), o [`jira-capture`](jira-capture.it.md) se è arrivata da
 qualcun altro. A separarli è se la cosa è già registrata, non la parola.
 
 Leggere uno sprint senza cambiarlo è di [`jira-inspect`](jira-inspect.it.md). Ma una richiesta che
@@ -66,6 +68,10 @@ intenti e non uno: la fix version ti viene risposta per prima, il cambio sullo s
 nominato accanto alla risposta, e per quello c'è un'approvazione a sé. Vedi
 [il processo di sviluppo](../development-process.it.md) su cosa succede quando una frase chiede due
 cose.
+
+[`jira-inspect`](jira-inspect.it.md) ti manda qui anche per una domanda che ha bisogno della board
+stessa — quali board esistono, o uno sprint che il project profile non nomina. La Jira CLI non ce
+l'ha, questa skill sì.
 
 ## Come si usa
 
@@ -88,10 +94,10 @@ che sulle board il project profile può dire tre cose diverse, e non sono la ste
 per due motivi diversi, e nominare il rimedio sbagliato ti manda contro un muro. Quale dei due sia
 viene stabilito prima di prescrivere qualsiasi cosa:
 
-| Cos'è che non va davvero                                                                                                                                                                                                                                                                                            | Il rimedio                                                                                                                                                 |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **La credenziale non è visibile alla shell che usano le skill.** Una skill raggiunge la CLI attraverso una shell **non interattiva**, e quella shell legge `~/.zshenv`, mai `~/.zshrc`. Un token esportato in `~/.zshrc` funziona nel tuo terminale ed è invisibile qui: sembra identico a una CLI mai configurata. | Esportalo da `~/.zshenv`. La skill ti riporta la riga e il file, e non modifica mai il tuo dotfile al posto tuo.                                           |
-| **La configurazione della CLI non è mai stata generata.**                                                                                                                                                                                                                                                           | `jira init`, e solo in questo caso. Viene **dopo**: si autentica mentre gira, quindi senza la credenziale risponde `401 Unauthorized` e non scrive niente. |
+| Cos'è che non va davvero                                                                                                                                                                                                                                                                                                                                                                         | Il rimedio                                                                                                                                                                                                                                                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **La credenziale non è visibile alla shell che usano le skill.** Una skill raggiunge la CLI attraverso una shell **non interattiva**, e quale file di avvio una shell così legga — ammesso che ne legga uno — dipende dalla shell. Un token esportato da un file che legge solo una shell interattiva funziona nel tuo terminale ed è invisibile qui: sembra identico a una CLI mai configurata. | Esportalo dal file che legge la forma non interattiva della tua shell: `~/.zshenv` sotto zsh, un file diverso sotto bash, e sotto fish non è affatto un file. Quale sia la tua shell lo stabilisce [`/jira-doctor`](../commands/jira-doctor.it.md) prima di nominare un file. La skill ti riporta il file e la riga, e non modifica mai il tuo dotfile al posto tuo. |
+| **La configurazione della CLI non è mai stata generata.**                                                                                                                                                                                                                                                                                                                                        | `jira init`, e solo in questo caso. Viene **dopo**: si autentica mentre gira, quindi senza la credenziale risponde `401 Unauthorized` e non scrive niente.                                                                                                                                                                                                           |
 
 I due casi si distinguono, non si tirano a indovinare: una CLI installata, configurata e solo
 spenta da una credenziale mancante non è una CLI mai configurata, e il report non dirà che lo è.
@@ -110,6 +116,12 @@ questo plugin si rivolge. Sono tre problemi distinti e vengono consegnati a te a
 | avviare uno sprint     | uno sprint che esiste già come `future` non può essere portato ad `active`: lo riempie e lo chiude, e ti chiede di avviarlo tu sulla board  |
 | togliere lavoro da uno | `jira sprint` sa aggiungere, chiudere ed elencare, e non sa rimuovere: nomina il work item e dove sta andando, e la mossa sulla board è tua |
 
+E al suo posto non viene tentato niente attraverso l'Atlassian MCP server. Che il Jira del tuo
+progetto permetta a quel server di scrivere il campo Sprint è un fatto della tua configurazione, non
+qualcosa che una skill possa dare per scontato, quindi il plugin lo tratta come assente — e comunque
+la mappa che assegna le operazioni ai channel non prevede ripieghi: un'operazione ha un solo
+channel, e quando quel channel non ha niente per lei il passo torna a te.
+
 Un gap non è un channel che è giù. Un gap vale ovunque e dura finché non cambia il tooling; una CLI
 non raggiungibile non è supportata qui e ora, non dice niente sul tuo progetto, e torna quando
 torna il channel. Sono annunciati entrambi, ma solo il primo è permanente. Se un futuro MCP server
@@ -125,22 +137,31 @@ controllo sbagliato, non un controllo severo. Quello che non regge viene nominat
 manca, **prima** di entrare. Puoi pianificarlo lo stesso: è una decisione, ed è giusto che la
 prenda tu sapendo, invece che la prenda lo strumento al posto tuo.
 
-**6 · Chiudere: ogni work item non finito riceve una destinazione, e la riceve prima.** Lo sprint successivo, il
-backlog, o qualcosa che nomini tu. Un work item lasciato senza risposta alla chiusura sparisce dal
-piano senza che nessuno l'abbia scelto, ed è l'unico esito da cui una review non si riprende —
-quindi le destinazioni si stabiliscono e ti vengono mostrate prima che qualcosa si chiuda, mai
-dopo. Nominate dopo sarebbero un resoconto e non una decisione.
+**6 · Chiudere: ogni work item non finito riceve una destinazione, e la riceve prima.** Lo sprint
+successivo, il backlog, o qualcosa che nomini tu. Un work item lasciato senza risposta alla chiusura
+sparisce dal piano senza che nessuno l'abbia scelto, ed è l'unico esito da cui una review non si
+riprende — quindi le destinazioni si stabiliscono e ti vengono mostrate prima che qualcosa si
+chiuda, mai dopo. Nominate dopo sarebbero un resoconto e non una decisione.
 
 Chiudere è l'unica scrittura, ed è grossolana: il comando prende uno sprint e nient'altro, quindi
 dove un work item non finito atterri davvero lo decide Jira e non questa skill. Te lo dice al
 cancello e non dopo, e il resoconto nomina gli spostamenti che restano tuoi.
 
-**7 · Poi il draft gate**, il cancello che precede ogni scrittura su Jira. L'insieme intero compare
-in chat prima che qualcosa si muova. Cosa aggiunge questa skill al gate: elenca ogni work item che
-si sposterà, e fra quelli ogni work item non raffinato. Una sola approvazione copre l'insieme —
-dieci conferme per una sola decisione è il modo in cui si smette del tutto di pianificare con lo
-strumento. Se una parte dell'operazione fallisce, riporta quali work item si sono spostati e quali
-no, e si ferma lì: non annulla gli altri di sua iniziativa.
+**7 · Poi [il draft gate](../development-process.it.md)** — il cancello che precede ogni scrittura
+su Jira, e qui un **operation gate**, la forma che mostra un cambiamento a ciò che esiste già. Qui non si scrive niente ex novo, quindi quello che
+approvi è il cambiamento e non un documento: ogni work item che tocca, cosa cambia di ciascuno,
+cosa sarà vero dopo, e cosa l'operazione **non** farà là dove potresti ragionevolmente
+aspettartelo. Riempire uno sprint mostra ogni work item che si sposterà e, fra quelli, ogni work
+item non raffinato; chiuderne uno mostra lo sprint, cosa è stato consegnato e cosa no, la
+destinazione stabilita per ogni work item non finito, e senza giri di parole che chiudere è tutto
+quello che questa skill fa. Una sola approvazione copre l'insieme — dieci conferme per una sola
+decisione è il modo in cui si smette del tutto di pianificare con lo strumento. Se una parte
+dell'operazione fallisce, riporta quali work item si sono spostati e quali no, e si ferma lì: non
+annulla gli altri di sua iniziativa.
+
+**Dire di no chiude la cosa.** Non si muove niente, e ti viene detto cosa vale adesso: lo sprint
+com'era, il lavoro dov'era. Non ti viene riproposta una lista più corta sperando che passi quella,
+e un messaggio successivo su altro non viene letto come un ripensamento.
 
 ## Scambio di esempio
 
@@ -230,11 +251,13 @@ Resta a te:  lo Sprint 25 è `future`. Avviarlo non è disponibile su nessuno de
 Quello che rende utile il primo blocco è dove compare PROJ-121: nell'elenco di cosa si sposterà, e
 di nuovo nell'elenco di cosa non è pronto. Una segnalazione fatta a sprint già pieno è una nota che
 non legge nessuno; fatta qui è una decisione che prendi tu, e l'operazione che approvi porta
-l'eccezione per iscritto. Il secondo blocco riporta quattro scritture fatte sotto una sola
-approvazione: se una fosse fallita, direbbe quali si sono spostate e quali no e si fermerebbe lì,
-perché se un risultato parziale si tiene o si annulla lo decidi tu. E la riga che resta, resta: non
-viene finta. Avviare uno sprint non è qualcosa che questo plugin possa fare, quindi dice di chi è
-il compito invece di inventare qualcosa che assomigli a uno sprint avviato.
+l'eccezione per iscritto. La riga sotto fa lo stesso lavoro dall'altro lato: cosa l'operazione non
+farà — nessuna transition, nessuna fix version, nessun riordino — sta scritto dove puoi ancora
+rifiutarlo, invece di scoprirlo dopo. Il secondo blocco riporta quattro scritture fatte sotto una
+sola approvazione: se una fosse fallita, direbbe quali si sono spostate e quali no e si fermerebbe
+lì, perché se un risultato parziale si tiene o si annulla lo decidi tu. E la riga che resta, resta:
+non viene finta. Avviare uno sprint non è qualcosa che questo plugin possa fare, quindi dice di chi
+è il compito invece di inventare qualcosa che assomigli a uno sprint avviato.
 
 ## Cosa non fa
 
@@ -252,6 +275,8 @@ il compito invece di inventare qualcosa che assomigli a uno sprint avviato.
 - **Riordinare un backlog secondo un proprio giudizio di priorità.**
 - **Chiudere uno sprint sopra lavoro non finito senza chiedere dove va ciascun work item.** Il
   silenzio alla chiusura toglie lavoro dal piano senza che nessuno l'abbia scelto.
+- **Insistere dopo un no.** Un'operazione rifiutata non viene scritta, ti viene detto cosa vale
+  adesso al suo posto, e non ne arriva una versione più piccola da approvare.
 
 ## Vedi anche
 

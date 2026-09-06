@@ -14,11 +14,11 @@
 
 ## What it does
 
-Records a request that arrived from outside the team — an email, a chat message, a note taken
-during a call — in the words it arrived in, before anyone has worked out what it means. It keeps
-the original wording, notes who asked and by what route, asks three short questions, and lists
-what the request does not answer. Then it shows you the whole thing and waits: nothing reaches
-Jira until you approve it.
+Records a request that reached you second-hand — an email, a chat message, a note taken during a
+call — in the words it arrived in, before anyone has worked out what it means. It keeps the
+original wording, notes who asked and by what route, asks three short questions, and lists what
+the request does not answer. Then it shows you the whole thing and waits: nothing reaches Jira
+until you approve it.
 
 A request nobody writes down is a request the team never sees; one dressed up as ready is worse,
 because someone will plan it. This is the one skill in the plugin that deliberately creates
@@ -28,7 +28,8 @@ that owns it next.
 
 ## When it fires · when it does not
 
-It fires when something arrives from outside and has to be on Jira before anyone has examined it.
+It fires when something reaches you second-hand and has to be on Jira before anyone has examined
+it.
 
 | Say something like                                 | And this is the skill you get       |
 | -------------------------------------------------- | ----------------------------------- |
@@ -37,25 +38,47 @@ It fires when something arrives from outside and has to be on Jira before anyone
 | "let's agree criteria on this one and split it"    | [`jira-refine`](jira-refine.md)     |
 | "we want customers to see their history"           | [`jira-propose`](jira-propose.md)   |
 | "the export comes out empty, we need to file this" | [`jira-diagnose`](jira-diagnose.md) |
+| "this works but it will bite us in six months"     | [`jira-assess`](jira-assess.md)     |
 
 The boundary that matters is the one with [`jira-refine`](jira-refine.md), and it runs in one
 direction: capture opens the path and refinement closes it. If you can already say what "done"
 would look like, the request has been examined and this is the wrong intent — everything capture
 adds at that point is a decision nobody made.
 
-Something broken that arrives from outside can be capture's or
-[`jira-diagnose`](jira-diagnose.md)'s, and what decides is **the material, not who sent it**. If
-the relayed text already carries what makes a fault reproducible — the steps, and an environment
-worth the name — it is a defect report and belongs to `jira-diagnose`, however plainly it arrived
-from elsewhere. If it carries nothing anyone could act on to see the fault happen, nobody here can
-supply that, and recording the complaint in the sender's words is the honest version. That bar is
-read against the whole message and never as boxes to tick. Steps, or the error itself, clear it;
-naming the program it broke in, or which version they run, does not.
+Everything else that reaches you second-hand is decided by **the material, not who sent it**. The
+message is plainly about something — a fault, an outcome someone wants, a piece of debt — and the
+intent that owns that names a **floor** in its own boundary. One question decides it: does the
+material carry anything a reader could act on without going back to whoever sent it? Where it does
+not, it comes here first.
 
-The same test runs against [`jira-propose`](jira-propose.md), where the bar is lower than it
-sounds. A relayed wish with no figure behind it at all is intake; one carrying a count of the
-symptom — _about forty calls last month_ — is a proposal, and the skill goes on to ask what
-success would have to look like.
+| Relayed material about   | The floor it has to clear                                                | The intent that then owns it        |
+| ------------------------ | ------------------------------------------------------------------------ | ----------------------------------- |
+| a fault                  | steps someone else could follow, or the error copied exactly             | [`jira-diagnose`](jira-diagnose.md) |
+| an outcome someone wants | a count of the symptom — _about forty calls last month_                  | [`jira-propose`](jira-propose.md)   |
+| debt                     | anything saying what deferring it costs — a consequence, a date, a count | [`jira-assess`](jira-assess.md)     |
+
+Below the floor it is intake, however plainly the message is about a fault, an outcome or a debt:
+nobody here can supply what the sender did not send, and recording the complaint in their words is
+the honest version. Clear it and the material belongs to that intent, however plainly it was
+relayed.
+
+**A floor is a threshold, not a checklist.** It is read against the whole message, and no single
+item decides it in either direction. Steps means an action, its result and a starting point someone
+else can reach; naming the program a fault broke in, or the version they run, is neither steps nor
+an error and clears nothing. A proposal needs no target — the count is the floor, and what success
+would have to look like is the first thing [`jira-propose`](jira-propose.md) goes on to ask. Naming
+the shortcut, the library or who took the decision says what a debt **is** rather than what leaving
+it costs, and clears nothing either, while a cost that is stated need not be precise to count. Nor
+is a floor a test of completeness. Material that clears one and then leaves half of what its intent
+will ask for still goes to that intent, which asks.
+
+**Each of the three applies its own floor after it fires, so the skill that starts may well be the
+sibling rather than this one.** A description is matched against your words on its own, before any
+profile has been read and without being weighed against its neighbour, so a bar that only works
+when two descriptions are read side by side has to live where a skill can apply it.
+[`jira-diagnose`](jira-diagnose.md) reads what arrived at its third step, says what is missing, and
+hands the request here before putting a single question to whoever forwarded it;
+[`jira-assess`](jira-assess.md) does the same with what deferring costs.
 
 The test is deliberately written on the text of the request and not on the people around it.
 Whether someone, once asked, would know the answer is a fact about the conversation's future, and
@@ -69,6 +92,14 @@ You do not need to name the skill. Say that something came in and paste it.
 `.jira/project-profile.md` to learn how your project is configured. If that file is missing it
 stops and tells you to run `jira-init` — it does not guess. See
 [the development process](../development-process.md) for what the profile holds and why.
+
+**And it reads the profile's Unsupported operations table before anything else.** If what this
+skill needs is listed there — creating a work item, for this intent — you are told straight away,
+with the operation named and the manual path the profile records, and the three questions below
+are never opened. Discovering it at the write instead would cost you every answer you had already
+given. What lands in that table is what discovery could not resolve **on this installation**: no
+tool for the operation, a channel that did not answer, an account without the permission, or a
+concept this project does not have.
 
 **2 · It takes the request whole, and keeps it verbatim.** No corrected spelling, no translation,
 no tightened phrasing, no summary standing in for the original. The wording is evidence of what
@@ -90,19 +121,40 @@ itself carries the distinction. It sets no parent, no sprint and no fix version:
 not earned a place in a hierarchy or a plan, and putting it in one is the mistake this skill
 exists to avoid.
 
-**6 · Then the draft gate.** The complete record appears in chat with the decisions it carries —
-the title, the work type, and anything the project marks required that the request does not
-answer. You approve, or you ask for changes and see it again. This skill adds one thing to the
-gate: the statement that the item is raw has to be visible in the draft itself, not merely
-intended, and the gate says plainly that what will be created is a raw record rather than planned
-work.
+**6 · Then the draft gate, which here is an artifact gate.** What you approve is the complete
+content of the work item, section by section — every section the template does not mark optional;
+the other form, an operation gate, shows a change reaching things that already exist and is what
+the skills that plan, release and move an item to its next status present instead. The record
+appears in chat with the decisions it carries — title, work type, anything the project marks
+required and the request does not answer, and, where your message carried a second intent this
+record does not satisfy, that intent and the skill that owns it. You approve, or you ask for
+changes and see it again. Or you say no, and that ends it: nothing is written, you are told what
+holds instead — the request is not on Jira, and its wording is still only in the message it
+arrived in — you are not shown a shorter record in the hope that one passes, and a later message
+about something else is not read as a change of mind. This skill adds one thing to the gate: the
+statement that the item is raw has to be visible in the draft itself, not merely intended, and the
+gate says plainly that what will be created is a raw record rather than planned work.
+
+**And the gate does not lift because you ask it to.** _Just create it_, _don't show me anything
+first_, _go ahead_ — each of those says something about impatience and nothing about approval,
+because what approval is of is a document that does not exist yet. The record is presented anyway,
+kept short, and the skill says that is why. A write you did not see is a write you did not approve,
+whatever you asked for beforehand.
+
+**7 · Then it writes, and hands over what it could not do.** The write goes through the tool your
+project profile resolved for creating a work item, and the key and the URL come back. Intake is
+where a message asking for two things most often lands — _record it, and get it into the next
+sprint_ — and the second one is named at the gate rather than quietly dropped: it belongs to
+another skill, it happens after this write, and it gets an approval of its own. Reporting the key
+ends the write, not the request.
 
 ## Worked exchange
 
 **You**
 
 > This came in from the Head of Finance this morning and nobody has looked at it yet. Can you get
-> it onto Jira as it is, before it gets lost?
+> it onto Jira as it is, before it gets lost? And put it in the next sprint while you are there —
+> they keep asking when it will happen.
 
 **`jira-capture`**
 
@@ -161,8 +213,12 @@ work.
 > Your project's scheme has a type meant for unexamined intake, `Request`, so that is the one I
 > recommend. It marks `Team` required on creation and the request does not say which team owns the
 > figures, so the draft names the field rather than filling it. No parent, no sprint and no fix
-> version — this has not been refined. Here is the whole thing: approve it and I write it, or tell
-> me what to change.
+> version — this has not been refined.
+>
+> The sprint is the half of your request this record does not do. It belongs to
+> [`jira-plan`](jira-plan.md), it is an approval of its own, and it flags work that is not ready
+> before planning it — which this is. Here is the whole record: approve it and I write it, and we
+> go there next. Or tell me what to change.
 
 ## The result
 
@@ -227,11 +283,17 @@ than described.
 Two of the template's sections are optional and they behave in opposite ways here. `Required
 fields not yet filled` is present because one is unfilled, so the gate raises it instead of the
 write failing. `Work type` is absent because this project does have a type for unexamined intake —
-where a project has none, that section is what carries the distinction the scheme cannot. And
-`Awaiting refinement` is not decoration: it is the declaration that makes an incomplete work item
-admissible at all. [`jira-refine`](jira-refine.md) retires that declaration when it refines the
-item, which is what keeps a refined item from carrying acceptance criteria beside a statement that
-it has none.
+where a project has none, that section is what carries the distinction the scheme cannot.
+
+`Awaiting refinement` is in neither camp. It is the declaration that makes an incomplete work item
+admissible at all, and the template gives it no _omit when_ clause, because there is no such case:
+everything intake writes is raw by construction. Nor is it permanent.
+[`jira-refine`](jira-refine.md) retires it on the same write that makes the item ready — on either
+of refinement's two branches, and never as a later tidy-up. Retired means removed, not softened
+into _this was once raw_: Jira's own history already holds that, and this plugin keeps no second
+copy of what the tracker records. The heading goes with the claim, because it exists for that
+claim alone and a section with nothing under it is a shape no template permits. Mandatory here and
+gone there are two moments, not two templates disagreeing.
 
 ## What it will not do
 
@@ -243,11 +305,14 @@ it has none.
 - **Judge whether the request is worth doing.** That is an outcome argued with a datum behind it,
   and it belongs to [`jira-propose`](jira-propose.md).
 - **Decide who it belongs to.** No parent, no sprint, no fix version, and no owner chosen on the
-  requester's behalf.
+  requester's behalf. Ask for the sprint in the same breath and it is named at the gate and handed
+  to [`jira-plan`](jira-plan.md), never quietly performed here.
 - **Correct the wording.** No spelling fix, no translation, no tightening. A rewritten request is
   no longer evidence of what was asked.
 - **Fill a silence with a plausible answer.** What the requester did not say is recorded as not
   stated, and stays that way until someone asks them.
+- **Write anything you have not seen.** _Just create it_ is not approval of a record that does not
+  exist yet, so it does not waive the gate — it makes the draft shorter, not absent.
 
 ## See also
 
@@ -257,3 +322,7 @@ it has none.
   the raw declaration.
 - [`jira-propose`](jira-propose.md) — for an outcome someone wants, argued rather than relayed.
 - [`jira-diagnose`](jira-diagnose.md) — for something broken that you or your team watched break.
+- [`jira-assess`](jira-assess.md) — for debt relayed with something that says what deferring it
+  costs.
+- [`jira-plan`](jira-plan.md) — where "and put it in the next sprint" goes. Intake never places
+  anything itself.

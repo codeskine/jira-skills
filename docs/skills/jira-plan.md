@@ -49,10 +49,12 @@ quietly becomes "what". And an item that is not ready stays not ready — `jira-
 before it plans it, and never makes it ready in passing.
 
 **The backlog is two words in one.** Said of a work item that already exists — _put KAN-12 back on
-the backlog_ — it is a place on the board, and this skill owns the move. Said of an idea nobody has
-written down — _put that on the backlog properly_ — it means record this, and that is
-[`jira-propose`](jira-propose.md), or [`jira-capture`](jira-capture.md) when it arrived from
-someone else. What separates them is whether the thing is recorded yet, not the word.
+the backlog_ — it names where an item is when it is in no sprint. Nothing is written there: taking
+it out of the sprint is the whole of the move, and that move is one of the three this skill hands
+back to you. Said of an idea nobody has written down — _put that on the backlog properly_ — it
+means record this, which is a proposal and not a placement: [`jira-propose`](jira-propose.md), or
+[`jira-capture`](jira-capture.md) when it arrived from someone else. What separates them is whether
+the thing is recorded yet, not the word.
 
 Reading a sprint without changing it belongs to [`jira-inspect`](jira-inspect.md). But a request
 that reads a sprint **and then changes that same sprint** — "show me what is left and drop the
@@ -64,6 +66,9 @@ again, not one: you get the fix version answered first, the sprint change named 
 answer, and a separate approval for it. See
 [the development process](../development-process.md) on what happens when one sentence asks for
 two things.
+
+`jira-inspect` also sends you here for a question that needs the board itself — which boards exist,
+or a sprint the profile does not name. It does not hold the Jira CLI, and this skill does.
 
 ## How to use it
 
@@ -85,10 +90,10 @@ can say one of three things about boards, and they are not the same answer:
 different reasons, and naming the wrong remedy sends you against a wall. Which one it is gets
 established before anything is prescribed:
 
-| What is actually wrong                                                                                                                                                                                                                                                                                                  | The remedy                                                                                                                                               |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **The credential is not visible to the shell the skills use.** A skill reaches the CLI through a **non-interactive** shell, and that shell reads `~/.zshenv`, never `~/.zshrc`. A token exported in `~/.zshrc` works in your own terminal and is invisible here — which looks exactly like a CLI that was never set up. | Export it from `~/.zshenv` instead. The skill reports the line and the file and never edits your own dotfile for you.                                    |
-| **The CLI configuration was never generated.**                                                                                                                                                                                                                                                                          | `jira init`, and only here. It comes second: it authenticates while it runs, so without the credential it answers `401 Unauthorized` and writes nothing. |
+| What is actually wrong                                                                                                                                                                                                                                                                                                                                                        | The remedy                                                                                                                                                                                                                                                                                                                                          |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **The credential is not visible to the shell the skills use.** A skill reaches the CLI through a **non-interactive** shell, and which startup file such a shell reads — if any — depends on the shell. A token exported from a file only your interactive shell reads works in your own terminal and is invisible here, which looks exactly like a CLI that was never set up. | Export it from the file the non-interactive form of your shell reads: `~/.zshenv` under zsh, a different file under bash, and under fish not a file at all. [`/jira-doctor`](../commands/jira-doctor.md) establishes which shell you are on before it names one. The skill reports the file and the line, and never edits your own dotfile for you. |
+| **The CLI configuration was never generated.**                                                                                                                                                                                                                                                                                                                                | `jira init`, and only here. It comes second: it authenticates while it runs, so without the credential it answers `401 Unauthorized` and writes nothing.                                                                                                                                                                                            |
 
 The two are told apart, not guessed between: a CLI that is installed, configured and merely unlit
 by a missing credential is not a CLI that was never set up, and the report will not say it was.
@@ -106,6 +111,12 @@ plugin targets. They are distinct problems, and all three are handed over the sa
 | create a sprint    | it fills and closes sprints but cannot open one, so it asks you to create it on the board and continues once it exists                    |
 | start a sprint     | a sprint that already exists as `future` cannot be moved to `active`, so it fills it and closes it, and asks you to start it on the board |
 | take work back out | `jira sprint` can add, close and list, and cannot remove — so it names the item and where it is going, and the move on the board is yours |
+
+Nothing is attempted through the Atlassian MCP server instead. Whether your project's Jira lets that
+server write the Sprint field is a fact about your own configuration and not one a skill can assume,
+so the plugin treats it as absent — and the map that assigns operations to channels carries no
+fallbacks in any case. An operation has one channel; when that channel has nothing for it, the step
+comes back to you.
 
 A gap is not a channel that is down. A gap holds everywhere and lasts until the tooling changes; an
 unreachable CLI is unsupported here and now, says nothing about your project, and returns when the
@@ -130,11 +141,19 @@ Closing is the only write in it, and it is coarse: the command takes a sprint an
 where an unfinished item actually lands is Jira's to decide and not this skill's to direct. You are
 told that at the gate rather than after it, and the report names the moves that are still yours.
 
-**7 · Then the draft gate.** The whole set is presented in chat before anything moves. What this
-skill adds to the gate: it lists every item that will move, and every unrefined item among them.
-One approval covers the set — ten confirmations for one decision is how planning stops being done
+**7 · Then [the draft gate](../development-process.md) — here an operation gate.** Nothing here is
+authored, so what you approve is the change rather than a document: every work item it reaches,
+what changes about each, what will be true once it has run, and what it will **not** do where you
+could reasonably expect otherwise. Filling a sprint shows every item that will move and every
+unrefined item among them; closing one shows the sprint, what was delivered and what was not, the
+destination settled for each unfinished item, and plainly that closing is all this skill does. One
+approval covers the set — ten confirmations for one decision is how planning stops being done
 through the tool at all. If part of the operation fails, it reports which items moved and which did
 not and stops there; it does not roll back the rest on its own initiative.
+
+**Saying no ends it.** Nothing moves, and you are told what now holds — the sprint as it was, the
+work still where it was. No shorter list comes back in the hope that one passes, and a later
+message about something else is not read as a change of mind.
 
 ## Worked exchange
 
@@ -222,12 +241,14 @@ Still yours to do:  Sprint 25 is `future`. Starting it is available on neither c
 
 What makes the first block the useful one is where PROJ-121 appears: in the list of what will move,
 and again in the list of what is not ready. A flag raised after the sprint is full is a note nobody
-reads; raised here it is a decision you take, and the operation you approve carries the exception
-in writing. The second block reports four writes made under one approval — had one of them failed,
-it would name which moved and which did not and stop there, because whether a partial result is
-kept or undone is yours to decide. And the line that is left is left, not faked: starting a sprint
-is not something this plugin can do, so it says whose job it is instead of inventing something that
-looks like a started sprint.
+reads; raised here it is a decision you take, and the operation you approve carries the exception in
+writing. The line underneath does the same job from the other side: what the operation will not do —
+no transition, no fix version, no reordering — is stated where you can still refuse it rather than
+discovered afterwards. The second block reports four writes made under one approval — had one of
+them failed, it would name which moved and which did not and stop there, because whether a partial
+result is kept or undone is yours to decide. And the line that is left is left, not faked: starting
+a sprint is not something this plugin can do, so it says whose job it is instead of inventing
+something that looks like a started sprint.
 
 ## What it will not do
 
@@ -244,6 +265,8 @@ looks like a started sprint.
 - **Reorder a backlog by its own judgement of priority.**
 - **Close a sprint over unfinished work without asking where each item goes.** Silence at close
   removes work from the plan without anyone having chosen that.
+- **Argue with a no.** A refused operation is not written, you are told what now holds instead, and
+  no smaller version of it comes back to be approved.
 
 ## See also
 

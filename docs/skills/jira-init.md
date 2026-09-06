@@ -169,14 +169,14 @@ tells you to commit it, and why.
 > | Statuses            | 4, observed on the 37 work items the project holds |
 > | Boards and sprints  | not read — the CLI channel did not answer          |
 > | Fix versions        | not read — the same channel                        |
-> | Operations resolved | 12 of the 17 this plugin uses                      |
+> | Operations resolved | 13 of the 18 this plugin uses                      |
 >
 > Two things you will meet later, so I am saying them now. This project's scheme has **no work
 > type for a defect, for unrefined intake, or for technical debt** — all three will be filed under
-> Task, and the artifact that creates one will say which intent it serves. And **nine operations
+> Task, and the artifact that creates one will say which intent it serves. And **ten operations
 > are unsupported here**: five because the CLI channel did not answer, and they return when it
-> does; four because no tool covers them on either channel — creating a sprint, starting one,
-> creating a fix version, releasing or archiving one.
+> does; five because no tool covers them on either channel — creating a sprint, starting one,
+> creating a fix version, releasing or archiving one, and moving a work item back out of one.
 >
 > Here is the whole profile. Approve it and I write `.jira/project-profile.md`, or tell me what to
 > change.
