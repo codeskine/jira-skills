@@ -327,17 +327,9 @@ La gerarchia è il caso più chiaro. Un parent e i suoi figli sono interrogabili
 nessuna skill scrive un elenco di figli dentro una descrizione: un elenco mantenuto a mano è una
 seconda risposta che prima o poi contraddirà la prima.
 
-<!-- shot:SHOT-03 pending -->
+![Il work item come lo mostra Jira: work type, parent e sprint sono campi di Jira, e il plugin non ne ha inventato nessuno.](assets/shot-03-work-item.png)
 
-> **SHOT-03** · screenshot da catturare — il work item risultante su Jira dopo una scrittura: il
-> work type, il parent e lo sprint come li mostra Jira stesso, senza nessun campo inventato dal
-> plugin.
-
-<!-- shot:SHOT-04 pending -->
-
-> **SHOT-04** · screenshot da catturare — un parent con i suoi figli nella vista gerarchica di
-> Jira, dopo una scomposizione fatta da `jira-refine`, a mostrare che quell'elenco non lo mantiene
-> nessuno a mano.
+![Un parent e i suoi figli nella vista gerarchica di Jira, dopo una scomposizione: quell'elenco non lo mantiene nessuno a mano.](assets/shot-04-hierarchy.png)
 
 ---
 
